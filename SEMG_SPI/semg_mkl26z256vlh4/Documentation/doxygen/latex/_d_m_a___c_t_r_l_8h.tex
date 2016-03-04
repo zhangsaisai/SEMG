@@ -1,0 +1,176 @@
+\hypertarget{_d_m_a___c_t_r_l_8h}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-\_\-\-C\-T\-R\-L.h File Reference}
+\label{_d_m_a___c_t_r_l_8h}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-\_\-\-C\-T\-R\-L.\-h@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-\_\-\-C\-T\-R\-L.\-h}}
+}
+
+
+This embedded component implements initialization and runtime handling of an on-\/chip D\-M\-A controller.  
+
+
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Const.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I\-O\-\_\-\-Map.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Cpu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-\_\-\-P\-D\-D.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-M\-U\-X\-\_\-\-P\-D\-D.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_d_m_a___c_t_r_l___t_descriptor_record}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-T\-Descriptor\-Record}
+\item 
+struct \hyperlink{struct_d_m_a___c_t_r_l___t_device_data}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-T\-Device\-Data}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga9feb00c7de6fd832b18a124b70ec57c4}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-P\-R\-P\-H\-\_\-\-B\-A\-S\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S}~0x40008000\-U
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga52949fe4da2927d2008e13026fa1e05b}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Init\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga08ff0cba74af3d362f918bf29ea0e24a}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Deinit\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga09618214fd4e853b5d3569e475509c30}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Enable\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga14d9474b48262b365e4422cac02c1f04}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Disable\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga58553c5c3fcf6de625b22b6360dc68cd}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Allocate\-Channel\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga8683b68326967d61cc3823367c935f36}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Enable\-Channel\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga31575fe0bd44f2dadbe710e7ba0f549a}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Disable\-Channel\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_gad0ff8434b75db68ebd7a137fed4eb0ac}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Source\-Address\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_ga7850ed9139222e998b6b45d32c8b4147}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Destination\-Address\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___d_m_a___c_t_r_l__module_gafe1968eaf17f93a96eec2bfc9ab566c7}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Byte\-Count\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga11d1b436b6bd3056d25f1d64c7503200}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-D\-M\-A\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x04\-U}\label{group___d_m_a___c_t_r_l__module_ga11d1b436b6bd3056d25f1d64c7503200}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga7b8c46627ab13e1bc670050cd9c98ec9}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga7b8c46627ab13e1bc670050cd9c98ec9}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga2a3b530e2e454b404ff7c3d1965cf6be}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga2a3b530e2e454b404ff7c3d1965cf6be}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga6d885587c92e7a55577b29edff3c32a2}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-O\-N\-F\-I\-G\-U\-R\-E\-D\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x04\-U}\label{group___d_m_a___c_t_r_l__module_ga6d885587c92e7a55577b29edff3c32a2}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga21d73f75673cb544edaa2c5b1176e759}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga21d73f75673cb544edaa2c5b1176e759}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga45379f53e5b1d52b882d69fb59febdb4}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-O\-N\-F\-I\-G\-U\-R\-E\-D\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga45379f53e5b1d52b882d69fb59febdb4}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga99b97cc0c573c102eb5471f167a3c345}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga99b97cc0c573c102eb5471f167a3c345}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gaf204f504bd1bb63deaac05ab96012725}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-O\-N\-F\-I\-G\-U\-R\-E\-D\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_gaf204f504bd1bb63deaac05ab96012725}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gacc278e448d9ad7da776fa177871087dc}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_gacc278e448d9ad7da776fa177871087dc}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gaea0a03e47be15d20944d4525089d329b}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-L\-L\-O\-C\-A\-T\-E\-D\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x04\-U}\label{group___d_m_a___c_t_r_l__module_gaea0a03e47be15d20944d4525089d329b}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga80e23f3b1dfb3c3886a80c70dd56c78a}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-L\-L\-O\-C\-A\-T\-E\-D\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga80e23f3b1dfb3c3886a80c70dd56c78a}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga82f0ab14a79a3ff93372728778a88cac}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-L\-L\-O\-C\-A\-T\-E\-D\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga82f0ab14a79a3ff93372728778a88cac}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga5dc538a95136c46dfc82ddad09f82378}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-P\-E\-R\-I\-O\-D\-I\-C\-\_\-\-T\-R\-I\-G\-G\-E\-R\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga5dc538a95136c46dfc82ddad09f82378}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga3b34c900ed3d3e30b8efc569051b8119}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-P\-E\-R\-I\-O\-D\-I\-C\-\_\-\-T\-R\-I\-G\-G\-E\-R\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0\-U}\label{group___d_m_a___c_t_r_l__module_ga3b34c900ed3d3e30b8efc569051b8119}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gade12bb2afe8dd891d5f6de83c0bd6f45}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-P\-E\-R\-I\-O\-D\-I\-C\-\_\-\-T\-R\-I\-G\-G\-E\-R\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0\-U}\label{group___d_m_a___c_t_r_l__module_gade12bb2afe8dd891d5f6de83c0bd6f45}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gac8ad2d692559a3feee900ff54608ce7c}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-S\-I\-M\-P\-L\-E\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0\-U}\label{group___d_m_a___c_t_r_l__module_gac8ad2d692559a3feee900ff54608ce7c}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga22e222ca9b69ea9195755895d103930c}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-S\-I\-M\-P\-L\-E\-\_\-\-D\-M\-A\-M\-U\-X0\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0\-U}\label{group___d_m_a___c_t_r_l__module_ga22e222ca9b69ea9195755895d103930c}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga1957669cb9909efeff019bbc8e29fd3b}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-S\-I\-M\-P\-L\-E\-\_\-\-D\-M\-A\-M\-U\-X1\-\_\-\-C\-H\-A\-N\-N\-E\-L\-S\-\_\-\-N\-U\-M\-B\-E\-R}~0\-U}\label{group___d_m_a___c_t_r_l__module_ga1957669cb9909efeff019bbc8e29fd3b}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga8460d3fd81e7ab952fc873178bc3b66a}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-0}~0x00\-U}\label{group___d_m_a___c_t_r_l__module_ga8460d3fd81e7ab952fc873178bc3b66a}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gaf0cf826af5454211c4403b2cc69d704a}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-1}~0x01\-U}\label{group___d_m_a___c_t_r_l__module_gaf0cf826af5454211c4403b2cc69d704a}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga448fa2e4a2d8b97cf04f583600f86718}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-2}~0x02\-U}\label{group___d_m_a___c_t_r_l__module_ga448fa2e4a2d8b97cf04f583600f86718}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gabde1018a8054a1325eaacfc3e7f1efdd}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-3}~0x03\-U}\label{group___d_m_a___c_t_r_l__module_gabde1018a8054a1325eaacfc3e7f1efdd}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga137af9ff3cce892a11bd4bc243488af8}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-E\-V\-E\-N\-T\-S\-\_\-\-M\-A\-S\-K}~(\hyperlink{group___p_e___types__module_ga76328e8cbfee1cf4f59c6139fc67a64b}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-O\-N\-\_\-\-C\-O\-M\-P\-L\-E\-T\-E} $|$ \hyperlink{group___p_e___types__module_ga17f1da97269ce52e5acfe3d8286b9192}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-O\-N\-\_\-\-E\-R\-R\-O\-R})}\label{group___d_m_a___c_t_r_l__module_ga137af9ff3cce892a11bd4bc243488af8}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gae0cd15d6c627ebbf8b7e128430e8fbca}{\#define {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-M\-A\-X\-\_\-\-B\-Y\-T\-E\-\_\-\-C\-O\-U\-N\-T}~0x00\-F\-F\-F\-F\-F\-F\-U}\label{group___d_m_a___c_t_r_l__module_gae0cd15d6c627ebbf8b7e128430e8fbca}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga5439eedd7cfe5777c631cdb8d0d5ae4b}{typedef \\*
+\hyperlink{struct_d_m_a___c_t_r_l___t_descriptor_record}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-T\-Descriptor\-Record} $\ast$ {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-T\-Descriptor\-Record\-Ptr}}\label{group___d_m_a___c_t_r_l__module_ga5439eedd7cfe5777c631cdb8d0d5ae4b}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___d_m_a___c_t_r_l__module_ga553f7520948665feb02a5442ce5fb2cc}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Initializes the device according to design-\/time configuration properties. Allocates memory for the device data structure. If the $<$Enable in init. code$>$ is set to \char`\"{}yes\char`\"{} then the device is also enabled (see the description of the Enable method). This method can be called only once. Before the second call of Init the Deinit method must be called first. \end{DoxyCompactList}\item 
+void \hyperlink{group___d_m_a___c_t_r_l__module_ga6e343d81dce77f34b1f1307c78674eae}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Deinit} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Deinitializes the associated peripheral(s) and frees the component internal data structure. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_ga97900786e1447569fa5f6b5f132f37cf}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Enable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Enables D\-M\-A device. This method is intended to be used together with Disable method to temporary switch On/\-Off the device after the device is initialized. This method is required if the $<$Enable in init. code$>$ property is set to \char`\"{}no\char`\"{} value. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_gaf35ca3966d15fd0e3a4eefcbcfab2fdc}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Disable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Disables the D\-M\-A device. When the device is disabled, some component methods should not be called. If so, error E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D is reported. This method is intended to be used together with Enable method to temporary switch On/\-Off the device after the device is initialized. This method is not required. The Deinit method can be used to switch off and uninstall the device. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_gad38448a11f7f6afbe795f86fa4a19d76}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Allocate\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method allocates D\-M\-A channel for the D\-M\-A transfer defined by the transfer descriptor input parameter Descriptor\-Ptr. This method must be called before D\-M\-A channel is initialized. Otherwise E\-R\-R\-\_\-\-N\-O\-T\-A\-V\-A\-I\-L error code is returned after call of D\-M\-A\-\_\-\-L\-D\-D channel methods. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_gac803089bdb38d5f79260efb90dcd18d7}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Enable\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method initializes and/or enables the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor input parameter Descriptor\-Ptr. First call of this method on given D\-M\-A channel initializes it and enables H\-W requests if Peripheral device or Always enabled trigger source is selected in transfer descriptor Trigger source type item. This method can be also used together with Disable method to temporary switch On/\-Off the D\-M\-A channel H\-W requests. In such case D\-M\-A channel registers are not reinitialized again. New initialization of D\-M\-A channel can be done via Set\-Channel\-Descriptor\-Update method which reinitializes whole channel with new transfer descriptor. After calling of Enable\-Channel method channel status is set to L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-I\-D\-L\-E. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_ga80ab4c932d2e7d3c9a9af041fa8fa6de}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Disable\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method disables the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor input parameter Descriptor\-Ptr and disables H\-W requests services. However, it is still possible to start transfer explicitly as S\-W transfer requests via Start\-Channel\-Transfer method. After calling of Disable\-Channel method channel status is set to L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-I\-D\-L\-E. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_gad8a42d75e916ffb25a8e4dc019e41c70}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Source\-Address} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr, \hyperlink{group___p_e___types__module_gab8287f62db7ff96992355760b652cd07}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Address} Address)
+\begin{DoxyCompactList}\small\item\em The method sets an source address for data to be transferred by the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor parameter Descriptor\-Ptr. This method can be used to update D\-M\-A transfer source address when D\-M\-A channel is enabled. New source address is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new source address can be optionally checked for consistency with rest of the transfer descriptor data. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_ga6eda6f1b27d9f04235bd0304fad7db0e}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Destination\-Address} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr, \hyperlink{group___p_e___types__module_gab8287f62db7ff96992355760b652cd07}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Address} Address)
+\begin{DoxyCompactList}\small\item\em The method sets an destination address for data to be transferred by the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor parameter Descriptor\-Ptr. This method can be used to update D\-M\-A transfer destination address when D\-M\-A channel is enabled. New destination address is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new destination address can be optionally checked for consistency with rest of the transfer descriptor data. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a___c_t_r_l__module_ga04ea535c86b9e0054c137c2aa38668cc}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Channel\-Byte\-Count} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{struct_l_d_d___d_m_a___t_transfer_descriptor}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Transfer\-Descriptor} $\ast$Descriptor\-Ptr, \hyperlink{group___p_e___types__module_gac001a681eb67942fa78ac9b62ba3b0d6}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Byte\-Count} Byte\-Count)
+\begin{DoxyCompactList}\small\item\em The method sets a byte count (size of data) to be transferred by the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor input parameter Descriptor\-Ptr. This method can be used to update D\-M\-A transfer byte count when D\-M\-A channel is enabled. New transfer byte count is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new transfer byte count can be optionally checked for consistency with rest of the transfer descriptor data. If nested operation is used, the method sets the minor (inner) loop byte count. \end{DoxyCompactList}\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga343baf6de050784880c4ffd12e3c8c20}{void {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Set\-Clock\-Configuration} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{group___p_e___types__module_ga369bcaf7f00caad5f994c72ac2629a37}{L\-D\-D\-\_\-\-T\-Clock\-Configuration} Clock\-Configuration)}\label{group___d_m_a___c_t_r_l__module_ga343baf6de050784880c4ffd12e3c8c20}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gae9670180792399f4c3459f12ff109fe6}{{\bfseries P\-E\-\_\-\-I\-S\-R} (D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Channel0\-Interrupt)}\label{group___d_m_a___c_t_r_l__module_gae9670180792399f4c3459f12ff109fe6}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga0a9edeb2d22400354f6e8358b2150cf7}{{\bfseries P\-E\-\_\-\-I\-S\-R} (D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Channel1\-Interrupt)}\label{group___d_m_a___c_t_r_l__module_ga0a9edeb2d22400354f6e8358b2150cf7}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga7d582271e716603e9f19d935e87af160}{{\bfseries P\-E\-\_\-\-I\-S\-R} (D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Channel2\-Interrupt)}\label{group___d_m_a___c_t_r_l__module_ga7d582271e716603e9f19d935e87af160}
+
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_gaeef016332b7d799da63538f65f860e04}{{\bfseries P\-E\-\_\-\-I\-S\-R} (D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Channel3\-Interrupt)}\label{group___d_m_a___c_t_r_l__module_gaeef016332b7d799da63538f65f860e04}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___d_m_a___c_t_r_l__module_ga437a5df61b265b71713b028b2fe4927d}{\hyperlink{struct_d_m_a___c_t_r_l___t_device_data}{D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-T\-Device\-Data} $\ast$ {\bfseries D\-M\-A\-\_\-\-C\-T\-R\-L\-\_\-\-Device\-Data\-Ptr}}\label{group___d_m_a___c_t_r_l__module_ga437a5df61b265b71713b028b2fe4927d}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This embedded component implements initialization and runtime handling of an on-\/chip D\-M\-A controller. \begin{DoxyVersion}{Version}
+01.\-07 
+\end{DoxyVersion}

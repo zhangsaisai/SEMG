@@ -1,0 +1,7 @@
+eclipse.preferences.version=1
+encoding//Compents/delay/delay.c=UTF-8
+encoding//Compents/hmc5883/hmc5883.c=UTF-8
+encoding//Compents/mpu6050/mpu6050.c=UTF-8
+encoding//Compents/mpu6050/mpu6050.h=UTF-8
+encoding//Project_Settings/Startup_Code/__arm_end.c=UTF-8
+encoding//Sources/Events.c=UTF-8

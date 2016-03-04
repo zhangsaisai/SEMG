@@ -1,0 +1,21 @@
+-mcpu=cortex-m0
+-mthumb
+-mfloat-abi=soft
+-g3
+-gdwarf-2
+-gstrict-dwarf
+-I"D:/Student Data/Desktop/CodeWarrior Projects/I2C_PE/Project_Headers"
+-I"D:/Student Data/Desktop/CodeWarrior Projects/I2C_PE/Project_Settings/Startup_Code"
+-I"D:/Programs/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_C/include"
+-I"D:/Programs/Freescale/CW MCU v10.6/MCU/ARM_GCC_Support/ewl/EWL_Runtime/include"
+-I"D:/Student Data/Desktop/CodeWarrior Projects/I2C_PE/Generated_Code"
+-I"D:/Student Data/Desktop/CodeWarrior Projects/I2C_PE/Sources"
+-I"D:/Programs/Freescale/CW MCU v10.6/MCU/ProcessorExpert/lib/Kinetis/pdd/inc"
+-I"D:/Programs/Freescale/CW MCU v10.6/MCU/ProcessorExpert/lib/Kinetis/iofiles"
+-O0
+-ffunction-sections
+-fdata-sections
+-Wall
+-c
+-fmessage-length=0
+-specs=ewl_c.specs

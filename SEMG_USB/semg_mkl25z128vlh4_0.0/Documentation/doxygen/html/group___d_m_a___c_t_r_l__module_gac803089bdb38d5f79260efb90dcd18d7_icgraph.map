@@ -1,0 +1,6 @@
+<map id="DMA_CTRL_EnableChannel" name="DMA_CTRL_EnableChannel">
+<area shape="rect" id="node2" href="$group___d_m_a_t___m___s_p_i___r_x__module.html#gafc57e74b4003c05c870480ab0c3a8432" title="The method initializes and/or enables the DMA channel allocated for the DMA transfer defined by the t..." alt="" coords="237,5,459,32"/>
+<area shape="rect" id="node3" href="$group___d_m_a_t___m___s_p_i___t_x__module.html#ga7c78e2312b7dea13bafe530139deec3c" title="The method initializes and/or enables the DMA channel allocated for the DMA transfer defined by the t..." alt="" coords="239,56,457,83"/>
+<area shape="rect" id="node4" href="$group___d_m_a_t___s___s_p_i___r_x__module.html#ga09c8b0a8458086aff28098984a90fa08" title="The method initializes and/or enables the DMA channel allocated for the DMA transfer defined by the t..." alt="" coords="239,107,457,133"/>
+<area shape="rect" id="node5" href="$group___d_m_a_t___s___s_p_i___t_x__module.html#ga522c738ebb05fecbf0be1b523eb96df9" title="The method initializes and/or enables the DMA channel allocated for the DMA transfer defined by the t..." alt="" coords="239,157,457,184"/>
+</map>

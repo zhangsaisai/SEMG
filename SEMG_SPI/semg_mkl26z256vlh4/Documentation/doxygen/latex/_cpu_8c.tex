@@ -1,0 +1,175 @@
+\hypertarget{_cpu_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Cpu.c File Reference}
+\label{_cpu_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Cpu.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Cpu.\-c}}
+}
+{\ttfamily \#include \char`\"{}S\-M\-\_\-\-S\-P\-I0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\-S\-\_\-\-S\-P\-I1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sys\-Tick.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-R\-E\-S\-E\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-S\-T\-A\-R\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-C\-S0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-\_\-\-C\-T\-R\-L.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-C\-S1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-R\-E\-S\-E\-T1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Const.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I\-O\-\_\-\-Map.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Events.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Cpu.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_gaa92cc6952b1e8d1b04e7cf8a82ce7ce0}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-O\-R\-T\-A)}\label{group___cpu__module_gaa92cc6952b1e8d1b04e7cf8a82ce7ce0}
+
+\item 
+\hypertarget{group___cpu__module_ga89f6e345028fe4a0a105f4f95e1bb85c}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-\-I\-N\-T\-\_\-\-N\-M\-I\-Interrupt)}\label{group___cpu__module_ga89f6e345028fe4a0a105f4f95e1bb85c}
+
+\item 
+\hypertarget{group___cpu__module_ga1399d7e195f7a72fc445cbdc4e2252f9}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Hard\-\_\-\-Fault)}\label{group___cpu__module_ga1399d7e195f7a72fc445cbdc4e2252f9}
+
+\item 
+\hypertarget{group___cpu__module_gafc3465ee692f69b615c95024fad3dd3f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved4)}\label{group___cpu__module_gafc3465ee692f69b615c95024fad3dd3f}
+
+\item 
+\hypertarget{group___cpu__module_ga1cc311da4698e715f4a969e1ef1955de}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved5)}\label{group___cpu__module_ga1cc311da4698e715f4a969e1ef1955de}
+
+\item 
+\hypertarget{group___cpu__module_gaed19bd2d5b9176d51a31f13a9ad8e82e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved6)}\label{group___cpu__module_gaed19bd2d5b9176d51a31f13a9ad8e82e}
+
+\item 
+\hypertarget{group___cpu__module_ga3c7b37b6c7a93eb737f82ae45ae60223}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved7)}\label{group___cpu__module_ga3c7b37b6c7a93eb737f82ae45ae60223}
+
+\item 
+\hypertarget{group___cpu__module_gab64f79a303b847c14887def8c70751be}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved8)}\label{group___cpu__module_gab64f79a303b847c14887def8c70751be}
+
+\item 
+\hypertarget{group___cpu__module_ga57b968ad266b449c4240a8a466dd4bdc}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved9)}\label{group___cpu__module_ga57b968ad266b449c4240a8a466dd4bdc}
+
+\item 
+\hypertarget{group___cpu__module_ga1cc9f2f0950767c87849f1050d47863e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved10)}\label{group___cpu__module_ga1cc9f2f0950767c87849f1050d47863e}
+
+\item 
+\hypertarget{group___cpu__module_gae67065ebf736008c63395db43e36939c}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-V\-Call)}\label{group___cpu__module_gae67065ebf736008c63395db43e36939c}
+
+\item 
+\hypertarget{group___cpu__module_gaf5ea425942f1518bfbd80cc581019b04}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved12)}\label{group___cpu__module_gaf5ea425942f1518bfbd80cc581019b04}
+
+\item 
+\hypertarget{group___cpu__module_gaaafd86f5cd268c236fc9c287e17c1cc3}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved13)}\label{group___cpu__module_gaaafd86f5cd268c236fc9c287e17c1cc3}
+
+\item 
+\hypertarget{group___cpu__module_ga0fd1b1ba53c8b9501ba0fdea93ad4525}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Pendable\-Srv\-Req)}\label{group___cpu__module_ga0fd1b1ba53c8b9501ba0fdea93ad4525}
+
+\item 
+\hypertarget{group___cpu__module_gae908242964ad0fbf3aad29e806bf397e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved20)}\label{group___cpu__module_gae908242964ad0fbf3aad29e806bf397e}
+
+\item 
+\hypertarget{group___cpu__module_ga368451747e5586e96beec939da11520a}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-F\-T\-F\-A)}\label{group___cpu__module_ga368451747e5586e96beec939da11520a}
+
+\item 
+\hypertarget{group___cpu__module_ga047c4793d4d1a8dac9c217861ff2dc07}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-V\-D\-\_\-\-L\-V\-W)}\label{group___cpu__module_ga047c4793d4d1a8dac9c217861ff2dc07}
+
+\item 
+\hypertarget{group___cpu__module_gab004a200fe392292ecb92586b0be5a5a}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-L\-W)}\label{group___cpu__module_gab004a200fe392292ecb92586b0be5a5a}
+
+\item 
+\hypertarget{group___cpu__module_ga29171c333e905fed19dc3f0862c77edd}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-I2\-C0)}\label{group___cpu__module_ga29171c333e905fed19dc3f0862c77edd}
+
+\item 
+\hypertarget{group___cpu__module_ga962a22125e77214ea609073dbeea57eb}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-I2\-C1)}\label{group___cpu__module_ga962a22125e77214ea609073dbeea57eb}
+
+\item 
+\hypertarget{group___cpu__module_ga38f534263a761285f2c2f9e09eead654}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-P\-I0)}\label{group___cpu__module_ga38f534263a761285f2c2f9e09eead654}
+
+\item 
+\hypertarget{group___cpu__module_gaab3d985e484f1bd29995c2c696d32c43}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-P\-I1)}\label{group___cpu__module_gaab3d985e484f1bd29995c2c696d32c43}
+
+\item 
+\hypertarget{group___cpu__module_gaecb823a7a5bc02652c9aeddba8c15f5f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T0)}\label{group___cpu__module_gaecb823a7a5bc02652c9aeddba8c15f5f}
+
+\item 
+\hypertarget{group___cpu__module_gab6dbbce88f00d88665f497d866a003e6}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T1)}\label{group___cpu__module_gab6dbbce88f00d88665f497d866a003e6}
+
+\item 
+\hypertarget{group___cpu__module_ga2401974d290ab484a38f630309e1a866}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T2)}\label{group___cpu__module_ga2401974d290ab484a38f630309e1a866}
+
+\item 
+\hypertarget{group___cpu__module_gad4dd609809c8f53a88e260a23246d404}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-A\-D\-C0)}\label{group___cpu__module_gad4dd609809c8f53a88e260a23246d404}
+
+\item 
+\hypertarget{group___cpu__module_ga92f6a9c4eec1faab98dea4e8474cdb4f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-C\-M\-P0)}\label{group___cpu__module_ga92f6a9c4eec1faab98dea4e8474cdb4f}
+
+\item 
+\hypertarget{group___cpu__module_ga4e86419a3aad53c4b3891ffcbf506822}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M0)}\label{group___cpu__module_ga4e86419a3aad53c4b3891ffcbf506822}
+
+\item 
+\hypertarget{group___cpu__module_ga264b6c3608162b22f626cd745db54024}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M1)}\label{group___cpu__module_ga264b6c3608162b22f626cd745db54024}
+
+\item 
+\hypertarget{group___cpu__module_ga78862c7201b90d0782fc17e9aaf43027}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M2)}\label{group___cpu__module_ga78862c7201b90d0782fc17e9aaf43027}
+
+\item 
+\hypertarget{group___cpu__module_ga3bf61532de21952d55b627d9c6db8252}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-R\-T\-C)}\label{group___cpu__module_ga3bf61532de21952d55b627d9c6db8252}
+
+\item 
+\hypertarget{group___cpu__module_ga8821889007f30ee161aafd07fb76ae75}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-R\-T\-C\-\_\-\-Seconds)}\label{group___cpu__module_ga8821889007f30ee161aafd07fb76ae75}
+
+\item 
+\hypertarget{group___cpu__module_gae327ed03c9a6b77f7b8bf9b5175e8986}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-I\-T)}\label{group___cpu__module_gae327ed03c9a6b77f7b8bf9b5175e8986}
+
+\item 
+\hypertarget{group___cpu__module_ga1d03bdc93abf0ca3b92642b20485be0d}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved39)}\label{group___cpu__module_ga1d03bdc93abf0ca3b92642b20485be0d}
+
+\item 
+\hypertarget{group___cpu__module_gaf14541bf6cab203acbc8bc8a39766d53}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-S\-B0)}\label{group___cpu__module_gaf14541bf6cab203acbc8bc8a39766d53}
+
+\item 
+\hypertarget{group___cpu__module_ga38c2812550216db436b9a04c188806b8}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-D\-A\-C0)}\label{group___cpu__module_ga38c2812550216db436b9a04c188806b8}
+
+\item 
+\hypertarget{group___cpu__module_gab80ccc1a0f979348431373976332e165}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-S\-I0)}\label{group___cpu__module_gab80ccc1a0f979348431373976332e165}
+
+\item 
+\hypertarget{group___cpu__module_ga911962460fde9d3de79fa1d9b4838959}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-M\-C\-G)}\label{group___cpu__module_ga911962460fde9d3de79fa1d9b4838959}
+
+\item 
+\hypertarget{group___cpu__module_ga1106f7d4b21c4da019f0aced16612135}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-P\-Timer)}\label{group___cpu__module_ga1106f7d4b21c4da019f0aced16612135}
+
+\item 
+\hypertarget{group___cpu__module_ga6e85aa4261d6eb4f1a4ef96d38368414}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved45)}\label{group___cpu__module_ga6e85aa4261d6eb4f1a4ef96d38368414}
+
+\item 
+\hypertarget{group___cpu__module_gada70f6e2afb564cf49abd9676d709001}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-O\-R\-T\-D)}\label{group___cpu__module_gada70f6e2afb564cf49abd9676d709001}
+
+\item 
+\hypertarget{group___cpu__module_ga32a8d86789a3326b3120bf1e1c1d4252}{void {\bfseries \-\_\-\-\_\-init\-\_\-hardware} (void)}\label{group___cpu__module_ga32a8d86789a3326b3120bf1e1c1d4252}
+
+\item 
+\hypertarget{group___cpu__module_ga95039f54c45f24c1b4ed640fa2f63f11}{void {\bfseries P\-E\-\_\-low\-\_\-level\-\_\-init} (void)}\label{group___cpu__module_ga95039f54c45f24c1b4ed640fa2f63f11}
+
+\item 
+\hypertarget{group___cpu__module_ga2d9b5b981f451cdf47bf43b4f9cc9e03}{{\bfseries \-\_\-\-\_\-attribute\-\_\-\-\_\-} ((section(\char`\"{}.cfmconfig\char`\"{}))) const}\label{group___cpu__module_ga2d9b5b981f451cdf47bf43b4f9cc9e03}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-reg}}\label{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}
+
+\item 
+\hypertarget{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-lock} = 0x00\-U}\label{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVersion}{Version}
+01.\-04 
+\end{DoxyVersion}

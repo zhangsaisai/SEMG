@@ -1,0 +1,617 @@
+\hypertarget{group___a_d_c__module}{\section{A\-D\-C module documentation}
+\label{group___a_d_c__module}\index{A\-D\-C module documentation@{A\-D\-C module documentation}}
+}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___a_d_c__module_gaaa101e52d770ddd28cf31c5cb5fc7691}{\#define {\bfseries T\-E\-S\-T\-\_\-\-A\-D\-C}~0}\label{group___a_d_c__module_gaaa101e52d770ddd28cf31c5cb5fc7691}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___a_d_c__module_ga0c711fb302e26085c0b47c83f53b263f}{A\-D\-C\-Init} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Initializes A\-D\-C. The method is called in the Peripheral\-Init function and will be called only once. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga55fa03d1036f43603a3a0776e1068c8a}{A\-D\-C\-Enable} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-C\-S is low, enable A\-D\-C. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gaee3c6f1b7638a7cf2ece62f97e507655}{A\-D\-C\-Disable} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-C\-S is High, disable A\-D\-C. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga2ec520f84e11f40a1d6e28004f143df5}{A\-D\-C\-Configure} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Configure the registers of A\-D\-C via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga3121ea29554dad5d44b0f93f44d4615a}{A\-D\-C\-Start\-Convert\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal S\-T\-A\-R\-T is high, A\-D\-C starts to convert. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga7f6ee96c5b2a3d3466992aa468a5a27f}{A\-D\-C\-Start\-Convert\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends S\-T\-A\-R\-T command to A\-D\-C, A\-D\-C starts to convert. This function starts A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gae7522edc164dc387abff35a130b268f7}{A\-D\-C\-Stop\-Convert\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal S\-T\-A\-R\-T is low, A\-D\-C stops converting. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga2444bbfdc43b6d1dd3cf27d62b41db39}{A\-D\-C\-Stop\-Convert\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends S\-T\-O\-P command to A\-D\-C, A\-D\-C stops to convert. This function stops A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gaac2da2d21a0153782e5c806878c45605}{A\-D\-C\-Reset\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-R\-E\-S\-E\-T varies from high to low to high, A\-D\-C resets. This function resets A\-D\-C via signal R\-E\-S\-E\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gaa6ed128c952696b046a47a2ae9d3ec1e}{A\-D\-C\-Reset\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends R\-E\-S\-E\-T command to A\-D\-C, A\-D\-C resets. This function resets A\-D\-C via S\-P\-I0. Avoid sending any commands during reset. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gace4858ead7841b0d2b078b5b33573740}{A\-D\-C\-Wake\-Up} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command W\-A\-K\-E\-U\-P to A\-D\-C via S\-P\-I0 to wake up A\-D\-C from low-\/power standby mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gac1be36a504b6060dd86bb74c0ac9dff3}{A\-D\-C\-Stand\-By} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command S\-T\-A\-N\-D\-B\-Y via S\-P\-I0 to make A\-D\-C entering the low-\/power standby mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga006599cf1a3384ae5bab076c52b99db8}{A\-D\-C\-Read\-Data\-Continuous} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command R\-D\-A\-T\-A\-C via S\-P\-I0 to make the conversion data of A\-D\-C can read continuously without command R\-D\-A\-T\-A. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga9cdb5ac2b155fab1a7510f980ea450ce}{A\-D\-C\-Stop\-Read\-Data\-Continuous} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command S\-D\-A\-T\-A\-C to A\-D\-C via S\-P\-I0 to stop A\-D\-C's R\-D\-A\-T\-A\-C mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga0c4f12b67a2d24c0a3f37b6f4d8a4df2}{A\-D\-C\-Send\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag, byte $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Send command to A\-D\-C via S\-P\-I0. Please use A\-D\-C\-Read\-Register and A\-D\-C\-Write\-Register, but not this function, to read and write A\-D\-C's register! \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga5a9a35fa254e8230cbc9be8858660f22}{A\-D\-C\-Read\-Register} (byte reg\-Addr, byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read data from register of A\-D\-C via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} and dat\mbox{[}1\mbox{]} are useless. The real data starts from dat\mbox{[}2\mbox{]}! \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga607e77df260f2c971d948c580a933280}{A\-D\-C\-Write\-Register} (byte reg\-Addr, byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Write data to register of A\-D\-C via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga8e75384212a08e64cdddf9fec4104248}{A\-D\-C\-Read\-Continuous\-Data} (byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read conversion data from A\-D\-C in R\-D\-A\-T\-A\-C mode via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gac52d9692bf2114d7a9d22042099d087b}{A\-D\-C\-Read\-Data} (byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read conversion data from A\-D\-C in R\-D\-A\-T\-A mode via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} is useless. The real data starts from dat\mbox{[}1\mbox{]}! \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gad964ca16935d2f9704e1e047861072ea}{A\-D\-C\-Data\-Init} (\hyperlink{struct_t_a_d_c}{T\-A\-D\-C\-Ptr} user\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method initialize the A\-D\-C device structure, including data, setting and status. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_ga6d15fbab721231334a4ea44c8df9d3f5}{Enable\-A\-D\-C\-S\-P\-I} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em This method pull the C\-S signal down to enable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is available. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gaaff16de9519f1d376e1103692d7dd44d}{Disable\-A\-D\-C\-S\-P\-I} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em This method pull the C\-S signal up to disable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is disabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This module contains A\-D\-C operation functions. 
+
+\subsection{Function Documentation}
+\hypertarget{group___a_d_c__module_ga2ec520f84e11f40a1d6e28004f143df5}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Configure@{A\-D\-C\-Configure}}
+\index{A\-D\-C\-Configure@{A\-D\-C\-Configure}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Configure}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Configure (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga2ec520f84e11f40a1d6e28004f143df5}
+
+
+Configure the registers of A\-D\-C via S\-P\-I0. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gad964ca16935d2f9704e1e047861072ea}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Data\-Init@{A\-D\-C\-Data\-Init}}
+\index{A\-D\-C\-Data\-Init@{A\-D\-C\-Data\-Init}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Data\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void A\-D\-C\-Data\-Init (
+\begin{DoxyParamCaption}
+\item[{{\bf T\-A\-D\-C\-Ptr}}]{user\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gad964ca16935d2f9704e1e047861072ea}
+
+
+This method initialize the A\-D\-C device structure, including data, setting and status. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em user\-Data\-Ptr} & -\/ Pointer to specific user data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gaee3c6f1b7638a7cf2ece62f97e507655}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Disable@{A\-D\-C\-Disable}}
+\index{A\-D\-C\-Disable@{A\-D\-C\-Disable}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Disable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Disable (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gaee3c6f1b7638a7cf2ece62f97e507655}
+
+
+Signal $\sim$\-C\-S is High, disable A\-D\-C. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K\-: Output of this pin is O\-K.
+\item E\-R\-R\-\_\-\-C\-O\-M\-M\-O\-N\-: Output of this pin goes wrong. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga55fa03d1036f43603a3a0776e1068c8a}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Enable@{A\-D\-C\-Enable}}
+\index{A\-D\-C\-Enable@{A\-D\-C\-Enable}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Enable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Enable (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga55fa03d1036f43603a3a0776e1068c8a}
+
+
+Signal $\sim$\-C\-S is low, enable A\-D\-C. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K\-: Output of this pin is O\-K.
+\item E\-R\-R\-\_\-\-C\-O\-M\-M\-O\-N\-: Output of this pin goes wrong. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga0c711fb302e26085c0b47c83f53b263f}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Init@{A\-D\-C\-Init}}
+\index{A\-D\-C\-Init@{A\-D\-C\-Init}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Init}]{\setlength{\rightskip}{0pt plus 5cm}void A\-D\-C\-Init (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga0c711fb302e26085c0b47c83f53b263f}
+
+
+Initializes A\-D\-C. The method is called in the Peripheral\-Init function and will be called only once. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga8e75384212a08e64cdddf9fec4104248}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Read\-Continuous\-Data@{A\-D\-C\-Read\-Continuous\-Data}}
+\index{A\-D\-C\-Read\-Continuous\-Data@{A\-D\-C\-Read\-Continuous\-Data}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Read\-Continuous\-Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Read\-Continuous\-Data (
+\begin{DoxyParamCaption}
+\item[{byte $\ast$}]{dat, }
+\item[{uint8}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga8e75384212a08e64cdddf9fec4104248}
+
+
+Read conversion data from A\-D\-C in R\-D\-A\-T\-A\-C mode via S\-P\-I0. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em dat} & -\/ Pointer to buffer where received data in. \\
+\hline
+\mbox{\tt in}  & {\em n} & -\/ The length of data bytes to be read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code of the the transmission status.
+\item Possible codes\-:
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K -\/ O\-K.
+\item E\-R\-R\-\_\-\-S\-P\-E\-E\-D -\/ This device does not work in the active clock configuration.
+\item E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D -\/ Component is disabled.
+\item E\-R\-R\-\_\-\-B\-U\-S\-Y -\/ The previous receive request is pending.
+\item etc. -\/ See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h}. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gac52d9692bf2114d7a9d22042099d087b}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Read\-Data@{A\-D\-C\-Read\-Data}}
+\index{A\-D\-C\-Read\-Data@{A\-D\-C\-Read\-Data}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Read\-Data}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Read\-Data (
+\begin{DoxyParamCaption}
+\item[{byte $\ast$}]{dat, }
+\item[{uint8}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gac52d9692bf2114d7a9d22042099d087b}
+
+
+Read conversion data from A\-D\-C in R\-D\-A\-T\-A mode via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} is useless. The real data starts from dat\mbox{[}1\mbox{]}! 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt out}  & {\em dat} & -\/ Pointer to buffer where received data in. \\
+\hline
+\mbox{\tt in}  & {\em n} & -\/ The length of data bytes to be read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code of the the transmission status.
+\item Possible codes\-:
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K -\/ O\-K.
+\item E\-R\-R\-\_\-\-S\-P\-E\-E\-D -\/ This device does not work in the active clock configuration.
+\item E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D -\/ Component is disabled.
+\item E\-R\-R\-\_\-\-B\-U\-S\-Y -\/ The previous receive request is pending.
+\item etc. -\/ See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h}. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga006599cf1a3384ae5bab076c52b99db8}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Read\-Data\-Continuous@{A\-D\-C\-Read\-Data\-Continuous}}
+\index{A\-D\-C\-Read\-Data\-Continuous@{A\-D\-C\-Read\-Data\-Continuous}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Read\-Data\-Continuous}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Read\-Data\-Continuous (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga006599cf1a3384ae5bab076c52b99db8}
+
+
+Send command R\-D\-A\-T\-A\-C via S\-P\-I0 to make the conversion data of A\-D\-C can read continuously without command R\-D\-A\-T\-A. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga5a9a35fa254e8230cbc9be8858660f22}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Read\-Register@{A\-D\-C\-Read\-Register}}
+\index{A\-D\-C\-Read\-Register@{A\-D\-C\-Read\-Register}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Read\-Register}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Read\-Register (
+\begin{DoxyParamCaption}
+\item[{byte}]{reg\-Addr, }
+\item[{byte $\ast$}]{dat, }
+\item[{uint8}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga5a9a35fa254e8230cbc9be8858660f22}
+
+
+Read data from register of A\-D\-C via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} and dat\mbox{[}1\mbox{]} are useless. The real data starts from dat\mbox{[}2\mbox{]}! 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg\-Addr} & -\/ The first address of register(s) to be read. \\
+\hline
+\mbox{\tt out}  & {\em dat} & -\/ Pointer to the buffer where received data in. \\
+\hline
+\mbox{\tt in}  & {\em n} & -\/ The number of registers to be read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code of the the transmission status.
+\item Possible codes\-:
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K -\/ O\-K.
+\item E\-R\-R\-\_\-\-S\-P\-E\-E\-D -\/ This device does not work in the active clock configuration.
+\item E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D -\/ Component is disabled.
+\item E\-R\-R\-\_\-\-B\-U\-S\-Y -\/ The previous receive request is pending.
+\item etc. -\/ See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h}. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gaa6ed128c952696b046a47a2ae9d3ec1e}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Reset\-By\-Command@{A\-D\-C\-Reset\-By\-Command}}
+\index{A\-D\-C\-Reset\-By\-Command@{A\-D\-C\-Reset\-By\-Command}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Reset\-By\-Command}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Reset\-By\-Command (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gaa6ed128c952696b046a47a2ae9d3ec1e}
+
+
+M\-C\-U sends R\-E\-S\-E\-T command to A\-D\-C, A\-D\-C resets. This function resets A\-D\-C via S\-P\-I0. Avoid sending any commands during reset. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gaac2da2d21a0153782e5c806878c45605}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Reset\-By\-Hardware@{A\-D\-C\-Reset\-By\-Hardware}}
+\index{A\-D\-C\-Reset\-By\-Hardware@{A\-D\-C\-Reset\-By\-Hardware}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Reset\-By\-Hardware}]{\setlength{\rightskip}{0pt plus 5cm}void A\-D\-C\-Reset\-By\-Hardware (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gaac2da2d21a0153782e5c806878c45605}
+
+
+Signal $\sim$\-R\-E\-S\-E\-T varies from high to low to high, A\-D\-C resets. This function resets A\-D\-C via signal R\-E\-S\-E\-T. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga0c4f12b67a2d24c0a3f37b6f4d8a4df2}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Send\-Command@{A\-D\-C\-Send\-Command}}
+\index{A\-D\-C\-Send\-Command@{A\-D\-C\-Send\-Command}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Send\-Command}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Send\-Command (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag, }
+\item[{byte $\ast$}]{cmd}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga0c4f12b67a2d24c0a3f37b6f4d8a4df2}
+
+
+Send command to A\-D\-C via S\-P\-I0. Please use A\-D\-C\-Read\-Register and A\-D\-C\-Write\-Register, but not this function, to read and write A\-D\-C's register! 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\mbox{\tt in}  & {\em cmd} & -\/ Pointer to command to be sent. See group A\-D\-C Commands in \hyperlink{_macros_8h}{Macros.\-h}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code of the the transmission status.
+\item Possible codes\-:
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K -\/ O\-K.
+\item E\-R\-R\-\_\-\-S\-P\-E\-E\-D -\/ This device does not work in the active clock configuration.
+\item E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D -\/ Component is disabled.
+\item E\-R\-R\-\_\-\-B\-U\-S\-Y -\/ The previous receive request is pending.
+\item etc. -\/ See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h}. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gac1be36a504b6060dd86bb74c0ac9dff3}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Stand\-By@{A\-D\-C\-Stand\-By}}
+\index{A\-D\-C\-Stand\-By@{A\-D\-C\-Stand\-By}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Stand\-By}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Stand\-By (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gac1be36a504b6060dd86bb74c0ac9dff3}
+
+
+Send command S\-T\-A\-N\-D\-B\-Y via S\-P\-I0 to make A\-D\-C entering the low-\/power standby mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga7f6ee96c5b2a3d3466992aa468a5a27f}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Start\-Convert\-By\-Command@{A\-D\-C\-Start\-Convert\-By\-Command}}
+\index{A\-D\-C\-Start\-Convert\-By\-Command@{A\-D\-C\-Start\-Convert\-By\-Command}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Start\-Convert\-By\-Command}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Start\-Convert\-By\-Command (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga7f6ee96c5b2a3d3466992aa468a5a27f}
+
+
+M\-C\-U sends S\-T\-A\-R\-T command to A\-D\-C, A\-D\-C starts to convert. This function starts A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga3121ea29554dad5d44b0f93f44d4615a}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Start\-Convert\-By\-Hardware@{A\-D\-C\-Start\-Convert\-By\-Hardware}}
+\index{A\-D\-C\-Start\-Convert\-By\-Hardware@{A\-D\-C\-Start\-Convert\-By\-Hardware}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Start\-Convert\-By\-Hardware}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Start\-Convert\-By\-Hardware (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga3121ea29554dad5d44b0f93f44d4615a}
+
+
+Signal S\-T\-A\-R\-T is high, A\-D\-C starts to convert. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K\-: Output of this pin is O\-K.
+\item E\-R\-R\-\_\-\-C\-O\-M\-M\-O\-N\-: Output of this pin goes wrong. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga2444bbfdc43b6d1dd3cf27d62b41db39}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Stop\-Convert\-By\-Command@{A\-D\-C\-Stop\-Convert\-By\-Command}}
+\index{A\-D\-C\-Stop\-Convert\-By\-Command@{A\-D\-C\-Stop\-Convert\-By\-Command}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Stop\-Convert\-By\-Command}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Stop\-Convert\-By\-Command (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga2444bbfdc43b6d1dd3cf27d62b41db39}
+
+
+M\-C\-U sends S\-T\-O\-P command to A\-D\-C, A\-D\-C stops to convert. This function stops A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gae7522edc164dc387abff35a130b268f7}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Stop\-Convert\-By\-Hardware@{A\-D\-C\-Stop\-Convert\-By\-Hardware}}
+\index{A\-D\-C\-Stop\-Convert\-By\-Hardware@{A\-D\-C\-Stop\-Convert\-By\-Hardware}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Stop\-Convert\-By\-Hardware}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Stop\-Convert\-By\-Hardware (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gae7522edc164dc387abff35a130b268f7}
+
+
+Signal S\-T\-A\-R\-T is low, A\-D\-C stops converting. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K\-: Output of this pin is O\-K.
+\item E\-R\-R\-\_\-\-C\-O\-M\-M\-O\-N\-: Output of this pin goes wrong. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga9cdb5ac2b155fab1a7510f980ea450ce}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Stop\-Read\-Data\-Continuous@{A\-D\-C\-Stop\-Read\-Data\-Continuous}}
+\index{A\-D\-C\-Stop\-Read\-Data\-Continuous@{A\-D\-C\-Stop\-Read\-Data\-Continuous}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Stop\-Read\-Data\-Continuous}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Stop\-Read\-Data\-Continuous (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga9cdb5ac2b155fab1a7510f980ea450ce}
+
+
+Send command S\-D\-A\-T\-A\-C to A\-D\-C via S\-P\-I0 to stop A\-D\-C's R\-D\-A\-T\-A\-C mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gace4858ead7841b0d2b078b5b33573740}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Wake\-Up@{A\-D\-C\-Wake\-Up}}
+\index{A\-D\-C\-Wake\-Up@{A\-D\-C\-Wake\-Up}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Wake\-Up}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Wake\-Up (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gace4858ead7841b0d2b078b5b33573740}
+
+
+Send command W\-A\-K\-E\-U\-P to A\-D\-C via S\-P\-I0 to wake up A\-D\-C from low-\/power standby mode. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga607e77df260f2c971d948c580a933280}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!A\-D\-C\-Write\-Register@{A\-D\-C\-Write\-Register}}
+\index{A\-D\-C\-Write\-Register@{A\-D\-C\-Write\-Register}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{A\-D\-C\-Write\-Register}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} A\-D\-C\-Write\-Register (
+\begin{DoxyParamCaption}
+\item[{byte}]{reg\-Addr, }
+\item[{byte $\ast$}]{dat, }
+\item[{uint8}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga607e77df260f2c971d948c580a933280}
+
+
+Write data to register of A\-D\-C via S\-P\-I0. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em reg\-Addr} & -\/ The first address of register(s) to be written. \\
+\hline
+\mbox{\tt in}  & {\em dat} & -\/ Pointer to buffer where data to be written in. \\
+\hline
+\mbox{\tt in}  & {\em n} & -\/ The number of registers to be written. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code of the the transmission status.
+\item Possible codes\-:
+\begin{DoxyItemize}
+\item E\-R\-R\-\_\-\-O\-K -\/ O\-K.
+\item E\-R\-R\-\_\-\-S\-P\-E\-E\-D -\/ This device does not work in the active clock configuration.
+\item E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D -\/ Component is disabled.
+\item E\-R\-R\-\_\-\-B\-U\-S\-Y -\/ The previous receive request is pending.
+\item etc. -\/ See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h}. 
+\end{DoxyItemize}
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_gaaff16de9519f1d376e1103692d7dd44d}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!Disable\-A\-D\-C\-S\-P\-I@{Disable\-A\-D\-C\-S\-P\-I}}
+\index{Disable\-A\-D\-C\-S\-P\-I@{Disable\-A\-D\-C\-S\-P\-I}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{Disable\-A\-D\-C\-S\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}void Disable\-A\-D\-C\-S\-P\-I (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_gaaff16de9519f1d376e1103692d7dd44d}
+
+
+This method pull the C\-S signal up to disable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is disabled. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{group___a_d_c__module_ga6d15fbab721231334a4ea44c8df9d3f5}{\index{A\-D\-C module documentation@{A\-D\-C module documentation}!Enable\-A\-D\-C\-S\-P\-I@{Enable\-A\-D\-C\-S\-P\-I}}
+\index{Enable\-A\-D\-C\-S\-P\-I@{Enable\-A\-D\-C\-S\-P\-I}!ADC module documentation@{A\-D\-C module documentation}}
+\subsubsection[{Enable\-A\-D\-C\-S\-P\-I}]{\setlength{\rightskip}{0pt plus 5cm}void Enable\-A\-D\-C\-S\-P\-I (
+\begin{DoxyParamCaption}
+\item[{{\bf E\-A\-D\-C\-Flag}}]{adc\-Flag}
+\end{DoxyParamCaption}
+)}}\label{group___a_d_c__module_ga6d15fbab721231334a4ea44c8df9d3f5}
+
+
+This method pull the C\-S signal down to enable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is available. 
+
+This method reads A\-D\-C's data when A\-D\-C's is ready to be read. This method is called in function E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt or E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt, file \hyperlink{_events_8c}{Events.\-c}.
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void
+\end{DoxyReturn}
+\begin{DoxyVerb} This method pull the CS signal down to enable corresonding ADC's SPI.
+ Each time only one ADC's SPI is available.
+\end{DoxyVerb}
+ 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em adc\-Flag} & -\/ Shows which A\-D\-C is selected. Possible value\-: e\-A\-D\-C0, e\-A\-D\-C1. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}

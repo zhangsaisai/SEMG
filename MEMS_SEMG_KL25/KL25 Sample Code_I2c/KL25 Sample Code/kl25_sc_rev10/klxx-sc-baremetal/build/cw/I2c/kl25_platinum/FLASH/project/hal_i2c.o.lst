@@ -1,0 +1,498 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"hal_i2c.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.i2c_set_tx_mode,"ax",%progbits
+  18              		.align	2
+  19              		.global	i2c_set_tx_mode
+  20              		.code	16
+  21              		.thumb_func
+  23              	i2c_set_tx_mode:
+  24              	.LFB0:
+  25              		.file 1 "../project/hal_i2c.c"
+   1:../project/hal_i2c.c **** 
+   2:../project/hal_i2c.c **** #include "common.h"
+   3:../project/hal_i2c.c **** #include "global.h"
+   4:../project/hal_i2c.c **** 
+   5:../project/hal_i2c.c **** 
+   6:../project/hal_i2c.c **** 
+   7:../project/hal_i2c.c **** void i2c_set_tx_mode(I2C_MemMapPtr p)
+   8:../project/hal_i2c.c **** {
+  26              		.loc 1 8 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+   9:../project/hal_i2c.c ****     p->C1 |= I2C_C1_TX_MASK;
+  29              		.loc 1 9 0
+  30 0000 8278     		ldrb	r2, [r0, #2]
+  31 0002 1023     		mov	r3, #16
+  32 0004 1343     		orr	r3, r2
+  33 0006 8370     		strb	r3, [r0, #2]
+  10:../project/hal_i2c.c **** 
+  11:../project/hal_i2c.c **** }
+  34              		.loc 1 11 0
+  35              		@ sp needed for prologue
+  36 0008 7047     		bx	lr
+  37              		.cfi_endproc
+  38              	.LFE0:
+  40 000a C046     		.section	.text.i2c_set_rx_mode,"ax",%progbits
+  41              		.align	2
+  42              		.global	i2c_set_rx_mode
+  43              		.code	16
+  44              		.thumb_func
+  46              	i2c_set_rx_mode:
+  47              	.LFB1:
+  12:../project/hal_i2c.c **** void i2c_set_rx_mode(I2C_MemMapPtr p)
+  13:../project/hal_i2c.c **** {
+  48              		.loc 1 13 0
+  49              		.cfi_startproc
+  50              	.LVL1:
+  14:../project/hal_i2c.c ****     p->C1 &= ~I2C_C1_TX_MASK;
+  51              		.loc 1 14 0
+  52 0000 8378     		ldrb	r3, [r0, #2]
+  53 0002 1022     		mov	r2, #16
+  54 0004 9343     		bic	r3, r2
+  55 0006 8370     		strb	r3, [r0, #2]
+  15:../project/hal_i2c.c **** }
+  56              		.loc 1 15 0
+  57              		@ sp needed for prologue
+  58 0008 7047     		bx	lr
+  59              		.cfi_endproc
+  60              	.LFE1:
+  62 000a C046     		.section	.text.i2c_set_slave_mode,"ax",%progbits
+  63              		.align	2
+  64              		.global	i2c_set_slave_mode
+  65              		.code	16
+  66              		.thumb_func
+  68              	i2c_set_slave_mode:
+  69              	.LFB2:
+  16:../project/hal_i2c.c **** 
+  17:../project/hal_i2c.c **** void i2c_set_slave_mode(I2C_MemMapPtr p)
+  18:../project/hal_i2c.c **** {
+  70              		.loc 1 18 0
+  71              		.cfi_startproc
+  72              	.LVL2:
+  19:../project/hal_i2c.c ****     p->C1  &= ~I2C_C1_MST_MASK;
+  73              		.loc 1 19 0
+  74 0000 8378     		ldrb	r3, [r0, #2]
+  75 0002 2022     		mov	r2, #32
+  76 0004 9343     		bic	r3, r2
+  77 0006 8370     		strb	r3, [r0, #2]
+  20:../project/hal_i2c.c **** }
+  78              		.loc 1 20 0
+  79              		@ sp needed for prologue
+  80 0008 7047     		bx	lr
+  81              		.cfi_endproc
+  82              	.LFE2:
+  84 000a C046     		.section	.text.i2c_set_master_mode,"ax",%progbits
+  85              		.align	2
+  86              		.global	i2c_set_master_mode
+  87              		.code	16
+  88              		.thumb_func
+  90              	i2c_set_master_mode:
+  91              	.LFB3:
+  21:../project/hal_i2c.c **** void i2c_set_master_mode(I2C_MemMapPtr p)
+  22:../project/hal_i2c.c **** {
+  92              		.loc 1 22 0
+  93              		.cfi_startproc
+  94              	.LVL3:
+  23:../project/hal_i2c.c ****     p->C1  |=  I2C_C1_MST_MASK;
+  95              		.loc 1 23 0
+  96 0000 8278     		ldrb	r2, [r0, #2]
+  97 0002 2023     		mov	r3, #32
+  98 0004 1343     		orr	r3, r2
+  99 0006 8370     		strb	r3, [r0, #2]
+  24:../project/hal_i2c.c **** }
+ 100              		.loc 1 24 0
+ 101              		@ sp needed for prologue
+ 102 0008 7047     		bx	lr
+ 103              		.cfi_endproc
+ 104              	.LFE3:
+ 106 000a C046     		.section	.text.i2c_give_nack,"ax",%progbits
+ 107              		.align	2
+ 108              		.global	i2c_give_nack
+ 109              		.code	16
+ 110              		.thumb_func
+ 112              	i2c_give_nack:
+ 113              	.LFB4:
+  25:../project/hal_i2c.c **** 
+  26:../project/hal_i2c.c **** // i2c general
+  27:../project/hal_i2c.c **** 
+  28:../project/hal_i2c.c **** void i2c_give_nack(I2C_MemMapPtr p)
+  29:../project/hal_i2c.c **** {
+ 114              		.loc 1 29 0
+ 115              		.cfi_startproc
+ 116              	.LVL4:
+  30:../project/hal_i2c.c ****     p->C1 |= I2C_C1_TXAK_MASK;
+ 117              		.loc 1 30 0
+ 118 0000 8278     		ldrb	r2, [r0, #2]
+ 119 0002 0823     		mov	r3, #8
+ 120 0004 1343     		orr	r3, r2
+ 121 0006 8370     		strb	r3, [r0, #2]
+  31:../project/hal_i2c.c **** }
+ 122              		.loc 1 31 0
+ 123              		@ sp needed for prologue
+ 124 0008 7047     		bx	lr
+ 125              		.cfi_endproc
+ 126              	.LFE4:
+ 128 000a C046     		.section	.text.i2c_give_ack,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	i2c_give_ack
+ 131              		.code	16
+ 132              		.thumb_func
+ 134              	i2c_give_ack:
+ 135              	.LFB5:
+  32:../project/hal_i2c.c **** void i2c_give_ack(I2C_MemMapPtr p)
+  33:../project/hal_i2c.c **** {
+ 136              		.loc 1 33 0
+ 137              		.cfi_startproc
+ 138              	.LVL5:
+  34:../project/hal_i2c.c ****     p->C1 &= ~I2C_C1_TXAK_MASK;
+ 139              		.loc 1 34 0
+ 140 0000 8378     		ldrb	r3, [r0, #2]
+ 141 0002 0822     		mov	r2, #8
+ 142 0004 9343     		bic	r3, r2
+ 143 0006 8370     		strb	r3, [r0, #2]
+  35:../project/hal_i2c.c **** }
+ 144              		.loc 1 35 0
+ 145              		@ sp needed for prologue
+ 146 0008 7047     		bx	lr
+ 147              		.cfi_endproc
+ 148              	.LFE5:
+ 150 000a C046     		.section	.text.i2c_repeated_start,"ax",%progbits
+ 151              		.align	2
+ 152              		.global	i2c_repeated_start
+ 153              		.code	16
+ 154              		.thumb_func
+ 156              	i2c_repeated_start:
+ 157              	.LFB6:
+  36:../project/hal_i2c.c **** void i2c_repeated_start(I2C_MemMapPtr p)
+  37:../project/hal_i2c.c **** {
+ 158              		.loc 1 37 0
+ 159              		.cfi_startproc
+ 160              	.LVL6:
+  38:../project/hal_i2c.c ****     p->C1     |= 0x04;
+ 161              		.loc 1 38 0
+ 162 0000 8278     		ldrb	r2, [r0, #2]
+ 163 0002 0423     		mov	r3, #4
+ 164 0004 1343     		orr	r3, r2
+ 165 0006 8370     		strb	r3, [r0, #2]
+  39:../project/hal_i2c.c **** }
+ 166              		.loc 1 39 0
+ 167              		@ sp needed for prologue
+ 168 0008 7047     		bx	lr
+ 169              		.cfi_endproc
+ 170              	.LFE6:
+ 172 000a C046     		.section	.text.i2c_write_byte,"ax",%progbits
+ 173              		.align	2
+ 174              		.global	i2c_write_byte
+ 175              		.code	16
+ 176              		.thumb_func
+ 178              	i2c_write_byte:
+ 179              	.LFB7:
+  40:../project/hal_i2c.c **** void i2c_write_byte(I2C_MemMapPtr p, byte data)
+  41:../project/hal_i2c.c **** {
+ 180              		.loc 1 41 0
+ 181              		.cfi_startproc
+ 182              	.LVL7:
+  42:../project/hal_i2c.c ****     p->D = data;
+ 183              		.loc 1 42 0
+ 184 0000 0171     		strb	r1, [r0, #4]
+  43:../project/hal_i2c.c **** }
+ 185              		.loc 1 43 0
+ 186              		@ sp needed for prologue
+ 187 0002 7047     		bx	lr
+ 188              		.cfi_endproc
+ 189              	.LFE7:
+ 191              		.section	.text.i2c_read_byte,"ax",%progbits
+ 192              		.align	2
+ 193              		.global	i2c_read_byte
+ 194              		.code	16
+ 195              		.thumb_func
+ 197              	i2c_read_byte:
+ 198              	.LFB8:
+  44:../project/hal_i2c.c **** byte i2c_read_byte(I2C_MemMapPtr p)
+  45:../project/hal_i2c.c **** {
+ 199              		.loc 1 45 0
+ 200              		.cfi_startproc
+ 201              	.LVL8:
+  46:../project/hal_i2c.c ****     return p->D;
+ 202              		.loc 1 46 0
+ 203 0000 0079     		ldrb	r0, [r0, #4]
+ 204              	.LVL9:
+  47:../project/hal_i2c.c **** }
+ 205              		.loc 1 47 0
+ 206              		@ sp needed for prologue
+ 207 0002 7047     		bx	lr
+ 208              		.cfi_endproc
+ 209              	.LFE8:
+ 211              		.section	.text.i2c_start,"ax",%progbits
+ 212              		.align	2
+ 213              		.global	i2c_start
+ 214              		.code	16
+ 215              		.thumb_func
+ 217              	i2c_start:
+ 218              	.LFB9:
+  48:../project/hal_i2c.c **** void i2c_start(I2C_MemMapPtr p)
+  49:../project/hal_i2c.c **** {
+ 219              		.loc 1 49 0
+ 220              		.cfi_startproc
+ 221              	.LVL10:
+ 222              	.LBB10:
+ 223              	.LBB11:
+  23:../project/hal_i2c.c ****     p->C1  |=  I2C_C1_MST_MASK;
+ 224              		.loc 1 23 0
+ 225 0000 8278     		ldrb	r2, [r0, #2]
+ 226 0002 2023     		mov	r3, #32
+ 227 0004 1343     		orr	r3, r2
+ 228 0006 8370     		strb	r3, [r0, #2]
+ 229              	.LVL11:
+ 230              	.LBE11:
+ 231              	.LBE10:
+ 232              	.LBB12:
+ 233              	.LBB13:
+   9:../project/hal_i2c.c ****     p->C1 |= I2C_C1_TX_MASK;
+ 234              		.loc 1 9 0
+ 235 0008 8178     		ldrb	r1, [r0, #2]
+ 236 000a 1022     		mov	r2, #16
+ 237 000c 0A43     		orr	r2, r1
+ 238 000e 8270     		strb	r2, [r0, #2]
+ 239              	.LBE13:
+ 240              	.LBE12:
+  50:../project/hal_i2c.c ****     i2c_set_master_mode(p);
+  51:../project/hal_i2c.c ****     i2c_set_tx_mode(p);
+  52:../project/hal_i2c.c **** }
+ 241              		.loc 1 52 0
+ 242              		@ sp needed for prologue
+ 243 0010 7047     		bx	lr
+ 244              		.cfi_endproc
+ 245              	.LFE9:
+ 247 0012 C046     		.section	.text.i2c_stop,"ax",%progbits
+ 248              		.align	2
+ 249              		.global	i2c_stop
+ 250              		.code	16
+ 251              		.thumb_func
+ 253              	i2c_stop:
+ 254              	.LFB10:
+  53:../project/hal_i2c.c **** void i2c_stop(I2C_MemMapPtr p)
+  54:../project/hal_i2c.c **** {
+ 255              		.loc 1 54 0
+ 256              		.cfi_startproc
+ 257              	.LVL12:
+ 258              	.LBB14:
+ 259              	.LBB15:
+  19:../project/hal_i2c.c ****     p->C1  &= ~I2C_C1_MST_MASK;
+ 260              		.loc 1 19 0
+ 261 0000 8378     		ldrb	r3, [r0, #2]
+ 262 0002 2022     		mov	r2, #32
+ 263 0004 9343     		bic	r3, r2
+ 264 0006 8370     		strb	r3, [r0, #2]
+ 265              	.LVL13:
+ 266              	.LBE15:
+ 267              	.LBE14:
+ 268              	.LBB16:
+ 269              	.LBB17:
+  14:../project/hal_i2c.c ****     p->C1 &= ~I2C_C1_TX_MASK;
+ 270              		.loc 1 14 0
+ 271 0008 8178     		ldrb	r1, [r0, #2]
+ 272 000a 1023     		mov	r3, #16
+ 273 000c 9943     		bic	r1, r3
+ 274 000e 8170     		strb	r1, [r0, #2]
+ 275              	.LBE17:
+ 276              	.LBE16:
+  55:../project/hal_i2c.c ****     i2c_set_slave_mode(p);
+  56:../project/hal_i2c.c ****     i2c_set_rx_mode(p);
+  57:../project/hal_i2c.c **** }
+ 277              		.loc 1 57 0
+ 278              		@ sp needed for prologue
+ 279 0010 7047     		bx	lr
+ 280              		.cfi_endproc
+ 281              	.LFE10:
+ 283 0012 C046     		.section	.text.i2c_wait,"ax",%progbits
+ 284              		.align	2
+ 285              		.global	i2c_wait
+ 286              		.code	16
+ 287              		.thumb_func
+ 289              	i2c_wait:
+ 290              	.LFB11:
+  58:../project/hal_i2c.c **** void i2c_wait(I2C_MemMapPtr p)
+  59:../project/hal_i2c.c **** {
+ 291              		.loc 1 59 0
+ 292              		.cfi_startproc
+ 293              	.LVL14:
+ 294 0000 00B5     		push	{lr}
+ 295              	.LCFI0:
+ 296              		.cfi_def_cfa_offset 4
+ 297              		.cfi_offset 14, -4
+  60:../project/hal_i2c.c ****     // wait flag
+  61:../project/hal_i2c.c ****     while((p->S & I2C_S_IICIF_MASK)==0)
+ 298              		.loc 1 61 0
+ 299 0002 0222     		mov	r2, #2
+ 300              	.L13:
+ 301              		.loc 1 61 0 is_stmt 0
+ 302 0004 C378     		ldrb	r3, [r0, #3]
+ 303 0006 1A42     		tst	r2, r3
+ 304 0008 FCD0     		beq	.L13
+  62:../project/hal_i2c.c ****         ;
+  63:../project/hal_i2c.c ****     // clear flag
+  64:../project/hal_i2c.c ****     p->S |= I2C_S_IICIF_MASK;
+ 305              		.loc 1 64 0 is_stmt 1
+ 306 000a C178     		ldrb	r1, [r0, #3]
+ 307 000c 0222     		mov	r2, #2
+ 308 000e 0A43     		orr	r2, r1
+ 309 0010 D3B2     		uxtb	r3, r2
+ 310 0012 C370     		strb	r3, [r0, #3]
+  65:../project/hal_i2c.c **** }
+ 311              		.loc 1 65 0
+ 312              		@ sp needed for prologue
+ 313 0014 00BD     		pop	{pc}
+ 314              		.cfi_endproc
+ 315              	.LFE11:
+ 317 0016 C046     		.section	.text.i2c_get_ack,"ax",%progbits
+ 318              		.align	2
+ 319              		.global	i2c_get_ack
+ 320              		.code	16
+ 321              		.thumb_func
+ 323              	i2c_get_ack:
+ 324              	.LFB12:
+  66:../project/hal_i2c.c **** bool i2c_get_ack(I2C_MemMapPtr p)
+  67:../project/hal_i2c.c **** {
+ 325              		.loc 1 67 0
+ 326              		.cfi_startproc
+ 327              	.LVL15:
+  68:../project/hal_i2c.c ****     if((p->S & I2C_S_RXAK_MASK) == 0)
+ 328              		.loc 1 68 0
+ 329 0000 C078     		ldrb	r0, [r0, #3]
+ 330              	.LVL16:
+ 331 0002 0123     		mov	r3, #1
+ 332 0004 1840     		and	r0, r3
+ 333 0006 0122     		mov	r2, #1
+ 334 0008 5040     		eor	r0, r2
+  69:../project/hal_i2c.c ****         return true;
+ 335              		.loc 1 69 0
+ 336 000a 1840     		and	r0, r3
+  70:../project/hal_i2c.c ****     else
+  71:../project/hal_i2c.c ****         return false;
+  72:../project/hal_i2c.c **** }
+ 337              		.loc 1 72 0
+ 338              		@ sp needed for prologue
+ 339 000c 7047     		bx	lr
+ 340              		.cfi_endproc
+ 341              	.LFE12:
+ 343 000e C046     		.section	.text.hal_i2c_init,"ax",%progbits
+ 344              		.align	2
+ 345              		.global	hal_i2c_init
+ 346              		.code	16
+ 347              		.thumb_func
+ 349              	hal_i2c_init:
+ 350              	.LFB13:
+  73:../project/hal_i2c.c **** 
+  74:../project/hal_i2c.c **** // -------------------------------------------------
+  75:../project/hal_i2c.c **** 
+  76:../project/hal_i2c.c **** void hal_i2c_init(void)
+  77:../project/hal_i2c.c **** {
+ 351              		.loc 1 77 0
+ 352              		.cfi_startproc
+  78:../project/hal_i2c.c ****     SIM_SCGC4 |= SIM_SCGC4_I2C0_MASK;
+ 353              		.loc 1 78 0
+ 354 0000 084A     		ldr	r2, .L21
+ 355 0002 094B     		ldr	r3, .L21+4
+ 356 0004 4021     		mov	r1, #64
+ 357 0006 D058     		ldr	r0, [r2, r3]
+  79:../project/hal_i2c.c ****     PORTE_PCR24 = PORT_PCR_MUX(5);
+  80:../project/hal_i2c.c ****     PORTE_PCR25 = PORT_PCR_MUX(5);
+  81:../project/hal_i2c.c **** 
+  82:../project/hal_i2c.c ****     I2C0_F  = 0x20;
+  83:../project/hal_i2c.c ****     I2C0_C1 = 0x80;
+  84:../project/hal_i2c.c **** }
+ 358              		.loc 1 84 0
+ 359              		@ sp needed for prologue
+  78:../project/hal_i2c.c ****     SIM_SCGC4 |= SIM_SCGC4_I2C0_MASK;
+ 360              		.loc 1 78 0
+ 361 0008 0143     		orr	r1, r0
+ 362 000a D150     		str	r1, [r2, r3]
+  79:../project/hal_i2c.c ****     PORTE_PCR24 = PORT_PCR_MUX(5);
+ 363              		.loc 1 79 0
+ 364 000c 074B     		ldr	r3, .L21+8
+ 365 000e A022     		mov	r2, #160
+ 366 0010 D000     		lsl	r0, r2, #3
+  82:../project/hal_i2c.c ****     I2C0_F  = 0x20;
+ 367              		.loc 1 82 0
+ 368 0012 0749     		ldr	r1, .L21+12
+  79:../project/hal_i2c.c ****     PORTE_PCR24 = PORT_PCR_MUX(5);
+ 369              		.loc 1 79 0
+ 370 0014 1866     		str	r0, [r3, #96]
+  83:../project/hal_i2c.c ****     I2C0_C1 = 0x80;
+ 371              		.loc 1 83 0
+ 372 0016 8022     		mov	r2, #128
+  80:../project/hal_i2c.c ****     PORTE_PCR25 = PORT_PCR_MUX(5);
+ 373              		.loc 1 80 0
+ 374 0018 5866     		str	r0, [r3, #100]
+  82:../project/hal_i2c.c ****     I2C0_F  = 0x20;
+ 375              		.loc 1 82 0
+ 376 001a 2023     		mov	r3, #32
+ 377 001c 4B70     		strb	r3, [r1, #1]
+  83:../project/hal_i2c.c ****     I2C0_C1 = 0x80;
+ 378              		.loc 1 83 0
+ 379 001e 8A70     		strb	r2, [r1, #2]
+ 380              		.loc 1 84 0
+ 381 0020 7047     		bx	lr
+ 382              	.L22:
+ 383 0022 C046     		.align	2
+ 384              	.L21:
+ 385 0024 00700440 		.word	1074032640
+ 386 0028 34100000 		.word	4148
+ 387 002c 00D00440 		.word	1074057216
+ 388 0030 00600640 		.word	1074159616
+ 389              		.cfi_endproc
+ 390              	.LFE13:
+ 392              		.text
+ 393              	.Letext0:
+ 394              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 395              		.file 3 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 396              		.file 4 "../project/global.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 hal_i2c.c
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:18     .text.i2c_set_tx_mode:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:23     .text.i2c_set_tx_mode:00000000 i2c_set_tx_mode
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:41     .text.i2c_set_rx_mode:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:46     .text.i2c_set_rx_mode:00000000 i2c_set_rx_mode
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:63     .text.i2c_set_slave_mode:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:68     .text.i2c_set_slave_mode:00000000 i2c_set_slave_mode
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:85     .text.i2c_set_master_mode:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:90     .text.i2c_set_master_mode:00000000 i2c_set_master_mode
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:107    .text.i2c_give_nack:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:112    .text.i2c_give_nack:00000000 i2c_give_nack
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:129    .text.i2c_give_ack:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:134    .text.i2c_give_ack:00000000 i2c_give_ack
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:151    .text.i2c_repeated_start:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:156    .text.i2c_repeated_start:00000000 i2c_repeated_start
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:173    .text.i2c_write_byte:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:178    .text.i2c_write_byte:00000000 i2c_write_byte
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:192    .text.i2c_read_byte:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:197    .text.i2c_read_byte:00000000 i2c_read_byte
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:212    .text.i2c_start:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:217    .text.i2c_start:00000000 i2c_start
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:248    .text.i2c_stop:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:253    .text.i2c_stop:00000000 i2c_stop
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:284    .text.i2c_wait:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:289    .text.i2c_wait:00000000 i2c_wait
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:318    .text.i2c_get_ack:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:323    .text.i2c_get_ack:00000000 i2c_get_ack
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:344    .text.hal_i2c_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:349    .text.hal_i2c_init:00000000 hal_i2c_init
+C:\Users\lab\AppData\Local\Temp\cc4grByV.s:385    .text.hal_i2c_init:00000024 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

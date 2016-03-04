@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.rse.ui.wizards.newconnection.RSEMainNewConnectionWizard">
+		<item value="com.freescale.cdt.debug.cw.core.ui.rse.systemtype.bareboard.hardware" key="lastSelectedSystemTypeId"/>
+		<section name="org.eclipse.rse.ui.wizards.newconnection.RSENewConnectionWizardSelectionPage">
+			<list key="filteredTree.expandedCatogryIds">
+				<item value="com.freescale.cdt.debug.cw.core.ui.rse.connectionwizardcategory.linuxapplication"/>
+				<item value="com.freescale.cdt.debug.cw.core.ui.rse.connectionwizardcategory.bareboard.hardware"/>
+			</list>
+		</section>
+	</section>
+</section>

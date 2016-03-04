@@ -1,0 +1,71 @@
+\hypertarget{struct_t_a_r_m_status}{\section{T\-A\-R\-M\-Status Struct Reference}
+\label{struct_t_a_r_m_status}\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}}
+}
+
+
+{\ttfamily \#include $<$Macros.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_a8133feec241a9c1d79b1e4cd059c3488}{is\-Requiring\-Data}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_a5ae99606de7e85202a6cb953d1aeed56}{is\-Upload\-Ready}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_a16ee59958b283acaec90b460378bf275}{is\-Fore\-Buffer\-Empty}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_abd76e9edbdc18a6fd3a0f7c93f788a60}{is\-Fore\-Buffer\-Full}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_a263f0e3cd78258d773d1ea15a972a3f9}{is\-Back\-Buffer\-Empty}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_afe6a55dcf60e589bb4b7b184d3b1c970}{is\-Back\-Buffer\-Full}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_a_r_m_status_a1d0cf9a59f58ffdea4d579f1596118d7}{is\-Transmitting\-Data}\-: 1
+\item 
+volatile \hyperlink{group___enum_grp_ga1cca30b0867e98d31885e58f552270e0}{E\-Transmition\-Content} \hyperlink{struct_t_a_r_m_status_a35402597843e9a17d7dfb718c15c06f2}{transmition\-Content}
+\item 
+volatile \hyperlink{group___enum_grp_gafa703983b61d6eddeeaca1f48ec61efc}{E\-A\-R\-M\-Data\-Buffer\-Flag} \hyperlink{struct_t_a_r_m_status_a40d2f75b2786ab11ed853b7c98c8a223}{fore\-Buffer\-Status}
+\item 
+volatile \hyperlink{group___enum_grp_gafa703983b61d6eddeeaca1f48ec61efc}{E\-A\-R\-M\-Data\-Buffer\-Flag} \hyperlink{struct_t_a_r_m_status_a42242ba39c52a261a7a5a58ed5a6ab4e}{back\-Buffer\-Status}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A structure of A\-R\-M's status. 
+
+\subsection{Field Documentation}
+\hypertarget{struct_t_a_r_m_status_a42242ba39c52a261a7a5a58ed5a6ab4e}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!back\-Buffer\-Status@{back\-Buffer\-Status}}
+\index{back\-Buffer\-Status@{back\-Buffer\-Status}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{back\-Buffer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf E\-A\-R\-M\-Data\-Buffer\-Flag} T\-A\-R\-M\-Status\-::back\-Buffer\-Status}}\label{struct_t_a_r_m_status_a42242ba39c52a261a7a5a58ed5a6ab4e}
+Flag of background buffer status. \hypertarget{struct_t_a_r_m_status_a40d2f75b2786ab11ed853b7c98c8a223}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!fore\-Buffer\-Status@{fore\-Buffer\-Status}}
+\index{fore\-Buffer\-Status@{fore\-Buffer\-Status}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{fore\-Buffer\-Status}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf E\-A\-R\-M\-Data\-Buffer\-Flag} T\-A\-R\-M\-Status\-::fore\-Buffer\-Status}}\label{struct_t_a_r_m_status_a40d2f75b2786ab11ed853b7c98c8a223}
+Flag of foreground buffer status. \hypertarget{struct_t_a_r_m_status_a263f0e3cd78258d773d1ea15a972a3f9}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Back\-Buffer\-Empty@{is\-Back\-Buffer\-Empty}}
+\index{is\-Back\-Buffer\-Empty@{is\-Back\-Buffer\-Empty}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Back\-Buffer\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Back\-Buffer\-Empty}}\label{struct_t_a_r_m_status_a263f0e3cd78258d773d1ea15a972a3f9}
+Flag of is the background buffer empty. T\-R\-U\-E\-: Cannot swap, can be written. \hypertarget{struct_t_a_r_m_status_afe6a55dcf60e589bb4b7b184d3b1c970}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Back\-Buffer\-Full@{is\-Back\-Buffer\-Full}}
+\index{is\-Back\-Buffer\-Full@{is\-Back\-Buffer\-Full}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Back\-Buffer\-Full}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Back\-Buffer\-Full}}\label{struct_t_a_r_m_status_afe6a55dcf60e589bb4b7b184d3b1c970}
+Flag of is the background buffer full. T\-R\-U\-E\-: Cannot be written, can swap \hypertarget{struct_t_a_r_m_status_a16ee59958b283acaec90b460378bf275}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Fore\-Buffer\-Empty@{is\-Fore\-Buffer\-Empty}}
+\index{is\-Fore\-Buffer\-Empty@{is\-Fore\-Buffer\-Empty}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Fore\-Buffer\-Empty}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Fore\-Buffer\-Empty}}\label{struct_t_a_r_m_status_a16ee59958b283acaec90b460378bf275}
+Flag of is the foreground buffer empty. T\-R\-U\-E\-: Cannot be read, can swap. \hypertarget{struct_t_a_r_m_status_abd76e9edbdc18a6fd3a0f7c93f788a60}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Fore\-Buffer\-Full@{is\-Fore\-Buffer\-Full}}
+\index{is\-Fore\-Buffer\-Full@{is\-Fore\-Buffer\-Full}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Fore\-Buffer\-Full}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Fore\-Buffer\-Full}}\label{struct_t_a_r_m_status_abd76e9edbdc18a6fd3a0f7c93f788a60}
+Flag of is the foreground buffer full. T\-R\-U\-E\-: Cannot swap, can be read. \hypertarget{struct_t_a_r_m_status_a8133feec241a9c1d79b1e4cd059c3488}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Requiring\-Data@{is\-Requiring\-Data}}
+\index{is\-Requiring\-Data@{is\-Requiring\-Data}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Requiring\-Data}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Requiring\-Data}}\label{struct_t_a_r_m_status_a8133feec241a9c1d79b1e4cd059c3488}
+Flag of whether arm requires data. \hypertarget{struct_t_a_r_m_status_a1d0cf9a59f58ffdea4d579f1596118d7}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Transmitting\-Data@{is\-Transmitting\-Data}}
+\index{is\-Transmitting\-Data@{is\-Transmitting\-Data}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Transmitting\-Data}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Transmitting\-Data}}\label{struct_t_a_r_m_status_a1d0cf9a59f58ffdea4d579f1596118d7}
+Flag of whether the data is being transmitted, difference from commands or others being transmitted. \hypertarget{struct_t_a_r_m_status_a5ae99606de7e85202a6cb953d1aeed56}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!is\-Upload\-Ready@{is\-Upload\-Ready}}
+\index{is\-Upload\-Ready@{is\-Upload\-Ready}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{is\-Upload\-Ready}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-A\-R\-M\-Status\-::is\-Upload\-Ready}}\label{struct_t_a_r_m_status_a5ae99606de7e85202a6cb953d1aeed56}
+Flag of whether data is ready for uploading to A\-R\-M. \hypertarget{struct_t_a_r_m_status_a35402597843e9a17d7dfb718c15c06f2}{\index{T\-A\-R\-M\-Status@{T\-A\-R\-M\-Status}!transmition\-Content@{transmition\-Content}}
+\index{transmition\-Content@{transmition\-Content}!TARMStatus@{T\-A\-R\-M\-Status}}
+\subsubsection[{transmition\-Content}]{\setlength{\rightskip}{0pt plus 5cm}volatile {\bf E\-Transmition\-Content} T\-A\-R\-M\-Status\-::transmition\-Content}}\label{struct_t_a_r_m_status_a35402597843e9a17d7dfb718c15c06f2}
+Flag of what content is being transmitted. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\hyperlink{_macros_8h}{Macros.\-h}\end{DoxyCompactItemize}

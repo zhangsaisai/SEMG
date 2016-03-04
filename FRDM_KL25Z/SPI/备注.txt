@@ -1,0 +1,33 @@
+1.主机和从机采用中断模式，主机发数据给从机，从机收到数据后进入中断。在进入接收中断以后，马上关闭中断。而在中断处理函数中，将接收数据结构重新初始化，并开启中断。这样能保证每一次都进入中断。
+2.清除接收标志不能在receive_block里面清除，要在主程序中SPI接收完成以后清除
+3.主机发出数据，从机能接收到数据，SPI中断调试成功
+4.SPI中断逻辑：
+                                SS1_ReceiveBlock(使能接收中断)
+                                         |
+                                         | （以下进入while循环） 
+                                         |
+                                  SM1_SendBlock（主机发送数据）
+                                         |
+                                         |
+                                         |
+                                PE_ISR(SS1_Interrupt)（进入中断）以下为中断处理函数的内容
+                                         |
+                             DeviceDataPrv->SerFlag |= BLOCK_RECEIVED（将接收标志置位）
+                                         |
+                             SS1_OnBlockReceived（进入中断处理函数）
+                                         |
+                             DeviceDataPtr)->InpDataPtr = (uint8_t*)BufferPtr
+                                                                                                                      （将接收到数据保存到指定的存储区中）
+                                         |
+                                                                                                                                       使能中断       
+                                         |
+                                         |
+                                         |
+                                                                                                                        接受标志此时被置位 （while循环在此处等待接收完成）  
+                                         |                                                                                                                                                                                                                                                     
+                                         |
+                                         |
+                                                                                                                                 清除接受标志，重新进入循环
+                                                                                                                           
+                                         
+                              

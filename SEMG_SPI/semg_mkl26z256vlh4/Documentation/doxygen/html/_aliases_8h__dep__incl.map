@@ -1,0 +1,9 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Headers/Aliases.h" name="E:/workspace/semg_mkl15z128vlh4/Headers/Aliases.h">
+<area shape="rect" id="node2" href="$_utilities_8c.html" title="This file contains general functions used in this project. " alt="" coords="259,97,488,138"/>
+<area shape="rect" id="node3" href="$_my_headers_8h.html" title="This file contains all header files created by user. Easy for including header files in other files..." alt="" coords="512,97,741,138"/>
+<area shape="rect" id="node4" href="$_a_d_c_8c.html" title="This file contains ADC operation functions. " alt="" coords="5,187,235,229"/>
+<area shape="rect" id="node5" href="$_events_8c.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="259,187,488,229"/>
+<area shape="rect" id="node6" href="$_init_8c.html" title="This file contains user initialization of data, on&#45;chip and peripheral devices. " alt="" coords="512,187,741,229"/>
+<area shape="rect" id="node7" href="$_processor_expert_8c.html" title="Main module. This module contains user&#39;s application code. " alt="" coords="765,187,995,229"/>
+<area shape="rect" id="node8" href="$_test_8c.html" title="This file contains test functions. " alt="" coords="1019,187,1248,229"/>
+</map>

@@ -1,0 +1,498 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"ProcessorExpert.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	msgMaster
+  18              		.section	.data.msgMaster,"aw",%progbits
+  19              		.align	2
+  22              	msgMaster:
+  23 0000 576F726C 		.ascii	"World!\000"
+  23      642100
+  24              		.global	msgSlave
+  25 0007 00       		.section	.data.msgSlave,"aw",%progbits
+  26              		.align	2
+  29              	msgSlave:
+  30 0000 48656C6C 		.ascii	"Hello!\000"
+  30      6F2100
+  31              		.global	msgDummy
+  32 0007 00       		.section	.data.msgDummy,"aw",%progbits
+  33              		.align	2
+  36              	msgDummy:
+  37 0000 2D2D2D2D 		.ascii	"------\000"
+  37      2D2D00
+  38              		.comm	buffMaster,6,4
+  39              		.comm	buffSlave,6,4
+  40              		.comm	buffDummy,6,4
+  41              		.comm	slaveDevData,4,4
+  42              		.comm	masterDevData,4,4
+  43              		.comm	err,2,2
+  44              		.comm	i,4,4
+  45 0007 00       		.section	.rodata
+  46              		.align	2
+  47              	.LC2:
+  48 0000 2A2A2A2A 		.ascii	"***************************************************"
+  48      2A2A2A2A 
+  48      2A2A2A2A 
+  48      2A2A2A2A 
+  48      2A2A2A2A 
+  49 0033 2A2A2A2A 		.ascii	"*******************\012\015\000"
+  49      2A2A2A2A 
+  49      2A2A2A2A 
+  49      2A2A2A2A 
+  49      2A2A2A0A 
+  50 0049 000000   		.align	2
+  51              	.LC4:
+  52 004c 2A2A2A20 		.ascii	"*** DEMO project for the SPIMaster and SPISlave com"
+  52      44454D4F 
+  52      2070726F 
+  52      6A656374 
+  52      20666F72 
+  53 007f 706F6E65 		.ascii	"ponent - begin\012\015\000"
+  53      6E74202D 
+  53      20626567 
+  53      696E0A0D 
+  53      00
+  54              		.align	2
+  55              	.LC6:
+  56 0090 0A0D00   		.ascii	"\012\015\000"
+  57 0093 00       		.align	2
+  58              	.LC8:
+  59 0094 50726F6A 		.ascii	"Project description:\012\015\000"
+  59      65637420 
+  59      64657363 
+  59      72697074 
+  59      696F6E3A 
+  60 00ab 00       		.align	2
+  61              	.LC10:
+  62 00ac 53504920 		.ascii	"SPI synchronous transfer example. Please interconne"
+  62      73796E63 
+  62      68726F6E 
+  62      6F757320 
+  62      7472616E 
+  63 00df 63742070 		.ascii	"ct pins:\012\015\000"
+  63      696E733A 
+  63      0A0D00
+  64 00ea 0000     		.align	2
+  65              	.LC12:
+  66 00ec 50544433 		.ascii	"PTD3 and PTE1\012\015\000"
+  66      20616E64 
+  66      20505445 
+  66      310A0D00 
+  67              		.align	2
+  68              	.LC14:
+  69 00fc 50544432 		.ascii	"PTD2 and PTE3\012\015\000"
+  69      20616E64 
+  69      20505445 
+  69      330A0D00 
+  70              		.align	2
+  71              	.LC16:
+  72 010c 50544431 		.ascii	"PTD1 and PTE2\012\015\000"
+  72      20616E64 
+  72      20505445 
+  72      320A0D00 
+  73              		.align	2
+  74              	.LC18:
+  75 011c 50544430 		.ascii	"PTD0 and PTE4\012\015\000"
+  75      20616E64 
+  75      20505445 
+  75      340A0D00 
+  76              		.align	2
+  77              	.LC21:
+  78 012c 2B2B2B20 		.ascii	"+++ Step 0 - begin +++\012\015\000"
+  78      53746570 
+  78      2030202D 
+  78      20626567 
+  78      696E202B 
+  79 0145 000000   		.align	2
+  80              	.LC24:
+  81 0148 44617461 		.ascii	"Data path master -> slave: \000"
+  81      20706174 
+  81      68206D61 
+  81      73746572 
+  81      202D3E20 
+  82              		.align	2
+  83              	.LC26:
+  84 0164 52657375 		.ascii	"Result: PASSED\012\015\000"
+  84      6C743A20 
+  84      50415353 
+  84      45440A0D 
+  84      00
+  85 0175 000000   		.align	2
+  86              	.LC28:
+  87 0178 52657375 		.ascii	"Result: FAILED !!!\012\015\000"
+  87      6C743A20 
+  87      4641494C 
+  87      45442021 
+  87      21210A0D 
+  88 018d 000000   		.align	2
+  89              	.LC30:
+  90 0190 2B2B2B20 		.ascii	"+++ Step 0 - end +++\012\015\012\015\000"
+  90      53746570 
+  90      2030202D 
+  90      20656E64 
+  90      202B2B2B 
+  91 01a9 000000   		.section	.text.main,"ax",%progbits
+  92              		.align	2
+  93              		.global	main
+  94              		.code	16
+  95              		.thumb_func
+  97              	main:
+  98              	.LFB0:
+  99              		.file 1 "../Sources/ProcessorExpert.c"
+   1:../Sources/ProcessorExpert.c **** /** ###################################################################
+   2:../Sources/ProcessorExpert.c **** **     Filename    : ProcessorExpert.c
+   3:../Sources/ProcessorExpert.c **** **     Project     : ProcessorExpert
+   4:../Sources/ProcessorExpert.c **** **     Processor   : MKL25Z128VLK4
+   5:../Sources/ProcessorExpert.c **** **     Version     : Driver 01.01
+   6:../Sources/ProcessorExpert.c **** **     Compiler    : GNU C Compiler
+   7:../Sources/ProcessorExpert.c **** **     Date/Time   : 2012-07-09, 11:32, # CodeGen: 0
+   8:../Sources/ProcessorExpert.c **** **     Abstract    :
+   9:../Sources/ProcessorExpert.c **** **         Main module.
+  10:../Sources/ProcessorExpert.c **** **         This module contains user's application code.
+  11:../Sources/ProcessorExpert.c **** **     Settings    :
+  12:../Sources/ProcessorExpert.c **** **     Contents    :
+  13:../Sources/ProcessorExpert.c **** **         No public methods
+  14:../Sources/ProcessorExpert.c **** **
+  15:../Sources/ProcessorExpert.c **** ** ###################################################################*/
+  16:../Sources/ProcessorExpert.c **** /* MODULE ProcessorExpert */
+  17:../Sources/ProcessorExpert.c **** 
+  18:../Sources/ProcessorExpert.c **** 
+  19:../Sources/ProcessorExpert.c **** /* Including needed modules to compile this module/procedure */
+  20:../Sources/ProcessorExpert.c **** #include "Cpu.h"
+  21:../Sources/ProcessorExpert.c **** #include "Events.h"
+  22:../Sources/ProcessorExpert.c **** #include "CsIO1.h"
+  23:../Sources/ProcessorExpert.c **** #include "IO1.h"
+  24:../Sources/ProcessorExpert.c **** #include "SS1.h"
+  25:../Sources/ProcessorExpert.c **** #include "SM1.h"
+  26:../Sources/ProcessorExpert.c **** /* Including shared modules, which are used for whole project */
+  27:../Sources/ProcessorExpert.c **** #include "PE_Types.h"
+  28:../Sources/ProcessorExpert.c **** #include "PE_Error.h"
+  29:../Sources/ProcessorExpert.c **** #include "PE_Const.h"
+  30:../Sources/ProcessorExpert.c **** #include "IO_Map.h"
+  31:../Sources/ProcessorExpert.c **** 
+  32:../Sources/ProcessorExpert.c **** /* User includes (#include below this line is not maintained by Processor Expert) */
+  33:../Sources/ProcessorExpert.c **** #include <stdio.h>
+  34:../Sources/ProcessorExpert.c **** #include <string.h>
+  35:../Sources/ProcessorExpert.c **** 
+  36:../Sources/ProcessorExpert.c ****   byte msgMaster[] = "World!";
+  37:../Sources/ProcessorExpert.c ****   byte msgSlave[] = "Hello!";
+  38:../Sources/ProcessorExpert.c ****   byte msgDummy[] = "------"; /* must be the same length as msgSlave */
+  39:../Sources/ProcessorExpert.c ****   byte buffMaster[6]; /* master gets msg from slave */
+  40:../Sources/ProcessorExpert.c ****   byte buffSlave[6]; /* slave gets msg from master */
+  41:../Sources/ProcessorExpert.c ****   byte buffDummy[6]; /* master's buffer for dummy data */
+  42:../Sources/ProcessorExpert.c **** 
+  43:../Sources/ProcessorExpert.c ****   LDD_TDeviceData *slaveDevData;
+  44:../Sources/ProcessorExpert.c ****   LDD_TDeviceData *masterDevData;
+  45:../Sources/ProcessorExpert.c ****   LDD_TError err;
+  46:../Sources/ProcessorExpert.c ****   
+  47:../Sources/ProcessorExpert.c ****   int i;
+  48:../Sources/ProcessorExpert.c **** int main(void)
+  49:../Sources/ProcessorExpert.c **** {
+ 100              		.loc 1 49 0
+ 101              		.cfi_startproc
+ 102 0000 80B5     		push	{r7, lr}
+ 103              	.LCFI0:
+ 104              		.cfi_def_cfa_offset 8
+ 105              		.cfi_offset 7, -8
+ 106              		.cfi_offset 14, -4
+ 107 0002 82B0     		sub	sp, sp, #8
+ 108              	.LCFI1:
+ 109              		.cfi_def_cfa_offset 16
+ 110 0004 00AF     		add	r7, sp, #0
+ 111              	.LCFI2:
+ 112              		.cfi_def_cfa_register 7
+  50:../Sources/ProcessorExpert.c ****   /* Write your local variable definition here */
+  51:../Sources/ProcessorExpert.c ****   uint8_t MasterReceiveFlag = FALSE; 
+ 113              		.loc 1 51 0
+ 114 0006 FB1D     		add	r3, r7, #7
+ 115 0008 0022     		mov	r2, #0
+ 116 000a 1A70     		strb	r2, [r3]
+  52:../Sources/ProcessorExpert.c ****   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
+  53:../Sources/ProcessorExpert.c ****   PE_low_level_init();
+ 117              		.loc 1 53 0
+ 118 000c FFF7FEFF 		bl	PE_low_level_init
+  54:../Sources/ProcessorExpert.c ****   /*** End of Processor Expert internal initialization.                    ***/
+  55:../Sources/ProcessorExpert.c **** 
+  56:../Sources/ProcessorExpert.c ****   masterDevData = SM1_Init(&MasterReceiveFlag);
+ 119              		.loc 1 56 0
+ 120 0010 FB1D     		add	r3, r7, #7
+ 121 0012 181C     		mov	r0, r3
+ 122 0014 FFF7FEFF 		bl	SM1_Init
+ 123 0018 021C     		mov	r2, r0
+ 124 001a 3A4B     		ldr	r3, .L6
+ 125 001c 1A60     		str	r2, [r3]
+  57:../Sources/ProcessorExpert.c ****   slaveDevData = SS1_Init(NULL);
+ 126              		.loc 1 57 0
+ 127 001e 0020     		mov	r0, #0
+ 128 0020 FFF7FEFF 		bl	SS1_Init
+ 129 0024 021C     		mov	r2, r0
+ 130 0026 384B     		ldr	r3, .L6+4
+ 131 0028 1A60     		str	r2, [r3]
+  58:../Sources/ProcessorExpert.c **** 
+  59:../Sources/ProcessorExpert.c ****   printf("**********************************************************************\n\r");
+ 132              		.loc 1 59 0
+ 133 002a 384B     		ldr	r3, .L6+8
+ 134 002c 181C     		mov	r0, r3
+ 135 002e FFF7FEFF 		bl	printf
+  60:../Sources/ProcessorExpert.c ****   printf("*** DEMO project for the SPIMaster and SPISlave component - begin\n\r");
+ 136              		.loc 1 60 0
+ 137 0032 374B     		ldr	r3, .L6+12
+ 138 0034 181C     		mov	r0, r3
+ 139 0036 FFF7FEFF 		bl	printf
+  61:../Sources/ProcessorExpert.c ****   printf("**********************************************************************\n\r");
+ 140              		.loc 1 61 0
+ 141 003a 344B     		ldr	r3, .L6+8
+ 142 003c 181C     		mov	r0, r3
+ 143 003e FFF7FEFF 		bl	printf
+  62:../Sources/ProcessorExpert.c ****   printf("\n\r");
+ 144              		.loc 1 62 0
+ 145 0042 344B     		ldr	r3, .L6+16
+ 146 0044 181C     		mov	r0, r3
+ 147 0046 FFF7FEFF 		bl	printf
+  63:../Sources/ProcessorExpert.c ****   printf("Project description:\n\r");
+ 148              		.loc 1 63 0
+ 149 004a 334B     		ldr	r3, .L6+20
+ 150 004c 181C     		mov	r0, r3
+ 151 004e FFF7FEFF 		bl	printf
+  64:../Sources/ProcessorExpert.c ****   printf("SPI synchronous transfer example. Please interconnect pins:\n\r");
+ 152              		.loc 1 64 0
+ 153 0052 324B     		ldr	r3, .L6+24
+ 154 0054 181C     		mov	r0, r3
+ 155 0056 FFF7FEFF 		bl	printf
+  65:../Sources/ProcessorExpert.c ****   printf("PTD3 and PTE1\n\r");
+ 156              		.loc 1 65 0
+ 157 005a 314B     		ldr	r3, .L6+28
+ 158 005c 181C     		mov	r0, r3
+ 159 005e FFF7FEFF 		bl	printf
+  66:../Sources/ProcessorExpert.c ****   printf("PTD2 and PTE3\n\r");
+ 160              		.loc 1 66 0
+ 161 0062 304B     		ldr	r3, .L6+32
+ 162 0064 181C     		mov	r0, r3
+ 163 0066 FFF7FEFF 		bl	printf
+  67:../Sources/ProcessorExpert.c ****   printf("PTD1 and PTE2\n\r");
+ 164              		.loc 1 67 0
+ 165 006a 2F4B     		ldr	r3, .L6+36
+ 166 006c 181C     		mov	r0, r3
+ 167 006e FFF7FEFF 		bl	printf
+  68:../Sources/ProcessorExpert.c ****   printf("PTD0 and PTE4\n\r");
+ 168              		.loc 1 68 0
+ 169 0072 2E4B     		ldr	r3, .L6+40
+ 170 0074 181C     		mov	r0, r3
+ 171 0076 FFF7FEFF 		bl	printf
+  69:../Sources/ProcessorExpert.c ****   printf("\n\r"); 
+ 172              		.loc 1 69 0
+ 173 007a 264B     		ldr	r3, .L6+16
+ 174 007c 181C     		mov	r0, r3
+ 175 007e FFF7FEFF 		bl	printf
+  70:../Sources/ProcessorExpert.c ****   
+  71:../Sources/ProcessorExpert.c ****   
+  72:../Sources/ProcessorExpert.c ****   //Put request for reading from SPI
+  73:../Sources/ProcessorExpert.c ****   SS1_ReceiveBlock(slaveDevData, (LDD_TData*)buffSlave, sizeof(buffSlave)); 
+ 176              		.loc 1 73 0
+ 177 0082 214B     		ldr	r3, .L6+4
+ 178 0084 1A68     		ldr	r2, [r3]
+ 179 0086 2A4B     		ldr	r3, .L6+44
+ 180 0088 101C     		mov	r0, r2
+ 181 008a 191C     		mov	r1, r3
+ 182 008c 0622     		mov	r2, #6
+ 183 008e FFF7FEFF 		bl	SS1_ReceiveBlock
+ 184              	.L5:
+  74:../Sources/ProcessorExpert.c ****   
+  75:../Sources/ProcessorExpert.c ****   for(;;)
+  76:../Sources/ProcessorExpert.c ****   {
+  77:../Sources/ProcessorExpert.c **** 	  
+  78:../Sources/ProcessorExpert.c **** 	  //Step0 is that : master send data to slave , slave receive the data
+  79:../Sources/ProcessorExpert.c **** 	  //Step 0 
+  80:../Sources/ProcessorExpert.c **** 	  printf("+++ Step 0 - begin +++\n\r");
+ 185              		.loc 1 80 0
+ 186 0092 284B     		ldr	r3, .L6+48
+ 187 0094 181C     		mov	r0, r3
+ 188 0096 FFF7FEFF 		bl	printf
+  81:../Sources/ProcessorExpert.c **** 	  
+  82:../Sources/ProcessorExpert.c **** 
+  83:../Sources/ProcessorExpert.c **** 	  //when slave receive the data , "SM1_ReceiveBlock" is not necessary
+  84:../Sources/ProcessorExpert.c **** 	  //Prepare master for dummy data from slave
+  85:../Sources/ProcessorExpert.c **** 	  //SM1_ReceiveBlock(masterDevData, (LDD_TData*)&buffDummy, sizeof(buffDummy)); 
+  86:../Sources/ProcessorExpert.c **** 	
+  87:../Sources/ProcessorExpert.c **** 	  //Master sends request to slave
+  88:../Sources/ProcessorExpert.c **** 	  SM1_SendBlock(masterDevData, (LDD_TData*)msgMaster, sizeof(msgMaster) );
+ 189              		.loc 1 88 0
+ 190 009a 1A4B     		ldr	r3, .L6
+ 191 009c 1A68     		ldr	r2, [r3]
+ 192 009e 264B     		ldr	r3, .L6+52
+ 193 00a0 101C     		mov	r0, r2
+ 194 00a2 191C     		mov	r1, r3
+ 195 00a4 0722     		mov	r2, #7
+ 196 00a6 FFF7FEFF 		bl	SM1_SendBlock
+  89:../Sources/ProcessorExpert.c **** 	  
+  90:../Sources/ProcessorExpert.c **** 	  //waits for request
+  91:../Sources/ProcessorExpert.c **** 	  while (SS1_GetBlockReceivedStatus(slaveDevData) == FALSE) ;
+ 197              		.loc 1 91 0
+ 198 00aa C046     		mov	r8, r8
+ 199              	.L2:
+ 200              		.loc 1 91 0 is_stmt 0
+ 201 00ac 164B     		ldr	r3, .L6+4
+ 202 00ae 1B68     		ldr	r3, [r3]
+ 203 00b0 181C     		mov	r0, r3
+ 204 00b2 FFF7FEFF 		bl	SS1_GetBlockReceivedStatus
+ 205 00b6 031C     		mov	r3, r0
+ 206 00b8 002B     		cmp	r3, #0
+ 207 00ba F7D0     		beq	.L2
+  92:../Sources/ProcessorExpert.c **** 	
+  93:../Sources/ProcessorExpert.c **** 	  ((SS1_TDeviceDataPtr)slaveDevData)->SerFlag &= (uint8_t)(~(uint8_t)BLOCK_RECEIVED); /* Clear dat
+ 208              		.loc 1 93 0 is_stmt 1
+ 209 00bc 124B     		ldr	r3, .L6+4
+ 210 00be 1A68     		ldr	r2, [r3]
+ 211 00c0 114B     		ldr	r3, .L6+4
+ 212 00c2 1B68     		ldr	r3, [r3]
+ 213 00c4 9B7D     		ldrb	r3, [r3, #22]
+ 214 00c6 0221     		mov	r1, #2
+ 215 00c8 8B43     		bic	r3, r1
+ 216 00ca DBB2     		uxtb	r3, r3
+ 217 00cc 9375     		strb	r3, [r2, #22]
+  94:../Sources/ProcessorExpert.c **** 	  
+  95:../Sources/ProcessorExpert.c **** 	  //Compare sent and received message
+  96:../Sources/ProcessorExpert.c **** 	  printf("Data path master -> slave: ");
+ 218              		.loc 1 96 0
+ 219 00ce 1B4B     		ldr	r3, .L6+56
+ 220 00d0 181C     		mov	r0, r3
+ 221 00d2 FFF7FEFF 		bl	printf
+  97:../Sources/ProcessorExpert.c **** 	  if (strcmp((char*)buffSlave, (char*)msgMaster) == 0) { 
+ 222              		.loc 1 97 0
+ 223 00d6 164A     		ldr	r2, .L6+44
+ 224 00d8 174B     		ldr	r3, .L6+52
+ 225 00da 101C     		mov	r0, r2
+ 226 00dc 191C     		mov	r1, r3
+ 227 00de FFF7FEFF 		bl	strcmp
+ 228 00e2 031C     		mov	r3, r0
+ 229 00e4 002B     		cmp	r3, #0
+ 230 00e6 04D1     		bne	.L3
+  98:../Sources/ProcessorExpert.c **** 		printf("Result: PASSED\n\r");	
+ 231              		.loc 1 98 0
+ 232 00e8 154B     		ldr	r3, .L6+60
+ 233 00ea 181C     		mov	r0, r3
+ 234 00ec FFF7FEFF 		bl	printf
+ 235 00f0 03E0     		b	.L4
+ 236              	.L3:
+  99:../Sources/ProcessorExpert.c **** 	  } else {
+ 100:../Sources/ProcessorExpert.c **** 		printf("Result: FAILED !!!\n\r");
+ 237              		.loc 1 100 0
+ 238 00f2 144B     		ldr	r3, .L6+64
+ 239 00f4 181C     		mov	r0, r3
+ 240 00f6 FFF7FEFF 		bl	printf
+ 241              	.L4:
+ 101:../Sources/ProcessorExpert.c **** 	  }
+ 102:../Sources/ProcessorExpert.c **** 	  printf("+++ Step 0 - end +++\n\r\n\r");
+ 242              		.loc 1 102 0
+ 243 00fa 134B     		ldr	r3, .L6+68
+ 244 00fc 181C     		mov	r0, r3
+ 245 00fe FFF7FEFF 		bl	printf
+ 103:../Sources/ProcessorExpert.c **** 	  
+ 104:../Sources/ProcessorExpert.c **** 	  //Step1 is that : slave send data to master,master receive the data
+ 105:../Sources/ProcessorExpert.c **** 	  /*
+ 106:../Sources/ProcessorExpert.c **** 	  printf("+++ Step 1 - begin +++\n\r");
+ 107:../Sources/ProcessorExpert.c **** 	
+ 108:../Sources/ProcessorExpert.c **** 	  //Put request for reading from SPI
+ 109:../Sources/ProcessorExpert.c **** 	  err = SM1_ReceiveBlock(masterDevData, (LDD_TData*)buffMaster, sizeof(buffMaster)); 
+ 110:../Sources/ProcessorExpert.c **** 	  if (err != ERR_OK) { 
+ 111:../Sources/ProcessorExpert.c **** 		  printf(" ERROR requesting read operation (master).\n\r");
+ 112:../Sources/ProcessorExpert.c **** 	  }
+ 113:../Sources/ProcessorExpert.c **** 	  
+ 114:../Sources/ProcessorExpert.c **** 	  //Slave sends answer
+ 115:../Sources/ProcessorExpert.c **** 	  SS1_SendBlock(slaveDevData, (LDD_TData*)msgSlave, sizeof(msgSlave) );
+ 116:../Sources/ProcessorExpert.c **** 	  
+ 117:../Sources/ProcessorExpert.c **** 	  //To provide clock for slave, master sends anything that is as long as expected answer from slav
+ 118:../Sources/ProcessorExpert.c **** 	  SM1_SendBlock(masterDevData, (LDD_TData*)msgDummy, sizeof(msgDummy) );  
+ 119:../Sources/ProcessorExpert.c **** 	
+ 120:../Sources/ProcessorExpert.c **** 	  //Master waits for data from slave
+ 121:../Sources/ProcessorExpert.c **** 	  MasterReceiveFlag = FALSE;
+ 122:../Sources/ProcessorExpert.c **** 	  while(!MasterReceiveFlag);
+ 123:../Sources/ProcessorExpert.c **** 	  //Compare sent and received message
+ 124:../Sources/ProcessorExpert.c **** 	  printf("Data path slave -> master: ");
+ 125:../Sources/ProcessorExpert.c **** 	  if (strcmp((char*)buffMaster, (char*)msgSlave) == 0) { 
+ 126:../Sources/ProcessorExpert.c **** 		printf("Result: PASSED\n\r");	
+ 127:../Sources/ProcessorExpert.c **** 	  } else {
+ 128:../Sources/ProcessorExpert.c **** 		printf("Result: FAILED !!!\n\r");
+ 129:../Sources/ProcessorExpert.c **** 	  }
+ 130:../Sources/ProcessorExpert.c **** 	  printf("+++ Step 1 - end +++\n\r");
+ 131:../Sources/ProcessorExpert.c **** 	  
+ 132:../Sources/ProcessorExpert.c **** 	  //End of program
+ 133:../Sources/ProcessorExpert.c **** 	  printf("\n\r");
+ 134:../Sources/ProcessorExpert.c **** 	  printf("*********************************************************************\n\r");
+ 135:../Sources/ProcessorExpert.c **** 	  printf("*** DEMO project for the SPIMaster and SPISlave component - end\n\r");
+ 136:../Sources/ProcessorExpert.c **** 	  printf("*********************************************************************\n\r");
+ 137:../Sources/ProcessorExpert.c **** 	  
+ 138:../Sources/ProcessorExpert.c **** 	  */
+ 139:../Sources/ProcessorExpert.c ****   }
+ 246              		.loc 1 139 0
+ 247 0102 C6E7     		b	.L5
+ 248              	.L7:
+ 249              		.align	2
+ 250              	.L6:
+ 251 0104 00000000 		.word	masterDevData
+ 252 0108 00000000 		.word	slaveDevData
+ 253 010c 00000000 		.word	.LC2
+ 254 0110 4C000000 		.word	.LC4
+ 255 0114 90000000 		.word	.LC6
+ 256 0118 94000000 		.word	.LC8
+ 257 011c AC000000 		.word	.LC10
+ 258 0120 EC000000 		.word	.LC12
+ 259 0124 FC000000 		.word	.LC14
+ 260 0128 0C010000 		.word	.LC16
+ 261 012c 1C010000 		.word	.LC18
+ 262 0130 00000000 		.word	buffSlave
+ 263 0134 2C010000 		.word	.LC21
+ 264 0138 00000000 		.word	msgMaster
+ 265 013c 48010000 		.word	.LC24
+ 266 0140 64010000 		.word	.LC26
+ 267 0144 78010000 		.word	.LC28
+ 268 0148 90010000 		.word	.LC30
+ 269              		.cfi_endproc
+ 270              	.LFE0:
+ 272              		.text
+ 273              	.Letext0:
+ 274              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 275              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/CodeWarrior_Examples/Processor_Expert/Kinetis/TWR-KL25Z48M/
+ 276              		.file 4 "E:/Freescale/CW MCU v10.5/MCU/CodeWarrior_Examples/Processor_Expert/Kinetis/TWR-KL25Z48M/
+DEFINED SYMBOLS
+                            *ABS*:00000000 ProcessorExpert.c
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:22     .data.msgMaster:00000000 msgMaster
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:19     .data.msgMaster:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:29     .data.msgSlave:00000000 msgSlave
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:26     .data.msgSlave:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:36     .data.msgDummy:00000000 msgDummy
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:33     .data.msgDummy:00000000 $d
+                            *COM*:00000006 buffMaster
+                            *COM*:00000006 buffSlave
+                            *COM*:00000006 buffDummy
+                            *COM*:00000004 slaveDevData
+                            *COM*:00000004 masterDevData
+                            *COM*:00000002 err
+                            *COM*:00000004 i
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:46     .rodata:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:92     .text.main:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:97     .text.main:00000000 main
+C:\Users\lab\AppData\Local\Temp\cc1IHvja.s:251    .text.main:00000104 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+PE_low_level_init
+SM1_Init
+SS1_Init
+printf
+SS1_ReceiveBlock
+SM1_SendBlock
+SS1_GetBlockReceivedStatus
+strcmp

@@ -1,0 +1,5 @@
+<map id="DMAT_S_SPI_TX_TDeviceData" name="DMAT_S_SPI_TX_TDeviceData">
+<area shape="rect" id="node2" href="$struct_d_m_a___c_t_r_l___t_device_data.html" title="DMA_CTRL_TDeviceData" alt="" coords="111,200,280,227"/>
+<area shape="rect" id="node3" href="$struct_d_m_a___c_t_r_l___t_descriptor_record.html" title="DMA_CTRL_TDescriptorRecord" alt="" coords="103,96,307,123"/>
+<area shape="rect" id="node4" href="$struct_l_d_d___d_m_a___t_transfer_descriptor.html" title="LDD_DMA_TTransferDescriptor" alt="" coords="9,5,212,32"/>
+</map>

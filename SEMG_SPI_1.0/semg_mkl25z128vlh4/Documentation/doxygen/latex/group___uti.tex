@@ -1,0 +1,249 @@
+\hypertarget{group___uti}{\section{Utilities}
+\label{group___uti}\index{Utilities@{Utilities}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___uti_ga0e9be11e405b65adc4e2da665356693b}{Delay1\-Us} ()
+\begin{DoxyCompactList}\small\item\em This method delays 1us most precisely with assembly code. Error limit\-: +/-\/1\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga75f8e7437f833a92c1b0b47ded4ee3d7}{Delay\-Us} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n us precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_gae6595d8b5c3351b857f86516fa753194}{Delay\-Ms} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n Ms precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga57c57c7cdd7316581e674de7f51c1d88}{Delay\-S} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n s with repeat a 1000ms delay in a loop which may not be that precisely. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_gadfeab0efcdcc155ec9f5692f87a2a57a}{Delay\-Some\-Us} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n us roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga9e773733f9f8678fa7f54e54c7e3f316}{Delay\-Some\-Ms} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n Ms roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga52aa6208719074d7cd10fe2a42d6d0c7}{Delay\-Some\-S} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n s roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_ga7b6649d282c8abf3613f1ed8e7ef4c34}{Get\-Current\-Us} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total microseconds since power on. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_ga231cbdb58ac0905883e23f1814de2549}{Get\-Current\-Ms} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total milliseconds since power on. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_gaffe959d82d984dc88cd02a4894d02a7c}{Get\-Current\-S} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total seconds since power on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This module contains general functions used in this project. 
+
+\subsection{Function Documentation}
+\hypertarget{group___uti_ga0e9be11e405b65adc4e2da665356693b}{\index{Utilities@{Utilities}!Delay1\-Us@{Delay1\-Us}}
+\index{Delay1\-Us@{Delay1\-Us}!Utilities@{Utilities}}
+\subsubsection[{Delay1\-Us}]{\setlength{\rightskip}{0pt plus 5cm}void Delay1\-Us (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga0e9be11e405b65adc4e2da665356693b}
+
+
+This method delays 1us most precisely with assembly code. Error limit\-: +/-\/1\%. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\hypertarget{group___uti_gae6595d8b5c3351b857f86516fa753194}{\index{Utilities@{Utilities}!Delay\-Ms@{Delay\-Ms}}
+\index{Delay\-Ms@{Delay\-Ms}!Utilities@{Utilities}}
+\subsubsection[{Delay\-Ms}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-Ms (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_gae6595d8b5c3351b857f86516fa753194}
+
+
+This method delays n Ms precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many milliseconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga57c57c7cdd7316581e674de7f51c1d88}{\index{Utilities@{Utilities}!Delay\-S@{Delay\-S}}
+\index{Delay\-S@{Delay\-S}!Utilities@{Utilities}}
+\subsubsection[{Delay\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-S (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga57c57c7cdd7316581e674de7f51c1d88}
+
+
+This method delays n s with repeat a 1000ms delay in a loop which may not be that precisely. Error limit\-: +/-\/0.001\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many seconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga9e773733f9f8678fa7f54e54c7e3f316}{\index{Utilities@{Utilities}!Delay\-Some\-Ms@{Delay\-Some\-Ms}}
+\index{Delay\-Some\-Ms@{Delay\-Some\-Ms}!Utilities@{Utilities}}
+\subsubsection[{Delay\-Some\-Ms}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-Some\-Ms (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga9e773733f9f8678fa7f54e54c7e3f316}
+
+
+This method delays n Ms roughly with codes calculating the time. Error limit\-: +4\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many milliseconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga52aa6208719074d7cd10fe2a42d6d0c7}{\index{Utilities@{Utilities}!Delay\-Some\-S@{Delay\-Some\-S}}
+\index{Delay\-Some\-S@{Delay\-Some\-S}!Utilities@{Utilities}}
+\subsubsection[{Delay\-Some\-S}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-Some\-S (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga52aa6208719074d7cd10fe2a42d6d0c7}
+
+
+This method delays n s roughly with codes calculating the time. Error limit\-: +4\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many seconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_gadfeab0efcdcc155ec9f5692f87a2a57a}{\index{Utilities@{Utilities}!Delay\-Some\-Us@{Delay\-Some\-Us}}
+\index{Delay\-Some\-Us@{Delay\-Some\-Us}!Utilities@{Utilities}}
+\subsubsection[{Delay\-Some\-Us}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-Some\-Us (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_gadfeab0efcdcc155ec9f5692f87a2a57a}
+
+
+This method delays n us roughly with codes calculating the time. Error limit\-: +4\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many microseconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga75f8e7437f833a92c1b0b47ded4ee3d7}{\index{Utilities@{Utilities}!Delay\-Us@{Delay\-Us}}
+\index{Delay\-Us@{Delay\-Us}!Utilities@{Utilities}}
+\subsubsection[{Delay\-Us}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Error} Delay\-Us (
+\begin{DoxyParamCaption}
+\item[{uint32}]{n}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga75f8e7437f833a92c1b0b47ded4ee3d7}
+
+
+This method delays n us precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em n} & -\/ How many microseconds to delay. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Error code. See \hyperlink{_p_e___error_8h}{P\-E\-\_\-\-Error.\-h} and \hyperlink{_macros_8h}{Macros.\-h} for more detailed information. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga231cbdb58ac0905883e23f1814de2549}{\index{Utilities@{Utilities}!Get\-Current\-Ms@{Get\-Current\-Ms}}
+\index{Get\-Current\-Ms@{Get\-Current\-Ms}!Utilities@{Utilities}}
+\subsubsection[{Get\-Current\-Ms}]{\setlength{\rightskip}{0pt plus 5cm}uint32 Get\-Current\-Ms (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga231cbdb58ac0905883e23f1814de2549}
+
+
+This method returns the current value of total milliseconds since power on. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Total milliseconds since power on. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_gaffe959d82d984dc88cd02a4894d02a7c}{\index{Utilities@{Utilities}!Get\-Current\-S@{Get\-Current\-S}}
+\index{Get\-Current\-S@{Get\-Current\-S}!Utilities@{Utilities}}
+\subsubsection[{Get\-Current\-S}]{\setlength{\rightskip}{0pt plus 5cm}uint32 Get\-Current\-S (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___uti_gaffe959d82d984dc88cd02a4894d02a7c}
+
+
+This method returns the current value of total seconds since power on. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Total seconds since power on. 
+\end{DoxyItemize}
+\end{DoxyReturn}
+\hypertarget{group___uti_ga7b6649d282c8abf3613f1ed8e7ef4c34}{\index{Utilities@{Utilities}!Get\-Current\-Us@{Get\-Current\-Us}}
+\index{Get\-Current\-Us@{Get\-Current\-Us}!Utilities@{Utilities}}
+\subsubsection[{Get\-Current\-Us}]{\setlength{\rightskip}{0pt plus 5cm}uint32 Get\-Current\-Us (
+\begin{DoxyParamCaption}
+\item[{void}]{}
+\end{DoxyParamCaption}
+)}}\label{group___uti_ga7b6649d282c8abf3613f1ed8e7ef4c34}
+
+
+This method returns the current value of total microseconds since power on. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em void} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+
+\begin{DoxyItemize}
+\item Total microseconds since power on. 
+\end{DoxyItemize}
+\end{DoxyReturn}

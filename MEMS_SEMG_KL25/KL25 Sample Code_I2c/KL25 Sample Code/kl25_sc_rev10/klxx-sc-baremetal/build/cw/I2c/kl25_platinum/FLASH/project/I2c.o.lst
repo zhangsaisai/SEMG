@@ -1,0 +1,101 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"I2c.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.startup.main,"ax",%progbits
+  18              		.align	2
+  19              		.global	main
+  20              		.code	16
+  21              		.thumb_func
+  23              	main:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****  * File:		platinum.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****  * Purpose:		Main process
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****  */
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #include "common.h"
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #include "global.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #include "hal_i2c.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #include "hal_dev_mma8451.h"
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #ifdef CMSIS
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #include "start.h"
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #endif
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** /********************************************************************/
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** int main (void)
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** {
+  26              		.loc 1 18 0
+  27              		.cfi_startproc
+  28 0000 08B5     		push	{r3, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****     	char ch;
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****         
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #ifdef CMSIS  // If we are conforming to CMSIS, we need to call start here
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****     start();
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** #endif
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****         
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c ****   	printf("\n\rRunning the platinum project.\n\r");
+  33              		.loc 1 25 0
+  34 0002 0448     		ldr	r0, .L4
+  35 0004 FFF7FEFF 		bl	printf
+  36              	.LVL0:
+  37              	.L2:
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 	while(1)
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 	{
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 	    hal_i2c_init();
+  38              		.loc 1 29 0
+  39 0008 FFF7FEFF 		bl	hal_i2c_init
+  40              	.LVL1:
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c\I2c.c **** 	    hal_dev_mma8451_test_function();
+  41              		.loc 1 30 0
+  42 000c FFF7FEFF 		bl	hal_dev_mma8451_test_function
+  43              	.LVL2:
+  44 0010 FAE7     		b	.L2
+  45              	.L5:
+  46 0012 C046     		.align	2
+  47              	.L4:
+  48 0014 00000000 		.word	.LC0
+  49              		.cfi_endproc
+  50              	.LFE0:
+  52              		.section	.rodata.str1.4,"aMS",%progbits,1
+  53              		.align	2
+  54              	.LC0:
+  55 0000 0A0D5275 		.ascii	"\012\015Running the platinum project.\012\015\000"
+  55      6E6E696E 
+  55      67207468 
+  55      6520706C 
+  55      6174696E 
+  56 0022 0000     		.text
+  57              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 I2c.c
+C:\Users\lab\AppData\Local\Temp\ccmq77wW.s:18     .text.startup.main:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccmq77wW.s:23     .text.startup.main:00000000 main
+C:\Users\lab\AppData\Local\Temp\ccmq77wW.s:48     .text.startup.main:00000014 $d
+C:\Users\lab\AppData\Local\Temp\ccmq77wW.s:53     .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf
+hal_i2c_init
+hal_dev_mma8451_test_function

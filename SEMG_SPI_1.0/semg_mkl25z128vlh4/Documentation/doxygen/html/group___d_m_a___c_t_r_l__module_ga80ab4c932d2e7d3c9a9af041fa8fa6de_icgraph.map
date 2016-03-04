@@ -1,0 +1,6 @@
+<map id="DMA_CTRL_DisableChannel" name="DMA_CTRL_DisableChannel">
+<area shape="rect" id="node2" href="$group___d_m_a_t___m___s_p_i___r_x__module.html#ga9b4e1d431dc3f67f2e9e4a52486ba2f2" title="The method disables the DMA channel allocated for the DMA transfer. However, it is still possible to ..." alt="" coords="240,5,464,32"/>
+<area shape="rect" id="node3" href="$group___d_m_a_t___m___s_p_i___t_x__module.html#gada4a924c19293a09528edcee718297cc" title="The method disables the DMA channel allocated for the DMA transfer. However, it is still possible to ..." alt="" coords="241,56,463,83"/>
+<area shape="rect" id="node4" href="$group___d_m_a_t___s___s_p_i___r_x__module.html#ga693d74a3e5ae5f976ee0c1026c67cfe9" title="The method disables the DMA channel allocated for the DMA transfer. However, it is still possible to ..." alt="" coords="241,107,463,133"/>
+<area shape="rect" id="node5" href="$group___d_m_a_t___s___s_p_i___t_x__module.html#ga181b8a0f23d6295dfe87d2fccc5a60e0" title="The method disables the DMA channel allocated for the DMA transfer. However, it is still possible to ..." alt="" coords="242,157,462,184"/>
+</map>

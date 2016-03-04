@@ -1,0 +1,1142 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"uart.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	__aeabi_idiv
+  18              		.section	.text.uart_init,"ax",%progbits
+  19              		.align	2
+  20              		.global	uart_init
+  21              		.code	16
+  22              		.thumb_func
+  24              	uart_init:
+  25              	.LFB0:
+  26              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * File:        uart.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Purpose:     Provide common uart routines for serial IO
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Notes:       
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *              
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** #include "common.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** #include "uart.h"
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** #include <stdarg.h>
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Initialize the uart for 8N1 operation, interrupts disabled, and
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * no hardware flow-control
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * NOTE: Since the uarts are pinned out in multiple locations on most
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *       Kinetis devices, this driver does not enable uart pin functions.
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *       The desired pins should be enabled before calling this init function.
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  uartch      uart channel to initialize
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  sysclk      uart module Clock in kHz(used to calculate baud)
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  baud        uart baud rate
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** void uart_init (UART_MemMapPtr uartch, int sysclk, int baud)
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+  27              		.loc 1 28 0
+  28              		.cfi_startproc
+  29              	.LVL0:
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     register uint16 sbr;
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint8 temp;
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****                                 
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****          
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       if (uartch == UART1_BASE_PTR)
+  30              		.loc 1 33 0
+  31 0000 164B     		ldr	r3, .L6
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+  32              		.loc 1 28 0
+  33 0002 70B5     		push	{r4, r5, r6, lr}
+  34              	.LCFI0:
+  35              		.cfi_def_cfa_offset 16
+  36              		.cfi_offset 4, -16
+  37              		.cfi_offset 5, -12
+  38              		.cfi_offset 6, -8
+  39              		.cfi_offset 14, -4
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+  40              		.loc 1 28 0
+  41 0004 041E     		sub	r4, r0, #0
+  42              		.loc 1 33 0
+  43 0006 9C42     		cmp	r4, r3
+  44 0008 20D0     		beq	.L5
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         SIM_SCGC4 |= SIM_SCGC4_UART1_MASK;
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       else
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     	SIM_SCGC4 |= SIM_SCGC4_UART2_MASK;
+  45              		.loc 1 36 0
+  46 000a 154D     		ldr	r5, .L6+4
+  47 000c 154B     		ldr	r3, .L6+8
+  48 000e 8020     		mov	r0, #128
+  49              	.LVL1:
+  50 0010 EE58     		ldr	r6, [r5, r3]
+  51 0012 4001     		lsl	r0, r0, #5
+  52 0014 3043     		orr	r0, r6
+  53 0016 E850     		str	r0, [r5, r3]
+  54              	.L3:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Make sure that the transmitter and receiver are disabled while we 
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****        * change settings.
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****        */
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C2_REG(uartch) &= ~(UART_C2_TE_MASK
+  55              		.loc 1 40 0
+  56 0018 E378     		ldrb	r3, [r4, #3]
+  57 001a 0C20     		mov	r0, #12
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 				| UART_C2_RE_MASK );
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Configure the uart for 8-bit mode, no parity */
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C1_REG(uartch) = 0;	/* We need all default settings, so entire register is cleared */
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Calculate baud settings */
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       sbr = (uint16)((sysclk*1000)/(baud * 16));
+  58              		.loc 1 47 0
+  59 001c FA25     		mov	r5, #250
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C2_REG(uartch) &= ~(UART_C2_TE_MASK
+  60              		.loc 1 40 0
+  61 001e 8343     		bic	r3, r0
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C1_REG(uartch) = 0;	/* We need all default settings, so entire register is cleared */
+  62              		.loc 1 44 0
+  63 0020 0026     		mov	r6, #0
+  64              		.loc 1 47 0
+  65 0022 A800     		lsl	r0, r5, #2
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C2_REG(uartch) &= ~(UART_C2_TE_MASK
+  66              		.loc 1 40 0
+  67 0024 E370     		strb	r3, [r4, #3]
+  68              		.loc 1 47 0
+  69 0026 4843     		mul	r0, r1
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C1_REG(uartch) = 0;	/* We need all default settings, so entire register is cleared */
+  70              		.loc 1 44 0
+  71 0028 A670     		strb	r6, [r4, #2]
+  72              		.loc 1 47 0
+  73 002a 1101     		lsl	r1, r2, #4
+  74              	.LVL2:
+  75 002c FFF7FEFF 		bl	__aeabi_idiv
+  76              	.LVL3:
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Save off the current value of the uartx_BDH except for the SBR field */
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       temp = UART_BDH_REG(uartch) & ~(UART_BDH_SBR(0x1F));
+  77              		.loc 1 50 0
+  78 0030 2378     		ldrb	r3, [r4]
+  79              	.LVL4:
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_BDH_REG(uartch) = temp |  UART_BDH_SBR(((sbr & 0x1F00) >> 8));
+  80              		.loc 1 52 0
+  81 0032 C204     		lsl	r2, r0, #19
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       temp = UART_BDH_REG(uartch) & ~(UART_BDH_SBR(0x1F));
+  82              		.loc 1 50 0
+  83 0034 1F21     		mov	r1, #31
+  84              		.loc 1 52 0
+  85 0036 D60E     		lsr	r6, r2, #27
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       temp = UART_BDH_REG(uartch) & ~(UART_BDH_SBR(0x1F));
+  86              		.loc 1 50 0
+  87 0038 8B43     		bic	r3, r1
+  88              	.LVL5:
+  89              		.loc 1 52 0
+  90 003a 3343     		orr	r3, r6
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_BDL_REG(uartch) = (uint8)(sbr & UART_BDL_SBR_MASK);
+  91              		.loc 1 53 0
+  92 003c C0B2     		uxtb	r0, r0
+  93              	.LVL6:
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_BDH_REG(uartch) = temp |  UART_BDH_SBR(((sbr & 0x1F00) >> 8));
+  94              		.loc 1 52 0
+  95 003e 2370     		strb	r3, [r4]
+  96              		.loc 1 53 0
+  97 0040 6070     		strb	r0, [r4, #1]
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Enable receiver and transmitter */
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_C2_REG(uartch) |= (UART_C2_TE_MASK
+  98              		.loc 1 56 0
+  99 0042 E578     		ldrb	r5, [r4, #3]
+ 100 0044 0C23     		mov	r3, #12
+ 101 0046 2B43     		orr	r3, r5
+ 102 0048 E370     		strb	r3, [r4, #3]
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 	    		  | UART_C2_RE_MASK );
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 103              		.loc 1 59 0
+ 104              		@ sp needed for prologue
+ 105              	.LVL7:
+ 106 004a 70BD     		pop	{r4, r5, r6, pc}
+ 107              	.LVL8:
+ 108              	.L5:
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         SIM_SCGC4 |= SIM_SCGC4_UART1_MASK;
+ 109              		.loc 1 34 0
+ 110 004c 0448     		ldr	r0, .L6+4
+ 111              	.LVL9:
+ 112 004e 054B     		ldr	r3, .L6+8
+ 113 0050 8025     		mov	r5, #128
+ 114 0052 C658     		ldr	r6, [r0, r3]
+ 115 0054 2D01     		lsl	r5, r5, #4
+ 116 0056 3543     		orr	r5, r6
+ 117 0058 C550     		str	r5, [r0, r3]
+ 118 005a DDE7     		b	.L3
+ 119              	.L7:
+ 120              		.align	2
+ 121              	.L6:
+ 122 005c 00B00640 		.word	1074180096
+ 123 0060 00700440 		.word	1074032640
+ 124 0064 34100000 		.word	4148
+ 125              		.cfi_endproc
+ 126              	.LFE0:
+ 128              		.section	.text.uart_getchar,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	uart_getchar
+ 131              		.code	16
+ 132              		.thumb_func
+ 134              	uart_getchar:
+ 135              	.LFB1:
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Wait for a character to be received on the specified uart
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to read from
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Return Values:
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  the received character
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** char uart_getchar (UART_MemMapPtr channel)
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 136              		.loc 1 71 0
+ 137              		.cfi_startproc
+ 138              	.LVL10:
+ 139 0000 00B5     		push	{lr}
+ 140              	.LCFI1:
+ 141              		.cfi_def_cfa_offset 4
+ 142              		.cfi_offset 14, -4
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Wait until character has been received */
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       while (!(UART_S1_REG(channel) & UART_S1_RDRF_MASK));
+ 143              		.loc 1 73 0
+ 144 0002 2022     		mov	r2, #32
+ 145              	.L9:
+ 146              		.loc 1 73 0 is_stmt 0
+ 147 0004 0379     		ldrb	r3, [r0, #4]
+ 148 0006 1A42     		tst	r2, r3
+ 149 0008 FCD0     		beq	.L9
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Return the 8-bit data from the receiver */
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       return UART_D_REG(channel);
+ 150              		.loc 1 76 0 is_stmt 1
+ 151 000a C079     		ldrb	r0, [r0, #7]
+ 152              	.LVL11:
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 153              		.loc 1 77 0
+ 154              		@ sp needed for prologue
+ 155 000c 00BD     		pop	{pc}
+ 156              		.cfi_endproc
+ 157              	.LFE1:
+ 159 000e C046     		.section	.text.uart_putchar,"ax",%progbits
+ 160              		.align	2
+ 161              		.global	uart_putchar
+ 162              		.code	16
+ 163              		.thumb_func
+ 165              	uart_putchar:
+ 166              	.LFB2:
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Wait for space in the uart Tx FIFO and then send a character
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to send to
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  ch			 character to send
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */ 
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** void uart_putchar (UART_MemMapPtr channel, char ch)
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 167              		.loc 1 87 0
+ 168              		.cfi_startproc
+ 169              	.LVL12:
+ 170 0000 00B5     		push	{lr}
+ 171              	.LCFI2:
+ 172              		.cfi_def_cfa_offset 4
+ 173              		.cfi_offset 14, -4
+ 174              	.L15:
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Wait until space is available in the FIFO */
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       while(!(UART_S1_REG(channel) & UART_S1_TDRE_MASK));
+ 175              		.loc 1 89 0
+ 176 0002 0379     		ldrb	r3, [r0, #4]
+ 177 0004 5AB2     		sxtb	r2, r3
+ 178 0006 002A     		cmp	r2, #0
+ 179 0008 FBDA     		bge	.L15
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Send the character */
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART_D_REG(channel) = (uint8)ch;
+ 180              		.loc 1 92 0
+ 181 000a C171     		strb	r1, [r0, #7]
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  }
+ 182              		.loc 1 94 0
+ 183              		@ sp needed for prologue
+ 184 000c 00BD     		pop	{pc}
+ 185              		.cfi_endproc
+ 186              	.LFE2:
+ 188 000e C046     		.section	.text.uart_getchar_present,"ax",%progbits
+ 189              		.align	2
+ 190              		.global	uart_getchar_present
+ 191              		.code	16
+ 192              		.thumb_func
+ 194              	uart_getchar_present:
+ 195              	.LFB3:
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Check to see if a character has been received
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to check for a character
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Return values:
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  0       No character received
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  1       Character has been received
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** int uart_getchar_present (UART_MemMapPtr channel)
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 196              		.loc 1 107 0
+ 197              		.cfi_startproc
+ 198              	.LVL13:
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     return (UART_S1_REG(channel) & UART_S1_RDRF_MASK);
+ 199              		.loc 1 108 0
+ 200 0000 0379     		ldrb	r3, [r0, #4]
+ 201 0002 2020     		mov	r0, #32
+ 202              	.LVL14:
+ 203 0004 1840     		and	r0, r3
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 204              		.loc 1 109 0
+ 205              		@ sp needed for prologue
+ 206 0006 7047     		bx	lr
+ 207              		.cfi_endproc
+ 208              	.LFE3:
+ 210              		.global	__aeabi_uidiv
+ 211              		.section	.text.uart0_init,"ax",%progbits
+ 212              		.align	2
+ 213              		.global	uart0_init
+ 214              		.code	16
+ 215              		.thumb_func
+ 217              	uart0_init:
+ 218              	.LFB4:
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /***************************************************************************
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Begin UART0 functions
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  **************************************************************************/
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Initialize the uart for 8N1 operation, interrupts disabled, and
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * no hardware flow-control
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * NOTE: Since the uarts are pinned out in multiple locations on most
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *       Kinetis devices, this driver does not enable uart pin functions.
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *       The desired pins should be enabled before calling this init function.
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  uartch      uart channel to initialize
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  sysclk      uart module Clock in kHz(used to calculate baud)
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  baud        uart baud rate
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** void uart0_init (UART0_MemMapPtr uartch, int sysclk, int baud)
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 219              		.loc 1 130 0
+ 220              		.cfi_startproc
+ 221              	.LVL15:
+ 222 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 223              	.LCFI3:
+ 224              		.cfi_def_cfa_offset 24
+ 225              		.cfi_offset 3, -24
+ 226              		.cfi_offset 4, -20
+ 227              		.cfi_offset 5, -16
+ 228              		.cfi_offset 6, -12
+ 229              		.cfi_offset 7, -8
+ 230              		.cfi_offset 14, -4
+ 231 0002 4F46     		mov	r7, r9
+ 232 0004 4646     		mov	r6, r8
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint8 i;
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 calculated_baud = 0;
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 baud_diff = 0;
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 osr_val = 0;
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 sbr_val, uart0clk;
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 baud_rate;
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 reg_temp = 0;
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uint32 temp = 0;
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     SIM_SCGC4 |= SIM_SCGC4_UART0_MASK;
+ 233              		.loc 1 140 0
+ 234 0006 444B     		ldr	r3, .L39
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 235              		.loc 1 130 0
+ 236 0008 141C     		mov	r4, r2
+ 237              		.loc 1 140 0
+ 238 000a 444A     		ldr	r2, .L39+4
+ 239              	.LVL16:
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 240              		.loc 1 130 0
+ 241 000c C0B4     		push	{r6, r7}
+ 242              	.LCFI4:
+ 243              		.cfi_def_cfa_offset 32
+ 244              		.cfi_offset 8, -32
+ 245              		.cfi_offset 9, -28
+ 246              		.loc 1 140 0
+ 247 000e 9D58     		ldr	r5, [r3, r2]
+ 248 0010 8020     		mov	r0, #128
+ 249              	.LVL17:
+ 250 0012 C600     		lsl	r6, r0, #3
+ 251 0014 2E43     		orr	r6, r5
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Disable UART0 before changing registers
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     UART0_C2 &= ~(UART0_C2_TE_MASK | UART0_C2_RE_MASK);
+ 252              		.loc 1 143 0
+ 253 0016 424F     		ldr	r7, .L39+8
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     SIM_SCGC4 |= SIM_SCGC4_UART0_MASK;
+ 254              		.loc 1 140 0
+ 255 0018 9E50     		str	r6, [r3, r2]
+ 256              		.loc 1 143 0
+ 257 001a FA78     		ldrb	r2, [r7, #3]
+ 258 001c 0C25     		mov	r5, #12
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Verify that a valid clock value has been passed to the function 
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     if ((sysclk > 50000) || (sysclk < 32))
+ 259              		.loc 1 146 0
+ 260 001e 081C     		mov	r0, r1
+ 261 0020 404E     		ldr	r6, .L39+12
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     UART0_C2 &= ~(UART0_C2_TE_MASK | UART0_C2_RE_MASK);
+ 262              		.loc 1 143 0
+ 263 0022 AA43     		bic	r2, r5
+ 264              		.loc 1 146 0
+ 265 0024 2038     		sub	r0, r0, #32
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     UART0_C2 &= ~(UART0_C2_TE_MASK | UART0_C2_RE_MASK);
+ 266              		.loc 1 143 0
+ 267 0026 FA70     		strb	r2, [r7, #3]
+ 268              		.loc 1 146 0
+ 269 0028 B042     		cmp	r0, r6
+ 270 002a 05D9     		bls	.L19
+ 271              	.LVL18:
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     {
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         sysclk = 0;
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = SIM_SOPT2;
+ 272              		.loc 1 149 0
+ 273 002c 3E4E     		ldr	r6, .L39+16
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp &= ~SIM_SOPT2_UART0SRC_MASK;
+ 274              		.loc 1 150 0
+ 275 002e 3F4C     		ldr	r4, .L39+20
+ 276              	.LVL19:
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = SIM_SOPT2;
+ 277              		.loc 1 149 0
+ 278 0030 9A59     		ldr	r2, [r3, r6]
+ 279              	.LVL20:
+ 280              		.loc 1 150 0
+ 281 0032 1440     		and	r4, r2
+ 282              	.LVL21:
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp |= SIM_SOPT2_UART0SRC(0);
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         SIM_SOPT2 = reg_temp;
+ 283              		.loc 1 152 0
+ 284 0034 9C51     		str	r4, [r3, r6]
+ 285              	.L20:
+ 286 0036 FEE7     		b	.L20
+ 287              	.LVL22:
+ 288              	.L19:
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // Enter inifinite loop because the 
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // the desired system clock value is 
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // invalid!!
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  while(1)
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 				{}
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     }
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Verify that a valid value has been passed to TERM_PORT_NUM and update
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // uart0_clk_hz accordingly.  Write 0 to TERM_PORT_NUM if an invalid 
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // value has been passed.  
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     if (TERM_PORT_NUM != 0)
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     {
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = SIM_SOPT2;
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp &= ~SIM_SOPT2_UART0SRC_MASK;
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp |= SIM_SOPT2_UART0SRC(0);
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         SIM_SOPT2 = reg_temp;
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // Enter inifinite loop because the 
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // the desired terminal port number 
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  // invalid!!
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 			  while(1)
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 				{}
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     }
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Initialize baud rate
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     baud_rate = baud;
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Change units to Hz
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     uart0clk = sysclk * 1000;
+ 289              		.loc 1 184 0
+ 290 0038 FA23     		mov	r3, #250
+ 291 003a 9D00     		lsl	r5, r3, #2
+ 292 003c 4D43     		mul	r5, r1
+ 293              	.LVL23:
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Calculate the first baud rate using the lowest OSR value possible.  
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     i = 4;
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     sbr_val = (uint32)(uart0clk/(baud_rate * i));
+ 294              		.loc 1 187 0
+ 295 003e A700     		lsl	r7, r4, #2
+ 296 0040 391C     		mov	r1, r7
+ 297              	.LVL24:
+ 298 0042 281C     		mov	r0, r5
+ 299              	.LVL25:
+ 300 0044 FFF7FEFF 		bl	__aeabi_uidiv
+ 301              	.LVL26:
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     calculated_baud = (uart0clk / (i * sbr_val));
+ 302              		.loc 1 188 0
+ 303 0048 8100     		lsl	r1, r0, #2
+ 304 004a 281C     		mov	r0, r5
+ 305 004c FFF7FEFF 		bl	__aeabi_uidiv
+ 306              	.LVL27:
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     if (calculated_baud > baud_rate)
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         baud_diff = calculated_baud - baud_rate;
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     else
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         baud_diff = baud_rate - calculated_baud;
+ 307              		.loc 1 193 0
+ 308 0050 261A     		sub	r6, r4, r0
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     if (calculated_baud > baud_rate)
+ 309              		.loc 1 190 0
+ 310 0052 8442     		cmp	r4, r0
+ 311 0054 00D2     		bcs	.L22
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         baud_diff = calculated_baud - baud_rate;
+ 312              		.loc 1 191 0
+ 313 0056 061B     		sub	r6, r0, r4
+ 314              	.LVL28:
+ 315              	.L22:
+ 316 0058 3919     		add	r1, r7, r4
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 317              		.loc 1 130 0
+ 318 005a 0422     		mov	r2, #4
+ 319 005c 8946     		mov	r9, r1
+ 320 005e 0527     		mov	r7, #5
+ 321 0060 9046     		mov	r8, r2
+ 322              	.LVL29:
+ 323              	.L26:
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     osr_val = i;
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     // Select the best OSR value
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     for (i = 5; i <= 32; i++)
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     {
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         sbr_val = (uint32)(uart0clk/(baud_rate * i));
+ 324              		.loc 1 200 0
+ 325 0062 4946     		mov	r1, r9
+ 326 0064 281C     		mov	r0, r5
+ 327 0066 FFF7FEFF 		bl	__aeabi_uidiv
+ 328              	.LVL30:
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         calculated_baud = (uart0clk / (i * sbr_val));
+ 329              		.loc 1 201 0
+ 330 006a 391C     		mov	r1, r7
+ 331 006c 4143     		mul	r1, r0
+ 332 006e 281C     		mov	r0, r5
+ 333 0070 FFF7FEFF 		bl	__aeabi_uidiv
+ 334              	.LVL31:
+ 202:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (calculated_baud > baud_rate)
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             temp = calculated_baud - baud_rate;
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         else
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             temp = baud_rate - calculated_baud;
+ 335              		.loc 1 206 0
+ 336 0074 231A     		sub	r3, r4, r0
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (calculated_baud > baud_rate)
+ 337              		.loc 1 203 0
+ 338 0076 8442     		cmp	r4, r0
+ 339 0078 00D2     		bcs	.L24
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             temp = calculated_baud - baud_rate;
+ 340              		.loc 1 204 0
+ 341 007a 031B     		sub	r3, r0, r4
+ 342              	.LVL32:
+ 343              	.L24:
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (temp <= baud_diff)
+ 344              		.loc 1 208 0
+ 345 007c B342     		cmp	r3, r6
+ 346 007e 01D8     		bhi	.L25
+ 209:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         {
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             baud_diff = temp;
+ 211:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             osr_val = i; 
+ 347              		.loc 1 211 0
+ 348 0080 B846     		mov	r8, r7
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (temp <= baud_diff)
+ 349              		.loc 1 208 0
+ 350 0082 1E1C     		mov	r6, r3
+ 351              	.LVL33:
+ 352              	.L25:
+ 353 0084 A144     		add	r9, r9, r4
+ 354              	.LVL34:
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         sbr_val = (uint32)(uart0clk/(baud_rate * i));
+ 355              		.loc 1 200 0
+ 356 0086 4946     		mov	r1, r9
+ 357 0088 281C     		mov	r0, r5
+ 358              	.LVL35:
+ 359 008a FFF7FEFF 		bl	__aeabi_uidiv
+ 360              	.LVL36:
+ 361 008e 0137     		add	r7, r7, #1
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         calculated_baud = (uart0clk / (i * sbr_val));
+ 362              		.loc 1 201 0
+ 363 0090 391C     		mov	r1, r7
+ 364 0092 4143     		mul	r1, r0
+ 365 0094 281C     		mov	r0, r5
+ 366 0096 FFF7FEFF 		bl	__aeabi_uidiv
+ 367              	.LVL37:
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             temp = baud_rate - calculated_baud;
+ 368              		.loc 1 206 0
+ 369 009a 211A     		sub	r1, r4, r0
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (calculated_baud > baud_rate)
+ 370              		.loc 1 203 0
+ 371 009c 8442     		cmp	r4, r0
+ 372 009e 00D2     		bcs	.L31
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             temp = calculated_baud - baud_rate;
+ 373              		.loc 1 204 0
+ 374 00a0 011B     		sub	r1, r0, r4
+ 375              	.L31:
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (temp <= baud_diff)
+ 376              		.loc 1 208 0
+ 377 00a2 B142     		cmp	r1, r6
+ 378 00a4 01D8     		bhi	.L37
+ 379              		.loc 1 211 0
+ 380 00a6 B846     		mov	r8, r7
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if (temp <= baud_diff)
+ 381              		.loc 1 208 0
+ 382 00a8 0E1C     		mov	r6, r1
+ 383              	.LVL38:
+ 384              	.L37:
+ 385 00aa 0137     		add	r7, r7, #1
+ 386 00ac A144     		add	r9, r9, r4
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     for (i = 5; i <= 32; i++)
+ 387              		.loc 1 198 0
+ 388 00ae 212F     		cmp	r7, #33
+ 389 00b0 D7D1     		bne	.L26
+ 212:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         }
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     }
+ 214:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 215:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     if (baud_diff < ((baud_rate / 100) * 3))
+ 390              		.loc 1 215 0
+ 391 00b2 201C     		mov	r0, r4
+ 392 00b4 6421     		mov	r1, #100
+ 393 00b6 FFF7FEFF 		bl	__aeabi_uidiv
+ 394              	.LVL39:
+ 395 00ba 4700     		lsl	r7, r0, #1
+ 396 00bc 3818     		add	r0, r7, r0
+ 397 00be B042     		cmp	r0, r6
+ 398 00c0 29D9     		bls	.L27
+ 216:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     {
+ 217:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // If the OSR is between 4x and 8x then both
+ 218:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // edge sampling MUST be turned on.  
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         if ((osr_val >3) && (osr_val < 9))
+ 399              		.loc 1 219 0
+ 400 00c2 4246     		mov	r2, r8
+ 401 00c4 043A     		sub	r2, r2, #4
+ 402 00c6 042A     		cmp	r2, #4
+ 403 00c8 04D8     		bhi	.L28
+ 220:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****             UART0_C5|= UART0_C5_BOTHEDGE_MASK;
+ 404              		.loc 1 220 0
+ 405 00ca 154B     		ldr	r3, .L39+8
+ 406 00cc 0226     		mov	r6, #2
+ 407              	.LVL40:
+ 408 00ce D97A     		ldrb	r1, [r3, #11]
+ 409 00d0 0E43     		orr	r6, r1
+ 410 00d2 DE72     		strb	r6, [r3, #11]
+ 411              	.L28:
+ 221:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 222:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // Setup OSR value 
+ 223:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = UART0_C4;
+ 412              		.loc 1 223 0
+ 413 00d4 124E     		ldr	r6, .L39+8
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp &= ~UART0_C4_OSR_MASK;
+ 225:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp |= UART0_C4_OSR(osr_val-1);
+ 414              		.loc 1 225 0
+ 415 00d6 4346     		mov	r3, r8
+ 223:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = UART0_C4;
+ 416              		.loc 1 223 0
+ 417 00d8 B07A     		ldrb	r0, [r6, #10]
+ 418              	.LVL41:
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp &= ~UART0_C4_OSR_MASK;
+ 419              		.loc 1 224 0
+ 420 00da 1F27     		mov	r7, #31
+ 421              		.loc 1 225 0
+ 422 00dc 013B     		sub	r3, r3, #1
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp &= ~UART0_C4_OSR_MASK;
+ 423              		.loc 1 224 0
+ 424 00de B843     		bic	r0, r7
+ 425              	.LVL42:
+ 426              		.loc 1 225 0
+ 427 00e0 3B40     		and	r3, r7
+ 428 00e2 0343     		orr	r3, r0
+ 429              	.LVL43:
+ 226:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 227:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // Write reg_temp to C4 register
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_C4 = reg_temp;
+ 229:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 230:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = (reg_temp & UART0_C4_OSR_MASK) + 1;
+ 430              		.loc 1 230 0
+ 431 00e4 391C     		mov	r1, r7
+ 432 00e6 1940     		and	r1, r3
+ 433              	.LVL44:
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_C4 = reg_temp;
+ 434              		.loc 1 228 0
+ 435 00e8 DAB2     		uxtb	r2, r3
+ 436              		.loc 1 230 0
+ 437 00ea 0131     		add	r1, r1, #1
+ 438              	.LVL45:
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_C4 = reg_temp;
+ 439              		.loc 1 228 0
+ 440 00ec B272     		strb	r2, [r6, #10]
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         sbr_val = (uint32)((uart0clk)/(baud_rate * (reg_temp)));
+ 441              		.loc 1 231 0
+ 442 00ee 6143     		mul	r1, r4
+ 443              	.LVL46:
+ 444 00f0 281C     		mov	r0, r5
+ 445 00f2 FFF7FEFF 		bl	__aeabi_uidiv
+ 446              	.LVL47:
+ 232:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****          /* Save off the current value of the uartx_BDH except for the SBR field */
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = UART0_BDH & ~(UART0_BDH_SBR(0x1F));
+ 447              		.loc 1 234 0
+ 448 00f6 3478     		ldrb	r4, [r6]
+ 449              	.LVL48:
+ 235:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****    
+ 236:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_BDH = reg_temp |  UART0_BDH_SBR(((sbr_val & 0x1F00) >> 8));
+ 450              		.loc 1 236 0
+ 451 00f8 C504     		lsl	r5, r0, #19
+ 452              	.LVL49:
+ 453 00fa E90E     		lsr	r1, r5, #27
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         reg_temp = UART0_BDH & ~(UART0_BDH_SBR(0x1F));
+ 454              		.loc 1 234 0
+ 455 00fc BC43     		bic	r4, r7
+ 456              	.LVL50:
+ 457              		.loc 1 236 0
+ 458 00fe 0C43     		orr	r4, r1
+ 237:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_BDL = (uint8)(sbr_val & UART0_BDL_SBR_MASK);
+ 459              		.loc 1 237 0
+ 460 0100 C0B2     		uxtb	r0, r0
+ 461              	.LVL51:
+ 236:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_BDH = reg_temp |  UART0_BDH_SBR(((sbr_val & 0x1F00) >> 8));
+ 462              		.loc 1 236 0
+ 463 0102 3470     		strb	r4, [r6]
+ 464              		.loc 1 237 0
+ 465 0104 7070     		strb	r0, [r6, #1]
+ 238:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         
+ 239:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         /* Enable receiver and transmitter */
+ 240:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         UART0_C2 |= (UART0_C2_TE_MASK
+ 466              		.loc 1 240 0
+ 467 0106 F778     		ldrb	r7, [r6, #3]
+ 468 0108 0C23     		mov	r3, #12
+ 469 010a 3B43     		orr	r3, r7
+ 470 010c F370     		strb	r3, [r6, #3]
+ 241:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****                     | UART0_C2_RE_MASK );
+ 242:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     }
+ 243:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     else
+ 244:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 		{
+ 245:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // Unacceptable baud rate difference
+ 246:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // More than 3% difference!!
+ 247:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         // Enter infinite loop!
+ 248:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****         while(1)
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 				{}
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 		}					
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 471              		.loc 1 252 0
+ 472              		@ sp needed for prologue
+ 473 010e 0CBC     		pop	{r2, r3}
+ 474 0110 9046     		mov	r8, r2
+ 475 0112 9946     		mov	r9, r3
+ 476 0114 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 477              	.LVL52:
+ 478              	.L27:
+ 479              	.L36:
+ 480 0116 FEE7     		b	.L36
+ 481              	.L40:
+ 482              		.align	2
+ 483              	.L39:
+ 484 0118 00700440 		.word	1074032640
+ 485 011c 34100000 		.word	4148
+ 486 0120 00A00640 		.word	1074176000
+ 487 0124 30C30000 		.word	49968
+ 488 0128 04100000 		.word	4100
+ 489 012c FFFFFFF3 		.word	-201326593
+ 490              		.cfi_endproc
+ 491              	.LFE4:
+ 493              		.section	.text.uart0_getchar,"ax",%progbits
+ 494              		.align	2
+ 495              		.global	uart0_getchar
+ 496              		.code	16
+ 497              		.thumb_func
+ 499              	uart0_getchar:
+ 500              	.LFB5:
+ 253:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Wait for a character to be received on the specified uart
+ 256:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 257:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+ 258:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to read from
+ 259:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 260:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Return Values:
+ 261:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  the received character
+ 262:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+ 263:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** char uart0_getchar (UART0_MemMapPtr channel)
+ 264:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 501              		.loc 1 264 0
+ 502              		.cfi_startproc
+ 503              	.LVL53:
+ 504 0000 00B5     		push	{lr}
+ 505              	.LCFI5:
+ 506              		.cfi_def_cfa_offset 4
+ 507              		.cfi_offset 14, -4
+ 265:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Wait until character has been received */
+ 266:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       while (!(UART0_S1_REG(channel) & UART0_S1_RDRF_MASK));
+ 508              		.loc 1 266 0
+ 509 0002 2022     		mov	r2, #32
+ 510              	.L42:
+ 511              		.loc 1 266 0 is_stmt 0
+ 512 0004 0379     		ldrb	r3, [r0, #4]
+ 513 0006 1A42     		tst	r2, r3
+ 514 0008 FCD0     		beq	.L42
+ 267:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 268:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Return the 8-bit data from the receiver */
+ 269:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       return UART0_D_REG(channel);
+ 515              		.loc 1 269 0 is_stmt 1
+ 516 000a C079     		ldrb	r0, [r0, #7]
+ 517              	.LVL54:
+ 270:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 518              		.loc 1 270 0
+ 519              		@ sp needed for prologue
+ 520 000c 00BD     		pop	{pc}
+ 521              		.cfi_endproc
+ 522              	.LFE5:
+ 524 000e C046     		.section	.text.uart0_putchar,"ax",%progbits
+ 525              		.align	2
+ 526              		.global	uart0_putchar
+ 527              		.code	16
+ 528              		.thumb_func
+ 530              	uart0_putchar:
+ 531              	.LFB6:
+ 271:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 272:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 273:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Wait for space in the uart Tx FIFO and then send a character
+ 274:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 275:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+ 276:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to send to
+ 277:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  ch			 character to send
+ 278:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */ 
+ 279:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** void uart0_putchar (UART0_MemMapPtr channel, char ch)
+ 280:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 532              		.loc 1 280 0
+ 533              		.cfi_startproc
+ 534              	.LVL55:
+ 535 0000 00B5     		push	{lr}
+ 536              	.LCFI6:
+ 537              		.cfi_def_cfa_offset 4
+ 538              		.cfi_offset 14, -4
+ 539              	.L48:
+ 281:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Wait until space is available in the FIFO */
+ 282:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       while(!(UART0_S1_REG(channel) & UART0_S1_TDRE_MASK));
+ 540              		.loc 1 282 0
+ 541 0002 0379     		ldrb	r3, [r0, #4]
+ 542 0004 5AB2     		sxtb	r2, r3
+ 543 0006 002A     		cmp	r2, #0
+ 544 0008 FBDA     		bge	.L48
+ 283:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 284:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       /* Send the character */
+ 285:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       UART0_D_REG(channel) = (uint8)ch;
+ 545              		.loc 1 285 0
+ 546 000a C171     		strb	r1, [r0, #7]
+ 286:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     
+ 287:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  }
+ 547              		.loc 1 287 0
+ 548              		@ sp needed for prologue
+ 549 000c 00BD     		pop	{pc}
+ 550              		.cfi_endproc
+ 551              	.LFE6:
+ 553 000e C046     		.section	.text.uart0_getchar_present,"ax",%progbits
+ 554              		.align	2
+ 555              		.global	uart0_getchar_present
+ 556              		.code	16
+ 557              		.thumb_func
+ 559              	uart0_getchar_present:
+ 560              	.LFB7:
+ 288:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 289:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 290:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Check to see if a character has been received
+ 291:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 292:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Parameters:
+ 293:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  channel      uart channel to check for a character
+ 294:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *
+ 295:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  * Return values:
+ 296:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  0       No character received
+ 297:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  *  1       Character has been received
+ 298:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****  */
+ 299:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** int uart0_getchar_present (UART0_MemMapPtr channel)
+ 300:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 561              		.loc 1 300 0
+ 562              		.cfi_startproc
+ 563              	.LVL56:
+ 301:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     return (UART0_S1_REG(channel) & UART0_S1_RDRF_MASK);
+ 564              		.loc 1 301 0
+ 565 0000 0379     		ldrb	r3, [r0, #4]
+ 566 0002 2020     		mov	r0, #32
+ 567              	.LVL57:
+ 568 0004 1840     		and	r0, r3
+ 302:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 569              		.loc 1 302 0
+ 570              		@ sp needed for prologue
+ 571 0006 7047     		bx	lr
+ 572              		.cfi_endproc
+ 573              	.LFE7:
+ 575              		.section	.text.__read_console,"ax",%progbits
+ 576              		.align	2
+ 577              		.global	__read_console
+ 578              		.code	16
+ 579              		.thumb_func
+ 581              	__read_console:
+ 582              	.LFB8:
+ 303:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /********************************************************************/
+ 304:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 305:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** #if (defined(CW))
+ 306:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 307:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 308:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Method      :  CsIO1___read_console (component ConsoleIO)
+ 309:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **
+ 310:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Description :
+ 311:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         __read_console
+ 312:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         This method is internal. It is used by Processor Expert only.
+ 313:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 314:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** */
+ 315:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** int __read_console(__file_handle handle, unsigned char* buffer, size_t * count)
+ 316:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 583              		.loc 1 316 0
+ 584              		.cfi_startproc
+ 585              	.LVL58:
+ 586 0000 10B5     		push	{r4, lr}
+ 587              	.LCFI7:
+ 588              		.cfi_def_cfa_offset 8
+ 589              		.cfi_offset 4, -8
+ 590              		.cfi_offset 14, -4
+ 591              	.LBB4:
+ 592              	.LBB5:
+ 266:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       while (!(UART0_S1_REG(channel) & UART0_S1_RDRF_MASK));
+ 593              		.loc 1 266 0
+ 594 0002 064C     		ldr	r4, .L57
+ 595              	.LBE5:
+ 596 0004 2020     		mov	r0, #32
+ 597              	.LVL59:
+ 598              	.L52:
+ 599              	.LBB6:
+ 600 0006 2379     		ldrb	r3, [r4, #4]
+ 601 0008 1842     		tst	r0, r3
+ 602 000a FCD0     		beq	.L52
+ 269:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       return UART0_D_REG(channel);
+ 603              		.loc 1 269 0
+ 604 000c 034C     		ldr	r4, .L57
+ 605              	.LBE6:
+ 606              	.LBE4:
+ 317:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   size_t CharCnt = 0x00;
+ 318:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 319:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   (void)handle;                        /* Parameter is not used, suppress unused argument warning *
+ 320:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   if (TERM_PORT_NUM == 0)
+ 321:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 	  *buffer = (unsigned char)uart0_getchar(UART0_BASE_PTR);
+ 322:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   else if (TERM_PORT_NUM == 1)
+ 323:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 	  *buffer = (unsigned char)uart_getchar(UART1_BASE_PTR);
+ 324:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   else
+ 325:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 	  *buffer = (unsigned char)uart_getchar(UART2_BASE_PTR);
+ 326:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   CharCnt = 1;                         /* Increase char counter */
+ 327:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   
+ 328:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   *count = CharCnt;
+ 329:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   return (__no_io_error);
+ 330:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 607              		.loc 1 330 0
+ 608              		@ sp needed for prologue
+ 609              	.LBB8:
+ 610              	.LBB7:
+ 269:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****       return UART0_D_REG(channel);
+ 611              		.loc 1 269 0
+ 612 000e E079     		ldrb	r0, [r4, #7]
+ 613              	.LBE7:
+ 614              	.LBE8:
+ 321:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 	  *buffer = (unsigned char)uart0_getchar(UART0_BASE_PTR);
+ 615              		.loc 1 321 0
+ 616 0010 0870     		strb	r0, [r1]
+ 617              	.LVL60:
+ 328:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   *count = CharCnt;
+ 618              		.loc 1 328 0
+ 619 0012 0121     		mov	r1, #1
+ 620              	.LVL61:
+ 621              		.loc 1 330 0
+ 622 0014 0020     		mov	r0, #0
+ 328:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   *count = CharCnt;
+ 623              		.loc 1 328 0
+ 624 0016 1160     		str	r1, [r2]
+ 625              		.loc 1 330 0
+ 626 0018 10BD     		pop	{r4, pc}
+ 627              	.L58:
+ 628 001a C046     		.align	2
+ 629              	.L57:
+ 630 001c 00A00640 		.word	1074176000
+ 631              		.cfi_endproc
+ 632              	.LFE8:
+ 634              		.section	.text.__write_console,"ax",%progbits
+ 635              		.align	2
+ 636              		.global	__write_console
+ 637              		.code	16
+ 638              		.thumb_func
+ 640              	__write_console:
+ 641              	.LFB9:
+ 331:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 332:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 333:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 334:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Method      :  CsIO1___write_console (component ConsoleIO)
+ 335:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **
+ 336:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Description :
+ 337:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         __write_console
+ 338:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         This method is internal. It is used by Processor Expert only.
+ 339:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 340:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** */
+ 341:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** int __write_console(__file_handle handle, unsigned char* buffer, size_t* count)
+ 342:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 642              		.loc 1 342 0
+ 643              		.cfi_startproc
+ 644              	.LVL62:
+ 343:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   size_t CharCnt = 0x00;
+ 344:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 345:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   (void)handle;                        /* Parameter is not used, suppress unused argument warning *
+ 346:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   for (;*count > 0x00; --*count) {
+ 645              		.loc 1 346 0
+ 646 0000 1368     		ldr	r3, [r2]
+ 342:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 647              		.loc 1 342 0
+ 648 0002 70B5     		push	{r4, r5, r6, lr}
+ 649              	.LCFI8:
+ 650              		.cfi_def_cfa_offset 16
+ 651              		.cfi_offset 4, -16
+ 652              		.cfi_offset 5, -12
+ 653              		.cfi_offset 6, -8
+ 654              		.cfi_offset 14, -4
+ 342:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 655              		.loc 1 342 0
+ 656 0004 0E1C     		mov	r6, r1
+ 657 0006 151C     		mov	r5, r2
+ 658              		.loc 1 346 0
+ 659 0008 0024     		mov	r4, #0
+ 660 000a 002B     		cmp	r3, #0
+ 661 000c 08D0     		beq	.L60
+ 662              	.LVL63:
+ 663              	.L61:
+ 347:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     /* Wait until UART is ready for saving a next character into the transmit buffer */
+ 348:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     out_char((unsigned char)*buffer);
+ 664              		.loc 1 348 0
+ 665 000e 305D     		ldrb	r0, [r6, r4]
+ 666 0010 FFF7FEFF 		bl	out_char
+ 667              	.LVL64:
+ 346:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   for (;*count > 0x00; --*count) {
+ 668              		.loc 1 346 0
+ 669 0014 2868     		ldr	r0, [r5]
+ 349:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     buffer++;                          /* Increase buffer pointer */
+ 350:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****     CharCnt++;                         /* Increase char counter */
+ 670              		.loc 1 350 0
+ 671 0016 0134     		add	r4, r4, #1
+ 672              	.LVL65:
+ 346:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   for (;*count > 0x00; --*count) {
+ 673              		.loc 1 346 0
+ 674 0018 0138     		sub	r0, r0, #1
+ 675 001a 2860     		str	r0, [r5]
+ 676 001c 0028     		cmp	r0, #0
+ 677 001e F6D1     		bne	.L61
+ 678              	.LVL66:
+ 679              	.L60:
+ 351:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   }
+ 352:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   *count = CharCnt;
+ 680              		.loc 1 352 0
+ 681 0020 2C60     		str	r4, [r5]
+ 353:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   return(__no_io_error);
+ 354:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 682              		.loc 1 354 0
+ 683 0022 0020     		mov	r0, #0
+ 684              		@ sp needed for prologue
+ 685              	.LVL67:
+ 686 0024 70BD     		pop	{r4, r5, r6, pc}
+ 687              		.cfi_endproc
+ 688              	.LFE9:
+ 690 0026 C046     		.section	.text.__close_console,"ax",%progbits
+ 691              		.align	2
+ 692              		.global	__close_console
+ 693              		.code	16
+ 694              		.thumb_func
+ 696              	__close_console:
+ 697              	.LFB10:
+ 355:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** 
+ 356:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** /*
+ 357:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 358:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Method      :  CsIO1___close_console (component ConsoleIO)
+ 359:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **
+ 360:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **     Description :
+ 361:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         __close_console
+ 362:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** **         This method is internal. It is used by Processor Expert only.
+ 363:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** ** ===================================================================
+ 364:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** */
+ 365:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** int __close_console(__file_handle handle)
+ 366:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** {
+ 698              		.loc 1 366 0
+ 699              		.cfi_startproc
+ 700              	.LVL68:
+ 367:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   (void)handle;                        /* Parameter is not used, suppress unused argument warning *
+ 368:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c ****   return(__no_io_error);
+ 369:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart\uart.c **** }
+ 701              		.loc 1 369 0
+ 702 0000 0020     		mov	r0, #0
+ 703              	.LVL69:
+ 704              		@ sp needed for prologue
+ 705 0002 7047     		bx	lr
+ 706              		.cfi_endproc
+ 707              	.LFE10:
+ 709              		.text
+ 710              	.Letext0:
+ 711              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 712              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 713              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 714              		.file 5 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/size_t.h"
+ 715              		.file 6 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/file_struc.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart.c
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:19     .text.uart_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:24     .text.uart_init:00000000 uart_init
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:122    .text.uart_init:0000005c $d
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:129    .text.uart_getchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:134    .text.uart_getchar:00000000 uart_getchar
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:160    .text.uart_putchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:165    .text.uart_putchar:00000000 uart_putchar
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:189    .text.uart_getchar_present:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:194    .text.uart_getchar_present:00000000 uart_getchar_present
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:212    .text.uart0_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:217    .text.uart0_init:00000000 uart0_init
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:484    .text.uart0_init:00000118 $d
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:494    .text.uart0_getchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:499    .text.uart0_getchar:00000000 uart0_getchar
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:525    .text.uart0_putchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:530    .text.uart0_putchar:00000000 uart0_putchar
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:554    .text.uart0_getchar_present:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:559    .text.uart0_getchar_present:00000000 uart0_getchar_present
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:576    .text.__read_console:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:581    .text.__read_console:00000000 __read_console
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:630    .text.__read_console:0000001c $d
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:635    .text.__write_console:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:640    .text.__write_console:00000000 __write_console
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:691    .text.__close_console:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccHQ1J5.s:696    .text.__close_console:00000000 __close_console
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__aeabi_idiv
+__aeabi_uidiv
+out_char

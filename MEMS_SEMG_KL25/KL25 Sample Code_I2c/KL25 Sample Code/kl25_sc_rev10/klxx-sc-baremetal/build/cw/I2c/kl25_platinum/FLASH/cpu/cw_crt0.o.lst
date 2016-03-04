@@ -1,0 +1,41 @@
+   1              	/*
+   2              	 * File:	cw_crt0.s
+   3              	 * Purpose:	Lowest level routines for Kinetis.
+   4              	 *
+   5              	 * Notes:	This is a CodeWarrior specific version of crt0.s
+   6              	 *
+   7              	 */
+   8              	
+   9              		.extern start
+  10              		
+  11              		.global startup
+  12              		.global __startup
+  13              	
+  14              		.text
+  15              	        .thumb_func
+  17              		
+  18              	startup:
+  19              	__startup:
+  20 0000 0020     	    LDR     r0,=0;                    /*Initialize the GPRs*/
+  21 0002 0021     		LDR     r1,=0;
+  22 0004 0022     		LDR     r2,=0;
+  23 0006 0023     		LDR     r3,=0;
+  24 0008 0024     		LDR     r4,=0;
+  25 000a 0025     		LDR     r5,=0;
+  26 000c 0026     		LDR     r6,=0;
+  27 000e 0027     		LDR     r7,=0;
+  28 0010 62B6     		CPSIE   i                       /* Unmask interrupts*/
+  29 0012 FFF7FEFF 	    BL      start                  /* call the C code*/
+  30              	done:
+  31 0016 FEE7     	        B       done
+  32              	
+  33              		.end
+DEFINED SYMBOLS
+D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu/cw_crt0.s:18     .text:00000000 startup
+D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu/cw_crt0.s:19     .text:00000000 __startup
+D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu/cw_crt0.s:20     .text:00000000 $t
+D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu/cw_crt0.s:30     .text:00000016 done
+                   .debug_aranges:0000000c $d
+
+UNDEFINED SYMBOLS
+start

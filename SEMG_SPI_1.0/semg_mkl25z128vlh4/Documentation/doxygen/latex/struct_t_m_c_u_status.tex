@@ -1,0 +1,101 @@
+\hypertarget{struct_t_m_c_u_status}{\section{T\-M\-C\-U\-Status Struct Reference}
+\label{struct_t_m_c_u_status}\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}}
+}
+
+
+{\ttfamily \#include $<$Macros.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a1874f5f942ba06c9a04cf9d80d886c69}{is\-Receiving\-A\-D\-C\-Data}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a758b50c845375122567c83d5d2ead1ea}{is\-Master\-Received}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a8c8822fd6c3cd3a66b0c57f7f599084e}{is\-Master\-Sent}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a93f9e6a2964b9b5d7c8c31ee7f3b418a}{is\-Slave\-Received}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_ad09ebfde33e68b109909147dc08b55fd}{is\-Slave\-Sent}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a1f1b1e5d16e3423b4dccbc2b045da15b}{is\-Uart\-Received}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a63eaabcf3e40778712ff5d9a92f68366}{is\-Uart\-Sent}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_af25f8dd705dffec7fff2e6085c0794ed}{is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_aba5065fea6beb711f6d8ab94af52d98d}{is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a8ae581353ceb6e9ef96799da069fb22c}{is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_ae2b77978e33c0cd9dcf7e83bdaa5eba9}{is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_a7f5b9e8989d93b19bbd38b01cb042a7f}{is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_ae8571f5d7f20af8bfaa6cfdf05146599}{is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_ab160f18b2afdcd78e46b3c21c50c62ea}{is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_aa864edeb6786363beac08a6c3bac7903}{is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed}\-: 1
+\item 
+volatile bool \hyperlink{struct_t_m_c_u_status_ad8338db303c6d87f044bdc059deee376}{is\-Delayed}\-: 1
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A structure of M\-C\-U's Status. 
+
+\subsection{Field Documentation}
+\hypertarget{struct_t_m_c_u_status_ad8338db303c6d87f044bdc059deee376}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Delayed@{is\-Delayed}}
+\index{is\-Delayed@{is\-Delayed}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Delayed}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Delayed}}\label{struct_t_m_c_u_status_ad8338db303c6d87f044bdc059deee376}
+Flag of whether delayed, used in delay functions. \hypertarget{struct_t_m_c_u_status_a758b50c845375122567c83d5d2ead1ea}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Master\-Received@{is\-Master\-Received}}
+\index{is\-Master\-Received@{is\-Master\-Received}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Master\-Received}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Master\-Received}}\label{struct_t_m_c_u_status_a758b50c845375122567c83d5d2ead1ea}
+Flag of whether Master S\-P\-I finishing reception. \hypertarget{struct_t_m_c_u_status_a8c8822fd6c3cd3a66b0c57f7f599084e}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Master\-Sent@{is\-Master\-Sent}}
+\index{is\-Master\-Sent@{is\-Master\-Sent}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Master\-Sent}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Master\-Sent}}\label{struct_t_m_c_u_status_a8c8822fd6c3cd3a66b0c57f7f599084e}
+Flag of whether Master S\-P\-I finishing transmission. \hypertarget{struct_t_m_c_u_status_a1874f5f942ba06c9a04cf9d80d886c69}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Receiving\-A\-D\-C\-Data@{is\-Receiving\-A\-D\-C\-Data}}
+\index{is\-Receiving\-A\-D\-C\-Data@{is\-Receiving\-A\-D\-C\-Data}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Receiving\-A\-D\-C\-Data}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Receiving\-A\-D\-C\-Data}}\label{struct_t_m_c_u_status_a1874f5f942ba06c9a04cf9d80d886c69}
+Flag of whether M\-C\-U is receiving data from A\-D\-C. \hypertarget{struct_t_m_c_u_status_a93f9e6a2964b9b5d7c8c31ee7f3b418a}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Slave\-Received@{is\-Slave\-Received}}
+\index{is\-Slave\-Received@{is\-Slave\-Received}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Slave\-Received}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Slave\-Received}}\label{struct_t_m_c_u_status_a93f9e6a2964b9b5d7c8c31ee7f3b418a}
+Flag of whether Slave S\-P\-I finishing reception. \hypertarget{struct_t_m_c_u_status_ad09ebfde33e68b109909147dc08b55fd}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Slave\-Sent@{is\-Slave\-Sent}}
+\index{is\-Slave\-Sent@{is\-Slave\-Sent}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Slave\-Sent}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Slave\-Sent}}\label{struct_t_m_c_u_status_ad09ebfde33e68b109909147dc08b55fd}
+Flag of whether Slave S\-P\-I finishing transmission. \hypertarget{struct_t_m_c_u_status_aba5065fea6beb711f6d8ab94af52d98d}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error}}
+\index{is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I0\-Rx\-D\-M\-A\-Channel\-Error}}\label{struct_t_m_c_u_status_aba5065fea6beb711f6d8ab94af52d98d}
+Flag of whether D\-M\-A Channel for S\-P\-I0 reception goes wrong. \hypertarget{struct_t_m_c_u_status_ae8571f5d7f20af8bfaa6cfdf05146599}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed}}
+\index{is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I0\-Rx\-D\-M\-A\-Trans\-Completed}}\label{struct_t_m_c_u_status_ae8571f5d7f20af8bfaa6cfdf05146599}
+Flag of whether S\-P\-I0 D\-M\-A reception is completed. \hypertarget{struct_t_m_c_u_status_af25f8dd705dffec7fff2e6085c0794ed}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error}}
+\index{is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I0\-Tx\-D\-M\-A\-Channel\-Error}}\label{struct_t_m_c_u_status_af25f8dd705dffec7fff2e6085c0794ed}
+Flag of whether D\-M\-A Channel for S\-P\-I0 transmission goes wrong. \hypertarget{struct_t_m_c_u_status_a7f5b9e8989d93b19bbd38b01cb042a7f}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed}}
+\index{is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I0\-Tx\-D\-M\-A\-Trans\-Completed}}\label{struct_t_m_c_u_status_a7f5b9e8989d93b19bbd38b01cb042a7f}
+Flag of whether S\-P\-I0 D\-M\-A transmission is completed. \hypertarget{struct_t_m_c_u_status_ae2b77978e33c0cd9dcf7e83bdaa5eba9}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error}}
+\index{is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I1\-Rx\-D\-M\-A\-Channel\-Error}}\label{struct_t_m_c_u_status_ae2b77978e33c0cd9dcf7e83bdaa5eba9}
+Flag of whether D\-M\-A Channel for S\-P\-I0 reception goes wrong. \hypertarget{struct_t_m_c_u_status_aa864edeb6786363beac08a6c3bac7903}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed}}
+\index{is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I1\-Rx\-D\-M\-A\-Trans\-Completed}}\label{struct_t_m_c_u_status_aa864edeb6786363beac08a6c3bac7903}
+Flag of whether S\-P\-I1 D\-M\-A reception is completed. \hypertarget{struct_t_m_c_u_status_a8ae581353ceb6e9ef96799da069fb22c}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error}}
+\index{is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error@{is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I1\-Tx\-D\-M\-A\-Channel\-Error}}\label{struct_t_m_c_u_status_a8ae581353ceb6e9ef96799da069fb22c}
+Flag of whether D\-M\-A Channel for S\-P\-I1 transmission goes wrong. \hypertarget{struct_t_m_c_u_status_ab160f18b2afdcd78e46b3c21c50c62ea}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed}}
+\index{is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed@{is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-S\-P\-I1\-Tx\-D\-M\-A\-Trans\-Completed}}\label{struct_t_m_c_u_status_ab160f18b2afdcd78e46b3c21c50c62ea}
+Flag of whether S\-P\-I1 D\-M\-A transmission is completed. \hypertarget{struct_t_m_c_u_status_a1f1b1e5d16e3423b4dccbc2b045da15b}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Uart\-Received@{is\-Uart\-Received}}
+\index{is\-Uart\-Received@{is\-Uart\-Received}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Uart\-Received}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Uart\-Received}}\label{struct_t_m_c_u_status_a1f1b1e5d16e3423b4dccbc2b045da15b}
+Flag of whether U\-A\-R\-T finishing reception. \hypertarget{struct_t_m_c_u_status_a63eaabcf3e40778712ff5d9a92f68366}{\index{T\-M\-C\-U\-Status@{T\-M\-C\-U\-Status}!is\-Uart\-Sent@{is\-Uart\-Sent}}
+\index{is\-Uart\-Sent@{is\-Uart\-Sent}!TMCUStatus@{T\-M\-C\-U\-Status}}
+\subsubsection[{is\-Uart\-Sent}]{\setlength{\rightskip}{0pt plus 5cm}volatile bool T\-M\-C\-U\-Status\-::is\-Uart\-Sent}}\label{struct_t_m_c_u_status_a63eaabcf3e40778712ff5d9a92f68366}
+Flag of whether U\-A\-R\-T finishing transmission. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\hyperlink{_macros_8h}{Macros.\-h}\end{DoxyCompactItemize}

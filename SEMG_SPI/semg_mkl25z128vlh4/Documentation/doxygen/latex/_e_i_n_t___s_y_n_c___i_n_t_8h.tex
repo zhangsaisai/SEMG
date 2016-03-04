@@ -1,0 +1,50 @@
+\hypertarget{_e_i_n_t___s_y_n_c___i_n_t_8h}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T.h File Reference}
+\label{_e_i_n_t___s_y_n_c___i_n_t_8h}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T.\-h@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T.\-h}}
+}
+
+
+This component, \char`\"{}\-Ext\-Int\-\_\-\-L\-D\-D\char`\"{}, provide a low level A\-P\-I for unified access of external interrupts handling across various device designs. The component uses one pin which generates interrupt on selected edge.  
+
+
+{\ttfamily \#include \char`\"{}Cpu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Const.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I\-O\-\_\-\-Map.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}G\-P\-I\-O\-\_\-\-P\-D\-D.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-O\-R\-T\-\_\-\-P\-D\-D.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_gad52e9ba39f2863cee0ed738caa94cc83}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-P\-R\-P\-H\-\_\-\-B\-A\-S\-E\-\_\-\-A\-D\-D\-R\-E\-S\-S}~0x400\-F\-F000\-U
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_gabce4727ed4efb48dc43276bd6a285b5a}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Init\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_ga3d1fe0785c1588a3a88f67fa67d184ba}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Enable\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_gabdc66245bce13f65b50f4075d4a31e48}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Disable\-\_\-\-M\-E\-T\-H\-O\-D\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_ga6978bc8c246f3ecea80104750e52210a}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt\-\_\-\-E\-V\-E\-N\-T\-\_\-\-E\-N\-A\-B\-L\-E\-D}
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_gac5672018041a0839aebaf7c214f8e4b6}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-P\-I\-N\-\_\-\-I\-N\-D\-E\-X}~0x02\-U
+\item 
+\#define \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_gaddd06b849c3d35837931a2be158c5b59}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-P\-I\-N\-\_\-\-M\-A\-S\-K}~0x04\-U
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_ga147d2662135bdc1fb7f7478a421933a4}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method initializes the associated peripheral(s) and the component internal variables. The method is called automatically as a part of the application initialization code. \end{DoxyCompactList}\item 
+void \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_ga4f53d72cded9bef1cf324a2092bdc661}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Enable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Enable the component -\/ the external events are accepted. This method is available only if H\-W module allows enable/disable of the interrupt. \end{DoxyCompactList}\item 
+void \hyperlink{group___e_i_n_t___s_y_n_c___i_n_t__module_ga436aa71d065e7db366bafdeb4f3ba1a4}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Disable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Disable the component -\/ the external events are not accepted. This method is available only if H\-W module allows enable/disable of the interrupt. \end{DoxyCompactList}\item 
+\hypertarget{group___e_i_n_t___s_y_n_c___i_n_t__module_ga8be5d304b56041b9d3a808782dc4ae71}{void {\bfseries E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-Interrupt} (void)}\label{group___e_i_n_t___s_y_n_c___i_n_t__module_ga8be5d304b56041b9d3a808782dc4ae71}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This component, \char`\"{}\-Ext\-Int\-\_\-\-L\-D\-D\char`\"{}, provide a low level A\-P\-I for unified access of external interrupts handling across various device designs. The component uses one pin which generates interrupt on selected edge. \begin{DoxyVersion}{Version}
+01.\-02 
+\end{DoxyVersion}

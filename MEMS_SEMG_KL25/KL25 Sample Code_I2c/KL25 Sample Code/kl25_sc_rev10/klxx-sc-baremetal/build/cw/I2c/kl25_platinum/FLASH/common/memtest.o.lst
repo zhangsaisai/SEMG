@@ -1,0 +1,692 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"memtest.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.memTestDataBus,"ax",%progbits
+  18              		.align	2
+  19              		.global	memTestDataBus
+  20              		.code	16
+  21              		.thumb_func
+  23              	memTestDataBus:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** /**********************************************************************
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Filename:    memtest.c
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * 
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Description: General-purpose memory testing functions.
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Notes:       This software can be easily ported to systems with
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              different data bus widths by redefining 'datum'.
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * 
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Copyright (c) 1998 by Michael Barr.  This software is placed into
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * the public domain and may be used for any purpose.  However, this
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * notice must not be changed or removed and no warranty is either
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * expressed or implied by its publication or distribution.
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  **********************************************************************/
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** #include "memtest.h"
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** /**********************************************************************
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Function:    memTestDataBus()
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Description: Test the data bus wiring in a memory region by
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              performing a walking 1's test at a fixed address
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              within that region.  The address (and hence the
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              memory region) is selected by the caller.
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Notes:       
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Returns:     0 if the test succeeds.  
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              A non-zero result is the first pattern that failed.
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  **********************************************************************/
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** datum
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDataBus(volatile datum * address)
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+  26              		.loc 1 38 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 00B5     		push	{lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 4
+  32              		.cfi_offset 14, -4
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     datum pattern;
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Perform a walking 1's test at the given address.
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1; pattern != 0; pattern <<= 1)
+  33              		.loc 1 45 0
+  34 0002 0123     		mov	r3, #1
+  35 0004 01E0     		b	.L3
+  36              	.LVL1:
+  37              	.L6:
+  38 0006 5B00     		lsl	r3, r3, #1
+  39              	.LVL2:
+  40 0008 03D0     		beq	.L2
+  41              	.LVL3:
+  42              	.L3:
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         /*
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****          * Write the test pattern.
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****          */
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         *address = pattern;
+  43              		.loc 1 50 0
+  44 000a 0360     		str	r3, [r0]
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         /*
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****          * Read it back (immediately is okay for this test).
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****          */
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (*address != pattern) 
+  45              		.loc 1 55 0
+  46 000c 0268     		ldr	r2, [r0]
+  47 000e 9A42     		cmp	r2, r3
+  48 0010 F9D0     		beq	.L6
+  49              	.L2:
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         {
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             return (pattern);
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         }
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     return (0);
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** }   /* memTestDataBus() */
+  50              		.loc 1 63 0
+  51 0012 181C     		mov	r0, r3
+  52              	.LVL4:
+  53              		@ sp needed for prologue
+  54 0014 00BD     		pop	{pc}
+  55              		.cfi_endproc
+  56              	.LFE0:
+  58 0016 C046     		.section	.text.memTestAddressBus,"ax",%progbits
+  59              		.align	2
+  60              		.global	memTestAddressBus
+  61              		.code	16
+  62              		.thumb_func
+  64              	memTestAddressBus:
+  65              	.LFB1:
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** /**********************************************************************
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Function:    memTestAddressBus()
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Description: Test the address bus wiring in a memory region by
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              performing a walking 1's test on the relevant bits
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              of the address and checking for aliasing. This test
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              will find single-bit address failures such as stuck
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              -high, stuck-low, and shorted pins.  The base address
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              and size of the region are selected by the caller.
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Notes:       For best results, the selected base address should
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              have enough LSB 0's to guarantee single address bit
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              changes.  For example, to test a 64-Kbyte region, 
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              select a base address on a 64-Kbyte boundary.  Also, 
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              select the region size as a power-of-two--if at all 
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              possible.
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Returns:     NULL if the test succeeds.  
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              A non-zero result is the first address at which an
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              aliasing problem was uncovered.  By examining the
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              contents of memory, it may be possible to gather
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              additional information about the problem.
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  **********************************************************************/
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** datum * 
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestAddressBus(volatile datum * baseAddress, unsigned long nBytes)
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+  66              		.loc 1 93 0
+  67              		.cfi_startproc
+  68              	.LVL5:
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     unsigned long addressMask = (nBytes/sizeof(datum) - 1);
+  69              		.loc 1 94 0
+  70 0000 8908     		lsr	r1, r1, #2
+  71              	.LVL6:
+  72 0002 0139     		sub	r1, r1, #1
+  73              	.LVL7:
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+  74              		.loc 1 93 0
+  75 0004 F0B5     		push	{r4, r5, r6, r7, lr}
+  76              	.LCFI1:
+  77              		.cfi_def_cfa_offset 20
+  78              		.cfi_offset 4, -20
+  79              		.cfi_offset 5, -16
+  80              		.cfi_offset 6, -12
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+  83              		.loc 1 93 0
+  84 0006 021C     		mov	r2, r0
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     unsigned long offset;
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     unsigned long testOffset;
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     datum pattern     = (datum) 0xAAAAAAAA;
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     datum antipattern = (datum) 0x55555555;
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Write the default pattern at each of the power-of-two offsets.
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+  85              		.loc 1 105 0
+  86 0008 CB07     		lsl	r3, r1, #31
+  87 000a 38D5     		bpl	.L8
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[offset] = pattern;
+  88              		.loc 1 107 0
+  89 000c 1F4C     		ldr	r4, .L29
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+  90              		.loc 1 105 0
+  91 000e 0127     		mov	r7, #1
+  92              	.LVL8:
+  93              	.L9:
+  94              		.loc 1 107 0
+  95 0010 BD00     		lsl	r5, r7, #2
+  96 0012 5619     		add	r6, r2, r5
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+  97              		.loc 1 105 0
+  98 0014 7F00     		lsl	r7, r7, #1
+  99              	.LVL9:
+ 100              		.loc 1 107 0
+ 101 0016 3460     		str	r4, [r6]
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+ 102              		.loc 1 105 0
+ 103 0018 3942     		tst	r1, r7
+ 104 001a F9D1     		bne	.L9
+ 105              	.LVL10:
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /* 
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Check for address bits stuck high.
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     testOffset = 0;
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     baseAddress[testOffset] = antipattern;
+ 106              		.loc 1 114 0
+ 107 001c 1C4B     		ldr	r3, .L29+4
+ 108 001e 161C     		mov	r6, r2
+ 109 0020 08C6     		stmia	r6!, {r3}
+ 110              	.LVL11:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 111              		.loc 1 118 0
+ 112 0022 5568     		ldr	r5, [r2, #4]
+ 113 0024 1948     		ldr	r0, .L29
+ 114              	.LVL12:
+ 115 0026 8542     		cmp	r5, r0
+ 116 0028 27D1     		bne	.L22
+ 117 002a 0127     		mov	r7, #1
+ 118 002c 04E0     		b	.L17
+ 119              	.LVL13:
+ 120              	.L12:
+ 121 002e BC00     		lsl	r4, r7, #2
+ 122 0030 1019     		add	r0, r2, r4
+ 123 0032 0368     		ldr	r3, [r0]
+ 124 0034 AB42     		cmp	r3, r5
+ 125 0036 21D1     		bne	.L23
+ 126              	.LVL14:
+ 127              	.L17:
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+ 128              		.loc 1 116 0
+ 129 0038 7F00     		lsl	r7, r7, #1
+ 130              	.LVL15:
+ 131 003a 0F42     		tst	r7, r1
+ 132 003c F7D1     		bne	.L12
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         {
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             return ((datum *) &baseAddress[offset]);
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         }
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     baseAddress[testOffset] = pattern;
+ 133              		.loc 1 124 0
+ 134 003e 134B     		ldr	r3, .L29
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Check for address bits stuck low or shorted.
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (testOffset = 1; (testOffset & addressMask) != 0; testOffset <<= 1)
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[testOffset] = antipattern;
+ 135              		.loc 1 131 0
+ 136 0040 1348     		ldr	r0, .L29+4
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     baseAddress[testOffset] = pattern;
+ 137              		.loc 1 124 0
+ 138 0042 1360     		str	r3, [r2]
+ 139              	.LVL16:
+ 140              		.loc 1 131 0
+ 141 0044 5060     		str	r0, [r2, #4]
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 		if (baseAddress[0] != pattern)
+ 142              		.loc 1 133 0
+ 143 0046 1468     		ldr	r4, [r2]
+ 144 0048 9C42     		cmp	r4, r3
+ 145 004a 16D1     		bne	.L22
+ 146 004c 0125     		mov	r5, #1
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[testOffset] = antipattern;
+ 147              		.loc 1 131 0
+ 148 004e 071C     		mov	r7, r0
+ 149              	.LVL17:
+ 150              	.L18:
+ 151              		.loc 1 133 0
+ 152 0050 0123     		mov	r3, #1
+ 153              	.LVL18:
+ 154              	.L15:
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 		{
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 			return ((datum *) &baseAddress[testOffset]);
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 		}
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         {
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             if ((baseAddress[offset] != pattern) && (offset != testOffset))
+ 155              		.loc 1 140 0
+ 156 0052 9800     		lsl	r0, r3, #2
+ 157 0054 1018     		add	r0, r2, r0
+ 158 0056 0068     		ldr	r0, [r0]
+ 159 0058 A042     		cmp	r0, r4
+ 160 005a 01D0     		beq	.L14
+ 161              		.loc 1 140 0 is_stmt 0
+ 162 005c AB42     		cmp	r3, r5
+ 163 005e 0CD1     		bne	.L22
+ 164              	.L14:
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         for (offset = 1; (offset & addressMask) != 0; offset <<= 1)
+ 165              		.loc 1 138 0 is_stmt 1
+ 166 0060 5B00     		lsl	r3, r3, #1
+ 167              	.LVL19:
+ 168 0062 1942     		tst	r1, r3
+ 169 0064 F5D1     		bne	.L15
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (testOffset = 1; (testOffset & addressMask) != 0; testOffset <<= 1)
+ 170              		.loc 1 129 0
+ 171 0066 6D00     		lsl	r5, r5, #1
+ 172              	.LVL20:
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             {
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****                 return ((datum *) &baseAddress[testOffset]);
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             }
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         }
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[testOffset] = pattern;
+ 173              		.loc 1 146 0
+ 174 0068 3460     		str	r4, [r6]
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (testOffset = 1; (testOffset & addressMask) != 0; testOffset <<= 1)
+ 175              		.loc 1 129 0
+ 176 006a 2942     		tst	r1, r5
+ 177 006c 0BD0     		beq	.L28
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[testOffset] = antipattern;
+ 178              		.loc 1 131 0
+ 179 006e AE00     		lsl	r6, r5, #2
+ 180 0070 9619     		add	r6, r2, r6
+ 181 0072 3760     		str	r7, [r6]
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 		if (baseAddress[0] != pattern)
+ 182              		.loc 1 133 0
+ 183 0074 1068     		ldr	r0, [r2]
+ 184 0076 A042     		cmp	r0, r4
+ 185 0078 EAD0     		beq	.L18
+ 186              	.LVL21:
+ 187              	.L22:
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[testOffset] = antipattern;
+ 188              		.loc 1 131 0
+ 189 007a 301C     		mov	r0, r6
+ 190              	.L23:
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     return (NULL);
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** }   /* memTestAddressBus() */
+ 191              		.loc 1 151 0
+ 192              		@ sp needed for prologue
+ 193 007c F0BD     		pop	{r4, r5, r6, r7, pc}
+ 194              	.LVL22:
+ 195              	.L8:
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     baseAddress[testOffset] = antipattern;
+ 196              		.loc 1 114 0
+ 197 007e 044B     		ldr	r3, .L29+4
+ 198 0080 0360     		str	r3, [r0]
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     baseAddress[testOffset] = pattern;
+ 199              		.loc 1 124 0
+ 200 0082 0248     		ldr	r0, .L29
+ 201              	.LVL23:
+ 202 0084 1060     		str	r0, [r2]
+ 203              	.LVL24:
+ 204              	.L28:
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     return (NULL);
+ 205              		.loc 1 149 0
+ 206 0086 0020     		mov	r0, #0
+ 207 0088 F8E7     		b	.L23
+ 208              	.L30:
+ 209 008a C046     		.align	2
+ 210              	.L29:
+ 211 008c AAAAAAAA 		.word	-1431655766
+ 212 0090 55555555 		.word	1431655765
+ 213              		.cfi_endproc
+ 214              	.LFE1:
+ 216              		.section	.text.memTestDevice,"ax",%progbits
+ 217              		.align	2
+ 218              		.global	memTestDevice
+ 219              		.code	16
+ 220              		.thumb_func
+ 222              	memTestDevice:
+ 223              	.LFB2:
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** /**********************************************************************
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Function:    memTestDevice()
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Description: Test the integrity of a physical memory device by
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              performing an increment/decrement test over the
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              entire region.  In the process every storage bit 
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              in the device is tested as a zero and a one.  The
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              base address and the size of the region are
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              selected by the caller.
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Notes:       
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  * Returns:     NULL if the test succeeds.
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              A non-zero result is the first address at which an
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              incorrect value was read back.  By examining the
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              contents of memory, it may be possible to gather
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *              additional information about the problem.
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  *
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****  **********************************************************************/
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** datum * 
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+ 224              		.loc 1 177 0
+ 225              		.cfi_startproc
+ 226              	.LVL25:
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     unsigned long offset;
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     unsigned long nWords = nBytes / sizeof(datum);
+ 227              		.loc 1 179 0
+ 228 0000 8908     		lsr	r1, r1, #2
+ 229              	.LVL26:
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** {
+ 230              		.loc 1 177 0
+ 231 0002 F0B5     		push	{r4, r5, r6, r7, lr}
+ 232              	.LCFI2:
+ 233              		.cfi_def_cfa_offset 20
+ 234              		.cfi_offset 4, -20
+ 235              		.cfi_offset 5, -16
+ 236              		.cfi_offset 6, -12
+ 237              		.cfi_offset 7, -8
+ 238              		.cfi_offset 14, -4
+ 239              		.loc 1 179 0
+ 240 0004 8C46     		mov	ip, r1
+ 241              	.LVL27:
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     datum pattern;
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     datum antipattern;
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Fill memory with a known pattern.
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 242              		.loc 1 188 0
+ 243 0006 0029     		cmp	r1, #0
+ 244 0008 60D0     		beq	.L39
+ 245 000a 0123     		mov	r3, #1
+ 246 000c 6246     		mov	r2, ip
+ 247 000e 013A     		sub	r2, r2, #1
+ 248 0010 1C1C     		mov	r4, r3
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[offset] = pattern;
+ 249              		.loc 1 190 0
+ 250 0012 051C     		mov	r5, r0
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+ 251              		.loc 1 176 0
+ 252 0014 0131     		add	r1, r1, #1
+ 253              	.LVL28:
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 254              		.loc 1 188 0
+ 255 0016 0226     		mov	r6, #2
+ 256 0018 1440     		and	r4, r2
+ 257              	.LVL29:
+ 258              		.loc 1 190 0
+ 259 001a 08C5     		stmia	r5!, {r3}
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 260              		.loc 1 188 0
+ 261 001c 8E42     		cmp	r6, r1
+ 262 001e 0DD0     		beq	.L55
+ 263 0020 002C     		cmp	r4, #0
+ 264 0022 03D0     		beq	.L33
+ 265              		.loc 1 190 0
+ 266 0024 40C5     		stmia	r5!, {r6}
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 267              		.loc 1 188 0
+ 268 0026 0326     		mov	r6, #3
+ 269              	.LVL30:
+ 270 0028 8E42     		cmp	r6, r1
+ 271 002a 07D0     		beq	.L55
+ 272              	.L33:
+ 273              		.loc 1 190 0
+ 274 002c 2F1C     		mov	r7, r5
+ 275 002e 40C7     		stmia	r7!, {r6}
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 276              		.loc 1 188 0
+ 277 0030 0136     		add	r6, r6, #1
+ 278              		.loc 1 190 0
+ 279 0032 6E60     		str	r6, [r5, #4]
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 280              		.loc 1 188 0
+ 281 0034 0136     		add	r6, r6, #1
+ 282 0036 3D1D     		add	r5, r7, #4
+ 283 0038 8E42     		cmp	r6, r1
+ 284 003a F7D1     		bne	.L33
+ 285              	.L55:
+ 286              	.LVL31:
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Check each location and invert it for the second pass.
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 287              		.loc 1 198 0
+ 288 003c 0168     		ldr	r1, [r0]
+ 289 003e 0129     		cmp	r1, #1
+ 290 0040 46D1     		bne	.L34
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+ 291              		.loc 1 176 0
+ 292 0042 011D     		add	r1, r0, #4
+ 293 0044 6546     		mov	r5, ip
+ 294 0046 0A1C     		mov	r2, r1
+ 295 0048 031C     		mov	r3, r0
+ 296 004a 0027     		mov	r7, #0
+ 297 004c 0124     		mov	r4, #1
+ 298 004e ED07     		lsl	r5, r5, #31
+ 299 0050 18D4     		bmi	.L35
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         {
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             return ((datum *) &baseAddress[offset]);
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         }
+ 202:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         antipattern = ~pattern;
+ 300              		.loc 1 203 0
+ 301 0052 0223     		mov	r3, #2
+ 302 0054 5A42     		neg	r2, r3
+ 303              	.LVL32:
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[offset] = antipattern;
+ 304              		.loc 1 204 0
+ 305 0056 0260     		str	r2, [r0]
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 306              		.loc 1 198 0
+ 307 0058 0A1C     		mov	r2, r1
+ 308 005a 10CA     		ldmia	r2!, {r4}
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 309              		.loc 1 196 0
+ 310 005c 0127     		mov	r7, #1
+ 311              	.LVL33:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 312              		.loc 1 198 0
+ 313 005e 0B1C     		mov	r3, r1
+ 314 0060 022C     		cmp	r4, #2
+ 315 0062 0FD0     		beq	.L35
+ 316              	.LVL34:
+ 317              	.L32:
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     /*
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      * Check each location for the inverted pattern and zero it.
+ 209:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****      */
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 211:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     {
+ 212:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         antipattern = ~pattern;
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != antipattern)
+ 214:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         {
+ 215:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****             return ((datum *) &baseAddress[offset]);
+ 216:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         }
+ 217:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     }
+ 218:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     return (NULL);
+ 220:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** 
+ 221:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** }   /* memTestDevice() */
+ 318              		.loc 1 221 0
+ 319 0064 181C     		mov	r0, r3
+ 320              		@ sp needed for prologue
+ 321 0066 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 322              	.LVL35:
+ 323              	.L36:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 324              		.loc 1 198 0
+ 325 0068 151C     		mov	r5, r2
+ 326 006a 40CD     		ldmia	r5!, {r6}
+ 327              	.LVL36:
+ 328 006c 131C     		mov	r3, r2
+ 329              	.LVL37:
+ 330 006e A642     		cmp	r6, r4
+ 331 0070 F8D1     		bne	.L32
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         antipattern = ~pattern;
+ 332              		.loc 1 203 0
+ 333 0072 F343     		mvn	r3, r6
+ 334              	.LVL38:
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[offset] = antipattern;
+ 335              		.loc 1 204 0
+ 336 0074 1360     		str	r3, [r2]
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 337              		.loc 1 198 0
+ 338 0076 5468     		ldr	r4, [r2, #4]
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 339              		.loc 1 196 0
+ 340 0078 0136     		add	r6, r6, #1
+ 341              	.LVL39:
+ 342 007a 0137     		add	r7, r7, #1
+ 343              	.LVL40:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != pattern)
+ 344              		.loc 1 198 0
+ 345 007c 2B1C     		mov	r3, r5
+ 346 007e 2A1D     		add	r2, r5, #4
+ 347 0080 B442     		cmp	r4, r6
+ 348 0082 EFD1     		bne	.L32
+ 349              	.LVL41:
+ 350              	.L35:
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         antipattern = ~pattern;
+ 351              		.loc 1 203 0
+ 352 0084 E643     		mvn	r6, r4
+ 353              	.LVL42:
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 354              		.loc 1 196 0
+ 355 0086 0137     		add	r7, r7, #1
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         baseAddress[offset] = antipattern;
+ 356              		.loc 1 204 0
+ 357 0088 1E60     		str	r6, [r3]
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 358              		.loc 1 196 0
+ 359 008a 0134     		add	r4, r4, #1
+ 360              	.LVL43:
+ 361 008c 6745     		cmp	r7, ip
+ 362 008e EBD1     		bne	.L36
+ 363              	.LVL44:
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != antipattern)
+ 364              		.loc 1 213 0
+ 365 0090 0468     		ldr	r4, [r0]
+ 366 0092 A31C     		add	r3, r4, #2
+ 367 0094 1CD1     		bne	.L34
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+ 368              		.loc 1 176 0
+ 369 0096 6046     		mov	r0, ip
+ 370              	.LVL45:
+ 371 0098 0325     		mov	r5, #3
+ 372 009a 271A     		sub	r7, r4, r0
+ 373 009c 6A42     		neg	r2, r5
+ 374 009e FB07     		lsl	r3, r7, #31
+ 375 00a0 12D4     		bmi	.L37
+ 376              	.LVL46:
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****         if (baseAddress[offset] != antipattern)
+ 377              		.loc 1 213 0
+ 378 00a2 0B1C     		mov	r3, r1
+ 379 00a4 40C9     		ldmia	r1!, {r6}
+ 380              	.LVL47:
+ 381 00a6 B242     		cmp	r2, r6
+ 382 00a8 DCD1     		bne	.L32
+ 383 00aa 0423     		mov	r3, #4
+ 384              	.LVL48:
+ 385 00ac 5A42     		neg	r2, r3
+ 386              	.LVL49:
+ 387 00ae 0BE0     		b	.L37
+ 388              	.LVL50:
+ 389              	.L38:
+ 390 00b0 081C     		mov	r0, r1
+ 391 00b2 10C8     		ldmia	r0!, {r4}
+ 392 00b4 0B1C     		mov	r3, r1
+ 393 00b6 551E     		sub	r5, r2, #1
+ 394 00b8 A242     		cmp	r2, r4
+ 395 00ba D3D1     		bne	.L32
+ 396 00bc 4E68     		ldr	r6, [r1, #4]
+ 397 00be 031C     		mov	r3, r0
+ 398 00c0 011D     		add	r1, r0, #4
+ 399 00c2 B542     		cmp	r5, r6
+ 400 00c4 CED1     		bne	.L32
+ 401 00c6 023A     		sub	r2, r2, #2
+ 402              	.LVL51:
+ 403              	.L37:
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     for (pattern = 1, offset = 0; offset < nWords; pattern++, offset++)
+ 404              		.loc 1 210 0
+ 405 00c8 BA42     		cmp	r2, r7
+ 406 00ca F1D1     		bne	.L38
+ 407              	.L39:
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c ****     return (NULL);
+ 408              		.loc 1 219 0
+ 409 00cc 0023     		mov	r3, #0
+ 410 00ce C9E7     		b	.L32
+ 411              	.LVL52:
+ 412              	.L34:
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\memtest.c **** memTestDevice(volatile datum * baseAddress, unsigned long nBytes)	
+ 413              		.loc 1 176 0
+ 414 00d0 031C     		mov	r3, r0
+ 415 00d2 C7E7     		b	.L32
+ 416              		.cfi_endproc
+ 417              	.LFE2:
+ 419              		.text
+ 420              	.Letext0:
+ 421              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 memtest.c
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:18     .text.memTestDataBus:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:23     .text.memTestDataBus:00000000 memTestDataBus
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:59     .text.memTestAddressBus:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:64     .text.memTestAddressBus:00000000 memTestAddressBus
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:211    .text.memTestAddressBus:0000008c $d
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:217    .text.memTestDevice:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc3x0ufM.s:222    .text.memTestDevice:00000000 memTestDevice
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

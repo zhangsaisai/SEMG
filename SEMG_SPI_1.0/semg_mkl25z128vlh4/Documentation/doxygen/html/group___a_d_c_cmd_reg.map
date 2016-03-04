@@ -1,0 +1,5 @@
+<map id="ADC Commands and Registers Map" name="ADC Commands and Registers Map">
+<area shape="rect" id="node1" href="$group___a_d_c_cmd.html" title="ADC Commands" alt="" coords="430,5,549,32"/>
+<area shape="rect" id="node4" href="$group___a_d_c_reg.html" title="ADC Registers" alt="" coords="435,56,543,83"/>
+<area shape="rect" id="node3" href="$group___user_macros.html" title="User Macros" alt="" coords="5,31,101,57"/>
+</map>

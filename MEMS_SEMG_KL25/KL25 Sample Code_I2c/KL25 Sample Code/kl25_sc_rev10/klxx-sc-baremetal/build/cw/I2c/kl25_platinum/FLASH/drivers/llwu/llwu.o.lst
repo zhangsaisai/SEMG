@@ -1,0 +1,1396 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"llwu.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.llwu_configure,"ax",%progbits
+  18              		.align	2
+  19              		.global	llwu_configure
+  20              		.code	16
+  21              		.thumb_func
+  23              	llwu_configure:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** /*!
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * \file    llwu.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * \brief   common LLWU routines
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * This file defines the functions/interrupt handlers/macros used for LLWU to be used as wakeup sou
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * And some common initializations.
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  *
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * \version $Revision: 1.0 $
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  * \author  Philip Drake(rxaa60)
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****  ***/
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #include "common.h"
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #include "llwu.h"
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #include "mcg.h"
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #include "vectors.h"
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** extern int re_init_clk;
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** extern int clock_freq_hz;
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** /* function: llwu_configure
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    description: Set up the LLWU for wakeup the MCU from LLS and VLLSx modes 
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    from the selected pin or module.
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    inputs:
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    pin_en - unsigned integer, bit position indicates the pin is enabled.  
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****             More than one bit can be set to enable more than one pin at a time.  
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    rise_fall - 0x00 = External input disabled as wakeup
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****                0x01 - External input enabled as rising edge detection
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****                0x02 - External input enabled as falling edge detection
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****                0x03 - External input enablge as any edge detection
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    module_en - unsigned char, bit position indicates the module is enabled.  
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****                More than one bit can be set to enabled more than one module                   
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    for example:  if bit 0 and 1 need to be enabled as rising edge detect call this  routine with
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    pin_en = 0x0003 and rise_fall = 0x02
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    Note: to set up one set of pins for rising and another for falling, 2 calls to this 
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          function are required, 1st for rising then the second for falling.
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** */
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** void llwu_configure(unsigned int pin_en, unsigned char rise_fall, unsigned char module_en ) {
+  26              		.loc 1 45 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 24
+  32              		.cfi_offset 3, -24
+  33              		.cfi_offset 4, -20
+  34              		.cfi_offset 5, -16
+  35              		.cfi_offset 6, -12
+  36              		.cfi_offset 7, -8
+  37              		.cfi_offset 14, -4
+  38 0002 4F46     		mov	r7, r9
+  39 0004 4646     		mov	r6, r8
+  40 0006 C0B4     		push	{r6, r7}
+  41              	.LCFI1:
+  42              		.cfi_def_cfa_offset 32
+  43              		.cfi_offset 8, -32
+  44              		.cfi_offset 9, -28
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     uint8 temp;
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     temp = LLWU_PE1;
+  45              		.loc 1 48 0
+  46 0008 744B     		ldr	r3, .L85
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** void llwu_configure(unsigned int pin_en, unsigned char rise_fall, unsigned char module_en ) {
+  47              		.loc 1 45 0
+  48 000a 041C     		mov	r4, r0
+  49 000c 0F1C     		mov	r7, r1
+  50 000e 9146     		mov	r9, r2
+  51              		.loc 1 48 0
+  52 0010 1D78     		ldrb	r5, [r3]
+  53              	.LVL1:
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0001)
+  54              		.loc 1 49 0
+  55 0012 C107     		lsl	r1, r0, #31
+  56 0014 00D5     		bpl	.LCB32
+  57 0016 DCE0     		b	.L69	@long jump
+  58              	.LCB32:
+  59              	.LVL2:
+  60              	.L2:
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {      
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE1/SCI1_RX/I2C1_SCL /SPI1_SIN");      
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0002)
+  61              		.loc 1 53 0
+  62 0018 A207     		lsl	r2, r4, #30
+  63 001a 00D5     		bpl	.LCB40
+  64 001c D5E0     		b	.L70	@long jump
+  65              	.LCB40:
+  66              	.L3:
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {      
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE2/SPI1_SCK/SDHC0_DCLK");       
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0004)
+  67              		.loc 1 57 0
+  68 001e 6307     		lsl	r3, r4, #29
+  69 0020 00D5     		bpl	.LCB45
+  70 0022 CEE0     		b	.L71	@long jump
+  71              	.LCB45:
+  72              	.L4:
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE4/SPI1_PCS0/SDHC0_D3");
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0008)
+  73              		.loc 1 61 0
+  74 0024 2107     		lsl	r1, r4, #28
+  75 0026 00D5     		bpl	.LCB50
+  76 0028 C7E0     		b	.L72	@long jump
+  77              	.LCB50:
+  78              	.L5:
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTA4/FTM0_CH1/NMI/EZP_CS");
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_PE1 = temp;
+  79              		.loc 1 65 0
+  80 002a 6C48     		ldr	r0, .L85
+  81 002c 0570     		strb	r5, [r0]
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     temp = LLWU_PE2;
+  82              		.loc 1 67 0
+  83 002e 4578     		ldrb	r5, [r0, #1]
+  84              	.LVL3:
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0010)
+  85              		.loc 1 68 0
+  86 0030 E206     		lsl	r2, r4, #27
+  87 0032 00D5     		bpl	.LCB61
+  88 0034 BDE0     		b	.L73	@long jump
+  89              	.LCB61:
+  90              	.L6:
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTA13/FTM1_CH1 /FTM1_QD_PHB");
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0020)
+  91              		.loc 1 72 0
+  92 0036 A306     		lsl	r3, r4, #26
+  93 0038 00D5     		bpl	.LCB66
+  94 003a ADE0     		b	.L74	@long jump
+  95              	.LCB66:
+  96              	.LVL4:
+  97              	.L7:
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE5(rise_fall);
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTB0/I2C0_SCL/FTM1_CH0/FTM1_QD_PHA is LLWU wakeup source ")
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF5_MASK;   // write one to clear the flag
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0040)
+  98              		.loc 1 78 0
+  99 003c 6106     		lsl	r1, r4, #25
+ 100 003e 00D5     		bpl	.LCB73
+ 101 0040 9DE0     		b	.L75	@long jump
+ 102              	.LCB73:
+ 103              	.LVL5:
+ 104              	.L8:
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE6(rise_fall);
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC1/SCI1_RTS/FTM0_CH0 is LLWU wakeup source ");
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF6_MASK;   // write one to clear the flag
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0080)
+ 105              		.loc 1 84 0
+ 106 0042 2206     		lsl	r2, r4, #24
+ 107 0044 00D5     		bpl	.LCB80
+ 108 0046 8EE0     		b	.L76	@long jump
+ 109              	.LCB80:
+ 110              	.LVL6:
+ 111              	.L9:
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE7(rise_fall);
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC3/SCI1_RX/FTM0_CH2 is LLWU wakeup source ");
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_PE2 = temp;
+ 112              		.loc 1 90 0
+ 113 0048 6448     		ldr	r0, .L85
+ 114 004a 4570     		strb	r5, [r0, #1]
+ 115 004c 8046     		mov	r8, r0
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     temp = LLWU_PE3;
+ 116              		.loc 1 92 0
+ 117 004e 8678     		ldrb	r6, [r0, #2]
+ 118              	.LVL7:
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0100)
+ 119              		.loc 1 93 0
+ 120 0050 E205     		lsl	r2, r4, #23
+ 121 0052 00D5     		bpl	.LCB93
+ 122 0054 7BE0     		b	.L77	@long jump
+ 123              	.LCB93:
+ 124              	.LVL8:
+ 125              	.L10:
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE8(rise_fall);
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC4/SPI0_PCS0/FTM0_CH3 is LLWU wakeup source ");
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0200)
+ 126              		.loc 1 99 0
+ 127 0056 A205     		lsl	r2, r4, #22
+ 128 0058 6CD4     		bmi	.L78
+ 129              	.LVL9:
+ 130              	.L11:
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE9(rise_fall);
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC5/SPI0_SCK/I2S0_RXD0 is LLWU wakeup source ");
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF9_MASK;   // write one to clear the flag
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0400)
+ 131              		.loc 1 105 0
+ 132 005a 6305     		lsl	r3, r4, #21
+ 133 005c 5DD4     		bmi	.L79
+ 134              	.LVL10:
+ 135              	.L12:
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE10(rise_fall);
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC6/PDB0_EXTRG to be an LLWU wakeup source ");
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF10_MASK;   // write one to clear the flag
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x0800)
+ 136              		.loc 1 111 0
+ 137 005e 2105     		lsl	r1, r4, #20
+ 138 0060 4FD4     		bmi	.L80
+ 139              	.LVL11:
+ 140              	.L13:
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE11(rise_fall);
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC11/I2S0_RXD1 to be an LLWU wakeup source ");
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_PE3 = temp;
+ 141              		.loc 1 117 0
+ 142 0062 5E4A     		ldr	r2, .L85
+ 143 0064 9670     		strb	r6, [r2, #2]
+ 144 0066 9046     		mov	r8, r2
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     temp = LLWU_PE4;
+ 145              		.loc 1 119 0
+ 146 0068 D578     		ldrb	r5, [r2, #3]
+ 147              	.LVL12:
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x1000)
+ 148              		.loc 1 120 0
+ 149 006a E104     		lsl	r1, r4, #19
+ 150 006c 3DD4     		bmi	.L81
+ 151              	.LVL13:
+ 152              	.L14:
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE12(rise_fall);
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD0/SPI0_PCS0/SCI2_RTS to be an LLWU wakeup source ");
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x2000)
+ 153              		.loc 1 126 0
+ 154 006e A204     		lsl	r2, r4, #18
+ 155 0070 2ED4     		bmi	.L82
+ 156              	.LVL14:
+ 157              	.L15:
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE13(rise_fall);
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD2/SCI2_RX to be an LLWU wakeup source ");
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF13_MASK;   // write one to clear the flag
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x4000)
+ 158              		.loc 1 132 0
+ 159 0072 6304     		lsl	r3, r4, #17
+ 160 0074 1FD4     		bmi	.L83
+ 161              	.LVL15:
+ 162              	.L16:
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE14(rise_fall);
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD4/SCI0_RTS/FTM0_CH4/EWM_IN is LLWU wakeup source ");
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF14_MASK;   // write one to clear the flag
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if( pin_en & 0x8000)
+ 163              		.loc 1 138 0
+ 164 0076 2104     		lsl	r1, r4, #16
+ 165 0078 11D4     		bmi	.L84
+ 166              	.LVL16:
+ 167              	.L17:
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     {
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE15(rise_fall);
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD6/SCI0_RX/FTM0_CH6/FTM0_FLT0 is LLWU wakeup source ");
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_PE4 = temp;
+ 168              		.loc 1 144 0
+ 169 007a 5848     		ldr	r0, .L85
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     if (module_en == 0){
+ 170              		.loc 1 145 0
+ 171 007c 4946     		mov	r1, r9
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_PE4 = temp;
+ 172              		.loc 1 144 0
+ 173 007e C570     		strb	r5, [r0, #3]
+ 174              		.loc 1 145 0
+ 175 0080 0029     		cmp	r1, #0
+ 176 0082 04D1     		bne	.L18
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****       LLWU_ME = 0;
+ 177              		.loc 1 146 0
+ 178 0084 0171     		strb	r1, [r0, #4]
+ 179              	.L1:
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }else  {
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_ME |= module_en;  //Set up more modules to wakeup up
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     printf("\n LLWU configured modules as LLWU wakeup sources = 0x%02X,",(LLWU_ME));
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** } // End LLWU Configuration
+ 180              		.loc 1 152 0
+ 181              		@ sp needed for prologue
+ 182              	.LVL17:
+ 183 0086 0CBC     		pop	{r2, r3}
+ 184 0088 9046     		mov	r8, r2
+ 185 008a 9946     		mov	r9, r3
+ 186 008c F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 187              	.LVL18:
+ 188              	.L18:
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     LLWU_ME |= module_en;  //Set up more modules to wakeup up
+ 189              		.loc 1 148 0
+ 190 008e 0279     		ldrb	r2, [r0, #4]
+ 191 0090 0A43     		orr	r2, r1
+ 192 0092 0271     		strb	r2, [r0, #4]
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     printf("\n LLWU configured modules as LLWU wakeup sources = 0x%02X,",(LLWU_ME));
+ 193              		.loc 1 149 0
+ 194 0094 0179     		ldrb	r1, [r0, #4]
+ 195 0096 5248     		ldr	r0, .L85+4
+ 196 0098 FFF7FEFF 		bl	printf
+ 197              	.LVL19:
+ 198 009c F3E7     		b	.L1
+ 199              	.LVL20:
+ 200              	.L84:
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE15(rise_fall);
+ 201              		.loc 1 140 0
+ 202 009e BC01     		lsl	r4, r7, #6
+ 203              	.LVL21:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 204              		.loc 1 142 0
+ 205 00a0 4E4F     		ldr	r7, .L85
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD6/SCI0_RX/FTM0_CH6/FTM0_FLT0 is LLWU wakeup source ");
+ 206              		.loc 1 141 0
+ 207 00a2 5048     		ldr	r0, .L85+8
+ 208 00a4 FFF7FEFF 		bl	printf
+ 209              	.LVL22:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 210              		.loc 1 142 0
+ 211 00a8 BE79     		ldrb	r6, [r7, #6]
+ 212 00aa 8023     		mov	r3, #128
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE15(rise_fall);
+ 213              		.loc 1 140 0
+ 214 00ac 2543     		orr	r5, r4
+ 215              	.LVL23:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 216              		.loc 1 142 0
+ 217 00ae 3343     		orr	r3, r6
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE15(rise_fall);
+ 218              		.loc 1 140 0
+ 219 00b0 EDB2     		uxtb	r5, r5
+ 220              	.LVL24:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 221              		.loc 1 142 0
+ 222 00b2 BB71     		strb	r3, [r7, #6]
+ 223 00b4 E1E7     		b	.L17
+ 224              	.LVL25:
+ 225              	.L83:
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE14(rise_fall);
+ 226              		.loc 1 134 0
+ 227 00b6 3023     		mov	r3, #48
+ 228 00b8 3E01     		lsl	r6, r7, #4
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD4/SCI0_RTS/FTM0_CH4/EWM_IN is LLWU wakeup source ");
+ 229              		.loc 1 135 0
+ 230 00ba 4B48     		ldr	r0, .L85+12
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE14(rise_fall);
+ 231              		.loc 1 134 0
+ 232 00bc 1E40     		and	r6, r3
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD4/SCI0_RTS/FTM0_CH4/EWM_IN is LLWU wakeup source ");
+ 233              		.loc 1 135 0
+ 234 00be FFF7FEFF 		bl	printf
+ 235              	.LVL26:
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF14_MASK;   // write one to clear the flag
+ 236              		.loc 1 136 0
+ 237 00c2 4648     		ldr	r0, .L85
+ 238 00c4 4022     		mov	r2, #64
+ 239 00c6 8179     		ldrb	r1, [r0, #6]
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE14(rise_fall);
+ 240              		.loc 1 134 0
+ 241 00c8 3543     		orr	r5, r6
+ 242              	.LVL27:
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF14_MASK;   // write one to clear the flag
+ 243              		.loc 1 136 0
+ 244 00ca 0A43     		orr	r2, r1
+ 245 00cc 8271     		strb	r2, [r0, #6]
+ 246 00ce D2E7     		b	.L16
+ 247              	.L82:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE13(rise_fall);
+ 248              		.loc 1 128 0
+ 249 00d0 0C23     		mov	r3, #12
+ 250 00d2 BE00     		lsl	r6, r7, #2
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD2/SCI2_RX to be an LLWU wakeup source ");
+ 251              		.loc 1 129 0
+ 252 00d4 4548     		ldr	r0, .L85+16
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE13(rise_fall);
+ 253              		.loc 1 128 0
+ 254 00d6 1E40     		and	r6, r3
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD2/SCI2_RX to be an LLWU wakeup source ");
+ 255              		.loc 1 129 0
+ 256 00d8 FFF7FEFF 		bl	printf
+ 257              	.LVL28:
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF13_MASK;   // write one to clear the flag
+ 258              		.loc 1 130 0
+ 259 00dc 3F48     		ldr	r0, .L85
+ 260 00de 2022     		mov	r2, #32
+ 261 00e0 8179     		ldrb	r1, [r0, #6]
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE13(rise_fall);
+ 262              		.loc 1 128 0
+ 263 00e2 3543     		orr	r5, r6
+ 264              	.LVL29:
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF13_MASK;   // write one to clear the flag
+ 265              		.loc 1 130 0
+ 266 00e4 0A43     		orr	r2, r1
+ 267 00e6 8271     		strb	r2, [r0, #6]
+ 268 00e8 C3E7     		b	.L15
+ 269              	.L81:
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTD0/SPI0_PCS0/SCI2_RTS to be an LLWU wakeup source ");
+ 270              		.loc 1 123 0
+ 271 00ea 4148     		ldr	r0, .L85+20
+ 272 00ec FFF7FEFF 		bl	printf
+ 273              	.LVL30:
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 274              		.loc 1 124 0
+ 275 00f0 4346     		mov	r3, r8
+ 276 00f2 9879     		ldrb	r0, [r3, #6]
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE12(rise_fall);
+ 277              		.loc 1 122 0
+ 278 00f4 0326     		mov	r6, #3
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 279              		.loc 1 124 0
+ 280 00f6 1022     		mov	r2, #16
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE12(rise_fall);
+ 281              		.loc 1 122 0
+ 282 00f8 3E40     		and	r6, r7
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 283              		.loc 1 124 0
+ 284 00fa 0243     		orr	r2, r0
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE4_WUPE12(rise_fall);
+ 285              		.loc 1 122 0
+ 286 00fc 3543     		orr	r5, r6
+ 287              	.LVL31:
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 288              		.loc 1 124 0
+ 289 00fe 9A71     		strb	r2, [r3, #6]
+ 290 0100 B5E7     		b	.L14
+ 291              	.LVL32:
+ 292              	.L80:
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC11/I2S0_RXD1 to be an LLWU wakeup source ");
+ 293              		.loc 1 114 0
+ 294 0102 3C48     		ldr	r0, .L85+24
+ 295 0104 FFF7FEFF 		bl	printf
+ 296              	.LVL33:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 297              		.loc 1 115 0
+ 298 0108 344B     		ldr	r3, .L85
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE11(rise_fall);
+ 299              		.loc 1 113 0
+ 300 010a BD01     		lsl	r5, r7, #6
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 301              		.loc 1 115 0
+ 302 010c 9879     		ldrb	r0, [r3, #6]
+ 303 010e 0821     		mov	r1, #8
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE11(rise_fall);
+ 304              		.loc 1 113 0
+ 305 0110 2E43     		orr	r6, r5
+ 306              	.LVL34:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 307              		.loc 1 115 0
+ 308 0112 0143     		orr	r1, r0
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE11(rise_fall);
+ 309              		.loc 1 113 0
+ 310 0114 F6B2     		uxtb	r6, r6
+ 311              	.LVL35:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 312              		.loc 1 115 0
+ 313 0116 9971     		strb	r1, [r3, #6]
+ 314 0118 A3E7     		b	.L13
+ 315              	.L79:
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE10(rise_fall);
+ 316              		.loc 1 107 0
+ 317 011a 3023     		mov	r3, #48
+ 318 011c 3D01     		lsl	r5, r7, #4
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC6/PDB0_EXTRG to be an LLWU wakeup source ");
+ 319              		.loc 1 108 0
+ 320 011e 3648     		ldr	r0, .L85+28
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE10(rise_fall);
+ 321              		.loc 1 107 0
+ 322 0120 1D40     		and	r5, r3
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC6/PDB0_EXTRG to be an LLWU wakeup source ");
+ 323              		.loc 1 108 0
+ 324 0122 FFF7FEFF 		bl	printf
+ 325              	.LVL36:
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF10_MASK;   // write one to clear the flag
+ 326              		.loc 1 109 0
+ 327 0126 2D48     		ldr	r0, .L85
+ 328 0128 0422     		mov	r2, #4
+ 329 012a 8179     		ldrb	r1, [r0, #6]
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE10(rise_fall);
+ 330              		.loc 1 107 0
+ 331 012c 2E43     		orr	r6, r5
+ 332              	.LVL37:
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF10_MASK;   // write one to clear the flag
+ 333              		.loc 1 109 0
+ 334 012e 0A43     		orr	r2, r1
+ 335 0130 8271     		strb	r2, [r0, #6]
+ 336 0132 94E7     		b	.L12
+ 337              	.L78:
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE9(rise_fall);
+ 338              		.loc 1 101 0
+ 339 0134 0C23     		mov	r3, #12
+ 340 0136 BD00     		lsl	r5, r7, #2
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC5/SPI0_SCK/I2S0_RXD0 is LLWU wakeup source ");
+ 341              		.loc 1 102 0
+ 342 0138 3048     		ldr	r0, .L85+32
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE9(rise_fall);
+ 343              		.loc 1 101 0
+ 344 013a 1D40     		and	r5, r3
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC5/SPI0_SCK/I2S0_RXD0 is LLWU wakeup source ");
+ 345              		.loc 1 102 0
+ 346 013c FFF7FEFF 		bl	printf
+ 347              	.LVL38:
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF9_MASK;   // write one to clear the flag
+ 348              		.loc 1 103 0
+ 349 0140 2648     		ldr	r0, .L85
+ 350 0142 0222     		mov	r2, #2
+ 351 0144 8179     		ldrb	r1, [r0, #6]
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE9(rise_fall);
+ 352              		.loc 1 101 0
+ 353 0146 2E43     		orr	r6, r5
+ 354              	.LVL39:
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF9_MASK;   // write one to clear the flag
+ 355              		.loc 1 103 0
+ 356 0148 0A43     		orr	r2, r1
+ 357 014a 8271     		strb	r2, [r0, #6]
+ 358 014c 85E7     		b	.L11
+ 359              	.L77:
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC4/SPI0_PCS0/FTM0_CH3 is LLWU wakeup source ");
+ 360              		.loc 1 96 0
+ 361 014e 2C48     		ldr	r0, .L85+36
+ 362 0150 FFF7FEFF 		bl	printf
+ 363              	.LVL40:
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+ 364              		.loc 1 97 0
+ 365 0154 4346     		mov	r3, r8
+ 366 0156 9A79     		ldrb	r2, [r3, #6]
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE8(rise_fall);
+ 367              		.loc 1 95 0
+ 368 0158 0325     		mov	r5, #3
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+ 369              		.loc 1 97 0
+ 370 015a 0120     		mov	r0, #1
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE8(rise_fall);
+ 371              		.loc 1 95 0
+ 372 015c 3D40     		and	r5, r7
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+ 373              		.loc 1 97 0
+ 374 015e 1043     		orr	r0, r2
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE3_WUPE8(rise_fall);
+ 375              		.loc 1 95 0
+ 376 0160 2E43     		orr	r6, r5
+ 377              	.LVL41:
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+ 378              		.loc 1 97 0
+ 379 0162 9871     		strb	r0, [r3, #6]
+ 380 0164 77E7     		b	.L10
+ 381              	.LVL42:
+ 382              	.L76:
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+ 383              		.loc 1 88 0
+ 384 0166 1D4E     		ldr	r6, .L85
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE7(rise_fall);
+ 385              		.loc 1 86 0
+ 386 0168 B901     		lsl	r1, r7, #6
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC3/SCI1_RX/FTM0_CH2 is LLWU wakeup source ");
+ 387              		.loc 1 87 0
+ 388 016a 2648     		ldr	r0, .L85+40
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE7(rise_fall);
+ 389              		.loc 1 86 0
+ 390 016c 0D43     		orr	r5, r1
+ 391              	.LVL43:
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC3/SCI1_RX/FTM0_CH2 is LLWU wakeup source ");
+ 392              		.loc 1 87 0
+ 393 016e FFF7FEFF 		bl	printf
+ 394              	.LVL44:
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+ 395              		.loc 1 88 0
+ 396 0172 7379     		ldrb	r3, [r6, #5]
+ 397 0174 8022     		mov	r2, #128
+ 398 0176 1A43     		orr	r2, r3
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE7(rise_fall);
+ 399              		.loc 1 86 0
+ 400 0178 EDB2     		uxtb	r5, r5
+ 401              	.LVL45:
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+ 402              		.loc 1 88 0
+ 403 017a 7271     		strb	r2, [r6, #5]
+ 404 017c 64E7     		b	.L9
+ 405              	.L75:
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE6(rise_fall);
+ 406              		.loc 1 80 0
+ 407 017e 3022     		mov	r2, #48
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF6_MASK;   // write one to clear the flag
+ 408              		.loc 1 82 0
+ 409 0180 164E     		ldr	r6, .L85
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE6(rise_fall);
+ 410              		.loc 1 80 0
+ 411 0182 3901     		lsl	r1, r7, #4
+ 412 0184 1140     		and	r1, r2
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC1/SCI1_RTS/FTM0_CH0 is LLWU wakeup source ");
+ 413              		.loc 1 81 0
+ 414 0186 2048     		ldr	r0, .L85+44
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE6(rise_fall);
+ 415              		.loc 1 80 0
+ 416 0188 0D43     		orr	r5, r1
+ 417              	.LVL46:
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTC1/SCI1_RTS/FTM0_CH0 is LLWU wakeup source ");
+ 418              		.loc 1 81 0
+ 419 018a FFF7FEFF 		bl	printf
+ 420              	.LVL47:
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF6_MASK;   // write one to clear the flag
+ 421              		.loc 1 82 0
+ 422 018e 7379     		ldrb	r3, [r6, #5]
+ 423 0190 4020     		mov	r0, #64
+ 424 0192 1843     		orr	r0, r3
+ 425 0194 7071     		strb	r0, [r6, #5]
+ 426 0196 54E7     		b	.L8
+ 427              	.L74:
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE5(rise_fall);
+ 428              		.loc 1 74 0
+ 429 0198 0C22     		mov	r2, #12
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF5_MASK;   // write one to clear the flag
+ 430              		.loc 1 76 0
+ 431 019a 104E     		ldr	r6, .L85
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE5(rise_fall);
+ 432              		.loc 1 74 0
+ 433 019c B900     		lsl	r1, r7, #2
+ 434 019e 1140     		and	r1, r2
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTB0/I2C0_SCL/FTM1_CH0/FTM1_QD_PHA is LLWU wakeup source ")
+ 435              		.loc 1 75 0
+ 436 01a0 1A48     		ldr	r0, .L85+48
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         temp |= LLWU_PE2_WUPE5(rise_fall);
+ 437              		.loc 1 74 0
+ 438 01a2 0D43     		orr	r5, r1
+ 439              	.LVL48:
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n LLWU configured pins PTB0/I2C0_SCL/FTM1_CH0/FTM1_QD_PHA is LLWU wakeup source ")
+ 440              		.loc 1 75 0
+ 441 01a4 FFF7FEFF 		bl	printf
+ 442              	.LVL49:
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         LLWU_F1 |= LLWU_F1_WUF5_MASK;   // write one to clear the flag
+ 443              		.loc 1 76 0
+ 444 01a8 7379     		ldrb	r3, [r6, #5]
+ 445 01aa 2020     		mov	r0, #32
+ 446 01ac 1843     		orr	r0, r3
+ 447 01ae 7071     		strb	r0, [r6, #5]
+ 448 01b0 44E7     		b	.L7
+ 449              	.L73:
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTA13/FTM1_CH1 /FTM1_QD_PHB");
+ 450              		.loc 1 70 0
+ 451 01b2 1748     		ldr	r0, .L85+52
+ 452 01b4 FFF7FEFF 		bl	printf
+ 453              	.LVL50:
+ 454 01b8 3DE7     		b	.L6
+ 455              	.L72:
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTA4/FTM0_CH1/NMI/EZP_CS");
+ 456              		.loc 1 63 0
+ 457 01ba 1648     		ldr	r0, .L85+56
+ 458 01bc FFF7FEFF 		bl	printf
+ 459              	.LVL51:
+ 460 01c0 33E7     		b	.L5
+ 461              	.L71:
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE4/SPI1_PCS0/SDHC0_D3");
+ 462              		.loc 1 59 0
+ 463 01c2 1548     		ldr	r0, .L85+60
+ 464 01c4 FFF7FEFF 		bl	printf
+ 465              	.LVL52:
+ 466 01c8 2CE7     		b	.L4
+ 467              	.L70:
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE2/SPI1_SCK/SDHC0_DCLK");       
+ 468              		.loc 1 55 0
+ 469 01ca 1448     		ldr	r0, .L85+64
+ 470 01cc FFF7FEFF 		bl	printf
+ 471              	.LVL53:
+ 472 01d0 25E7     		b	.L3
+ 473              	.LVL54:
+ 474              	.L69:
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****         printf("\n Invalid LLWU configured pin PTE1/SCI1_RX/I2C1_SCL /SPI1_SIN");      
+ 475              		.loc 1 51 0
+ 476 01d2 1348     		ldr	r0, .L85+68
+ 477              	.LVL55:
+ 478 01d4 FFF7FEFF 		bl	printf
+ 479              	.LVL56:
+ 480 01d8 1EE7     		b	.L2
+ 481              	.L86:
+ 482 01da C046     		.align	2
+ 483              	.L85:
+ 484 01dc 00C00740 		.word	1074249728
+ 485 01e0 48040000 		.word	.LC32
+ 486 01e4 F8030000 		.word	.LC30
+ 487 01e8 AC030000 		.word	.LC28
+ 488 01ec 68030000 		.word	.LC26
+ 489 01f0 1C030000 		.word	.LC24
+ 490 01f4 D8020000 		.word	.LC22
+ 491 01f8 94020000 		.word	.LC20
+ 492 01fc 4C020000 		.word	.LC18
+ 493 0200 04020000 		.word	.LC16
+ 494 0204 C0010000 		.word	.LC14
+ 495 0208 78010000 		.word	.LC12
+ 496 020c 24010000 		.word	.LC10
+ 497 0210 E8000000 		.word	.LC8
+ 498 0214 B0000000 		.word	.LC6
+ 499 0218 78000000 		.word	.LC4
+ 500 021c 40000000 		.word	.LC2
+ 501 0220 00000000 		.word	.LC0
+ 502              		.cfi_endproc
+ 503              	.LFE0:
+ 505              		.section	.text.llwu_configure_filter,"ax",%progbits
+ 506              		.align	2
+ 507              		.global	llwu_configure_filter
+ 508              		.code	16
+ 509              		.thumb_func
+ 511              	llwu_configure_filter:
+ 512              	.LFB1:
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** void llwu_configure_filter(unsigned int wu_pin_num, unsigned char filter_en, unsigned char rise_fal
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** {
+ 513              		.loc 1 156 0
+ 514              		.cfi_startproc
+ 515              	.LVL57:
+ 516 0000 F8B5     		push	{r3, r4, r5, r6, r7, lr}
+ 517              	.LCFI2:
+ 518              		.cfi_def_cfa_offset 24
+ 519              		.cfi_offset 3, -24
+ 520              		.cfi_offset 4, -20
+ 521              		.cfi_offset 5, -16
+ 522              		.cfi_offset 6, -12
+ 523              		.cfi_offset 7, -8
+ 524              		.cfi_offset 14, -4
+ 525              		.loc 1 156 0
+ 526 0002 061C     		mov	r6, r0
+ 527 0004 171C     		mov	r7, r2
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //wu_pin_num is the pin number to be written to FILTSEL.  wu_pin_num is not the same as pin_en. 
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     uint8 temp;
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     printf("\nEnabling Filter %x on WU Pin %x for WU sense %x \n",filter_en, wu_pin_num, rise_fall)
+ 528              		.loc 1 160 0
+ 529 0006 1248     		ldr	r0, .L93
+ 530              	.LVL58:
+ 531 0008 321C     		mov	r2, r6
+ 532              	.LVL59:
+ 533 000a 3B1C     		mov	r3, r7
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** {
+ 534              		.loc 1 156 0
+ 535 000c 0C1C     		mov	r4, r1
+ 536              		.loc 1 160 0
+ 537 000e FFF7FEFF 		bl	printf
+ 538              	.LVL60:
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      temp = 0;
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      //first clear filter values and clear flag by writing a 1
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      LLWU_FILT1 = LLWU_FILT1_FILTF_MASK;
+ 539              		.loc 1 164 0
+ 540 0012 1049     		ldr	r1, .L93+4
+ 541 0014 8025     		mov	r5, #128
+ 542 0016 0D72     		strb	r5, [r1, #8]
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      LLWU_FILT2 = LLWU_FILT2_FILTF_MASK;
+ 543              		.loc 1 165 0
+ 544 0018 4D72     		strb	r5, [r1, #9]
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      if(filter_en == 1)
+ 545              		.loc 1 167 0
+ 546 001a 012C     		cmp	r4, #1
+ 547 001c 0ED0     		beq	.L91
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      {
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     	 //clear the flag bit and set the others
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          temp |= (LLWU_FILT1_FILTF_MASK) | (LLWU_FILT1_FILTE(rise_fall) | LLWU_FILT1_FILTSEL(wu_pin
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LLWU_FILT1 = temp;
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      }else if (filter_en == 2)
+ 548              		.loc 1 173 0
+ 549 001e 022C     		cmp	r4, #2
+ 550 0020 03D0     		beq	.L92
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      {
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     	 //clear the flag bit and set the others
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     	 temp |= (LLWU_FILT2_FILTF_MASK) | (LLWU_FILT2_FILTE(rise_fall) | LLWU_FILT2_FILTSEL(wu_pin_nu
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LLWU_FILT2 = temp;
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      }else
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      {
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     	 printf("\nError - invalid filter number\n"); 
+ 551              		.loc 1 180 0
+ 552 0022 0D48     		ldr	r0, .L93+8
+ 553 0024 FFF7FEFF 		bl	puts
+ 554              	.LVL61:
+ 555              	.L87:
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****      }
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** }    
+ 556              		.loc 1 182 0
+ 557              		@ sp needed for prologue
+ 558 0028 F8BD     		pop	{r3, r4, r5, r6, r7, pc}
+ 559              	.LVL62:
+ 560              	.L92:
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     	 temp |= (LLWU_FILT2_FILTF_MASK) | (LLWU_FILT2_FILTE(rise_fall) | LLWU_FILT2_FILTSEL(wu_pin_nu
+ 561              		.loc 1 176 0
+ 562 002a 0F22     		mov	r2, #15
+ 563 002c 7801     		lsl	r0, r7, #5
+ 564 002e 6023     		mov	r3, #96
+ 565 0030 1640     		and	r6, r2
+ 566              	.LVL63:
+ 567 0032 1840     		and	r0, r3
+ 568 0034 3543     		orr	r5, r6
+ 569 0036 0543     		orr	r5, r0
+ 570              	.LVL64:
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LLWU_FILT2 = temp;
+ 571              		.loc 1 177 0
+ 572 0038 4D72     		strb	r5, [r1, #9]
+ 573 003a F5E7     		b	.L87
+ 574              	.LVL65:
+ 575              	.L91:
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          temp |= (LLWU_FILT1_FILTF_MASK) | (LLWU_FILT1_FILTE(rise_fall) | LLWU_FILT1_FILTSEL(wu_pin
+ 576              		.loc 1 170 0
+ 577 003c 0F20     		mov	r0, #15
+ 578 003e 7C01     		lsl	r4, r7, #5
+ 579 0040 0640     		and	r6, r0
+ 580              	.LVL66:
+ 581 0042 6027     		mov	r7, #96
+ 582 0044 3C40     		and	r4, r7
+ 583 0046 3543     		orr	r5, r6
+ 584 0048 2543     		orr	r5, r4
+ 585              	.LVL67:
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LLWU_FILT1 = temp;
+ 586              		.loc 1 171 0
+ 587 004a 0D72     		strb	r5, [r1, #8]
+ 588 004c ECE7     		b	.L87
+ 589              	.L94:
+ 590 004e C046     		.align	2
+ 591              	.L93:
+ 592 0050 84040000 		.word	.LC34
+ 593 0054 00C00740 		.word	1074249728
+ 594 0058 B8040000 		.word	.LC36
+ 595              		.cfi_endproc
+ 596              	.LFE1:
+ 598              		.section	.text.llwu_isr,"ax",%progbits
+ 599              		.align	2
+ 600              		.global	llwu_isr
+ 601              		.code	16
+ 602              		.thumb_func
+ 604              	llwu_isr:
+ 605              	.LFB2:
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** //Interrupt handler for LLWU 
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #ifdef CMSIS
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** void LLW_IRQHandler(void) {
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #else
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** void llwu_isr(void){
+ 606              		.loc 1 188 0
+ 607              		.cfi_startproc
+ 608 0000 00B5     		push	{lr}
+ 609              	.LCFI3:
+ 610              		.cfi_def_cfa_offset 4
+ 611              		.cfi_offset 14, -4
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** #endif
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //printf("\n [LLWU ISR] "); 
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F1 & LLWU_F1_WUF5_MASK) {
+ 612              		.loc 1 191 0
+ 613 0002 494B     		ldr	r3, .L143
+ 614 0004 5A79     		ldrb	r2, [r3, #5]
+ 615 0006 9106     		lsl	r1, r2, #26
+ 616 0008 04D5     		bpl	.L96
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF5 was set *****\r\n"); 
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F1 |= LLWU_F1_WUF5_MASK;   // write one to clear the flag
+ 617              		.loc 1 193 0
+ 618 000a 5979     		ldrb	r1, [r3, #5]
+ 619 000c 2020     		mov	r0, #32
+ 620 000e 0843     		orr	r0, r1
+ 621 0010 C2B2     		uxtb	r2, r0
+ 622 0012 5A71     		strb	r2, [r3, #5]
+ 623              	.L96:
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F1 & LLWU_F1_WUF6_MASK) {
+ 624              		.loc 1 195 0
+ 625 0014 444B     		ldr	r3, .L143
+ 626 0016 5979     		ldrb	r1, [r3, #5]
+ 627 0018 4906     		lsl	r1, r1, #25
+ 628 001a 04D5     		bpl	.L97
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF6 was set *****\r\n"); 
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F1 |= LLWU_F1_WUF6_MASK;   // write one to clear the flag
+ 629              		.loc 1 197 0
+ 630 001c 5879     		ldrb	r0, [r3, #5]
+ 631 001e 4022     		mov	r2, #64
+ 632 0020 0243     		orr	r2, r0
+ 633 0022 D1B2     		uxtb	r1, r2
+ 634 0024 5971     		strb	r1, [r3, #5]
+ 635              	.L97:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     }
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F1 & LLWU_F1_WUF7_MASK) {
+ 636              		.loc 1 199 0
+ 637 0026 404B     		ldr	r3, .L143
+ 638 0028 5879     		ldrb	r0, [r3, #5]
+ 639 002a 42B2     		sxtb	r2, r0
+ 640 002c 002A     		cmp	r2, #0
+ 641 002e 00DA     		bge	.LCB646
+ 642 0030 74E0     		b	.L140	@long jump
+ 643              	.LCB646:
+ 644              	.L98:
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF7 was set from PTC3 input  *****\r\n"); 
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+ 202:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF8_MASK) {
+ 645              		.loc 1 203 0
+ 646 0032 3D4B     		ldr	r3, .L143
+ 647 0034 9A79     		ldrb	r2, [r3, #6]
+ 648 0036 D107     		lsl	r1, r2, #31
+ 649 0038 04D5     		bpl	.L99
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF8 was set *****\r\n"); 
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF8_MASK;   // write one to clear the flag
+ 650              		.loc 1 205 0
+ 651 003a 9979     		ldrb	r1, [r3, #6]
+ 652 003c 0120     		mov	r0, #1
+ 653 003e 0843     		orr	r0, r1
+ 654 0040 C2B2     		uxtb	r2, r0
+ 655 0042 9A71     		strb	r2, [r3, #6]
+ 656              	.L99:
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF9_MASK) {
+ 657              		.loc 1 207 0
+ 658 0044 384B     		ldr	r3, .L143
+ 659 0046 9979     		ldrb	r1, [r3, #6]
+ 660 0048 8907     		lsl	r1, r1, #30
+ 661 004a 04D5     		bpl	.L100
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF9 was set *****\r\n"); 
+ 209:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF9_MASK;   // write one to clear the flag
+ 662              		.loc 1 209 0
+ 663 004c 9879     		ldrb	r0, [r3, #6]
+ 664 004e 0222     		mov	r2, #2
+ 665 0050 0243     		orr	r2, r0
+ 666 0052 D1B2     		uxtb	r1, r2
+ 667 0054 9971     		strb	r1, [r3, #6]
+ 668              	.L100:
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 211:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF10_MASK) {
+ 669              		.loc 1 211 0
+ 670 0056 344B     		ldr	r3, .L143
+ 671 0058 9879     		ldrb	r0, [r3, #6]
+ 672 005a 4107     		lsl	r1, r0, #29
+ 673 005c 04D5     		bpl	.L101
+ 212:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF10 was set *****\r\n"); 
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF10_MASK;   // write one to clear the flag
+ 674              		.loc 1 213 0
+ 675 005e 9979     		ldrb	r1, [r3, #6]
+ 676 0060 0422     		mov	r2, #4
+ 677 0062 0A43     		orr	r2, r1
+ 678 0064 D0B2     		uxtb	r0, r2
+ 679 0066 9871     		strb	r0, [r3, #6]
+ 680              	.L101:
+ 214:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 215:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF11_MASK) {
+ 681              		.loc 1 215 0
+ 682 0068 2F4B     		ldr	r3, .L143
+ 683 006a 9979     		ldrb	r1, [r3, #6]
+ 684 006c 0907     		lsl	r1, r1, #28
+ 685 006e 04D5     		bpl	.L102
+ 216:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF11 was set *****\r\n"); 
+ 217:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF11_MASK;   // write one to clear the flag
+ 686              		.loc 1 217 0
+ 687 0070 9879     		ldrb	r0, [r3, #6]
+ 688 0072 0822     		mov	r2, #8
+ 689 0074 0243     		orr	r2, r0
+ 690 0076 D1B2     		uxtb	r1, r2
+ 691 0078 9971     		strb	r1, [r3, #6]
+ 692              	.L102:
+ 218:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF12_MASK) {
+ 693              		.loc 1 219 0
+ 694 007a 2B4B     		ldr	r3, .L143
+ 695 007c 9879     		ldrb	r0, [r3, #6]
+ 696 007e C106     		lsl	r1, r0, #27
+ 697 0080 04D5     		bpl	.L103
+ 220:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF12 was set *****\r\n"); 
+ 221:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF12_MASK;   // write one to clear the flag
+ 698              		.loc 1 221 0
+ 699 0082 9979     		ldrb	r1, [r3, #6]
+ 700 0084 1022     		mov	r2, #16
+ 701 0086 0A43     		orr	r2, r1
+ 702 0088 D0B2     		uxtb	r0, r2
+ 703 008a 9871     		strb	r0, [r3, #6]
+ 704              	.L103:
+ 222:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 223:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF13_MASK) {
+ 705              		.loc 1 223 0
+ 706 008c 264B     		ldr	r3, .L143
+ 707 008e 9979     		ldrb	r1, [r3, #6]
+ 708 0090 8906     		lsl	r1, r1, #26
+ 709 0092 04D5     		bpl	.L104
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF13 was set *****\r\n"); 
+ 225:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF13_MASK;   // write one to clear the flag
+ 710              		.loc 1 225 0
+ 711 0094 9879     		ldrb	r0, [r3, #6]
+ 712 0096 2022     		mov	r2, #32
+ 713 0098 0243     		orr	r2, r0
+ 714 009a D1B2     		uxtb	r1, r2
+ 715 009c 9971     		strb	r1, [r3, #6]
+ 716              	.L104:
+ 226:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 227:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF14_MASK) {
+ 717              		.loc 1 227 0
+ 718 009e 224B     		ldr	r3, .L143
+ 719 00a0 9879     		ldrb	r0, [r3, #6]
+ 720 00a2 4106     		lsl	r1, r0, #25
+ 721 00a4 04D5     		bpl	.L105
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF14 was set *****\r\n"); 
+ 229:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF14_MASK;   // write one to clear the flag
+ 722              		.loc 1 229 0
+ 723 00a6 9979     		ldrb	r1, [r3, #6]
+ 724 00a8 4022     		mov	r2, #64
+ 725 00aa 0A43     		orr	r2, r1
+ 726 00ac D0B2     		uxtb	r0, r2
+ 727 00ae 9871     		strb	r0, [r3, #6]
+ 728              	.L105:
+ 230:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if (LLWU_F2 & LLWU_F2_WUF15_MASK) {
+ 729              		.loc 1 231 0
+ 730 00b0 1D4B     		ldr	r3, .L143
+ 731 00b2 9979     		ldrb	r1, [r3, #6]
+ 732 00b4 4AB2     		sxtb	r2, r1
+ 733 00b6 002A     		cmp	r2, #0
+ 734 00b8 2BDB     		blt	.L141
+ 735              	.L106:
+ 232:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    //    printf("****WUF15 was set *****\r\n"); 
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 235:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    
+ 236:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    /************************************************************************
+ 237:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     * Note: This ISR does not write to the LLWU_F3 register because these
+ 238:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     * are peripheral module wakeups.  The flags contained in the LLWU_F3 
+ 239:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     * register should be cleared through the associated module interrupt 
+ 240:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     * and not through the LLWU_F3 per the Kinetis L Family Reference
+ 241:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     * Manual (LLWU Chapter)
+ 242:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     **********************************************************************/
+ 243:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****   if (LLWU_F3 & LLWU_F3_MWUF0_MASK) {
+ 736              		.loc 1 243 0
+ 737 00ba 1B4B     		ldr	r3, .L143
+ 738 00bc DA79     		ldrb	r2, [r3, #7]
+ 739 00be 0123     		mov	r3, #1
+ 740 00c0 1342     		tst	r3, r2
+ 741 00c2 0BD0     		beq	.L107
+ 244:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****     //   printf("****WUF3_MWUF0 IF  LPTMR  *****\r\n"); 
+ 245:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          SIM_SCGC5 |= SIM_SCGC5_LPTMR_MASK;
+ 742              		.loc 1 245 0
+ 743 00c4 1949     		ldr	r1, .L143+4
+ 744 00c6 1A4A     		ldr	r2, .L143+8
+ 745 00c8 8858     		ldr	r0, [r1, r2]
+ 746 00ca 0343     		orr	r3, r0
+ 747 00cc 8B50     		str	r3, [r1, r2]
+ 246:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LPTMR0_CSR |=  LPTMR_CSR_TCF_MASK;   // write 1 to TCF to clear the LPT timer compare flag
+ 748              		.loc 1 246 0
+ 749 00ce 194B     		ldr	r3, .L143+12
+ 750 00d0 8022     		mov	r2, #128
+ 751 00d2 1968     		ldr	r1, [r3]
+ 247:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LPTMR0_CSR = ( LPTMR_CSR_TEN_MASK | LPTMR_CSR_TIE_MASK | LPTMR_CSR_TCF_MASK  );
+ 752              		.loc 1 247 0
+ 753 00d4 C120     		mov	r0, #193
+ 246:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****          LPTMR0_CSR |=  LPTMR_CSR_TCF_MASK;   // write 1 to TCF to clear the LPT timer compare flag
+ 754              		.loc 1 246 0
+ 755 00d6 0A43     		orr	r2, r1
+ 756 00d8 1A60     		str	r2, [r3]
+ 757              		.loc 1 247 0
+ 758 00da 1860     		str	r0, [r3]
+ 759              	.L107:
+ 248:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if(LLWU_FILT1 & LLWU_FILT1_FILTF_MASK){
+ 760              		.loc 1 249 0
+ 761 00dc 124B     		ldr	r3, .L143
+ 762 00de 197A     		ldrb	r1, [r3, #8]
+ 763 00e0 4AB2     		sxtb	r2, r1
+ 764 00e2 002A     		cmp	r2, #0
+ 765 00e4 10DB     		blt	.L142
+ 766              	.L108:
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 	   
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 	   LLWU_FILT1 |= LLWU_FILT1_FILTF_MASK;
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 253:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    if(LLWU_FILT2 & LLWU_FILT2_FILTF_MASK){
+ 767              		.loc 1 253 0
+ 768 00e6 104B     		ldr	r3, .L143
+ 769 00e8 5A7A     		ldrb	r2, [r3, #9]
+ 770 00ea 50B2     		sxtb	r0, r2
+ 771 00ec 0028     		cmp	r0, #0
+ 772 00ee 03DA     		bge	.L109
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 	   
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 	   LLWU_FILT2 |= LLWU_FILT2_FILTF_MASK;
+ 773              		.loc 1 255 0
+ 774 00f0 597A     		ldrb	r1, [r3, #9]
+ 775 00f2 8022     		mov	r2, #128
+ 776 00f4 0A43     		orr	r2, r1
+ 777 00f6 5A72     		strb	r2, [r3, #9]
+ 778              	.L109:
+ 256:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    }
+ 257:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****    NVIC_ICPR |= 1 << (LLWU_irq_no%32);
+ 779              		.loc 1 257 0
+ 780 00f8 0F4A     		ldr	r2, .L143+16
+ 781 00fa C023     		mov	r3, #192
+ 782 00fc 5B00     		lsl	r3, r3, #1
+ 783 00fe D058     		ldr	r0, [r2, r3]
+ 784 0100 8021     		mov	r1, #128
+ 785 0102 0143     		orr	r1, r0
+ 786 0104 D150     		str	r1, [r2, r3]
+ 258:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** }
+ 787              		.loc 1 258 0
+ 788              		@ sp needed for prologue
+ 789 0106 00BD     		pop	{pc}
+ 790              	.L142:
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c **** 	   LLWU_FILT1 |= LLWU_FILT1_FILTF_MASK;
+ 791              		.loc 1 251 0
+ 792 0108 187A     		ldrb	r0, [r3, #8]
+ 793 010a 8021     		mov	r1, #128
+ 794 010c 0143     		orr	r1, r0
+ 795 010e 1972     		strb	r1, [r3, #8]
+ 796 0110 E9E7     		b	.L108
+ 797              	.L141:
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F2 |= LLWU_F2_WUF15_MASK;   // write one to clear the flag
+ 798              		.loc 1 233 0
+ 799 0112 9879     		ldrb	r0, [r3, #6]
+ 800 0114 8021     		mov	r1, #128
+ 801 0116 0143     		orr	r1, r0
+ 802 0118 9971     		strb	r1, [r3, #6]
+ 803 011a CEE7     		b	.L106
+ 804              	.L140:
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu\llwu.c ****        LLWU_F1 |= LLWU_F1_WUF7_MASK;   // write one to clear the flag
+ 805              		.loc 1 201 0
+ 806 011c 5979     		ldrb	r1, [r3, #5]
+ 807 011e 8020     		mov	r0, #128
+ 808 0120 0843     		orr	r0, r1
+ 809 0122 5871     		strb	r0, [r3, #5]
+ 810 0124 85E7     		b	.L98
+ 811              	.L144:
+ 812 0126 C046     		.align	2
+ 813              	.L143:
+ 814 0128 00C00740 		.word	1074249728
+ 815 012c 00700440 		.word	1074032640
+ 816 0130 38100000 		.word	4152
+ 817 0134 00000440 		.word	1074003968
+ 818 0138 00E100E0 		.word	-536813312
+ 819              		.cfi_endproc
+ 820              	.LFE2:
+ 822              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 823              		.align	2
+ 824              	.LC0:
+ 825 0000 0A20496E 		.ascii	"\012 Invalid LLWU configured pin PTE1/SCI1_RX/I2C1_"
+ 825      76616C69 
+ 825      64204C4C 
+ 825      57552063 
+ 825      6F6E6669 
+ 826 0030 53434C20 		.ascii	"SCL /SPI1_SIN\000"
+ 826      2F535049 
+ 826      315F5349 
+ 826      4E00
+ 827 003e 0000     		.space	2
+ 828              	.LC2:
+ 829 0040 0A20496E 		.ascii	"\012 Invalid LLWU configured pin PTE2/SPI1_SCK/SDHC"
+ 829      76616C69 
+ 829      64204C4C 
+ 829      57552063 
+ 829      6F6E6669 
+ 830 0070 305F4443 		.ascii	"0_DCLK\000"
+ 830      4C4B00
+ 831 0077 00       		.space	1
+ 832              	.LC4:
+ 833 0078 0A20496E 		.ascii	"\012 Invalid LLWU configured pin PTE4/SPI1_PCS0/SDH"
+ 833      76616C69 
+ 833      64204C4C 
+ 833      57552063 
+ 833      6F6E6669 
+ 834 00a8 43305F44 		.ascii	"C0_D3\000"
+ 834      3300
+ 835 00ae 0000     		.space	2
+ 836              	.LC6:
+ 837 00b0 0A20496E 		.ascii	"\012 Invalid LLWU configured pin PTA4/FTM0_CH1/NMI/"
+ 837      76616C69 
+ 837      64204C4C 
+ 837      57552063 
+ 837      6F6E6669 
+ 838 00e0 455A505F 		.ascii	"EZP_CS\000"
+ 838      435300
+ 839 00e7 00       		.space	1
+ 840              	.LC8:
+ 841 00e8 0A20496E 		.ascii	"\012 Invalid LLWU configured pin PTA13/FTM1_CH1 /FT"
+ 841      76616C69 
+ 841      64204C4C 
+ 841      57552063 
+ 841      6F6E6669 
+ 842 0118 4D315F51 		.ascii	"M1_QD_PHB\000"
+ 842      445F5048 
+ 842      4200
+ 843 0122 0000     		.space	2
+ 844              	.LC10:
+ 845 0124 0A204C4C 		.ascii	"\012 LLWU configured pins PTB0/I2C0_SCL/FTM1_CH0/FT"
+ 845      57552063 
+ 845      6F6E6669 
+ 845      67757265 
+ 845      64207069 
+ 846 0154 4D315F51 		.ascii	"M1_QD_PHA is LLWU wakeup source \000"
+ 846      445F5048 
+ 846      41206973 
+ 846      204C4C57 
+ 846      55207761 
+ 847 0175 000000   		.space	3
+ 848              	.LC12:
+ 849 0178 0A204C4C 		.ascii	"\012 LLWU configured pins PTC1/SCI1_RTS/FTM0_CH0 is"
+ 849      57552063 
+ 849      6F6E6669 
+ 849      67757265 
+ 849      64207069 
+ 850 01a8 204C4C57 		.ascii	" LLWU wakeup source \000"
+ 850      55207761 
+ 850      6B657570 
+ 850      20736F75 
+ 850      72636520 
+ 851 01bd 000000   		.space	3
+ 852              	.LC14:
+ 853 01c0 0A204C4C 		.ascii	"\012 LLWU configured pins PTC3/SCI1_RX/FTM0_CH2 is "
+ 853      57552063 
+ 853      6F6E6669 
+ 853      67757265 
+ 853      64207069 
+ 854 01f0 4C4C5755 		.ascii	"LLWU wakeup source \000"
+ 854      2077616B 
+ 854      65757020 
+ 854      736F7572 
+ 854      63652000 
+ 855              	.LC16:
+ 856 0204 0A204C4C 		.ascii	"\012 LLWU configured pins PTC4/SPI0_PCS0/FTM0_CH3 i"
+ 856      57552063 
+ 856      6F6E6669 
+ 856      67757265 
+ 856      64207069 
+ 857 0234 73204C4C 		.ascii	"s LLWU wakeup source \000"
+ 857      57552077 
+ 857      616B6575 
+ 857      7020736F 
+ 857      75726365 
+ 858 024a 0000     		.space	2
+ 859              	.LC18:
+ 860 024c 0A204C4C 		.ascii	"\012 LLWU configured pins PTC5/SPI0_SCK/I2S0_RXD0 i"
+ 860      57552063 
+ 860      6F6E6669 
+ 860      67757265 
+ 860      64207069 
+ 861 027c 73204C4C 		.ascii	"s LLWU wakeup source \000"
+ 861      57552077 
+ 861      616B6575 
+ 861      7020736F 
+ 861      75726365 
+ 862 0292 0000     		.space	2
+ 863              	.LC20:
+ 864 0294 0A204C4C 		.ascii	"\012 LLWU configured pins PTC6/PDB0_EXTRG to be an "
+ 864      57552063 
+ 864      6F6E6669 
+ 864      67757265 
+ 864      64207069 
+ 865 02c4 4C4C5755 		.ascii	"LLWU wakeup source \000"
+ 865      2077616B 
+ 865      65757020 
+ 865      736F7572 
+ 865      63652000 
+ 866              	.LC22:
+ 867 02d8 0A204C4C 		.ascii	"\012 LLWU configured pins PTC11/I2S0_RXD1 to be an "
+ 867      57552063 
+ 867      6F6E6669 
+ 867      67757265 
+ 867      64207069 
+ 868 0308 4C4C5755 		.ascii	"LLWU wakeup source \000"
+ 868      2077616B 
+ 868      65757020 
+ 868      736F7572 
+ 868      63652000 
+ 869              	.LC24:
+ 870 031c 0A204C4C 		.ascii	"\012 LLWU configured pins PTD0/SPI0_PCS0/SCI2_RTS t"
+ 870      57552063 
+ 870      6F6E6669 
+ 870      67757265 
+ 870      64207069 
+ 871 034c 6F206265 		.ascii	"o be an LLWU wakeup source \000"
+ 871      20616E20 
+ 871      4C4C5755 
+ 871      2077616B 
+ 871      65757020 
+ 872              	.LC26:
+ 873 0368 0A204C4C 		.ascii	"\012 LLWU configured pins PTD2/SCI2_RX to be an LLW"
+ 873      57552063 
+ 873      6F6E6669 
+ 873      67757265 
+ 873      64207069 
+ 874 0398 55207761 		.ascii	"U wakeup source \000"
+ 874      6B657570 
+ 874      20736F75 
+ 874      72636520 
+ 874      00
+ 875 03a9 000000   		.space	3
+ 876              	.LC28:
+ 877 03ac 0A204C4C 		.ascii	"\012 LLWU configured pins PTD4/SCI0_RTS/FTM0_CH4/EW"
+ 877      57552063 
+ 877      6F6E6669 
+ 877      67757265 
+ 877      64207069 
+ 878 03dc 4D5F494E 		.ascii	"M_IN is LLWU wakeup source \000"
+ 878      20697320 
+ 878      4C4C5755 
+ 878      2077616B 
+ 878      65757020 
+ 879              	.LC30:
+ 880 03f8 0A204C4C 		.ascii	"\012 LLWU configured pins PTD6/SCI0_RX/FTM0_CH6/FTM"
+ 880      57552063 
+ 880      6F6E6669 
+ 880      67757265 
+ 880      64207069 
+ 881 0428 305F464C 		.ascii	"0_FLT0 is LLWU wakeup source \000"
+ 881      54302069 
+ 881      73204C4C 
+ 881      57552077 
+ 881      616B6575 
+ 882 0446 0000     		.space	2
+ 883              	.LC32:
+ 884 0448 0A204C4C 		.ascii	"\012 LLWU configured modules as LLWU wakeup sources"
+ 884      57552063 
+ 884      6F6E6669 
+ 884      67757265 
+ 884      64206D6F 
+ 885 0478 203D2030 		.ascii	" = 0x%02X,\000"
+ 885      78253032 
+ 885      582C00
+ 886 0483 00       		.space	1
+ 887              	.LC34:
+ 888 0484 0A456E61 		.ascii	"\012Enabling Filter %x on WU Pin %x for WU sense %x"
+ 888      626C696E 
+ 888      67204669 
+ 888      6C746572 
+ 888      20257820 
+ 889 04b4 200A00   		.ascii	" \012\000"
+ 890 04b7 00       		.space	1
+ 891              	.LC36:
+ 892 04b8 0A457272 		.ascii	"\012Error - invalid filter number\000"
+ 892      6F72202D 
+ 892      20696E76 
+ 892      616C6964 
+ 892      2066696C 
+ 893 04d7 00       		.text
+ 894              	.Letext0:
+ 895              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 896              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 897              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 llwu.c
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:18     .text.llwu_configure:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:23     .text.llwu_configure:00000000 llwu_configure
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:484    .text.llwu_configure:000001dc $d
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:506    .text.llwu_configure_filter:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:511    .text.llwu_configure_filter:00000000 llwu_configure_filter
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:592    .text.llwu_configure_filter:00000050 $d
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:599    .text.llwu_isr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:604    .text.llwu_isr:00000000 llwu_isr
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:814    .text.llwu_isr:00000128 $d
+C:\Users\lab\AppData\Local\Temp\cceNVeKz.s:823    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf
+puts

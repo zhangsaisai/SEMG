@@ -1,0 +1,80 @@
+\hypertarget{group___enum_grp}{\section{Enum Group}
+\label{group___enum_grp}\index{Enum Group@{Enum Group}}
+}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+typedef enum A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-F\-E\-R \hyperlink{group___enum_grp_ga0556af71c2e177b00bb1ec7741d36624}{E\-A\-R\-M\-Data\-Buffer}
+\item 
+typedef enum A\-D\-C\-\_\-\-D\-A\-T\-A\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-L\-A\-G \hyperlink{group___enum_grp_ga28f90ca377a944d61b5d7c95655e2d97}{E\-A\-D\-C\-Data\-Status\-Flag}
+\item 
+typedef enum A\-D\-C\-\_\-\-F\-L\-A\-G \hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag}
+\item 
+typedef enum A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-\_\-\-F\-L\-A\-G \hyperlink{group___enum_grp_gafa703983b61d6eddeeaca1f48ec61efc}{E\-A\-R\-M\-Data\-Buffer\-Flag}
+\item 
+typedef enum \\*
+T\-R\-A\-N\-S\-M\-I\-T\-I\-O\-N\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-F\-L\-A\-G \hyperlink{group___enum_grp_ga1cca30b0867e98d31885e58f552270e0}{E\-Transmition\-Content}
+\item 
+typedef enum S\-P\-I\-\_\-\-M\-O\-D\-E \hyperlink{group___enum_grp_ga34cca0902b647bf356893ca1ee8d202b}{E\-S\-P\-I\-Mode}
+\end{DoxyCompactItemize}
+\subsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum {\bfseries A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-F\-E\-R} \{ {\bfseries e\-Left\-Buffer} = 0, 
+{\bfseries e\-Right\-Buffer} = 1
+ \}
+\item 
+enum {\bfseries A\-D\-C\-\_\-\-D\-A\-T\-A\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-L\-A\-G} \{ {\bfseries e\-Idle} = -\/1, 
+{\bfseries e\-Receiving} = 0, 
+{\bfseries e\-Received} = 1
+ \}
+\item 
+enum {\bfseries A\-D\-C\-\_\-\-F\-L\-A\-G} \{ {\bfseries e\-A\-D\-C0} = 0, 
+{\bfseries e\-A\-D\-C1} = 1
+ \}
+\item 
+enum {\bfseries A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-\_\-\-F\-L\-A\-G} \{ \\*
+{\bfseries e\-Null} = -\/1, 
+{\bfseries e\-Empty} = 0, 
+{\bfseries e\-Read} = 1, 
+{\bfseries e\-Write} = 2, 
+\\*
+{\bfseries e\-Full} = 3, 
+{\bfseries e\-Overflow} = 4
+ \}
+\item 
+enum {\bfseries T\-R\-A\-N\-S\-M\-I\-T\-I\-O\-N\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-F\-L\-A\-G} \{ {\bfseries e\-Nothing} = -\/1, 
+{\bfseries e\-Command} = 0, 
+{\bfseries e\-Data} = 1
+ \}
+\item 
+enum {\bfseries S\-P\-I\-\_\-\-M\-O\-D\-E} \{ {\bfseries e\-Poll} = 0, 
+{\bfseries e\-Interrupt} = 1, 
+{\bfseries e\-D\-M\-A} = 2
+ \}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Typedef Documentation}
+\hypertarget{group___enum_grp_ga28f90ca377a944d61b5d7c95655e2d97}{\index{Enum Group@{Enum Group}!E\-A\-D\-C\-Data\-Status\-Flag@{E\-A\-D\-C\-Data\-Status\-Flag}}
+\index{E\-A\-D\-C\-Data\-Status\-Flag@{E\-A\-D\-C\-Data\-Status\-Flag}!Enum Group@{Enum Group}}
+\subsubsection[{E\-A\-D\-C\-Data\-Status\-Flag}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum A\-D\-C\-\_\-\-D\-A\-T\-A\-\_\-\-S\-T\-A\-T\-U\-S\-\_\-\-F\-L\-A\-G  {\bf E\-A\-D\-C\-Data\-Status\-Flag}}}\label{group___enum_grp_ga28f90ca377a944d61b5d7c95655e2d97}
+The value of flag to mark the status of receiving A\-D\-C data. \hypertarget{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{\index{Enum Group@{Enum Group}!E\-A\-D\-C\-Flag@{E\-A\-D\-C\-Flag}}
+\index{E\-A\-D\-C\-Flag@{E\-A\-D\-C\-Flag}!Enum Group@{Enum Group}}
+\subsubsection[{E\-A\-D\-C\-Flag}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum A\-D\-C\-\_\-\-F\-L\-A\-G  {\bf E\-A\-D\-C\-Flag}}}\label{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}
+The value of flag to mark A\-D\-C. \hypertarget{group___enum_grp_ga0556af71c2e177b00bb1ec7741d36624}{\index{Enum Group@{Enum Group}!E\-A\-R\-M\-Data\-Buffer@{E\-A\-R\-M\-Data\-Buffer}}
+\index{E\-A\-R\-M\-Data\-Buffer@{E\-A\-R\-M\-Data\-Buffer}!Enum Group@{Enum Group}}
+\subsubsection[{E\-A\-R\-M\-Data\-Buffer}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-F\-E\-R  {\bf E\-A\-R\-M\-Data\-Buffer}}}\label{group___enum_grp_ga0556af71c2e177b00bb1ec7741d36624}
+The value of flag to mark the name of the arm data buffer. \hypertarget{group___enum_grp_gafa703983b61d6eddeeaca1f48ec61efc}{\index{Enum Group@{Enum Group}!E\-A\-R\-M\-Data\-Buffer\-Flag@{E\-A\-R\-M\-Data\-Buffer\-Flag}}
+\index{E\-A\-R\-M\-Data\-Buffer\-Flag@{E\-A\-R\-M\-Data\-Buffer\-Flag}!Enum Group@{Enum Group}}
+\subsubsection[{E\-A\-R\-M\-Data\-Buffer\-Flag}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum A\-R\-M\-\_\-\-D\-A\-T\-A\-\_\-\-B\-U\-F\-\_\-\-F\-L\-A\-G  {\bf E\-A\-R\-M\-Data\-Buffer\-Flag}}}\label{group___enum_grp_gafa703983b61d6eddeeaca1f48ec61efc}
+The value of flag to mark which buffer's data transmitting to A\-R\-M. \hypertarget{group___enum_grp_ga34cca0902b647bf356893ca1ee8d202b}{\index{Enum Group@{Enum Group}!E\-S\-P\-I\-Mode@{E\-S\-P\-I\-Mode}}
+\index{E\-S\-P\-I\-Mode@{E\-S\-P\-I\-Mode}!Enum Group@{Enum Group}}
+\subsubsection[{E\-S\-P\-I\-Mode}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum S\-P\-I\-\_\-\-M\-O\-D\-E  {\bf E\-S\-P\-I\-Mode}}}\label{group___enum_grp_ga34cca0902b647bf356893ca1ee8d202b}
+The value of flag to mark what S\-P\-I mode is used. \hypertarget{group___enum_grp_ga1cca30b0867e98d31885e58f552270e0}{\index{Enum Group@{Enum Group}!E\-Transmition\-Content@{E\-Transmition\-Content}}
+\index{E\-Transmition\-Content@{E\-Transmition\-Content}!Enum Group@{Enum Group}}
+\subsubsection[{E\-Transmition\-Content}]{\setlength{\rightskip}{0pt plus 5cm}typedef enum T\-R\-A\-N\-S\-M\-I\-T\-I\-O\-N\-\_\-\-C\-O\-N\-T\-E\-N\-T\-\_\-\-F\-L\-A\-G  {\bf E\-Transmition\-Content}}}\label{group___enum_grp_ga1cca30b0867e98d31885e58f552270e0}
+The value of flag to mark what content is being transmitted. 

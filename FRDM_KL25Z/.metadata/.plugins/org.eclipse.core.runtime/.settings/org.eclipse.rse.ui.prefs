@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.eclipse.rse.preferences.order.connections=lab-PC.Local;lab-PC.KL25_openSDA;lab-PC.KL25_openSDA_flash;lab-PC.SPI_FLASH_PnE U-MultiLink;lab-PC.SPI_FLASH_PnE U-MultiLink Target

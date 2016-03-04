@@ -1,0 +1,80 @@
+\hypertarget{_a_d_c_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-A\-D\-C.c File Reference}
+\label{_a_d_c_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-A\-D\-C.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-A\-D\-C.\-c}}
+}
+
+
+This file contains A\-D\-C operation functions.  
+
+
+{\ttfamily \#include \char`\"{}S\-M\-\_\-\-S\-P\-I0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-R\-E\-S\-E\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-S\-T\-A\-R\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Const.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I\-O\-\_\-\-Map.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Events.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Cpu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}limits.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}string.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stdlib.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}My\-Headers.\-h\char`\"{}}\\*
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___a_d_c__module_gaaa101e52d770ddd28cf31c5cb5fc7691}{\#define {\bfseries T\-E\-S\-T\-\_\-\-A\-D\-C}~0}\label{group___a_d_c__module_gaaa101e52d770ddd28cf31c5cb5fc7691}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___a_d_c__module_ga0c711fb302e26085c0b47c83f53b263f}{A\-D\-C\-Init} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Initializes A\-D\-C. The method is called in the Peripheral\-Init function and will be called only once. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga55fa03d1036f43603a3a0776e1068c8a}{A\-D\-C\-Enable} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-C\-S is low, enable A\-D\-C. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gaee3c6f1b7638a7cf2ece62f97e507655}{A\-D\-C\-Disable} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-C\-S is High, disable A\-D\-C. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga2ec520f84e11f40a1d6e28004f143df5}{A\-D\-C\-Configure} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Configure the registers of A\-D\-C via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga3121ea29554dad5d44b0f93f44d4615a}{A\-D\-C\-Start\-Convert\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal S\-T\-A\-R\-T is high, A\-D\-C starts to convert. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga7f6ee96c5b2a3d3466992aa468a5a27f}{A\-D\-C\-Start\-Convert\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends S\-T\-A\-R\-T command to A\-D\-C, A\-D\-C starts to convert. This function starts A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gae7522edc164dc387abff35a130b268f7}{A\-D\-C\-Stop\-Convert\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal S\-T\-A\-R\-T is low, A\-D\-C stops converting. This function starts A\-D\-C to convert via signal S\-T\-A\-R\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga2444bbfdc43b6d1dd3cf27d62b41db39}{A\-D\-C\-Stop\-Convert\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends S\-T\-O\-P command to A\-D\-C, A\-D\-C stops to convert. This function stops A\-D\-C to convert via S\-P\-I0. In this method, signal S\-T\-A\-R\-T must be low. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gaac2da2d21a0153782e5c806878c45605}{A\-D\-C\-Reset\-By\-Hardware} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Signal $\sim$\-R\-E\-S\-E\-T varies from high to low to high, A\-D\-C resets. This function resets A\-D\-C via signal R\-E\-S\-E\-T. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gaa6ed128c952696b046a47a2ae9d3ec1e}{A\-D\-C\-Reset\-By\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em M\-C\-U sends R\-E\-S\-E\-T command to A\-D\-C, A\-D\-C resets. This function resets A\-D\-C via S\-P\-I0. Avoid sending any commands during reset. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gace4858ead7841b0d2b078b5b33573740}{A\-D\-C\-Wake\-Up} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command W\-A\-K\-E\-U\-P to A\-D\-C via S\-P\-I0 to wake up A\-D\-C from low-\/power standby mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gac1be36a504b6060dd86bb74c0ac9dff3}{A\-D\-C\-Stand\-By} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command S\-T\-A\-N\-D\-B\-Y via S\-P\-I0 to make A\-D\-C entering the low-\/power standby mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga006599cf1a3384ae5bab076c52b99db8}{A\-D\-C\-Read\-Data\-Continuous} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command R\-D\-A\-T\-A\-C via S\-P\-I0 to make the conversion data of A\-D\-C can read continuously without command R\-D\-A\-T\-A. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga9cdb5ac2b155fab1a7510f980ea450ce}{A\-D\-C\-Stop\-Read\-Data\-Continuous} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em Send command S\-D\-A\-T\-A\-C to A\-D\-C via S\-P\-I0 to stop A\-D\-C's R\-D\-A\-T\-A\-C mode. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga0c4f12b67a2d24c0a3f37b6f4d8a4df2}{A\-D\-C\-Send\-Command} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag, byte $\ast$cmd)
+\begin{DoxyCompactList}\small\item\em Send command to A\-D\-C via S\-P\-I0. Please use A\-D\-C\-Read\-Register and A\-D\-C\-Write\-Register, but not this function, to read and write A\-D\-C's register! \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga5a9a35fa254e8230cbc9be8858660f22}{A\-D\-C\-Read\-Register} (byte reg\-Addr, byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read data from register of A\-D\-C via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} and dat\mbox{[}1\mbox{]} are useless. The real data starts from dat\mbox{[}2\mbox{]}! \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga607e77df260f2c971d948c580a933280}{A\-D\-C\-Write\-Register} (byte reg\-Addr, byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Write data to register of A\-D\-C via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_ga8e75384212a08e64cdddf9fec4104248}{A\-D\-C\-Read\-Continuous\-Data} (byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read conversion data from A\-D\-C in R\-D\-A\-T\-A\-C mode via S\-P\-I0. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___a_d_c__module_gac52d9692bf2114d7a9d22042099d087b}{A\-D\-C\-Read\-Data} (byte $\ast$dat, uint8 n)
+\begin{DoxyCompactList}\small\item\em Read conversion data from A\-D\-C in R\-D\-A\-T\-A mode via S\-P\-I0. The data returned in dat\mbox{[}0\mbox{]} is useless. The real data starts from dat\mbox{[}1\mbox{]}! \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gad964ca16935d2f9704e1e047861072ea}{A\-D\-C\-Data\-Init} (\hyperlink{struct_t_a_d_c}{T\-A\-D\-C\-Ptr} user\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method initialize the A\-D\-C device structure, including data, setting and status. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_ga6d15fbab721231334a4ea44c8df9d3f5}{Enable\-A\-D\-C\-S\-P\-I} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em This method pull the C\-S signal down to enable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is available. \end{DoxyCompactList}\item 
+void \hyperlink{group___a_d_c__module_gaaff16de9519f1d376e1103692d7dd44d}{Disable\-A\-D\-C\-S\-P\-I} (\hyperlink{group___enum_grp_ga7a77f876c6fae36cb97dfc3ba1e07665}{E\-A\-D\-C\-Flag} adc\-Flag)
+\begin{DoxyCompactList}\small\item\em This method pull the C\-S signal up to disable corresonding A\-D\-C's S\-P\-I. Each time only one A\-D\-C's S\-P\-I is disabled. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains A\-D\-C operation functions. \begin{DoxyVersion}{Version}
+01.\-00 
+\end{DoxyVersion}

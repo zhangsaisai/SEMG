@@ -1,0 +1,17 @@
+<map id="SPI1ReceiveSendData" name="SPI1ReceiveSendData">
+<area shape="rect" id="node2" href="$group___a_d_c__module.html#ga85039be9a6883ebc1bb2f695515c6651" title="Send command to ADC via SPI1. Please use ADCReadRegister and ADCWriteRegister, but not this function..." alt="" coords="221,157,360,184"/>
+<area shape="rect" id="node13" href="$group___a_d_c__module.html#ga5a9a35fa254e8230cbc9be8858660f22" title="Read data from register of ADC via SPI1. The data returned in dat[0] and dat[1] are useless..." alt="" coords="227,19,354,45"/>
+<area shape="rect" id="node14" href="$group___a_d_c__module.html#ga607e77df260f2c971d948c580a933280" title="Write data to register of ADC via SPI1. " alt="" coords="227,81,355,108"/>
+<area shape="rect" id="node15" href="$group___a_d_c__module.html#ga8e75384212a08e64cdddf9fec4104248" title="Read conversion data from ADC in RDATAC mode via SPI1. " alt="" coords="205,208,376,235"/>
+<area shape="rect" id="node16" href="$group___a_d_c__module.html#gac52d9692bf2114d7a9d22042099d087b" title="Read conversion data from ADC in RDATA mode via SPI1. The data returned in dat[0] is useless..." alt="" coords="237,259,344,285"/>
+<area shape="rect" id="node3" href="$group___a_d_c__module.html#ga739a74c1af38253fc979507db8a7fc77" title="Configure the registers of ADC via SPI1. " alt="" coords="473,5,575,32"/>
+<area shape="rect" id="node5" href="$group___a_d_c__module.html#gaa7e8295af4f38b1588ed738440a4cf48" title="MCU sends START command to ADC, ADC starts to convert. This function starts ADC to convert via SPI1..." alt="" coords="427,56,621,83"/>
+<area shape="rect" id="node7" href="$group___a_d_c__module.html#ga46359ab6b6e65236d4322114a792f171" title="MCU sends STOP command to ADC, ADC stops to convert. This function stops ADC to convert via SPI1..." alt="" coords="427,107,621,133"/>
+<area shape="rect" id="node8" href="$group___a_d_c__module.html#ga2409c7c6acb1abc14e9fcd3360ec7d82" title="MCU sends RESET command to ADC, ADC resets. This function resets ADC via SPI1. Avoid sending any comm..." alt="" coords="445,157,603,184"/>
+<area shape="rect" id="node9" href="$group___a_d_c__module.html#gae34d28e63f3bac9c1e741c963e8ad83b" title="Send command WAKEUP to ADC via SPI1 to wake up ADC from low&#45;power standby mode. " alt="" coords="475,208,573,235"/>
+<area shape="rect" id="node10" href="$group___a_d_c__module.html#gadd64f9ec09f151dea512f17c47da0e83" title="Send command STANDBY via SPI1 to make ADC entering the low&#45;power standby mode. " alt="" coords="475,259,573,285"/>
+<area shape="rect" id="node11" href="$group___a_d_c__module.html#gafd2c62b0857ae8f97e6238acc9cdf8cd" title="Send command RDATAC via SPI1 to make the conversion data of ADC can read continuously without command..." alt="" coords="439,309,609,336"/>
+<area shape="rect" id="node12" href="$group___a_d_c__module.html#ga790d06986f2f4bc069ebfe55babd1e87" title="Send command SDATAC to ADC via SPI1 to stop ADC&#39;s RDATAC mode. " alt="" coords="425,360,623,387"/>
+<area shape="rect" id="node4" href="$group___a_d_c__module.html#ga39150f192703c8fc5f1885bc21deee7f" title="Initializes ADC. The method is called in the PeripheralInit function and will be called only once..." alt="" coords="672,5,739,32"/>
+<area shape="rect" id="node6" href="$group___processor_expert__module.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The main function of the project. " alt="" coords="680,233,731,260"/>
+</map>

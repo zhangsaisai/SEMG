@@ -1,0 +1,318 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"pmc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.LVD_Initalize,"ax",%progbits
+  18              		.align	2
+  19              		.global	LVD_Initalize
+  20              		.code	16
+  21              		.thumb_func
+  23              	LVD_Initalize:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  * File:        pmc.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  * Purpose:     Provides routines for entering low power modes.
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  * Notes:	Since the wakeup mechanism for low power modes
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              will be application specific, these routines
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              do not include code to setup interrupts to exit
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              from the low power modes. The desired means of
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              low power mode exit should be configured before
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              calling any of these functions.
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              These routines do not include protection to
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              prevent illegal state transitions in the mode
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              controller, and all routines that write to the
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              PMPROT register write a value to allow all
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              possible low power modes (it is write once, so
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              if only the currently requested mode is enabled
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              a different mode couldn't be enabled later on).
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  *              
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  */
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** #include "common.h"
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** #include "pmc.h"
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** #include "mcg.h"
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** #include "uart.h"
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** int i;
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** void LVD_Initalize(unsigned char lvd_select, 
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                    unsigned char lvd_reset_enable,
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                    unsigned char lvd_int_enable, 
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                    unsigned char lvw_select,
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                    unsigned char lvw_int_enable){
+  26              		.loc 1 31 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 20
+  32              		.cfi_offset 4, -20
+  33              		.cfi_offset 5, -16
+  34              		.cfi_offset 6, -12
+  35              		.cfi_offset 7, -8
+  36              		.cfi_offset 14, -4
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC1 =  PMC_LVDSC1_LVDACK_MASK | 
+  37              		.loc 1 32 0
+  38 0002 0326     		mov	r6, #3
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                    unsigned char lvw_int_enable){
+  39              		.loc 1 31 0
+  40 0004 05AC     		add	r4, sp, #20
+  41 0006 2778     		ldrb	r7, [r4]
+  42              		.loc 1 32 0
+  43 0008 3040     		and	r0, r6
+  44              	.LVL1:
+  45 000a 0143     		orr	r1, r0
+  46              	.LVL2:
+  47 000c 4025     		mov	r5, #64
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                  (lvd_reset_enable) |   //enable LVD Reset ?
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 	          lvd_int_enable |      //LVD Interrupt ?
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 	          PMC_LVDSC1_LVDV(lvd_select)   ;        //select high or low LVD
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC2  = PMC_LVDSC2_LVWACK_MASK | 
+  48              		.loc 1 36 0
+  49 000e 1E40     		and	r6, r3
+  50 0010 3E43     		orr	r6, r7
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC1 =  PMC_LVDSC1_LVDACK_MASK | 
+  51              		.loc 1 32 0
+  52 0012 2943     		orr	r1, r5
+  53 0014 0348     		ldr	r0, .L2
+  54              		.loc 1 36 0
+  55 0016 3543     		orr	r5, r6
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC1 =  PMC_LVDSC1_LVDACK_MASK | 
+  56              		.loc 1 32 0
+  57 0018 0A43     		orr	r2, r1
+  58              	.LVL3:
+  59 001a D2B2     		uxtb	r2, r2
+  60              		.loc 1 36 0
+  61 001c E9B2     		uxtb	r1, r5
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC1 =  PMC_LVDSC1_LVDACK_MASK | 
+  62              		.loc 1 32 0
+  63 001e 0270     		strb	r2, [r0]
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                  (lvw_int_enable) |    //LVW interrupt?
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****                   PMC_LVDSC2_LVWV(lvw_select);  // select LVW level 1,2,3 or 4
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** }
+  64              		.loc 1 39 0
+  65              		@ sp needed for prologue
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****     PMC_LVDSC2  = PMC_LVDSC2_LVWACK_MASK | 
+  66              		.loc 1 36 0
+  67 0020 4170     		strb	r1, [r0, #1]
+  68              		.loc 1 39 0
+  69 0022 F0BD     		pop	{r4, r5, r6, r7, pc}
+  70              	.L3:
+  71              		.align	2
+  72              	.L2:
+  73 0024 00D00740 		.word	1074253824
+  74              		.cfi_endproc
+  75              	.LFE0:
+  77              		.section	.text.LVD_Init,"ax",%progbits
+  78              		.align	2
+  79              		.global	LVD_Init
+  80              		.code	16
+  81              		.thumb_func
+  83              	LVD_Init:
+  84              	.LFB1:
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** //******************************************************************************
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** void LVD_Init(void)
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** {
+  85              		.loc 1 42 0
+  86              		.cfi_startproc
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** /* setup LVD
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** Low-Voltage Detect Voltage Select
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** Selects the LVD trip point voltage (VLVD).
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 00 Low trip point selected (VLVD = VLVDL)
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 01 High trip point selected (VLVD = VLVDH)
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 10 Reserved
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 11 Reserved
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****   */
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 	PMC_LVDSC1 =  PMC_LVDSC1_LVDRE_MASK |   //enable LVD Reset
+  87              		.loc 1 51 0
+  88 0000 074B     		ldr	r3, .L5
+  89 0002 1122     		mov	r2, #17
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 	               PMC_LVDSC1_LVDV(1);   //Enable LVD Reset High level
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****         
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** PMC_LVDSC2  = PMC_LVDSC2_LVWACK_MASK | 
+  90              		.loc 1 55 0
+  91 0004 4320     		mov	r0, #67
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 	PMC_LVDSC1 =  PMC_LVDSC1_LVDRE_MASK |   //enable LVD Reset
+  92              		.loc 1 51 0
+  93 0006 1A70     		strb	r2, [r3]
+  94              		.loc 1 55 0
+  95 0008 5870     		strb	r0, [r3, #1]
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****               PMC_LVDSC2_LVWV(3) ;
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** // ack to clear initial flags
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** PMC_LVDSC1 |= PMC_LVDSC1_LVDACK_MASK; 
+  96              		.loc 1 60 0
+  97 000a 1978     		ldrb	r1, [r3]
+  98 000c 4022     		mov	r2, #64
+  99 000e 1143     		orr	r1, r2
+ 100 0010 C8B2     		uxtb	r0, r1
+ 101 0012 1870     		strb	r0, [r3]
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** PMC_LVDSC2 |= PMC_LVDSC2_LVWACK_MASK;
+ 102              		.loc 1 61 0
+ 103 0014 5978     		ldrb	r1, [r3, #1]
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** /* 
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** LVWV if LVD high range selected
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 2.621
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 2.72
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 2.82
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 2.92
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** LVDV if LVD low range selected
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 1.74
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 1.84
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 1.94
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** */
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** }
+ 104              		.loc 1 76 0
+ 105              		@ sp needed for prologue
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** PMC_LVDSC2 |= PMC_LVDSC2_LVWACK_MASK;
+ 106              		.loc 1 61 0
+ 107 0016 0A43     		orr	r2, r1
+ 108 0018 D2B2     		uxtb	r2, r2
+ 109 001a 5A70     		strb	r2, [r3, #1]
+ 110              		.loc 1 76 0
+ 111 001c 7047     		bx	lr
+ 112              	.L6:
+ 113 001e C046     		.align	2
+ 114              	.L5:
+ 115 0020 00D00740 		.word	1074253824
+ 116              		.cfi_endproc
+ 117              	.LFE1:
+ 119              		.section	.text.pmc_lvd_isr,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	pmc_lvd_isr
+ 122              		.code	16
+ 123              		.thumb_func
+ 125              	pmc_lvd_isr:
+ 126              	.LFB2:
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** void pmc_lvd_isr(void)
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** {
+ 127              		.loc 1 78 0
+ 128              		.cfi_startproc
+ 129 0000 08B5     		push	{r3, lr}
+ 130              	.LCFI1:
+ 131              		.cfi_def_cfa_offset 8
+ 132              		.cfi_offset 3, -8
+ 133              		.cfi_offset 14, -4
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****   if (PMC_LVDSC1 &PMC_LVDSC1_LVDF_MASK){
+ 134              		.loc 1 80 0
+ 135 0002 0E4B     		ldr	r3, .L13
+ 136 0004 1878     		ldrb	r0, [r3]
+ 137 0006 41B2     		sxtb	r1, r0
+ 138 0008 0029     		cmp	r1, #0
+ 139 000a 13DB     		blt	.L11
+ 140              	.L8:
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****    printf("[LVD_isr]LV DETECT interrupt occurred");
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****   }
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****   if (PMC_LVDSC2 &PMC_LVDSC2_LVWF_MASK){
+ 141              		.loc 1 83 0
+ 142 000c 0B4A     		ldr	r2, .L13
+ 143 000e 5378     		ldrb	r3, [r2, #1]
+ 144 0010 58B2     		sxtb	r0, r3
+ 145 0012 0028     		cmp	r0, #0
+ 146 0014 0ADB     		blt	.L12
+ 147              	.L9:
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****    printf("[LVD_isr]LV WARNING interrupt occurred");
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****   }
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  // ack to clear initial flags
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  PMC_LVDSC1 |= PMC_LVDSC1_LVDACK_MASK; 
+ 148              		.loc 1 88 0
+ 149 0016 094B     		ldr	r3, .L13
+ 150 0018 4022     		mov	r2, #64
+ 151 001a 1978     		ldrb	r1, [r3]
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  PMC_LVDSC2 |= PMC_LVDSC2_LVWACK_MASK;
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** 
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c **** }
+ 152              		.loc 1 91 0
+ 153              		@ sp needed for prologue
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  PMC_LVDSC1 |= PMC_LVDSC1_LVDACK_MASK; 
+ 154              		.loc 1 88 0
+ 155 001c 1143     		orr	r1, r2
+ 156 001e C8B2     		uxtb	r0, r1
+ 157 0020 1870     		strb	r0, [r3]
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****  PMC_LVDSC2 |= PMC_LVDSC2_LVWACK_MASK;
+ 158              		.loc 1 89 0
+ 159 0022 5978     		ldrb	r1, [r3, #1]
+ 160 0024 0A43     		orr	r2, r1
+ 161 0026 D2B2     		uxtb	r2, r2
+ 162 0028 5A70     		strb	r2, [r3, #1]
+ 163              		.loc 1 91 0
+ 164 002a 08BD     		pop	{r3, pc}
+ 165              	.L12:
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****    printf("[LVD_isr]LV WARNING interrupt occurred");
+ 166              		.loc 1 84 0
+ 167 002c 0448     		ldr	r0, .L13+4
+ 168 002e FFF7FEFF 		bl	printf
+ 169              	.LVL4:
+ 170 0032 F0E7     		b	.L9
+ 171              	.L11:
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc\pmc.c ****    printf("[LVD_isr]LV DETECT interrupt occurred");
+ 172              		.loc 1 81 0
+ 173 0034 0348     		ldr	r0, .L13+8
+ 174 0036 FFF7FEFF 		bl	printf
+ 175              	.LVL5:
+ 176 003a E7E7     		b	.L8
+ 177              	.L14:
+ 178              		.align	2
+ 179              	.L13:
+ 180 003c 00D00740 		.word	1074253824
+ 181 0040 28000000 		.word	.LC2
+ 182 0044 00000000 		.word	.LC0
+ 183              		.cfi_endproc
+ 184              	.LFE2:
+ 186              		.comm	i,4,4
+ 187              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 188              		.align	2
+ 189              	.LC0:
+ 190 0000 5B4C5644 		.ascii	"[LVD_isr]LV DETECT interrupt occurred\000"
+ 190      5F697372 
+ 190      5D4C5620 
+ 190      44455445 
+ 190      43542069 
+ 191 0026 0000     		.space	2
+ 192              	.LC2:
+ 193 0028 5B4C5644 		.ascii	"[LVD_isr]LV WARNING interrupt occurred\000"
+ 193      5F697372 
+ 193      5D4C5620 
+ 193      5741524E 
+ 193      494E4720 
+ 194 004f 00       		.text
+ 195              	.Letext0:
+ 196              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 197              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+DEFINED SYMBOLS
+                            *ABS*:00000000 pmc.c
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:18     .text.LVD_Initalize:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:23     .text.LVD_Initalize:00000000 LVD_Initalize
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:73     .text.LVD_Initalize:00000024 $d
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:78     .text.LVD_Init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:83     .text.LVD_Init:00000000 LVD_Init
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:115    .text.LVD_Init:00000020 $d
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:120    .text.pmc_lvd_isr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:125    .text.pmc_lvd_isr:00000000 pmc_lvd_isr
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:180    .text.pmc_lvd_isr:0000003c $d
+                            *COM*:00000004 i
+C:\Users\lab\AppData\Local\Temp\cckqnZca.s:188    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf

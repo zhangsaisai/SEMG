@@ -1,0 +1,318 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>SEMG通信协议</title>
+    <!--  <script type ="text/javascript" src="script.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="style.css" /> 
+    <!-- <link rel="stylesheet" href="jquery-ui-1.10.3.custom/css/start/jquery-ui-1.10.3.custom.css"> -->
+    <script src="jquery-1.10.2.js"></script>
+
+<script>
+    
+   /* $(window).load(function () {
+        $("aside").css("position", "relative");
+        var p = $("aside").offset();
+        p.left = 100;
+        p.top = 200;
+        $("aside").offset(p);
+        $("aside").slideToggle(2000).slideToggle(2000).slideToggle(2000).slideToggle(2000);
+        $("#revision").load("HTMLPage1.html");
+        $("#datepicker").datepicker();
+    });*/
+   
+</script>
+   
+</head>
+<body>
+  <!--  <input id="File1" type="file" />
+ Content of the draggable element 
+    <img id="content" src="123.gif"/>
+    <p>Date: <input type="text" id="datepicker"></p>-->
+    <aside onmousedown="if(event.shiftkey) drag(this, event);">
+        <nav>
+            <dl>
+
+                <dt>1. 引言</dt>
+                <dt>2. 协议过程</dt>
+                <dd>
+                    <dl>
+                        <dt>2.1 MCU（Branch)和Linux(root)通信协议</dt>
+                        <dd><a href="channel">2.1.1 Channel数据包</a></dd>
+                        <dd>2.1.2 握手过程</dd>
+                        <dd>2.1.3 数据通信</dd>
+                    </dl>
+
+                </dd>
+                <dd>
+                    <dl>
+                        <dt>2.2 root和PC通信协议</dt>
+                        <dd>2.2.1 握手(ShakeHand)</dd>
+                        <dd>2.2.2 数据包(Data)</dd>
+
+                    </dl>
+                </dd>
+                <dt>3.</dt>
+                <dt></dt>
+
+
+            </dl>
+        </nav>
+    </aside>
+    <h1>SEMG通信协议</h1>
+    <h2>1. 引言</h2>
+    <strong>Notes</strong>
+    <p>
+        1. 协议中采用小端模式
+        2. 表格中的字段默认是1个字节
+    </p>
+    <p>&nbsp;</p>
+    <table id="revision">
+        <tr>
+            <th scope="col">时间</th>
+            <th scope="col">版本</th>
+            <th scope="col" style="width: 200px">内容</th>
+            <th scope="col">作者</th>
+        </tr>
+        <tr>
+            <td style="position: absolute;left:10cm;top:100px">2013-12-10</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>林上耀 </td>
+        </tr>
+    </table>
+    <h2>2. 协议过程</h2>
+    <h3>2.1 MCU（Branch)和Linux(root)通信协议</h3>
+    <h4><a id="channel">2.1.1 Channel数据包</a></h4>
+    <div>Channel通道数据包格式</div>
+    <table class="protocol">
+        <caption>Channel通道数据包(203Byte)</caption>
+        <tr>
+            <td>0x11</td>
+            <td>Channel_Num</td>
+            <td>State</td>
+            <td class="data_td">Data</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">0x11</span>: Channel数据包头</li>
+        <li><span class="packet_field">Channel_Num</span>: 通道编号,0-127共128通道</li>
+        <li><span class="packet_field">State</span>: 状态字节(留作扩展)</li>
+        <li><span class="packet_field">Data</span>: 通信包中数据字段,200Byte，共100个AD采样值
+           <br />
+            其中<table class="data">
+                <tr>
+                    <td>DataH</td>
+                    <td>DataL</td>
+                    <td>...</td>
+                    <td>DataH</td>
+                    <td>DataL</td>
+                </tr>
+            </table>
+
+        </li>
+    </ul>
+    <hr />
+    <h4>2.1.2 握手过程</h4>
+    <p>Branch同root握手包</p>
+    <table class="protocol">
+        <caption>Branch握手应答包</caption>
+        <tr>
+            <td>0xB6</td>
+            <td>Branch_Num</td>
+            <td>State</td>
+        </tr>
+    </table>
+
+    <ul>
+        <li><span class="packet_field">0xB6</span>: 握手应答包头</li>
+        <li><span class="packet_field">Branch_Num</span>: Branch编号,0-7</li>
+        <li><span class="packet_field">State</span>: 状态标志,保留</li>
+    </ul>
+    <p>root-&gt;branch</p>
+    <table class="protocol">
+        <caption>root握手请求包</caption>
+        <tr>
+            <td>0xA5</td>
+            <td>Branch_Num</td>
+            <td>Cmd</td>
+        </tr>
+    </table>
+
+    <ul>
+        <li><span class="packet_field">0xB6</span>: 握手应答包头</li>
+        <li><span class="packet_field">Branch_Num</span>: Branch编号,0-7</li>
+        <li><span class="packet_field">State</span>: 状态标志,保留</li>
+    </ul>
+    <hr />
+    <h4>2.1.3 数据通信</h4>
+    <div>Branch和root数据通信过程</div>
+    <table class="protocol">
+        <caption>Branch->root</caption>
+        <tr>
+            <td>0xB7</td>
+            <td>Branch_Num</td>
+            <td>DataLenH</td>
+            <td>DataLenL</td>
+            <td>TimestampH</td>
+            <td>TimestampL</td>
+            <td>stateH</td>
+            <td>stateL</td>
+            <td class="data_td">Data</td>
+            <td>0xED</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">0xB7</span>: Branch数据应答头</li>
+        <li><span class="packet_field">Branch_Num</span>: Branch编号,0-7共8个，每个Branch携带(8/16 Channel)</li>
+        <li><span class="packet_field">DataLenH</span>: 状态字节(留作扩展)</li>
+        <li><span class="packet_field">DataLenL</span>: 通信数据</li>
+        <li><span class="packet_field">TimestampH</span>: 时间戳高8位</li>
+        <li><span class="packet_field">TimestampL</span>: 时间戳低8位</li>
+        <li><span class="packet_field">StateH</span>: 状态标志高8位[7] - x
+                [6] - x
+                [5] - x
+				[4] 
+                [3:1] - Buffer Status(empty, write, full or overflow)
+                [0] - Buffer Label(left buffer or right buffer)</li>
+        <li><span class="packet_field">StateL</span>: 状态标志低8位 [7-0] - Overflow Count</li>
+        <li><span class="packet_field">Data</span>: Branch数据,共n(16)个通道，每个通道数据包的格式
+            <a href="#channel">参照</a>
+            <table class="data">
+                <tr>
+                    <td>通道0 数据包</td>
+                    <td>通道1 数据包</td>
+                    <td>...</td>
+                    <td>通道n-1 数据包</td>
+                </tr>
+            </table>
+        </li>
+        <li><span class="packet_field">0xED</span>: 包尾</li>
+    </ul>
+    <hr />
+
+    <h3>2.2 root和PC通信协议</h3>
+    <p>root和PC采用socket进行通信，同样需要握手和数据通信。</p>
+    <h4>2.2.1 握手(ShakeHand)</h4>
+    <p>root-&gt;PC</p>
+    <table class="protocol">
+        <caption>root握手应答包</caption>
+        <tr>
+            <td>'h'</td>
+            <td>协议版本H</td>
+            <td>协议版本L</td>
+            <td>总通道数</td>
+            <td>AD采样率</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">'h'</span>: PC握手请求包</li>
+        <li><span class="packet_field">Branch_Num</span>: Branch编号,0-7共8个，每个Branch携带(8/16 Channel)</li>
+        <li><span class="packet_field">协议版本H</span>: 状态字节(留作扩展)</li>
+        <li><span class="packet_field">协议版本L</span>: 通信数据</li>
+        <li><span class="packet_field">总通道数</span>: 时间戳高8位</li>
+        <li><span class="packet_field">AD采样率</span>: 时间戳低8位</li>
+        <li><span class="packet_field">StateH</span>: 状态标志高8位</li>
+        <li><span class="packet_field">StateL</span>: 状态标志低8位</li>
+        <li><span class="packet_field">Data</span>: Branch数据</li>
+        <li><span class="packet_field">0xED</span>: 包尾</li>
+    </ul>
+    <p>PC-&gt;root</p>
+    <table class="protocol">
+        <caption>PC握手请求包</caption>
+        <tr>
+            <td>'H'</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">'H'</span>: 握手请求包头</li>
+    </ul>
+    <h4>2.2.2 数据包(Data)</h4>
+    <p>PC数据请求包</p>
+    <table class="protocol">
+        <tr>
+            <td>'D'</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">'D'</span>: 数据请求包头</li>
+    </ul>
+    <table class="protocol">
+        <caption>root数据应答包</caption>
+        <tr>
+            <td>'d'</td>
+            <td>LenH</td>
+            <td>LenL</td>
+            <td>TimestampH</td>
+            <td>TimestampL</td>
+            <td class="data_td">Data</td>
+            <td>0xED</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">'d'</span>: 数据应答头</li>
+        <li><span class="packet_field">LenH</span>: <span style="color:red;" >本帧</span>字节长度高8位</li>
+        <li><span class="packet_field">LenL</span>: <span style="color:red;" >本帧</span>字节长度低8位</li>
+        <li><span class="packet_field">TimestampH</span>: 时间戳高8位</li>
+        <li><span class="packet_field">TimestampL</span>: 时间戳低8位</li>
+        <li><span class="packet_field">Data</span>: 数据包正文
+            共n(128)个通道，每个通道数据包的格式
+            <a href="#channel">参照</a>
+            <table class="data">
+                <tr>
+                    <td>通道0 数据包</td>
+                    <td>通道1 数据包</td>
+                    <td>...</td>
+                    <td>通道n-1 数据包</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+
+    <h4>2.2.3 控制包(Control)</h4>
+    <p>PC-&gt;root</p>
+    <table class="protocol">
+    	<caption>PC控制请求包</caption>
+    	<tr>
+            <td>'C'(0x43)</td>
+            <td>CMD</td>
+            <td class="data_td">Data</td>
+            <td>CheckCode</td>
+            <td>0xED</td>
+        </tr>
+    </table>
+    <ul>
+        <li><span class="packet_field">'d'</span>: 数据应答头</li>
+        <li><span class="packet_field">LenH</span>: <span style="color:red;" >本帧</span>字节长度高8位</li>
+        <li><span class="packet_field">LenL</span>: <span style="color:red;" >本帧</span>字节长度低8位</li>
+        <li><span class="packet_field">TimestampH</span>: 时间戳高8位</li>
+        <li><span class="packet_field">TimestampL</span>: 时间戳低8位</li>
+        <li><span class="packet_field">Data</span>: 数据包正文
+            共n(128)个通道，每个通道数据包的格式
+            <a href="#channel">参照</a>
+            <table class="data">
+                <tr>
+                    <td>通道0 数据包</td>
+                    <td>通道1 数据包</td>
+                    <td>...</td>
+                    <td>通道n-1 数据包</td>
+                </tr>
+            </table>
+        </li>
+    </ul>
+	<p>PC-&gt;root</p>
+    <table class="protocol">
+    	<caption>root控制应答包</caption>
+    	<tr>
+            <td>'C'(0x63)</td>
+            <td>ACK_CMD</td>
+            <td class="data_td">Data</td>
+            <td>0xED</td>
+        </tr>
+    </table>
+    <p>&nbsp;</p>
+    <p>2.1</p>
+    <p>3.</p>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="4">
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/iofiles"</Line>
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/pdd/inc"</Line>
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Generated_Code/Cpu.c" FileDate="2015-01-02, 19:12:21" FileAge="1420197141429" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET1.h" FileDate="2015-01-02, 19:12:23" FileAge="1420197143558" FileType="45637" CompNumb="139" />
+      <File Name="Project_Settings/Debugger/MKL25Z128.mem" FileDate="2015-01-02, 19:12:20" FileAge="1420197140514" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET1.c" FileDate="2015-01-02, 19:12:23" FileAge="1420197143548" FileType="45637" CompNumb="139" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_CS0.txt" FileDate="2015-01-02, 19:12:24" FileAge="1420197144215" FileType="45637" CompNumb="31" />
+      <File Name="Generated_Code/DMAT_M_SPI_RX.h" FileDate="2015-01-02, 22:25:23" FileAge="1420208723242" FileType="45637" CompNumb="92" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_RESET0.txt" FileDate="2015-01-02, 19:12:24" FileAge="1420197144445" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/DMA_CTRL.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144109" FileType="45637" CompNumb="90" />
+      <File Name="Generated_Code/SM_SPI0.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144770" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/DMAT_M_SPI_RX.c" FileDate="2015-01-02, 22:25:26" FileAge="1420208726303" FileType="45637" CompNumb="92" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.h" FileDate="2015-01-02, 22:25:21" FileAge="1420208721814" FileType="45637" CompNumb="105" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET0.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144462" FileType="45637" CompNumb="19" />
+      <File Name="Documentation/doxygen/DMAT_M_SPI_RX.txt" FileDate="2015-01-02, 22:25:26" FileAge="1420208726335" FileType="45637" CompNumb="92" />
+      <File Name="Generated_Code/DMA_CTRL.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144083" FileType="45637" CompNumb="90" />
+      <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2013-07-11, 23:27:47" FileAge="1373556467255" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/SM_SPI0.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144763" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.c" FileDate="2015-01-02, 22:25:27" FileAge="1420208727307" FileType="45637" CompNumb="105" />
+      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2015-05-20, 10:40:14" FileAge="1432089614599" FileType="3072" />
+      <File Name="Documentation/doxygen/DMAT_M_SPI_TX.txt" FileDate="2015-01-02, 22:25:26" FileAge="1420208726237" FileType="45637" CompNumb="89" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET0.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144455" FileType="45637" CompNumb="19" />
+      <File Name="Documentation/doxygen/ProcessorExpert.txt" FileDate="2015-01-02, 19:12:21" FileAge="1420197141421" FileType="45637" CompNumb="182" />
+      <File Name="Sources/ProcessorExpert.c" FileDate="2015-01-02, 19:12:22" FileAge="1420197142275" FileType="128" />
+      <File Name="Generated_Code/SysTick.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144599" FileType="45637" CompNumb="13" />
+      <File Name="Documentation/doxygen/BitIO_AD_START0.txt" FileDate="2014-03-17, 16:28:34" FileAge="1395044914493" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/SysTick.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144554" FileType="45637" CompNumb="13" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.h" FileDate="2015-01-02, 22:25:21" FileAge="1420208721690" FileType="45637" CompNumb="106" />
+      <File Name="Documentation/doxygen/EINT_SYNC_INT.txt" FileDate="2014-08-08, 20:03:37" FileAge="1407499417710" FileType="45637" CompNumb="60" />
+      <File Name="Documentation/doxygen/pex.css" FileDate="2013-07-11, 23:27:46" FileAge="1373556466726" FileType="16384" CompNumb="182" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.c" FileDate="2015-01-02, 22:25:27" FileAge="1420208727388" FileType="45637" CompNumb="106" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2015-01-02, 19:12:22" FileAge="1420197142420" FileType="45637" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2015-01-02, 19:12:22" FileAge="1420197142590" FileType="45637" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_RX.txt" FileDate="2015-01-02, 22:25:28" FileAge="1420208728263" FileType="45637" CompNumb="106" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2015-01-02, 19:12:22" FileAge="1420197142617" FileType="45637" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_TX.txt" FileDate="2015-01-02, 22:25:27" FileAge="1420208727357" FileType="45637" CompNumb="105" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2015-01-02, 19:12:22" FileAge="1420197142609" FileType="45637" />
+      <File Name="Documentation/doxygen/BitIO_UPRDY.txt" FileDate="2014-08-08, 10:21:40" FileAge="1407464500448" FileType="45637" CompNumb="110" />
+      <File Name="Generated_Code/SS_SPI1.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144746" FileType="45637" CompNumb="8" />
+      <File Name="Generated_Code/SS_SPI1.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144615" FileType="45637" CompNumb="8" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2015-01-02, 19:12:20" FileAge="1420197140405" FileType="8" CompNumb="182" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2015-01-02, 19:12:21" FileAge="1420197141356" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2015-01-02, 19:12:20" FileAge="1420197140363" FileType="45637" CompNumb="182" />
+      <File Name="Documentation/doxygen/EINT_AD_NOT_DRDY0.txt" FileDate="2014-03-27, 22:12:10" FileAge="1395929530197" FileType="45637" CompNumb="59" />
+      <File Name="Documentation/doxygen/SysTick.txt" FileDate="2014-03-28, 16:13:00" FileAge="1395994380794" FileType="45637" CompNumb="13" />
+      <File Name="Generated_Code/EINT_SYNC_INT.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144153" FileType="45637" CompNumb="60" />
+      <File Name="Documentation/doxygen/DMA_CTRL.txt" FileDate="2015-01-02, 19:12:24" FileAge="1420197144075" FileType="45637" CompNumb="90" />
+      <File Name="Generated_Code/EINT_SYNC_INT.c" FileDate="2015-01-02, 22:34:47" FileAge="1420209287537" FileType="45637" CompNumb="60" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2015-01-02, 19:12:20" FileAge="1420197140481" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS1.h" FileDate="2015-01-02, 19:12:23" FileAge="1420197143604" FileType="45637" CompNumb="138" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_CS1.txt" FileDate="2015-01-02, 19:12:23" FileAge="1420197143566" FileType="45637" CompNumb="138" />
+      <File Name="Documentation/doxygen/SS_SPI1.txt" FileDate="2015-01-02, 19:12:24" FileAge="1420197144608" FileType="45637" CompNumb="8" />
+      <File Name="Documentation/doxygen/SM_SPI0.txt" FileDate="2015-01-02, 19:12:24" FileAge="1420197144754" FileType="45637" CompNumb="7" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_RESET1.txt" FileDate="2014-08-08, 10:21:39" FileAge="1407464499608" FileType="45637" CompNumb="139" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS1.c" FileDate="2015-01-02, 19:12:23" FileAge="1420197143579" FileType="45637" CompNumb="138" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2015-01-02, 19:12:20" FileAge="1420197140506" FileType="45637" CompNumb="182" />
+      <File Name="Documentation/ProcessorExpert_Settings.xml" FileDate="2015-05-20, 10:40:14" FileAge="1432089614643" FileType="3072" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY0.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144209" FileType="45637" CompNumb="59" />
+      <File Name="Documentation/ProcessorExpert.txt" FileDate="2015-01-02, 19:12:25" FileAge="1420197145871" FileType="3072" />
+      <File Name="Generated_Code/BitIO_AD_START0.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144438" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/DMAT_M_SPI_TX.h" FileDate="2015-01-02, 22:25:24" FileAge="1420208724210" FileType="45637" CompNumb="89" />
+      <File Name="Generated_Code/BitIO_UPRDY.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144415" FileType="45637" CompNumb="110" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS0.h" FileDate="2015-01-02, 19:12:24" FileAge="1420197144280" FileType="45637" CompNumb="31" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY0.c" FileDate="2015-01-02, 22:34:40" FileAge="1420209280632" FileType="45637" CompNumb="59" />
+      <File Name="Sources/Events.h" FileDate="2015-01-02, 19:12:19" FileAge="1420197139684" FileType="131328" />
+      <File Name="Generated_Code/BitIO_AD_START0.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144429" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/DMAT_M_SPI_TX.c" FileDate="2015-01-02, 22:25:25" FileAge="1420208725264" FileType="45637" CompNumb="89" />
+      <File Name="Generated_Code/BitIO_UPRDY.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144375" FileType="45637" CompNumb="110" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2015-01-02, 19:12:21" FileAge="1420197141437" FileType="45637" CompNumb="182" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS0.c" FileDate="2015-01-02, 19:12:24" FileAge="1420197144222" FileType="45637" CompNumb="31" />
+      <File Name="Sources/Events.c" FileDate="2015-02-04, 11:07:23" FileAge="1423019243408" FileType="131328" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>282</CodeGenReference>
+</CodeGenerationInfo>

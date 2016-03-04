@@ -1,0 +1,7 @@
+<map id="ADCConfigure" name="ADCConfigure">
+<area shape="rect" id="node2" href="$group___a_d_c__module.html#ga85039be9a6883ebc1bb2f695515c6651" title="Send command to ADC via SPI1. Please use ADCReadRegister and ADCWriteRegister, but not this function..." alt="" coords="157,5,296,32"/>
+<area shape="rect" id="node5" href="$group___a_d_c__module.html#ga5a9a35fa254e8230cbc9be8858660f22" title="Read data from register of ADC via SPI1. The data returned in dat[0] and dat[1] are useless..." alt="" coords="163,56,290,83"/>
+<area shape="rect" id="node6" href="$group___a_d_c__module.html#ga607e77df260f2c971d948c580a933280" title="Write data to register of ADC via SPI1. " alt="" coords="163,107,291,133"/>
+<area shape="rect" id="node3" href="$group___uti.html#ga74f6556b7e12839094c1c547b749a389" title="this method catches the error and print the right error message. " alt="" coords="355,31,485,57"/>
+<area shape="rect" id="node4" href="$group___s_p_i___operation.html#gaa5f377e0c22b59a379b04f910cec62ee" title="This method packs a serious operations of receiving &amp; sending data via SPI1. Receive &amp; send data from..." alt="" coords="344,81,496,108"/>
+</map>

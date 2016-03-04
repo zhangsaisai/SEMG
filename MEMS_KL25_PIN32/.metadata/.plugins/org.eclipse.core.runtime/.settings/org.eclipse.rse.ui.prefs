@@ -1,0 +1,2 @@
+eclipse.preferences.version=1
+org.eclipse.rse.preferences.order.connections=lab-PC.Local;lab-PC.spi_demo_FLASH_OpenSDA;lab-PC.spi_demo_FLASH_OpenSDA Target;lab-PC.spi_demo_FLASH_Segger J-Link_Trace;lab-PC.spi_demo_FLASH_Segger J-Link_Trace Target;lab-PC.Sensor3.0_KL25Z_FLASH_PnE U-MultiLink;lab-PC.Sensor3.0_KL25Z_FLASH_PnE U-MultiLink Target

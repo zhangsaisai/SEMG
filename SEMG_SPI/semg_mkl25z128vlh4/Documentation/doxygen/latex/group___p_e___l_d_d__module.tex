@@ -1,0 +1,130 @@
+\hypertarget{group___p_e___l_d_d__module}{\section{P\-E\-\_\-\-L\-D\-D module documentation}
+\label{group___p_e___l_d_d__module}\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___p_e___l_d_d__module_ga6cb22864b71fd00f200c9fb3375f4e29}{P\-E\-\_\-\-Fill\-Memory} (register void $\ast$Source\-Address\-Ptr, register uint8\-\_\-t c, register uint32\-\_\-t len)
+\begin{DoxyCompactList}\small\item\em Fills a memory area block by a specified value. \end{DoxyCompactList}\item 
+bool \hyperlink{group___p_e___l_d_d__module_ga9e049b01a45212fe5b6a8476fe124b59}{P\-E\-\_\-\-Peripheral\-Used} (uint32\-\_\-t Prph\-Base\-Address)
+\begin{DoxyCompactList}\small\item\em Returns information whether a peripheral is allocated by P\-Ex or not. \end{DoxyCompactList}\item 
+void \hyperlink{group___p_e___l_d_d__module_ga7fe8a131453ba765c5e85130a282eafb}{L\-D\-D\-\_\-\-Set\-Clock\-Configuration} (\hyperlink{group___p_e___types__module_ga369bcaf7f00caad5f994c72ac2629a37}{L\-D\-D\-\_\-\-T\-Clock\-Configuration} Clock\-Configuration)
+\begin{DoxyCompactList}\small\item\em Changes the clock configuration of all L\-D\-D components in a project. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___p_e___l_d_d__module_ga4323b74fe3deac7b812be72b488df761}{P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List} \mbox{[}15\mbox{]}
+\item 
+const \hyperlink{struct_t_cpu_clock_configuration}{T\-Cpu\-Clock\-Configuration} \hyperlink{group___p_e___l_d_d__module_gab69281f0e90d16198a5595ed7f471441}{P\-E\-\_\-\-Cpu\-Clock\-Configurations} \mbox{[}C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-\-N\-U\-M\-B\-E\-R\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group___p_e___l_d_d__module_ga7fe8a131453ba765c5e85130a282eafb}{\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}!L\-D\-D\-\_\-\-Set\-Clock\-Configuration@{L\-D\-D\-\_\-\-Set\-Clock\-Configuration}}
+\index{L\-D\-D\-\_\-\-Set\-Clock\-Configuration@{L\-D\-D\-\_\-\-Set\-Clock\-Configuration}!PE_LDD module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+\subsubsection[{L\-D\-D\-\_\-\-Set\-Clock\-Configuration}]{\setlength{\rightskip}{0pt plus 5cm}void L\-D\-D\-\_\-\-Set\-Clock\-Configuration (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-Clock\-Configuration}}]{Clock\-Configuration}
+\end{DoxyParamCaption}
+)}}\label{group___p_e___l_d_d__module_ga7fe8a131453ba765c5e85130a282eafb}
+
+
+Changes the clock configuration of all L\-D\-D components in a project. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Clock\-Configuration} & -\/ New C\-P\-U clock configuration changed by C\-P\-U Set\-Clock\-Configuration method. \\
+\hline
+\end{DoxyParams}
+$<$ Parameter is not used, suppress unused argument warning \hypertarget{group___p_e___l_d_d__module_ga6cb22864b71fd00f200c9fb3375f4e29}{\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}!P\-E\-\_\-\-Fill\-Memory@{P\-E\-\_\-\-Fill\-Memory}}
+\index{P\-E\-\_\-\-Fill\-Memory@{P\-E\-\_\-\-Fill\-Memory}!PE_LDD module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+\subsubsection[{P\-E\-\_\-\-Fill\-Memory}]{\setlength{\rightskip}{0pt plus 5cm}void P\-E\-\_\-\-Fill\-Memory (
+\begin{DoxyParamCaption}
+\item[{register void $\ast$}]{Source\-Address\-Ptr, }
+\item[{register uint8\-\_\-t}]{c, }
+\item[{register uint32\-\_\-t}]{len}
+\end{DoxyParamCaption}
+)}}\label{group___p_e___l_d_d__module_ga6cb22864b71fd00f200c9fb3375f4e29}
+
+
+Fills a memory area block by a specified value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Source\-Address\-Ptr} & -\/ Source address pointer. \\
+\hline
+{\em c} & -\/ A value used to fill a memory block. \\
+\hline
+{\em len} & -\/ Length of a memory block to fill. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___p_e___l_d_d__module_ga9e049b01a45212fe5b6a8476fe124b59}{\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}!P\-E\-\_\-\-Peripheral\-Used@{P\-E\-\_\-\-Peripheral\-Used}}
+\index{P\-E\-\_\-\-Peripheral\-Used@{P\-E\-\_\-\-Peripheral\-Used}!PE_LDD module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+\subsubsection[{P\-E\-\_\-\-Peripheral\-Used}]{\setlength{\rightskip}{0pt plus 5cm}bool P\-E\-\_\-\-Peripheral\-Used (
+\begin{DoxyParamCaption}
+\item[{uint32\-\_\-t}]{Prph\-Base\-Address}
+\end{DoxyParamCaption}
+)}}\label{group___p_e___l_d_d__module_ga9e049b01a45212fe5b6a8476fe124b59}
+
+
+Returns information whether a peripheral is allocated by P\-Ex or not. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em Prph\-Base\-Address} & -\/ Base address of a peripheral. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+T\-R\-U\-E if a peripheral is used by P\-Ex or F\-A\-L\-S\-E if it isn't used. 
+\end{DoxyReturn}
+
+
+\subsection{Variable Documentation}
+\hypertarget{group___p_e___l_d_d__module_gab69281f0e90d16198a5595ed7f471441}{\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}!P\-E\-\_\-\-Cpu\-Clock\-Configurations@{P\-E\-\_\-\-Cpu\-Clock\-Configurations}}
+\index{P\-E\-\_\-\-Cpu\-Clock\-Configurations@{P\-E\-\_\-\-Cpu\-Clock\-Configurations}!PE_LDD module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+\subsubsection[{P\-E\-\_\-\-Cpu\-Clock\-Configurations}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf T\-Cpu\-Clock\-Configuration} P\-E\-\_\-\-Cpu\-Clock\-Configurations\mbox{[}C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-\-N\-U\-M\-B\-E\-R\mbox{]}}}\label{group___p_e___l_d_d__module_gab69281f0e90d16198a5595ed7f471441}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+  
+  \{
+    CPU\_CORE\_CLK\_HZ\_CONFIG\_0,          
+    CPU\_BUS\_CLK\_HZ\_CONFIG\_0,           
+    CPU\_FLEXBUS\_CLK\_HZ\_CONFIG\_0,       
+    CPU\_FLASH\_CLK\_HZ\_CONFIG\_0,         
+    CPU\_USB\_CLK\_HZ\_CONFIG\_0,           
+    CPU\_PLL\_FLL\_CLK\_HZ\_CONFIG\_0,       
+    CPU\_MCGIR\_CLK\_HZ\_CONFIG\_0,         
+    CPU\_OSCER\_CLK\_HZ\_CONFIG\_0,         
+    CPU\_ERCLK32K\_CLK\_HZ\_CONFIG\_0,      
+    CPU\_MCGFF\_CLK\_HZ\_CONFIG\_0          
+  \}
+\}
+\end{DoxyCode}
+The array of clock configurations (frequencies) configured in configured clock configurations of the C\-P\-U component. \hypertarget{group___p_e___l_d_d__module_ga4323b74fe3deac7b812be72b488df761}{\index{P\-E\-\_\-\-L\-D\-D module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}!P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List@{P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List}}
+\index{P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List@{P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List}!PE_LDD module documentation@{P\-E\-\_\-\-L\-D\-D module documentation}}
+\subsubsection[{P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-T\-Device\-Data}$\ast$ P\-E\-\_\-\-L\-D\-D\-\_\-\-Device\-Data\-List\mbox{[}15\mbox{]}}}\label{group___p_e___l_d_d__module_ga4323b74fe3deac7b812be72b488df761}
+{\bfseries Initial value\-:}
+\begin{DoxyCode}
+= \{
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL,
+    NULL
+  \}
+\end{DoxyCode}
+Array of L\-D\-D component device structures 

@@ -1,0 +1,106 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="4">
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/iofiles"</Line>
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/pdd/inc"</Line>
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Generated_Code/usb_devapi.h" FileDate="2015-10-21, 17:20:09" FileAge="1445419209003" FileType="45637" CompNumb="183" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_TX.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953147" FileType="45637" CompNumb="105" />
+      <File Name="Generated_Code/usb_class.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208970" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS1.h" FileDate="2015-02-07, 12:05:52" FileAge="1423281952538" FileType="45637" CompNumb="138" />
+      <File Name="Generated_Code/usb_class.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208974" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2015-02-07, 12:07:40" FileAge="1423282060970" FileType="45637" CompNumb="206" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS1.c" FileDate="2015-02-07, 12:05:52" FileAge="1423281952496" FileType="45637" CompNumb="138" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS0.h" FileDate="2015-02-07, 12:05:52" FileAge="1423281952631" FileType="45637" CompNumb="31" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2015-02-07, 12:07:40" FileAge="1423282060997" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/EINT_SYNC_INT.txt" FileDate="2014-08-08, 20:03:38" FileAge="1407499418000" FileType="45637" CompNumb="60" />
+      <File Name="Generated_Code/BitIO_AD_NOT_CS0.c" FileDate="2015-02-07, 12:05:53" FileAge="1423281953069" FileType="45637" CompNumb="31" />
+      <File Name="Sources/ProcessorExpert.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208936" FileType="128" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2015-02-07, 12:05:53" FileAge="1423281953351" FileType="8" CompNumb="206" />
+      <File Name="Generated_Code/usb_dci.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208995" FileType="45637" CompNumb="183" />
+      <File Name="Documentation/doxygen/EINT_AD_NOT_DRDY0.txt" FileDate="2014-03-27, 22:12:12" FileAge="1395929532000" FileType="45637" CompNumb="59" />
+      <File Name="Generated_Code/types.h" FileDate="2015-10-21, 17:20:09" FileAge="1445419209006" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/usb_dci.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208991" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/usb_driver.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208979" FileType="45637" CompNumb="183" />
+      <File Name="Documentation/ProcessorExpert.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953716" FileType="3072" />
+      <File Name="Generated_Code/SysTick.h" FileDate="2014-03-28, 16:13:02" FileAge="1395994382000" FileType="45637" CompNumb="13" />
+      <File Name="Documentation/doxygen/DMAT_M_SPI_RX.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953135" FileType="45637" CompNumb="92" />
+      <File Name="Generated_Code/SysTick.c" FileDate="2014-03-28, 16:13:02" FileAge="1395994382000" FileType="45637" CompNumb="13" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208863" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2014-03-11, 19:56:36" FileAge="1394538996000" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_RESET1.txt" FileDate="2014-08-08, 10:21:40" FileAge="1407464500000" FileType="45637" CompNumb="139" />
+      <File Name="Generated_Code/usb_device.h" FileDate="2014-12-24, 14:50:15" FileAge="1419403815179" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208882" FileType="45637" CompNumb="206" />
+      <File Name="Generated_Code/DMAT_M_SPI_RX.h" FileDate="2015-02-07, 12:12:54" FileAge="1423282374473" FileType="45637" CompNumb="92" />
+      <File Name="Generated_Code/usb_device.c" FileDate="2015-11-02, 20:32:08" FileAge="1446467528080" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208886" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/BitIO_AD_START0.txt" FileDate="2014-03-17, 16:28:36" FileAge="1395044916000" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/DMAT_M_SPI_RX.c" FileDate="2015-02-07, 12:12:54" FileAge="1423282374460" FileType="45637" CompNumb="92" />
+      <File Name="Generated_Code/BitIO_AD_START1.h" FileDate="1970-01-01, 07:59:59" FileAge="-1" FileType="45637" />
+      <File Name="Generated_Code/usb_dciapi.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208998" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208966" FileType="45637" />
+      <File Name="Generated_Code/DMAT_M_SPI_TX.h" FileDate="2015-02-07, 12:12:54" FileAge="1423282374503" FileType="45637" CompNumb="89" />
+      <File Name="Generated_Code/BitIO_AD_START1.c" FileDate="1970-01-01, 07:59:59" FileAge="-1" FileType="45637" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET1.h" FileDate="2014-03-17, 15:18:12" FileAge="1395040692000" FileType="45637" CompNumb="139" />
+      <File Name="Generated_Code/BitIO_AD_START0.h" FileDate="2014-03-17, 16:28:36" FileAge="1395044916000" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/usb_framework.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208987" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/DMAT_M_SPI_TX.c" FileDate="2015-02-07, 12:12:54" FileAge="1423282374490" FileType="45637" CompNumb="89" />
+      <File Name="Generated_Code/BitIO_AD_START0.c" FileDate="2014-03-18, 16:09:44" FileAge="1395130184000" FileType="45637" CompNumb="21" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET1.c" FileDate="2014-08-08, 10:40:52" FileAge="1407465652000" FileType="45637" CompNumb="139" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY1.h" FileDate="1970-01-01, 07:59:59" FileAge="-1" FileType="45637" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET0.h" FileDate="2015-02-07, 12:05:52" FileAge="1423281952678" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/usb_framework.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208983" FileType="45637" CompNumb="183" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.h" FileDate="2015-02-07, 12:12:54" FileAge="1423282374424" FileType="45637" CompNumb="106" />
+      <File Name="Project_Settings/Debugger/MKL25Z128.mem" FileDate="2015-02-07, 12:05:53" FileAge="1423281953329" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/SM_SPI0.txt" FileDate="2015-02-07, 12:05:52" FileAge="1423281952860" FileType="45637" CompNumb="7" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY1.c" FileDate="1970-01-01, 07:59:59" FileAge="-1" FileType="45637" />
+      <File Name="Generated_Code/BitIO_AD_NOT_RESET0.c" FileDate="2015-02-07, 12:05:52" FileAge="1423281952664" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY0.h" FileDate="2014-03-27, 22:12:10" FileAge="1395929530000" FileType="45637" CompNumb="59" />
+      <File Name="Documentation/doxygen/ProcessorExpert.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953316" FileType="45637" CompNumb="206" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.c" FileDate="2015-02-07, 12:12:54" FileAge="1423282374570" FileType="45637" CompNumb="106" />
+      <File Name="Documentation/ProcessorExpert_Settings.xml" FileDate="2015-02-09, 14:50:28" FileAge="1423464628869" FileType="3072" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_RESET0.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953053" FileType="45637" CompNumb="19" />
+      <File Name="Documentation/doxygen/SS_SPI1.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953040" FileType="45637" CompNumb="8" />
+      <File Name="Generated_Code/EINT_AD_NOT_DRDY0.c" FileDate="2014-04-01, 09:50:36" FileAge="1396317036000" FileType="45637" CompNumb="59" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.h" FileDate="2015-02-07, 12:12:54" FileAge="1423282374442" FileType="45637" CompNumb="105" />
+      <File Name="Generated_Code/SS_SPI1.h" FileDate="2014-03-17, 13:37:14" FileAge="1395034634000" FileType="45637" CompNumb="8" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.c" FileDate="2015-02-07, 12:12:54" FileAge="1423282374560" FileType="45637" CompNumb="105" />
+      <File Name="Generated_Code/BitIO_UPRDY.h" FileDate="2014-03-17, 16:49:20" FileAge="1395046160000" FileType="45637" CompNumb="110" />
+      <File Name="Generated_Code/SS_SPI1.c" FileDate="2014-04-15, 12:19:02" FileAge="1397535542000" FileType="45637" CompNumb="8" />
+      <File Name="Generated_Code/BitIO_UPRDY.c" FileDate="2014-03-18, 16:09:58" FileAge="1395130198000" FileType="45637" CompNumb="110" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208959" FileType="45637" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208955" FileType="45637" />
+      <File Name="Documentation/doxygen/DMAT_M_SPI_TX.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953113" FileType="45637" CompNumb="89" />
+      <File Name="Documentation/doxygen/USB_LDD.txt" FileDate="2015-01-06, 20:08:48" FileAge="1420546128727" FileType="45637" CompNumb="184" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_RX.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953158" FileType="45637" CompNumb="106" />
+      <File Name="Generated_Code/SM_SPI0.h" FileDate="2015-02-07, 12:05:52" FileAge="1423281952747" FileType="45637" CompNumb="7" />
+      <File Name="Documentation/doxygen/DMA_CTRL.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953102" FileType="45637" CompNumb="90" />
+      <File Name="Generated_Code/SM_SPI0.c" FileDate="2015-02-07, 12:05:52" FileAge="1423281952733" FileType="45637" CompNumb="7" />
+      <File Name="Documentation/doxygen/BitIO_UPRDY.txt" FileDate="2014-08-08, 10:21:42" FileAge="1407464502000" FileType="45637" CompNumb="110" />
+      <File Name="Documentation/doxygen/SysTick.txt" FileDate="2014-03-28, 16:13:02" FileAge="1395994382000" FileType="45637" CompNumb="13" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_CS1.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953171" FileType="45637" CompNumb="138" />
+      <File Name="Generated_Code/EINT_SYNC_INT.h" FileDate="2014-08-08, 20:03:38" FileAge="1407499418000" FileType="45637" CompNumb="60" />
+      <File Name="Generated_Code/USB_LDD.h" FileDate="2015-01-06, 20:08:48" FileAge="1420546128551" FileType="45637" CompNumb="184" />
+      <File Name="Generated_Code/DMA_CTRL.h" FileDate="2014-03-24, 15:03:56" FileAge="1395644636000" FileType="45637" CompNumb="90" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208963" FileType="45637" />
+      <File Name="Generated_Code/EINT_SYNC_INT.c" FileDate="2014-08-13, 10:33:14" FileAge="1407897194000" FileType="45637" CompNumb="60" />
+      <File Name="Generated_Code/USB_LDD.c" FileDate="2015-02-07, 21:24:17" FileAge="1423315457602" FileType="45637" CompNumb="184" />
+      <File Name="Generated_Code/DMA_CTRL.c" FileDate="2014-04-27, 20:31:04" FileAge="1398601864000" FileType="45637" CompNumb="90" />
+      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2015-11-03, 10:29:40" FileAge="1446517780744" FileType="3072" />
+      <File Name="Sources/Events.h" FileDate="2015-10-21, 17:20:08" FileAge="1445419208857" FileType="131328" />
+      <File Name="Documentation/doxygen/pex.css" FileDate="2013-07-11, 23:27:48" FileAge="1373556468000" FileType="16384" CompNumb="206" />
+      <File Name="Sources/Events.c" FileDate="2015-10-21, 17:20:08" FileAge="1445419208852" FileType="131328" />
+      <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2013-07-11, 23:27:48" FileAge="1373556468000" FileType="45637" CompNumb="206" />
+      <File Name="Documentation/doxygen/BitIO_AD_NOT_CS0.txt" FileDate="2015-02-07, 12:05:53" FileAge="1423281953083" FileType="45637" CompNumb="31" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>313</CodeGenReference>
+</CodeGenerationInfo>

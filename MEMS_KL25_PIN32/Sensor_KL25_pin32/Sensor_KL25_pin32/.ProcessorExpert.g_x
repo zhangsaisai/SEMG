@@ -1,0 +1,63 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="4">
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/iofiles"</Line>
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/pdd/inc"</Line>
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Generated_Code/PE_Const.h" FileDate="2015-06-25, 15:40:18" FileAge="1435218018728" FileType="45637" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2015-10-14, 15:26:07" FileAge="1444807567089" FileType="45637" />
+      <File Name="Generated_Code/SDA_G.c" FileDate="2015-06-25, 15:40:23" FileAge="1435218023527" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2015-06-25, 15:40:19" FileAge="1435218019513" FileType="45637" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2015-10-14, 15:26:08" FileAge="1444807568730" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2015-10-14, 15:26:08" FileAge="1444807568725" FileType="45637" CompNumb="48" />
+      <File Name="Documentation/doxygen/Times.txt" FileDate="2015-09-12, 14:24:58" FileAge="1442039098524" FileType="45637" CompNumb="70" />
+      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2015-10-20, 10:10:50" FileAge="1445307050170" FileType="3072" />
+      <File Name="Documentation/doxygen/ProcessorExpert.txt" FileDate="2015-10-14, 15:26:08" FileAge="1444807568717" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/MPU6050_DRDY.h" FileDate="2015-09-16, 16:51:22" FileAge="1442393482216" FileType="45637" CompNumb="35" />
+      <File Name="Generated_Code/SDA_M.h" FileDate="2015-06-25, 15:40:21" FileAge="1435218021390" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/MPU6050_DRDY.c" FileDate="2015-09-16, 16:51:22" FileAge="1442393482301" FileType="45637" CompNumb="35" />
+      <File Name="Generated_Code/SDA_M.c" FileDate="2015-06-25, 15:40:21" FileAge="1435218021314" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/Times.h" FileDate="2015-09-12, 14:24:58" FileAge="1442039098585" FileType="45637" CompNumb="70" />
+      <File Name="Documentation/doxygen/SysTick.txt" FileDate="2015-09-17, 19:10:20" FileAge="1442488220962" FileType="45637" CompNumb="10" />
+      <File Name="Documentation/doxygen/SCL_G.txt" FileDate="2015-06-25, 15:40:22" FileAge="1435218022629" FileType="45637" CompNumb="14" />
+      <File Name="Generated_Code/Times.c" FileDate="2015-09-12, 14:43:56" FileAge="1442040236054" FileType="45637" CompNumb="70" />
+      <File Name="Documentation/doxygen/SDA_G.txt" FileDate="2015-06-25, 15:40:23" FileAge="1435218023560" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/SCL_G.h" FileDate="2015-06-25, 15:40:21" FileAge="1435218021587" FileType="45637" CompNumb="14" />
+      <File Name="Generated_Code/SysTick.h" FileDate="2015-01-14, 13:40:13" FileAge="1421214013329" FileType="45637" CompNumb="10" />
+      <File Name="Sources/Events.h" FileDate="2015-10-14, 15:26:08" FileAge="1444807568741" FileType="131328" />
+      <File Name="Generated_Code/SCL_G.c" FileDate="2015-06-25, 15:40:21" FileAge="1435218021794" FileType="45637" CompNumb="14" />
+      <File Name="Documentation/ProcessorExpert_Settings.xml" FileDate="2015-10-14, 15:39:52" FileAge="1444808392357" FileType="3072" />
+      <File Name="Generated_Code/SysTick.c" FileDate="2015-09-17, 19:09:55" FileAge="1442488195175" FileType="45637" CompNumb="10" />
+      <File Name="Sources/Events.c" FileDate="2015-10-20, 09:56:27" FileAge="1445306187229" FileType="131328" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2015-06-25, 11:21:33" FileAge="1435202493874" FileType="45637" />
+      <File Name="Documentation/ProcessorExpert.txt" FileDate="2015-10-14, 15:26:08" FileAge="1444807568841" FileType="3072" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2015-06-25, 15:40:24" FileAge="1435218024348" FileType="45637" CompNumb="48" />
+      <File Name="Documentation/doxygen/MPU6050_DRDY.txt" FileDate="2015-10-14, 15:26:07" FileAge="1444807567071" FileType="45637" CompNumb="35" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2015-10-14, 16:16:14" FileAge="1444810574647" FileType="45637" CompNumb="48" />
+      <File Name="Documentation/doxygen/pex.css" FileDate="2015-01-14, 10:27:45" FileAge="1421202465914" FileType="16384" CompNumb="48" />
+      <File Name="Generated_Code/SCL_M.h" FileDate="2015-06-25, 15:40:21" FileAge="1435218021549" FileType="45637" CompNumb="18" />
+      <File Name="Documentation/doxygen/SCL_M.txt" FileDate="2015-05-11, 22:24:12" FileAge="1431354252275" FileType="45637" CompNumb="18" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2015-01-14, 10:27:46" FileAge="1421202466084" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2015-10-14, 15:26:08" FileAge="1444807568735" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/SS_SPI0.h" FileDate="2015-10-14, 15:39:50" FileAge="1444808390767" FileType="45637" CompNumb="51" />
+      <File Name="Documentation/doxygen/SDA_M.txt" FileDate="2015-05-11, 22:24:12" FileAge="1431354252354" FileType="45637" CompNumb="19" />
+      <File Name="Generated_Code/SCL_M.c" FileDate="2015-06-25, 15:40:21" FileAge="1435218021536" FileType="45637" CompNumb="18" />
+      <File Name="Documentation/doxygen/SS_SPI0.txt" FileDate="2015-10-14, 15:39:51" FileAge="1444808391472" FileType="45637" CompNumb="51" />
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2015-06-25, 15:40:25" FileAge="1435218025908" FileType="8" CompNumb="48" />
+      <File Name="Project_Settings/Debugger/MKL25Z128.mem" FileDate="2015-01-14, 10:27:46" FileAge="1421202466078" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/SS_SPI0.c" FileDate="2015-10-14, 15:39:50" FileAge="1444808390802" FileType="45637" CompNumb="51" />
+      <File Name="Sources/ProcessorExpert.c" FileDate="2015-10-20, 09:56:27" FileAge="1445306187210" FileType="128" />
+      <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2015-01-14, 10:27:46" FileAge="1421202466090" FileType="45637" CompNumb="48" />
+      <File Name="Generated_Code/SDA_G.h" FileDate="2015-06-25, 15:40:23" FileAge="1435218023481" FileType="45637" CompNumb="15" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>86</CodeGenReference>
+</CodeGenerationInfo>

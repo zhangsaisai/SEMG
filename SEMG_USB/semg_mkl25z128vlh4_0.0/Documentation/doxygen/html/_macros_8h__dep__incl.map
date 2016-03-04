@@ -1,0 +1,13 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Headers/Macros.h" name="E:/workspace/semg_mkl15z128vlh4/Headers/Macros.h">
+<area shape="rect" id="node2" href="$_macros_8c.html" title="This file contains user macros used in this project. " alt="" coords="5,97,235,138"/>
+<area shape="rect" id="node3" href="$_utilities_8c.html" title="This file contains general functions used in this project. " alt="" coords="233,187,463,229"/>
+<area shape="rect" id="node4" href="$_a_d_c_8h.html" title="This file contains ADC operation functions. " alt="" coords="563,97,792,138"/>
+<area shape="rect" id="node5" href="$_my_headers_8h.html" title="This file contains all header files created by user. Easy for including header files in other files..." alt="" coords="639,187,868,229"/>
+<area shape="rect" id="node11" href="$_globals_8h.html" title="This file defines global variables used in this project. " alt="" coords="309,97,539,138"/>
+<area shape="rect" id="node12" href="$_process_8h.html" title="This file contains functions for kinds of data processing. " alt="" coords="867,97,1096,138"/>
+<area shape="rect" id="node6" href="$_a_d_c_8c.html" title="This file contains ADC operation functions. " alt="" coords="132,278,361,319"/>
+<area shape="rect" id="node7" href="$_events_8c.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="385,278,615,319"/>
+<area shape="rect" id="node8" href="$_init_8c.html" title="This file contains user initialization of data, on&#45;chip and peripheral devices. " alt="" coords="639,278,868,319"/>
+<area shape="rect" id="node9" href="$_processor_expert_8c.html" title="Main module. This module contains user&#39;s application code. " alt="" coords="892,278,1121,319"/>
+<area shape="rect" id="node10" href="$_test_8c.html" title="This file contains test functions. " alt="" coords="1145,278,1375,319"/>
+</map>

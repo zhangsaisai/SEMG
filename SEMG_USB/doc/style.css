@@ -1,0 +1,91 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+}
+
+h3 {
+}
+
+
+h4 {
+}
+
+#revision {
+    border: 1px solid;
+    width: 600px;
+    border-collapse: collapse;
+}
+
+    #revision th {
+        border: 1px solid black;
+        background-color: #83b3df;
+    }
+
+    #revision td {
+        border: 1px solid black;
+        text-align: center;
+        /*width*/
+    }
+
+table.protocol {
+    border-collapse: collapse;
+    border: 1px solid black;
+    table-layout: fixed;
+    caption-side: top;
+}
+
+table.protocol th {
+    border: 1px solid black;
+}
+
+
+
+table.protocol td {
+    border: 1px solid black;
+    text-align: center;
+    width: 100px;
+    /*width*/
+}
+table.data {
+    border-collapse: collapse;
+    border: 1px solid black;
+    table-layout: fixed;
+    caption-side: top;
+}
+ table.data td{
+    border: 1px solid black;
+    text-align: center;
+    width: auto;
+    background-color: greenyellow;
+    /*width*/
+}
+.packet_field {
+    color: blue;
+}
+
+.data_td {
+    background-color: greenyellow;
+}
+
+aside {
+    position: fixed;
+    right:auto;
+    top:100px;
+   /* background-color: #dda;*/
+    border: 1px solid black;
+    /*width: 200px;*/
+    left: 75%;
+}
+
+
+#TOC { border: solid black 1px; margin: 10px; padding: 10px; }
+ .TOCEntry { font-family: sans-serif; }
+ .TOCEntry a { text-decoration: none; }
+.TOCLevel1 { font-size: 16pt; font-weight: bold; }
+  .TOCLevel2 { font-size: 12pt; margin-left: .5in; }
+  .TOCSectNum:after { content: ": "; }

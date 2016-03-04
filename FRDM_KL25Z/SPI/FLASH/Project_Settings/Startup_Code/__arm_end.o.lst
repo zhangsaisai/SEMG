@@ -1,0 +1,92 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"__arm_end.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text._ExitProcess,"ax",%progbits
+  18              		.align	2
+  19              		.weak	_ExitProcess
+  20              		.code	16
+  21              		.thumb_func
+  23              	_ExitProcess:
+  24              	.LFB0:
+  25              		.file 1 "../Project_Settings/Startup_Code/__arm_end.c"
+   1:../Project_Settings/Startup_Code/__arm_end.c **** /* CodeWarrior ARM Runtime Support Library 
+   2:../Project_Settings/Startup_Code/__arm_end.c ****  * Copyright © 2012 FReescale. All rights reserved. 
+   3:../Project_Settings/Startup_Code/__arm_end.c ****  * 
+   4:../Project_Settings/Startup_Code/__arm_end.c ****  * $Date: 2012/07/12 23:03:54 $ 
+   5:../Project_Settings/Startup_Code/__arm_end.c ****  * $Revision: 1.3 $ 
+   6:../Project_Settings/Startup_Code/__arm_end.c ****  */ 
+   7:../Project_Settings/Startup_Code/__arm_end.c **** 
+   8:../Project_Settings/Startup_Code/__arm_end.c **** /*
+   9:../Project_Settings/Startup_Code/__arm_end.c **** 
+  10:../Project_Settings/Startup_Code/__arm_end.c **** FILE
+  11:../Project_Settings/Startup_Code/__arm_end.c **** 	__arm_end.c
+  12:../Project_Settings/Startup_Code/__arm_end.c **** 
+  13:../Project_Settings/Startup_Code/__arm_end.c **** DESCRIPTION
+  14:../Project_Settings/Startup_Code/__arm_end.c **** 
+  15:../Project_Settings/Startup_Code/__arm_end.c **** 	Use this file for C.
+  16:../Project_Settings/Startup_Code/__arm_end.c **** 	
+  17:../Project_Settings/Startup_Code/__arm_end.c **** 	Interface for board-level termination.
+  18:../Project_Settings/Startup_Code/__arm_end.c **** 	
+  19:../Project_Settings/Startup_Code/__arm_end.c **** */
+  20:../Project_Settings/Startup_Code/__arm_end.c **** 
+  21:../Project_Settings/Startup_Code/__arm_end.c **** #include <ansi_parms.h>
+  22:../Project_Settings/Startup_Code/__arm_end.c **** #include <CWCPlusLib.h>
+  23:../Project_Settings/Startup_Code/__arm_end.c **** 
+  24:../Project_Settings/Startup_Code/__arm_end.c **** _EWL_BEGIN_EXTERN_C
+  25:../Project_Settings/Startup_Code/__arm_end.c **** 
+  26:../Project_Settings/Startup_Code/__arm_end.c **** #if defined(__SEMIHOSTING)
+  27:../Project_Settings/Startup_Code/__arm_end.c **** extern void sys_exit(int status);
+  28:../Project_Settings/Startup_Code/__arm_end.c **** #endif
+  29:../Project_Settings/Startup_Code/__arm_end.c **** 
+  30:../Project_Settings/Startup_Code/__arm_end.c **** /*
+  31:../Project_Settings/Startup_Code/__arm_end.c ****  *	_ExitProcess
+  32:../Project_Settings/Startup_Code/__arm_end.c ****  *
+  33:../Project_Settings/Startup_Code/__arm_end.c ****  */
+  34:../Project_Settings/Startup_Code/__arm_end.c **** extern void _ExitProcess(int status) _EWL_WEAK;
+  35:../Project_Settings/Startup_Code/__arm_end.c **** extern void _ExitProcess(int status)
+  36:../Project_Settings/Startup_Code/__arm_end.c **** {
+  26              		.loc 1 36 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 7, -8
+  32              		.cfi_offset 14, -4
+  33 0002 82B0     		sub	sp, sp, #8
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_offset 16
+  36 0004 00AF     		add	r7, sp, #0
+  37              	.LCFI2:
+  38              		.cfi_def_cfa_register 7
+  39 0006 7860     		str	r0, [r7, #4]
+  40              	.L2:
+  37:../Project_Settings/Startup_Code/__arm_end.c **** #if defined(__SEMIHOSTING)
+  38:../Project_Settings/Startup_Code/__arm_end.c **** 	sys_exit(status);
+  39:../Project_Settings/Startup_Code/__arm_end.c **** #endif
+  40:../Project_Settings/Startup_Code/__arm_end.c **** 	while (1);
+  41              		.loc 1 40 0
+  42 0008 FEE7     		b	.L2
+  43              		.cfi_endproc
+  44              	.LFE0:
+  46 000a C046     		.text
+  47              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 __arm_end.c
+C:\Users\lab\AppData\Local\Temp\ccVXy6ii.s:18     .text._ExitProcess:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccVXy6ii.s:23     .text._ExitProcess:00000000 _ExitProcess
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

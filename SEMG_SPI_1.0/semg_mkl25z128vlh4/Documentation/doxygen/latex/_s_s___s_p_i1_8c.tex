@@ -1,0 +1,46 @@
+\hypertarget{_s_s___s_p_i1_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-S\-S\-\_\-\-S\-P\-I1.c File Reference}
+\label{_s_s___s_p_i1_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-S\-S\-\_\-\-S\-P\-I1.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-S\-S\-\_\-\-S\-P\-I1.\-c}}
+}
+
+
+This component \char`\"{}\-S\-P\-I\-Slave\-\_\-\-L\-D\-D\char`\"{} implements S\-L\-A\-V\-E part of synchronous serial master-\/slave communication.  
+
+
+{\ttfamily \#include \char`\"{}S\-S\-\_\-\-S\-P\-I1.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_s_s___s_p_i1___t_device_data}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-T\-Device\-Data}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___s_s___s_p_i1__module_ga5f04a8830cd52a3ffa1678d113f31aee}{\#define {\bfseries A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-E\-V\-E\-N\-T\-S\-\_\-\-M\-A\-S\-K}~0x00\-U}\label{group___s_s___s_p_i1__module_ga5f04a8830cd52a3ffa1678d113f31aee}
+
+\item 
+\hypertarget{group___s_s___s_p_i1__module_ga8d7637fb717e457b529135b4a75f7fd6}{\#define {\bfseries S\-S\-\_\-\-S\-P\-I1\-\_\-\-A\-V\-A\-I\-L\-A\-B\-L\-E\-\_\-\-P\-I\-N\-\_\-\-M\-A\-S\-K}~(\hyperlink{group___p_e___types__module_ga073542f5b2a49dca62e3eeb042f63909}{L\-D\-D\-\_\-\-S\-P\-I\-S\-L\-A\-V\-E\-\_\-\-I\-N\-P\-U\-T\-\_\-\-P\-I\-N} $|$ \hyperlink{group___p_e___types__module_ga7cf4950dd3ffdf321903de20719bdd60}{L\-D\-D\-\_\-\-S\-P\-I\-S\-L\-A\-V\-E\-\_\-\-O\-U\-T\-P\-U\-T\-\_\-\-P\-I\-N} $|$ \hyperlink{group___p_e___types__module_ga2b1fbaeec45990b4da5598609754233b}{L\-D\-D\-\_\-\-S\-P\-I\-S\-L\-A\-V\-E\-\_\-\-C\-L\-K\-\_\-\-P\-I\-N} $|$ \hyperlink{group___p_e___types__module_ga9a25bc45156156e5c9c1ba6d3f6ec840}{L\-D\-D\-\_\-\-S\-P\-I\-S\-L\-A\-V\-E\-\_\-\-S\-S\-\_\-\-P\-I\-N})}\label{group___s_s___s_p_i1__module_ga8d7637fb717e457b529135b4a75f7fd6}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___s_s___s_p_i1__module_ga8ad1ea2d70fc3b8d2b9ea2c601f10065}{typedef \hyperlink{struct_s_s___s_p_i1___t_device_data}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-T\-Device\-Data} $\ast$ {\bfseries S\-S\-\_\-\-S\-P\-I1\-\_\-\-T\-Device\-Data\-Ptr}}\label{group___s_s___s_p_i1__module_ga8ad1ea2d70fc3b8d2b9ea2c601f10065}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___s_s___s_p_i1__module_ga3fcbc65a28ef92bf7bb582ab1a44c492}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets interrupt priority, sets pin routing, sets timing, etc. If the \char`\"{}\-Enable in init. code\char`\"{} is set to \char`\"{}yes\char`\"{} value then the device is also enabled(see the description of the Enable() method). In this case the Enable() method is not necessary and needn't to be generated. This method can be called only once. Before the second call of Init() the Deinit() must be called first. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___s_s___s_p_i1__module_gaff0ae1b55915d6730a5670c42a4e2c95}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-Enable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method enables S\-P\-I device. This method is intended to be used together with $<$Disable()$>$ method to temporary switch On/\-Off the device after the device is initialized. This method is required if the $<$Enabled in init. code$>$ property is set to \char`\"{}no\char`\"{} value. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___s_s___s_p_i1__module_gaa1498d8d4293a6cb7230a4bc8b016a4f}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-Disable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Disables the S\-P\-I device. When the device is disabled, some component methods should not be called. If so, error E\-R\-R\-\_\-\-D\-I\-S\-A\-B\-L\-E\-D may be reported. This method is intended to be used together with $<$Enable()$>$ method to temporary switch on/off the device after the device is initialized. This method is not required. The $<$Deinit()$>$ method can be used to switch off and uninstall the device. \end{DoxyCompactList}\item 
+void \hyperlink{group___s_s___s_p_i1__module_ga791549a3c993814fc03f19149793b89a}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-Main} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method is available only in the polling mode (Interrupt service/event = 'no'). If interrupt service is disabled this method replaces the interrupt handler. This method should be called if Receive/\-Send\-Block was invoked before in order to run the reception/transmission. The end of the receiving/transmitting is indicated by On\-Block\-Sent or On\-Block\-Received event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This component \char`\"{}\-S\-P\-I\-Slave\-\_\-\-L\-D\-D\char`\"{} implements S\-L\-A\-V\-E part of synchronous serial master-\/slave communication. \begin{DoxyVersion}{Version}
+01.\-02 
+\end{DoxyVersion}

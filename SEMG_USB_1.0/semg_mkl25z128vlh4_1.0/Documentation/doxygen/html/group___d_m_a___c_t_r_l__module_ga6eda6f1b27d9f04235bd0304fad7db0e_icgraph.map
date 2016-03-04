@@ -1,0 +1,6 @@
+<map id="DMA_CTRL_SetChannelDestinationAddress" name="DMA_CTRL_SetChannelDestinationAddress">
+<area shape="rect" id="node2" href="$group___d_m_a_t___m___s_p_i___r_x__module.html#ga902c844d7c70f4c7d494f83e65f58cd2" title="The method sets an data destination address for to be transferred by the DMA channel allocated for th..." alt="" coords="283,5,501,46"/>
+<area shape="rect" id="node3" href="$group___d_m_a_t___m___s_p_i___t_x__module.html#ga1a33c0a3ee3c52e3eb70c340bdb55ead" title="The method sets an data destination address for to be transferred by the DMA channel allocated for th..." alt="" coords="283,70,501,111"/>
+<area shape="rect" id="node4" href="$group___d_m_a_t___s___s_p_i___r_x__module.html#gab7d59bf4b8848b9a5377cbbad357cecc" title="The method sets an data destination address for to be transferred by the DMA channel allocated for th..." alt="" coords="283,135,501,177"/>
+<area shape="rect" id="node5" href="$group___d_m_a_t___s___s_p_i___t_x__module.html#ga1b996683c666a693497a501342eb2f5a" title="The method sets an data destination address for to be transferred by the DMA channel allocated for th..." alt="" coords="285,201,499,242"/>
+</map>

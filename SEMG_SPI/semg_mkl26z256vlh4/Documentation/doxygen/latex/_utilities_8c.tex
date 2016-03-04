@@ -1,0 +1,47 @@
+\hypertarget{_utilities_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Utilities.c File Reference}
+\label{_utilities_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Utilities.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Utilities.\-c}}
+}
+
+
+This file contains general functions used in this project.  
+
+
+{\ttfamily \#include \char`\"{}Utilities.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sys\-Tick.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Sys\-Tick\-\_\-\-P\-D\-D.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Aliases.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Globals.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}limits.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Macros.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}stdio.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}string.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___uti_ga0e9be11e405b65adc4e2da665356693b}{Delay1\-Us} ()
+\begin{DoxyCompactList}\small\item\em This method delays 1us most precisely with assembly code. Error limit\-: +/-\/1\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga75f8e7437f833a92c1b0b47ded4ee3d7}{Delay\-Us} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n us precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_gae6595d8b5c3351b857f86516fa753194}{Delay\-Ms} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n Ms precisely with Sys\-Tick being the calculating the beats. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga57c57c7cdd7316581e674de7f51c1d88}{Delay\-S} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n s with repeat a 1000ms delay in a loop which may not be that precisely. Error limit\-: +/-\/0.001\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_gadfeab0efcdcc155ec9f5692f87a2a57a}{Delay\-Some\-Us} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n us roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga9e773733f9f8678fa7f54e54c7e3f316}{Delay\-Some\-Ms} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n Ms roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___uti_ga52aa6208719074d7cd10fe2a42d6d0c7}{Delay\-Some\-S} (uint32 n)
+\begin{DoxyCompactList}\small\item\em This method delays n s roughly with codes calculating the time. Error limit\-: +4\%. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_ga7b6649d282c8abf3613f1ed8e7ef4c34}{Get\-Current\-Us} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total microseconds since power on. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_ga231cbdb58ac0905883e23f1814de2549}{Get\-Current\-Ms} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total milliseconds since power on. \end{DoxyCompactList}\item 
+uint32 \hyperlink{group___uti_gaffe959d82d984dc88cd02a4894d02a7c}{Get\-Current\-S} (void)
+\begin{DoxyCompactList}\small\item\em This method returns the current value of total seconds since power on. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains general functions used in this project. \begin{DoxyVersion}{Version}
+01.\-00 
+\end{DoxyVersion}

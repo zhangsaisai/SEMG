@@ -1,0 +1,13 @@
+1.PE生成DMA，SPI调试成功，DMA能初步通信。
+2.SPI1当作slave，SPI0当作master
+3.SPI0主机为中断模式接收，SPI1从机为DMA发送，没有开启中断。
+4.从机发数据给主机，主机收到的数据与从机发送的数据一致，通过测试。
+5.正确的通信顺序是：
+	   //Put request for reading from SPI
+	   SM_SPI0_ReceiveBlock(SPI0, (LDD_TData*)buffMaster, sizeof(buffMaster));
+	   
+	   //SS_SPI1_SendBlock(SPI1, (LDD_TData*)msgSlave, sizeof(msgSlave) );  
+	   SPI1SendData((LDD_DMA_TAddress)msgSlave, sizeof(msgSlave));
+	   
+	   //To provide clock for slave, master sends anything that is as long as expected answer from slave. length(msgDummy) = length(msgSlave) 
+	   SM_SPI0_SendBlock(SPI0, (LDD_TData*)msgDummy, sizeof(msgDummy) );  

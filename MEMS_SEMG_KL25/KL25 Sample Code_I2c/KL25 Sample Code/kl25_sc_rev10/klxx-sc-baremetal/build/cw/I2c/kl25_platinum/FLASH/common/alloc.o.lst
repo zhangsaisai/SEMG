@@ -1,0 +1,489 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"alloc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.free,"ax",%progbits
+  18              		.align	2
+  19              		.global	free
+  20              		.code	16
+  21              		.thumb_func
+  23              	free:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * File:        alloc.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * Purpose:     generic malloc() and free() engine
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  *
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** #include "common.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** #include "stdlib.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** #ifdef IAR
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** #pragma section = "HEAP"
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** #endif
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** /********************************************************************/
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** /*
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * This struct forms the minimum block size which is allocated, and
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * also forms the linked list for the memory space used with alloc()
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * and free().  It is padded so that on a 32-bit machine, all malloc'ed
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  * pointers are 16-byte aligned.
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****  */
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** typedef struct ALLOC_HDR
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** {
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     struct
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         struct ALLOC_HDR     *ptr;
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         unsigned int size;
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     } s;
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     unsigned int align;
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     unsigned int pad;
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** } ALLOC_HDR;
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** static ALLOC_HDR base;
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** static ALLOC_HDR *freep = NULL;
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** /********************************************************************/
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** void
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** free (void *ap)
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** {
+  26              		.loc 1 40 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     ALLOC_HDR *bp, *p;
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     bp = (ALLOC_HDR *)ap - 1;   /* point to block header */
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = freep; !((bp > p) && (bp < p->s.ptr)) ; p = p->s.ptr)
+  29              		.loc 1 44 0
+  30 0000 1849     		ldr	r1, .L19
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     bp = (ALLOC_HDR *)ap - 1;   /* point to block header */
+  31              		.loc 1 43 0
+  32 0002 1038     		sub	r0, r0, #16
+  33              	.LVL1:
+  34              		.loc 1 44 0
+  35 0004 0B68     		ldr	r3, [r1]
+  36              	.LVL2:
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** {
+  37              		.loc 1 40 0
+  38 0006 30B5     		push	{r4, r5, lr}
+  39              	.LCFI0:
+  40              		.cfi_def_cfa_offset 12
+  41              		.cfi_offset 4, -12
+  42              		.cfi_offset 5, -8
+  43              		.cfi_offset 14, -4
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         if ((p >= p->s.ptr) && ((bp > p) || (bp < p->s.ptr)))
+  44              		.loc 1 46 0
+  45 0008 1A68     		ldr	r2, [r3]
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = freep; !((bp > p) && (bp < p->s.ptr)) ; p = p->s.ptr)
+  46              		.loc 1 44 0
+  47 000a 8342     		cmp	r3, r0
+  48 000c 07D3     		bcc	.L16
+  49              	.L4:
+  50              		.loc 1 46 0
+  51 000e 9342     		cmp	r3, r2
+  52 0010 01D3     		bcc	.L14
+  53              		.loc 1 46 0 is_stmt 0
+  54 0012 9042     		cmp	r0, r2
+  55 0014 07D3     		bcc	.L3
+  56              	.L14:
+  57              		.loc 1 46 0
+  58 0016 131C     		mov	r3, r2
+  59              	.LVL3:
+  60 0018 1A68     		ldr	r2, [r3]
+  61              	.LVL4:
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = freep; !((bp > p) && (bp < p->s.ptr)) ; p = p->s.ptr)
+  62              		.loc 1 44 0 is_stmt 1
+  63 001a 8342     		cmp	r3, r0
+  64 001c F7D2     		bcs	.L4
+  65              	.L16:
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = freep; !((bp > p) && (bp < p->s.ptr)) ; p = p->s.ptr)
+  66              		.loc 1 44 0 is_stmt 0
+  67 001e 9042     		cmp	r0, r2
+  68 0020 01D3     		bcc	.L3
+  69              		.loc 1 46 0 is_stmt 1
+  70 0022 9342     		cmp	r3, r2
+  71 0024 F7D3     		bcc	.L14
+  72              	.L3:
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         {
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             break; /* freed block at start or end of arena */
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         }
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     if ((bp + bp->s.size) == p->s.ptr)
+  73              		.loc 1 52 0
+  74 0026 4468     		ldr	r4, [r0, #4]
+  75 0028 2501     		lsl	r5, r4, #4
+  76 002a 4519     		add	r5, r0, r5
+  77 002c 9542     		cmp	r5, r2
+  78 002e 08D0     		beq	.L17
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.size += p->s.ptr->s.size;
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.ptr = p->s.ptr->s.ptr;
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     else
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.ptr = p->s.ptr;
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     if ((p + p->s.size) == bp)
+  79              		.loc 1 62 0
+  80 0030 5D68     		ldr	r5, [r3, #4]
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.ptr = p->s.ptr;
+  81              		.loc 1 59 0
+  82 0032 0260     		str	r2, [r0]
+  83              		.loc 1 62 0
+  84 0034 2C01     		lsl	r4, r5, #4
+  85 0036 1A19     		add	r2, r3, r4
+  86 0038 9042     		cmp	r0, r2
+  87 003a 0CD0     		beq	.L18
+  88              	.L8:
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size += bp->s.size;
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = bp->s.ptr;
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     else
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = bp;
+  89              		.loc 1 69 0
+  90 003c 1860     		str	r0, [r3]
+  91              	.LVL5:
+  92              	.L9:
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     freep = p;
+  93              		.loc 1 72 0
+  94 003e 0B60     		str	r3, [r1]
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** }
+  95              		.loc 1 73 0
+  96              		@ sp needed for prologue
+  97 0040 30BD     		pop	{r4, r5, pc}
+  98              	.LVL6:
+  99              	.L17:
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.size += p->s.ptr->s.size;
+ 100              		.loc 1 54 0
+ 101 0042 5568     		ldr	r5, [r2, #4]
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.ptr = p->s.ptr->s.ptr;
+ 102              		.loc 1 55 0
+ 103 0044 1268     		ldr	r2, [r2]
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.size += p->s.ptr->s.size;
+ 104              		.loc 1 54 0
+ 105 0046 2C19     		add	r4, r5, r4
+ 106 0048 4460     		str	r4, [r0, #4]
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     if ((p + p->s.size) == bp)
+ 107              		.loc 1 62 0
+ 108 004a 5D68     		ldr	r5, [r3, #4]
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         bp->s.ptr = p->s.ptr->s.ptr;
+ 109              		.loc 1 55 0
+ 110 004c 0260     		str	r2, [r0]
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     if ((p + p->s.size) == bp)
+ 111              		.loc 1 62 0
+ 112 004e 2C01     		lsl	r4, r5, #4
+ 113 0050 1A19     		add	r2, r3, r4
+ 114 0052 9042     		cmp	r0, r2
+ 115 0054 F2D1     		bne	.L8
+ 116              	.L18:
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size += bp->s.size;
+ 117              		.loc 1 64 0
+ 118 0056 4468     		ldr	r4, [r0, #4]
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = bp->s.ptr;
+ 119              		.loc 1 65 0
+ 120 0058 0068     		ldr	r0, [r0]
+ 121              	.LVL7:
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size += bp->s.size;
+ 122              		.loc 1 64 0
+ 123 005a 6519     		add	r5, r4, r5
+ 124 005c 5D60     		str	r5, [r3, #4]
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = bp->s.ptr;
+ 125              		.loc 1 65 0
+ 126 005e 1860     		str	r0, [r3]
+ 127 0060 EDE7     		b	.L9
+ 128              	.L20:
+ 129 0062 C046     		.align	2
+ 130              	.L19:
+ 131 0064 00000000 		.word	.LANCHOR0
+ 132              		.cfi_endproc
+ 133              	.LFE0:
+ 135              		.section	.text.malloc,"ax",%progbits
+ 136              		.align	2
+ 137              		.global	malloc
+ 138              		.code	16
+ 139              		.thumb_func
+ 141              	malloc:
+ 142              	.LFB1:
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** /********************************************************************/
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** void *
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** malloc (unsigned nbytes)
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** {
+ 143              		.loc 1 78 0
+ 144              		.cfi_startproc
+ 145              	.LVL8:
+ 146 0000 70B5     		push	{r4, r5, r6, lr}
+ 147              	.LCFI1:
+ 148              		.cfi_def_cfa_offset 16
+ 149              		.cfi_offset 4, -16
+ 150              		.cfi_offset 5, -12
+ 151              		.cfi_offset 6, -8
+ 152              		.cfi_offset 14, -4
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     /* Get addresses for the HEAP start and end */
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     #if defined(CW)  
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****       extern char __HEAP_START[];
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****       extern char __HEAP_END[];
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     #elif defined(IAR)
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****       char* __HEAP_START = __section_begin("HEAP");
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****       char* __HEAP_END = __section_end("HEAP");
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     #elif defined(KEIL)
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 	  extern uint32_t HEAP$$Base;
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 	  extern uint32_t HEAP$$Limit;
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 	  uint32_t __HEAP_START = (uint32_t)&HEAP$$Base;
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 	  uint32_t __HEAP_END = (uint32_t)&HEAP$$Limit;
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     #endif
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****    
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     ALLOC_HDR *p, *prevp;
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     unsigned nunits;
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     nunits = ((nbytes+sizeof(ALLOC_HDR)-1) / sizeof(ALLOC_HDR)) + 1;
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     if ((prevp = freep) == NULL)
+ 153              		.loc 1 98 0
+ 154 0002 204D     		ldr	r5, .L38
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     nunits = ((nbytes+sizeof(ALLOC_HDR)-1) / sizeof(ALLOC_HDR)) + 1;
+ 155              		.loc 1 96 0
+ 156 0004 011C     		mov	r1, r0
+ 157 0006 0F31     		add	r1, r1, #15
+ 158              		.loc 1 98 0
+ 159 0008 2C68     		ldr	r4, [r5]
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     nunits = ((nbytes+sizeof(ALLOC_HDR)-1) / sizeof(ALLOC_HDR)) + 1;
+ 160              		.loc 1 96 0
+ 161 000a 0909     		lsr	r1, r1, #4
+ 162 000c 0131     		add	r1, r1, #1
+ 163              	.LVL9:
+ 164              		.loc 1 98 0
+ 165 000e 002C     		cmp	r4, #0
+ 166 0010 1BD0     		beq	.L22
+ 167 0012 2368     		ldr	r3, [r4]
+ 168 0014 5A68     		ldr	r2, [r3, #4]
+ 169              	.LVL10:
+ 170              	.L23:
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p = (ALLOC_HDR *)__HEAP_START;
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size = ( ((uint32)__HEAP_END - (uint32)__HEAP_START)
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             / sizeof(ALLOC_HDR) );
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = &base;
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         base.s.ptr = p;
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         base.s.size = 0;
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         prevp = freep = &base;
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = prevp->s.ptr; ; prevp = p, p = p->s.ptr)
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     {
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         if (p->s.size >= nunits)
+ 171              		.loc 1 111 0
+ 172 0016 9142     		cmp	r1, r2
+ 173 0018 32D9     		bls	.L31
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         {
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             if (p->s.size == nunits)
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             {
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 prevp->s.ptr = p->s.ptr;
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             }
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             else
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             {
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p->s.size -= nunits;
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p += p->s.size;
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p->s.size = nunits;
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             }
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             freep = prevp;
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             return (void *)(p + 1);
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         }
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** 
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         if (p == freep)
+ 174              		.loc 1 127 0
+ 175 001a 2C68     		ldr	r4, [r5]
+ 176              	.LVL11:
+ 177 001c A342     		cmp	r3, r4
+ 178 001e 03D1     		bne	.L35
+ 179 0020 11E0     		b	.L33
+ 180              	.LVL12:
+ 181              	.L36:
+ 182 0022 031E     		sub	r3, r0, #0
+ 183              	.LVL13:
+ 184 0024 A342     		cmp	r3, r4
+ 185 0026 0ED0     		beq	.L33
+ 186              	.LVL14:
+ 187              	.L35:
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     for (p = prevp->s.ptr; ; prevp = p, p = p->s.ptr)
+ 188              		.loc 1 109 0
+ 189 0028 1868     		ldr	r0, [r3]
+ 190              	.LVL15:
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         if (p->s.size >= nunits)
+ 191              		.loc 1 111 0
+ 192 002a 4268     		ldr	r2, [r0, #4]
+ 193 002c 9142     		cmp	r1, r2
+ 194 002e F8D8     		bhi	.L36
+ 195 0030 1C1C     		mov	r4, r3
+ 196              	.LVL16:
+ 197              	.L24:
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             if (p->s.size == nunits)
+ 198              		.loc 1 113 0
+ 199 0032 9142     		cmp	r1, r2
+ 200 0034 21D0     		beq	.L37
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p->s.size -= nunits;
+ 201              		.loc 1 119 0
+ 202 0036 561A     		sub	r6, r2, r1
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p += p->s.size;
+ 203              		.loc 1 120 0
+ 204 0038 3201     		lsl	r2, r6, #4
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p->s.size -= nunits;
+ 205              		.loc 1 119 0
+ 206 003a 4660     		str	r6, [r0, #4]
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p += p->s.size;
+ 207              		.loc 1 120 0
+ 208 003c 8018     		add	r0, r0, r2
+ 209              	.LVL17:
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 p->s.size = nunits;
+ 210              		.loc 1 121 0
+ 211 003e 4160     		str	r1, [r0, #4]
+ 212              	.LVL18:
+ 213              	.L28:
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             freep = prevp;
+ 214              		.loc 1 123 0
+ 215 0040 2C60     		str	r4, [r5]
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             return (void *)(p + 1);
+ 216              		.loc 1 124 0
+ 217 0042 1030     		add	r0, r0, #16
+ 218              	.LVL19:
+ 219              	.L25:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             return NULL;
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****     }
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c **** }
+ 220              		.loc 1 130 0
+ 221              		@ sp needed for prologue
+ 222 0044 70BD     		pop	{r4, r5, r6, pc}
+ 223              	.LVL20:
+ 224              	.L33:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             return NULL;
+ 225              		.loc 1 128 0
+ 226 0046 0020     		mov	r0, #0
+ 227 0048 FCE7     		b	.L25
+ 228              	.LVL21:
+ 229              	.L22:
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size = ( ((uint32)__HEAP_END - (uint32)__HEAP_START)
+ 230              		.loc 1 101 0
+ 231 004a 0F4B     		ldr	r3, .L38+4
+ 232 004c 0F48     		ldr	r0, .L38+8
+ 233              	.LVL22:
+ 234 004e C01A     		sub	r0, r0, r3
+ 235 0050 060B     		lsr	r6, r0, #12
+ 236 0052 5E71     		strb	r6, [r3, #5]
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****             / sizeof(ALLOC_HDR) );
+ 237              		.loc 1 102 0
+ 238 0054 0209     		lsr	r2, r0, #4
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size = ( ((uint32)__HEAP_END - (uint32)__HEAP_START)
+ 239              		.loc 1 101 0
+ 240 0056 060D     		lsr	r6, r0, #20
+ 241 0058 000F     		lsr	r0, r0, #28
+ 242 005a D871     		strb	r0, [r3, #7]
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = &base;
+ 243              		.loc 1 103 0
+ 244 005c 0C48     		ldr	r0, .L38+12
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size = ( ((uint32)__HEAP_END - (uint32)__HEAP_START)
+ 245              		.loc 1 101 0
+ 246 005e 9E71     		strb	r6, [r3, #6]
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = &base;
+ 247              		.loc 1 103 0
+ 248 0060 060A     		lsr	r6, r0, #8
+ 249 0062 5E70     		strb	r6, [r3, #1]
+ 250 0064 060C     		lsr	r6, r0, #16
+ 251 0066 9E70     		strb	r6, [r3, #2]
+ 252 0068 060E     		lsr	r6, r0, #24
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.size = ( ((uint32)__HEAP_END - (uint32)__HEAP_START)
+ 253              		.loc 1 101 0
+ 254 006a 1A71     		strb	r2, [r3, #4]
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         p->s.ptr = &base;
+ 255              		.loc 1 103 0
+ 256 006c 1870     		strb	r0, [r3]
+ 257 006e DE70     		strb	r6, [r3, #3]
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         base.s.size = 0;
+ 258              		.loc 1 105 0
+ 259 0070 4460     		str	r4, [r0, #4]
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         base.s.ptr = p;
+ 260              		.loc 1 104 0
+ 261 0072 0360     		str	r3, [r0]
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         prevp = freep = &base;
+ 262              		.loc 1 106 0
+ 263 0074 2860     		str	r0, [r5]
+ 264              	.LVL23:
+ 265 0076 041C     		mov	r4, r0
+ 266 0078 CDE7     		b	.L23
+ 267              	.LVL24:
+ 268              	.L37:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****                 prevp->s.ptr = p->s.ptr;
+ 269              		.loc 1 115 0
+ 270 007a 0168     		ldr	r1, [r0]
+ 271              	.LVL25:
+ 272 007c 2160     		str	r1, [r4]
+ 273 007e DFE7     		b	.L28
+ 274              	.LVL26:
+ 275              	.L31:
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\alloc.c ****         if (p->s.size >= nunits)
+ 276              		.loc 1 111 0
+ 277 0080 181C     		mov	r0, r3
+ 278 0082 D6E7     		b	.L24
+ 279              	.L39:
+ 280              		.align	2
+ 281              	.L38:
+ 282 0084 00000000 		.word	.LANCHOR0
+ 283 0088 00000000 		.word	__HEAP_START
+ 284 008c 00000000 		.word	__HEAP_END
+ 285 0090 00000000 		.word	.LANCHOR1
+ 286              		.cfi_endproc
+ 287              	.LFE1:
+ 289              		.section	.bss.freep,"aw",%nobits
+ 290              		.align	2
+ 291              		.set	.LANCHOR0,. + 0
+ 294              	freep:
+ 295 0000 00000000 		.space	4
+ 296              		.section	.bss.base,"aw",%nobits
+ 297              		.align	2
+ 298              		.set	.LANCHOR1,. + 0
+ 301              	base:
+ 302 0000 00000000 		.space	16
+ 302      00000000 
+ 302      00000000 
+ 302      00000000 
+ 303              		.text
+ 304              	.Letext0:
+ 305              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 alloc.c
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:18     .text.free:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:23     .text.free:00000000 free
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:131    .text.free:00000064 $d
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:136    .text.malloc:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:141    .text.malloc:00000000 malloc
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:282    .text.malloc:00000084 $d
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:290    .bss.freep:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:294    .bss.freep:00000000 freep
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:297    .bss.base:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cccy1eO8.s:301    .bss.base:00000000 base
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+__HEAP_START
+__HEAP_END

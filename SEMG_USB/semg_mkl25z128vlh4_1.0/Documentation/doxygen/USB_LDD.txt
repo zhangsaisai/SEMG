@@ -1,0 +1,499 @@
+/*!
+\page USB_LDD USB_LDD (USB_LDD)
+**         This component implements an low level USB API.
+
+- \subpage USB_LDD_settings
+- \subpage USB_LDD_regs_overview  
+- \subpage USB_LDD_regs_details
+- \ref USB_LDD_module "Component documentation" 
+
+\page USB_LDD_regs_overview Registers Initialization Overview
+This page initialization values for the registers of the peripheral(s) configured
+by the component. 
+<table>
+<tr><td colspan="4" class="ttitle1">USB_LDD Initialization</td></tr>
+<tr><td class="ttitle2">Address</td><td class="ttitle2">Register</td><td class="ttitle2">Register Value</td><td class="ttitle2">Register Description</td></tr>
+<tr><td>0xE000E418</td><td>NVIC_IPR6</td><td>
+    0x00000080
+ </td><td>NVIC_IPR6 register, peripheral USB_LDD.</td></tr>
+<tr><td>0xE000E100</td><td>NVIC_ISER</td><td>
+    0x4100000F
+ </td><td>NVIC_ISER register, peripheral USB_LDD.</td></tr>
+<tr><td>0x40048004</td><td>SIM_SOPT2</td><td>
+    0x00040000
+ </td><td>SIM_SOPT2 register, peripheral USB_LDD.</td></tr>
+<tr><td>0x40048034</td><td>SIM_SCGC4</td><td>
+    0x00C40000
+ </td><td>SIM_SCGC4 register, peripheral USB_LDD.</td></tr>
+<tr><td>0x4007210C</td><td>USB0_USBTRC0</td><td>
+    0x000000C0
+ </td><td>USB0_USBTRC0 register, peripheral USB_LDD.</td></tr>
+<tr><td>0x40047000</td><td>SIM_SOPT1</td><td>
+    0x00000080
+ </td><td>SIM_SOPT1 register, peripheral USB_LDD.</td></tr>
+<tr><td>0x40072100</td><td>USB0_USBCTRL</td><td>
+    0x000000C0
+ </td><td>USB0_USBCTRL register, peripheral USB_LDD.</td></tr>
+<tr><td>0x4007201C</td><td>USB0_OTGCTL</td><td>
+    0x00000004
+ </td><td>USB0_OTGCTL register, peripheral USB_LDD.</td></tr>
+</table>
+<br/>
+\page USB_LDD_regs_details Register Initialization Details
+This page contains detailed description of initialization values for the 
+registers of the peripheral(s) configured by the component. 
+
+<div class="reghdr1">NVIC_IPR6</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="8" rowspan="2">PRI_27</td><td colspan="8" rowspan="2">PRI_26</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="8" rowspan="2">PRI_25</td><td colspan="8" rowspan="2">PRI_24</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0xE000E418</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000080</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>24 - 31</td><td>PRI_27</td><td>0x00</td><td>Priority of interrupt 27</td>
+<tr><td>16 - 23</td><td>PRI_26</td><td>0x00</td><td>Priority of interrupt 26</td>
+<tr><td>8 - 15</td><td>PRI_25</td><td>0x00</td><td>Priority of interrupt 25</td>
+<tr><td>0 - 7</td><td>PRI_24</td><td>0x80</td><td>Priority of interrupt 24</td>
+</tr></table>
+<div class="reghdr1">NVIC_ISER</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="16" rowspan="2">SETENA</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="32" rowspan="2">SETENA</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0xE000E100</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x4100000F</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>0 - 31</td><td>SETENA</td><td>0x00</td><td>Interrupt set enable bits</td>
+</tr></table>
+<div class="reghdr1">SIM_SOPT2</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="2" rowspan="2">UART0SRC</td><td colspan="2" rowspan="2">TPMSRC</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">USBSRC</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">PLLFLLSEL</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="3" rowspan="2">CLKOUTSEL</td>
+<td colspan="1" rowspan="2">RTCCLKOUTSEL</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40048004</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00040000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>26 - 27</td><td>UART0SRC</td><td>0x00</td><td>UART0 clock source select</td>
+<tr><td>24 - 25</td><td>TPMSRC</td><td>0x00</td><td>TPM clock source select</td>
+<tr><td>18</td><td>USBSRC</td><td>0x01</td><td>USB clock source select</td>
+<tr><td>16</td><td>PLLFLLSEL</td><td>0x00</td><td>PLL/FLL clock select</td>
+<tr><td>5 - 7</td><td>CLKOUTSEL</td><td>0x00</td><td>CLKOUT select</td>
+<tr><td>4</td><td>RTCCLKOUTSEL</td><td>0x00</td><td>RTC clock out select</td>
+</tr></table>
+<div class="reghdr1">SIM_SCGC4</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">SPI1</td>
+<td colspan="1" rowspan="2">SPI0</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">CMP</td><td colspan="1" rowspan="2">USBOTG</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">UART2</td><td colspan="1" rowspan="2">UART1</td><td colspan="1" rowspan="2">UART0</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">I2C1</td>
+<td colspan="1" rowspan="2">I2C0</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40048034</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00C40000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0xF0000030</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>23</td><td>SPI1</td><td>0x01</td><td>SPI1 Clock Gate Control</td>
+<tr><td>22</td><td>SPI0</td><td>0x01</td><td>SPI0 Clock Gate Control</td>
+<tr><td>19</td><td>CMP</td><td>0x00</td><td>Comparator Clock Gate Control</td>
+<tr><td>18</td><td>USBOTG</td><td>0x01</td><td>USB Clock Gate Control</td>
+<tr><td>12</td><td>UART2</td><td>0x00</td><td>UART2 Clock Gate Control</td>
+<tr><td>11</td><td>UART1</td><td>0x00</td><td>UART1 Clock Gate Control</td>
+<tr><td>10</td><td>UART0</td><td>0x00</td><td>UART0 Clock Gate Control</td>
+<tr><td>7</td><td>I2C1</td><td>0x00</td><td>I2C1 Clock Gate Control</td>
+<tr><td>6</td><td>I2C0</td><td>0x00</td><td>I2C0 Clock Gate Control</td>
+</tr></table>
+<div class="reghdr1">USB0_USBTRC0</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1"></td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">USBRESMEN</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="1">SYNC_DET</td><td colspan="1" rowspan="1">USB_RESUME_INT</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+<td colspan="1">USBRESET</td><td colspan="1"></td><td colspan="1"></td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4007210C</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000000C0</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>7</td><td>USBRESET</td><td>0x01</td><td>USB Reset</td>
+<tr><td>5</td><td>USBRESMEN</td><td>0x00</td><td>Asynchronous Resume Interrupt Enable</td>
+<tr><td>1</td><td>SYNC_DET</td><td>0x00</td><td>Synchronous USB Interrupt Detect</td>
+<tr><td>0</td><td>USB_RESUME_INT</td><td>0x00</td><td>USB Asynchronous Interrupt</td>
+</tr></table>
+<div class="reghdr1">SIM_SOPT1</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>31</td><td>30</td><td>29</td><td>28</td><td>27</td><td>26</td><td>25</td><td>24</td><td>23</td>
+<td>22</td><td>21</td><td>20</td><td>19</td><td>18</td><td>17</td><td>16</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">USBREGEN</td><td colspan="1" rowspan="2">USBSSTBY</td>
+<td colspan="1" rowspan="2">USBVSTBY</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="2" rowspan="2">OSC32KSEL</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>15</td><td>14</td><td>13</td><td>12</td><td>11</td><td>10</td><td>9</td><td>8</td><td>7</td>
+<td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+<td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40047000</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000080</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x80000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>31</td><td>USBREGEN</td><td>0x00</td><td>USB voltage regulator enable</td>
+<tr><td>30</td><td>USBSSTBY</td><td>0x00</td><td>USB voltage regulator in standby mode during Stop, VLPS, LLS and VLLS modes</td>
+<tr><td>29</td><td>USBVSTBY</td><td>0x00</td><td>USB voltage regulator in standby mode during VLPR and VLPW modes</td>
+<tr><td>18 - 19</td><td>OSC32KSEL</td><td>0x00</td><td>32K oscillator clock select</td>
+</tr></table>
+<div class="reghdr1">USB0_USBCTRL</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">SUSP</td><td colspan="1" rowspan="2">PDE</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x40072100</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x000000C0</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x000000C0</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>7</td><td>SUSP</td><td>0x01</td><td>Places the USB transceiver into the suspend state</td>
+<tr><td>6</td><td>PDE</td><td>0x01</td><td>Enables the weak pulldowns on the USB transceiver</td>
+</tr></table>
+<div class="reghdr1">USB0_OTGCTL</div>
+<div class="regdiag">
+<table class="regtbl">
+<tr class="trd1r">
+<td class="trd1c">Bit</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td><td>0</td>
+</tr>
+<tr>
+<td class="trd1c">R</td><td colspan="1" rowspan="2">DPHIGH</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">DPLOW</td><td colspan="1" rowspan="2">DMLOW</td><td colspan="1" rowspan="2">-</td>
+<td colspan="1" rowspan="2">OTGEN</td><td colspan="1" rowspan="2">-</td><td colspan="1" rowspan="2">-</td>
+</tr>
+<tr>
+<td class="trd1c">W</td>
+</tr>
+<tr class="trd1r">
+<td class="trd1c">Reset</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td>
+</tr>
+</table>
+        
+</div>
+<table class="regtbl2"><tr><td class="trowtit" colspan="2">Address</td><td colspan="2">0x4007201C</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">Initial value</td><td colspan="2">0x00000004</td></tr>
+<tr class="trowtit"><td  class="trowtit" colspan="2">After-reset value</td><td colspan="2">0x00000000</td></tr>
+<tr><td class="ttitle2">Bit</td><td class="ttitle2">Field</td><td class="ttitle2">Value</td><td class="ttitle2">Description</td></tr>
+<tr><td>7</td><td>DPHIGH</td><td>0x00</td><td>D+ Data Line pullup resistor enable</td>
+<tr><td>5</td><td>DPLOW</td><td>0x00</td><td>D+ Data Line pull-down resistor enable</td>
+<tr><td>4</td><td>DMLOW</td><td>0x00</td><td>D- Data Line pull-down resistor enable</td>
+<tr><td>2</td><td>OTGEN</td><td>0x01</td><td>On-The-Go pullup/pulldown resistor enable</td>
+</tr></table>
+*/
+/*!
+\page USB_LDD_settings Component Settings
+\code
+**          Component name                                 : USB_LDD
+**          USB module (SIE)                               : USB0
+**          Input clock frequency [MHz]                    : 48 MHz
+**          Interrupt service/event                        : Enabled
+**            Interrupt                                    : INT_USB0
+**            Interrupt priority                           : medium priority
+**          Mode                                           : DEVICE
+**            Transceiver type                             : Internal
+**              Transceiver module                         : USB0_FS
+**              Transceiver weak pull-downs                : Enabled
+**              USB revision                               : USB 2.0
+**              Device data rate                           : Full speed
+**              Pin/signal setting                         : 
+**                Clock pin                                : Disabled
+**                USB data pins                            : 
+**                  Data plus                              : 
+**                    Pin                                  : USB0_DP
+**                    Pin signal                           : 
+**                  Data minus                             : 
+**                    Pin                                  : USB0_DM
+**                    Pin signal                           : 
+**                VBUS pins                                : 
+**                  VBUS detect                            : Disabled
+**                Pullup/Pulldown pins                     : 
+**                  DP pullup                              : Enabled
+**                    Pin                                  : USB0_Internal_DP_PU
+**                    Pin signal                           : 
+**                    Polarity                             : Activ high
+**                  DM pullup                              : Disabled
+**            Device mode setting                          : 
+**              EP list                                    : 16
+**                EP 0                                     : Enabled
+**                  Control transfer                       : Enabled
+**                    Maximum packet size                  : 8
+**                    Max. queue size                      : 1
+**                  Bulk OUT transfer                      : Disabled
+**                  Bulk IN transfer                       : Disabled
+**                  Interrupt OUT transfer                 : Disabled
+**                  Interrupt IN transfer                  : Disabled
+**                  Isochronous OUT  transfer              : Disabled
+**                  Isochronous IN  transfer               : Disabled
+**                EP 1                                     : Enabled
+**                  Control transfer                       : Disabled
+**                  Bulk OUT transfer                      : Disabled
+**                  Bulk IN transfer                       : Enabled
+**                    Max. packet size                     : 64
+**                    Max. queue size                      : 1
+**                  Interrupt OUT transfer                 : Disabled
+**                  Interrupt IN transfer                  : Disabled
+**                  Isochronous OUT  transfer              : Disabled
+**                  Isochronous IN  transfer               : Disabled
+**                EP 2                                     : Enabled
+**                  Control transfer                       : Disabled
+**                  Bulk OUT transfer                      : Enabled
+**                    Max. packet size                     : 64
+**                    Max. queue size                      : 1
+**                  Bulk IN transfer                       : Disabled
+**                  Interrupt OUT transfer                 : Disabled
+**                  Interrupt IN transfer                  : Disabled
+**                  Isochronous OUT  transfer              : Disabled
+**                  Isochronous IN  transfer               : Disabled
+**                EP 3                                     : Enabled
+**                  Control transfer                       : Disabled
+**                  Bulk OUT transfer                      : Disabled
+**                  Bulk IN transfer                       : Disabled
+**                  Interrupt OUT transfer                 : Disabled
+**                  Interrupt IN transfer                  : Enabled
+**                    Max. packet size                     : 8
+**                    Max. queue size                      : 1
+**                  Isochronous OUT  transfer              : Disabled
+**                  Isochronous IN  transfer               : Disabled
+**                EP 4                                     : Disabled
+**                EP 5                                     : Disabled
+**                EP 6                                     : Disabled
+**                EP 7                                     : Disabled
+**                EP 8                                     : Disabled
+**                EP 9                                     : Disabled
+**                EP 10                                    : Disabled
+**                EP 11                                    : Disabled
+**                EP 12                                    : Disabled
+**                EP 13                                    : Disabled
+**                EP 14                                    : Disabled
+**                EP 15                                    : Disabled
+**            Initialization                               : 
+**              Enabled in init. code                      : no
+**              Auto initialization                        : no
+**              Event mask                                 : 
+**                OnDeviceReset                            : Enabled
+**                OnDeviceSpeedDetect                      : Enabled
+**                OnDeviceSuspend                          : Enabled
+**                OnDeviceResume                           : Enabled
+**                OnDeviceSetupPacket                      : Enabled
+**                OnDeviceSof                              : Enabled
+**                OnDeviceError                            : Enabled
+**                OnDevice1msTimer                         : Enabled
+**                OnSignalChange                           : Enabled
+**          CPU clock/configuration selection              : 
+**            Clock configuration 0                        : This component enabled
+**            Clock configuration 1                        : This component disabled
+**            Clock configuration 2                        : This component disabled
+**            Clock configuration 3                        : This component disabled
+**            Clock configuration 4                        : This component disabled
+**            Clock configuration 5                        : This component disabled
+**            Clock configuration 6                        : This component disabled
+**            Clock configuration 7                        : This component disabled
+\endcode
+*/

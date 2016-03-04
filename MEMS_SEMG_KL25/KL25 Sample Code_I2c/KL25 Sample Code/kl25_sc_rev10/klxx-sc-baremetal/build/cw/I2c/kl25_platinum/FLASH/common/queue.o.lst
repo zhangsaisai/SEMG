@@ -1,0 +1,354 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"queue.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.queue_init,"ax",%progbits
+  18              		.align	2
+  19              		.global	queue_init
+  20              		.code	16
+  21              		.thumb_func
+  23              	queue_init:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * File:    queue.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Purpose: Implement a first in, first out linked list
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Notes:   
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** #include "common.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** #include "queue.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** 
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Initialize the specified queue to an empty state
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * 
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  q   Pointer to queue structure
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** void
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_init(QUEUE *q)
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+  26              		.loc 1 20 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     q->head = NULL;
+  29              		.loc 1 21 0
+  30 0000 0023     		mov	r3, #0
+  31 0002 0360     		str	r3, [r0]
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+  32              		.loc 1 22 0
+  33              		@ sp needed for prologue
+  34 0004 7047     		bx	lr
+  35              		.cfi_endproc
+  36              	.LFE0:
+  38 0006 C046     		.section	.text.queue_isempty,"ax",%progbits
+  39              		.align	2
+  40              		.global	queue_isempty
+  41              		.code	16
+  42              		.thumb_func
+  44              	queue_isempty:
+  45              	.LFB1:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Check for an empty queue
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  q       Pointer to queue structure
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * 
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Return Value:
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  1 if Queue is empty
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  0 otherwise
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** int
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_isempty(QUEUE *q)
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+  46              		.loc 1 36 0
+  47              		.cfi_startproc
+  48              	.LVL1:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return (q->head == NULL);
+  49              		.loc 1 37 0
+  50 0000 0068     		ldr	r0, [r0]
+  51              	.LVL2:
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+  52              		.loc 1 38 0
+  53              		@ sp needed for prologue
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return (q->head == NULL);
+  54              		.loc 1 37 0
+  55 0002 4342     		neg	r3, r0
+  56 0004 5841     		adc	r0, r0, r3
+  57              		.loc 1 38 0
+  58 0006 7047     		bx	lr
+  59              		.cfi_endproc
+  60              	.LFE1:
+  62              		.section	.text.queue_add,"ax",%progbits
+  63              		.align	2
+  64              		.global	queue_add
+  65              		.code	16
+  66              		.thumb_func
+  68              	queue_add:
+  69              	.LFB2:
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Add an item to the end of the queue 
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  q       Pointer to queue structure
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  node    New node to add to the queue
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** void
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_add(QUEUE *q, QNODE *node)
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+  70              		.loc 1 49 0
+  71              		.cfi_startproc
+  72              	.LVL3:
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     if (queue_isempty(q))
+  73              		.loc 1 50 0
+  74 0000 0368     		ldr	r3, [r0]
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+  75              		.loc 1 49 0
+  76 0002 00B5     		push	{lr}
+  77              	.LCFI0:
+  78              		.cfi_def_cfa_offset 4
+  79              		.cfi_offset 14, -4
+  80              		.loc 1 50 0
+  81 0004 002B     		cmp	r3, #0
+  82 0006 05D0     		beq	.L7
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     {
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         q->head = q->tail = node;
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     }
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     else
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     {
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         q->tail->next = node;
+  83              		.loc 1 56 0
+  84 0008 4268     		ldr	r2, [r0, #4]
+  85 000a 1160     		str	r1, [r2]
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         q->tail = node;
+  86              		.loc 1 57 0
+  87 000c 4160     		str	r1, [r0, #4]
+  88              	.L5:
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     }
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     node->next = NULL;
+  89              		.loc 1 60 0
+  90 000e 0020     		mov	r0, #0
+  91              	.LVL4:
+  92 0010 0860     		str	r0, [r1]
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+  93              		.loc 1 61 0
+  94              		@ sp needed for prologue
+  95 0012 00BD     		pop	{pc}
+  96              	.LVL5:
+  97              	.L7:
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         q->head = q->tail = node;
+  98              		.loc 1 52 0
+  99 0014 4160     		str	r1, [r0, #4]
+ 100 0016 0160     		str	r1, [r0]
+ 101 0018 F9E7     		b	.L5
+ 102              		.cfi_endproc
+ 103              	.LFE2:
+ 105 001a C046     		.section	.text.queue_remove,"ax",%progbits
+ 106              		.align	2
+ 107              		.global	queue_remove
+ 108              		.code	16
+ 109              		.thumb_func
+ 111              	queue_remove:
+ 112              	.LFB3:
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** 
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Remove and return first (oldest) entry from the specified queue 
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  q       Pointer to queue structure
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Return Value:
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  Node at head of queue - NULL if queue is empty
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** QNODE*
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_remove(QUEUE *q)
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+ 113              		.loc 1 75 0
+ 114              		.cfi_startproc
+ 115              	.LVL6:
+ 116              	.LBB10:
+ 117              	.LBB11:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return (q->head == NULL);
+ 118              		.loc 1 37 0
+ 119 0000 0368     		ldr	r3, [r0]
+ 120              	.LBE11:
+ 121              	.LBE10:
+ 122              		.loc 1 75 0
+ 123 0002 00B5     		push	{lr}
+ 124              	.LCFI1:
+ 125              		.cfi_def_cfa_offset 4
+ 126              		.cfi_offset 14, -4
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     QNODE *oldest;
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     if (queue_isempty(q))
+ 127              		.loc 1 78 0
+ 128 0004 002B     		cmp	r3, #0
+ 129 0006 01D0     		beq	.L9
+ 130              	.LVL7:
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         return NULL;
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     oldest = q->head;
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     q->head = oldest->next;
+ 131              		.loc 1 82 0
+ 132 0008 1A68     		ldr	r2, [r3]
+ 133 000a 0260     		str	r2, [r0]
+ 134              	.LVL8:
+ 135              	.L9:
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return oldest;
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+ 136              		.loc 1 84 0
+ 137 000c 181C     		mov	r0, r3
+ 138              	.LVL9:
+ 139              		@ sp needed for prologue
+ 140 000e 00BD     		pop	{pc}
+ 141              		.cfi_endproc
+ 142              	.LFE3:
+ 144              		.section	.text.queue_peek,"ax",%progbits
+ 145              		.align	2
+ 146              		.global	queue_peek
+ 147              		.code	16
+ 148              		.thumb_func
+ 150              	queue_peek:
+ 151              	.LFB4:
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Peek into the queue and return pointer to first (oldest) entry.
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * The queue is not modified
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  q       Pointer to queue structure
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Return Value:
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  Node at head of queue - NULL if queue is empty
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** QNODE*
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_peek(QUEUE *q)
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+ 152              		.loc 1 98 0
+ 153              		.cfi_startproc
+ 154              	.LVL10:
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return q->head;
+ 155              		.loc 1 99 0
+ 156 0000 0068     		ldr	r0, [r0]
+ 157              	.LVL11:
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+ 158              		.loc 1 100 0
+ 159              		@ sp needed for prologue
+ 160 0002 7047     		bx	lr
+ 161              		.cfi_endproc
+ 162              	.LFE4:
+ 164              		.section	.text.queue_move,"ax",%progbits
+ 165              		.align	2
+ 166              		.global	queue_move
+ 167              		.code	16
+ 168              		.thumb_func
+ 170              	queue_move:
+ 171              	.LFB5:
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /********************************************************************/
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** /* 
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Move entire contents of one queue to the other
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  * Parameters:
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  src     Pointer to source queue
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  *  dst     Pointer to destination queue
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****  */
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** void
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** queue_move(QUEUE *dst, QUEUE *src)
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** {
+ 172              		.loc 1 111 0
+ 173              		.cfi_startproc
+ 174              	.LVL12:
+ 175              	.LBB12:
+ 176              	.LBB13:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return (q->head == NULL);
+ 177              		.loc 1 37 0
+ 178 0000 0B68     		ldr	r3, [r1]
+ 179              	.LBE13:
+ 180              	.LBE12:
+ 181              		.loc 1 111 0
+ 182 0002 00B5     		push	{lr}
+ 183              	.LCFI2:
+ 184              		.cfi_def_cfa_offset 4
+ 185              		.cfi_offset 14, -4
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     if (queue_isempty(src))
+ 186              		.loc 1 112 0
+ 187 0004 002B     		cmp	r3, #0
+ 188 0006 08D0     		beq	.L14
+ 189              	.LVL13:
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         return;
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     if (queue_isempty(dst))
+ 190              		.loc 1 115 0
+ 191 0008 0268     		ldr	r2, [r0]
+ 192 000a 002A     		cmp	r2, #0
+ 193 000c 06D0     		beq	.L21
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         dst->head = src->head;
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     else
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         dst->tail->next = src->head;
+ 194              		.loc 1 118 0
+ 195 000e 4268     		ldr	r2, [r0, #4]
+ 196 0010 1360     		str	r3, [r2]
+ 197              	.L17:
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** 
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     dst->tail = src->tail;
+ 198              		.loc 1 120 0
+ 199 0012 4B68     		ldr	r3, [r1, #4]
+ 200 0014 4360     		str	r3, [r0, #4]
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     src->head = NULL;
+ 201              		.loc 1 121 0
+ 202 0016 0020     		mov	r0, #0
+ 203              	.LVL14:
+ 204 0018 0860     		str	r0, [r1]
+ 205              	.LVL15:
+ 206              	.L14:
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****     return;
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c **** }
+ 207              		.loc 1 123 0
+ 208              		@ sp needed for prologue
+ 209 001a 00BD     		pop	{pc}
+ 210              	.LVL16:
+ 211              	.L21:
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\queue.c ****         dst->head = src->head;
+ 212              		.loc 1 116 0
+ 213 001c 0360     		str	r3, [r0]
+ 214 001e F8E7     		b	.L17
+ 215              		.cfi_endproc
+ 216              	.LFE5:
+ 218              		.text
+ 219              	.Letext0:
+ 220              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 queue.c
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:18     .text.queue_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:23     .text.queue_init:00000000 queue_init
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:39     .text.queue_isempty:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:44     .text.queue_isempty:00000000 queue_isempty
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:63     .text.queue_add:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:68     .text.queue_add:00000000 queue_add
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:106    .text.queue_remove:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:111    .text.queue_remove:00000000 queue_remove
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:145    .text.queue_peek:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:150    .text.queue_peek:00000000 queue_peek
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:165    .text.queue_move:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwG1mNA.s:170    .text.queue_move:00000000 queue_move
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

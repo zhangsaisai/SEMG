@@ -1,0 +1,721 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"Events.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.Cpu_OnNMIINT,"ax",%progbits
+  18              		.align	2
+  19              		.global	Cpu_OnNMIINT
+  20              		.code	16
+  21              		.thumb_func
+  23              	Cpu_OnNMIINT:
+  24              	.LFB0:
+  25              		.file 1 "../Sources/Events.c"
+   1:../Sources/Events.c **** /** ###################################################################
+   2:../Sources/Events.c **** **     Filename    : Events.c
+   3:../Sources/Events.c **** **     Project     : ProcessorExpert
+   4:../Sources/Events.c **** **     Processor   : MKL25Z128VFM4
+   5:../Sources/Events.c **** **     Component   : Events
+   6:../Sources/Events.c **** **     Version     : Driver 01.00
+   7:../Sources/Events.c **** **     Compiler    : GNU C Compiler
+   8:../Sources/Events.c **** **     Date/Time   : 2012-08-08, 16:59, # CodeGen: 0
+   9:../Sources/Events.c **** **     Abstract    :
+  10:../Sources/Events.c **** **         This is user's event module.
+  11:../Sources/Events.c **** **         Put your event handler code here.
+  12:../Sources/Events.c **** **     Settings    :
+  13:../Sources/Events.c **** **     Contents    :
+  14:../Sources/Events.c **** **         Cpu_OnNMIINT - void Cpu_OnNMIINT(void);
+  15:../Sources/Events.c **** **
+  16:../Sources/Events.c **** ** ###################################################################*/
+  17:../Sources/Events.c **** /* MODULE Events */
+  18:../Sources/Events.c **** 
+  19:../Sources/Events.c **** #include "Cpu.h"
+  20:../Sources/Events.c **** #include "Events.h"
+  21:../Sources/Events.c **** 
+  22:../Sources/Events.c **** /* User includes (#include below this line is not maintained by Processor Expert) */
+  23:../Sources/Events.c **** #include <string.h>
+  24:../Sources/Events.c **** 
+  25:../Sources/Events.c **** /* Global Variables */
+  26:../Sources/Events.c **** #define DATA_SIZE 14
+  27:../Sources/Events.c **** #define COMM_SIZE 1
+  28:../Sources/Events.c **** extern volatile bool SlaveReceivedFlg;
+  29:../Sources/Events.c **** extern volatile bool MasterReceivedFlg;
+  30:../Sources/Events.c **** extern char master_send[14];
+  31:../Sources/Events.c **** extern char slave_send[14];
+  32:../Sources/Events.c **** extern char master_receive[14];
+  33:../Sources/Events.c **** extern char slave_receive[14];
+  34:../Sources/Events.c **** 
+  35:../Sources/Events.c **** /*
+  36:../Sources/Events.c **** ** ===================================================================
+  37:../Sources/Events.c **** **     Event       :  Cpu_OnNMIINT (module Events)
+  38:../Sources/Events.c **** **
+  39:../Sources/Events.c **** **     Component   :  Cpu [MKL25Z128LK4]
+  40:../Sources/Events.c **** **     Description :
+  41:../Sources/Events.c **** **         This event is called when the Non maskable interrupt had
+  42:../Sources/Events.c **** **         occurred. This event is automatically enabled when the <NMI
+  43:../Sources/Events.c **** **         interrrupt> property is set to 'Enabled'.
+  44:../Sources/Events.c **** **     Parameters  : None
+  45:../Sources/Events.c **** **     Returns     : Nothing
+  46:../Sources/Events.c **** ** ===================================================================
+  47:../Sources/Events.c **** */
+  48:../Sources/Events.c **** void Cpu_OnNMIINT(void)
+  49:../Sources/Events.c **** {
+  26              		.loc 1 49 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 7, -8
+  32              		.cfi_offset 14, -4
+  33 0002 00AF     		add	r7, sp, #0
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_register 7
+  50:../Sources/Events.c ****   /* Write your code here ... */
+  51:../Sources/Events.c **** }
+  36              		.loc 1 51 0
+  37 0004 BD46     		mov	sp, r7
+  38              		@ sp needed for prologue
+  39 0006 80BD     		pop	{r7, pc}
+  40              		.cfi_endproc
+  41              	.LFE0:
+  43              		.section	.text.Cpu_OnHardFault,"ax",%progbits
+  44              		.align	2
+  45              		.global	Cpu_OnHardFault
+  46              		.code	16
+  47              		.thumb_func
+  49              	Cpu_OnHardFault:
+  50              	.LFB1:
+  52:../Sources/Events.c **** 
+  53:../Sources/Events.c **** /*
+  54:../Sources/Events.c **** ** ===================================================================
+  55:../Sources/Events.c **** **     Event       :  Cpu_OnHardFault (module Events)
+  56:../Sources/Events.c **** **
+  57:../Sources/Events.c **** **     Component   :  Cpu [MKL25Z128LK4]
+  58:../Sources/Events.c **** **     Description :
+  59:../Sources/Events.c **** **         This event is called when the Hard Fault exception had
+  60:../Sources/Events.c **** **         occurred. This event is automatically enabled when the <Hard
+  61:../Sources/Events.c **** **         Fault> property is set to 'Enabled'.
+  62:../Sources/Events.c **** **     Parameters  : None
+  63:../Sources/Events.c **** **     Returns     : Nothing
+  64:../Sources/Events.c **** ** ===================================================================
+  65:../Sources/Events.c **** */
+  66:../Sources/Events.c **** void Cpu_OnHardFault(void)
+  67:../Sources/Events.c **** {
+  51              		.loc 1 67 0
+  52              		.cfi_startproc
+  53 0000 80B5     		push	{r7, lr}
+  54              	.LCFI2:
+  55              		.cfi_def_cfa_offset 8
+  56              		.cfi_offset 7, -8
+  57              		.cfi_offset 14, -4
+  58 0002 00AF     		add	r7, sp, #0
+  59              	.LCFI3:
+  60              		.cfi_def_cfa_register 7
+  68:../Sources/Events.c ****   /* Write your code here ... */
+  69:../Sources/Events.c **** }
+  61              		.loc 1 69 0
+  62 0004 BD46     		mov	sp, r7
+  63              		@ sp needed for prologue
+  64 0006 80BD     		pop	{r7, pc}
+  65              		.cfi_endproc
+  66              	.LFE1:
+  68              		.section	.text.IO1_OnBlockReceived,"ax",%progbits
+  69              		.align	2
+  70              		.global	IO1_OnBlockReceived
+  71              		.code	16
+  72              		.thumb_func
+  74              	IO1_OnBlockReceived:
+  75              	.LFB2:
+  70:../Sources/Events.c **** 
+  71:../Sources/Events.c **** /*
+  72:../Sources/Events.c **** ** ===================================================================
+  73:../Sources/Events.c **** **     Event       :  IO1_OnBlockReceived (module Events)
+  74:../Sources/Events.c **** **
+  75:../Sources/Events.c **** **     Component   :  IO1 [Serial_LDD]
+  76:../Sources/Events.c **** **     Description :
+  77:../Sources/Events.c **** **         This event is called when the requested number of data is
+  78:../Sources/Events.c **** **         moved to the input buffer.
+  79:../Sources/Events.c **** **     Parameters  :
+  80:../Sources/Events.c **** **         NAME            - DESCRIPTION
+  81:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+  82:../Sources/Events.c **** **                           RTOS specific data. This pointer is passed
+  83:../Sources/Events.c **** **                           as the parameter of Init method.
+  84:../Sources/Events.c **** **     Returns     : Nothing
+  85:../Sources/Events.c **** ** ===================================================================
+  86:../Sources/Events.c **** */
+  87:../Sources/Events.c **** void IO1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+  88:../Sources/Events.c **** {
+  76              		.loc 1 88 0
+  77              		.cfi_startproc
+  78 0000 80B5     		push	{r7, lr}
+  79              	.LCFI4:
+  80              		.cfi_def_cfa_offset 8
+  81              		.cfi_offset 7, -8
+  82              		.cfi_offset 14, -4
+  83 0002 82B0     		sub	sp, sp, #8
+  84              	.LCFI5:
+  85              		.cfi_def_cfa_offset 16
+  86 0004 00AF     		add	r7, sp, #0
+  87              	.LCFI6:
+  88              		.cfi_def_cfa_register 7
+  89 0006 7860     		str	r0, [r7, #4]
+  89:../Sources/Events.c ****   /* Write your code here ... */  
+  90:../Sources/Events.c **** 
+  91:../Sources/Events.c **** }
+  90              		.loc 1 91 0
+  91 0008 BD46     		mov	sp, r7
+  92 000a 02B0     		add	sp, sp, #8
+  93              		@ sp needed for prologue
+  94 000c 80BD     		pop	{r7, pc}
+  95              		.cfi_endproc
+  96              	.LFE2:
+  98 000e C046     		.section	.text.IO1_OnBlockSent,"ax",%progbits
+  99              		.align	2
+ 100              		.global	IO1_OnBlockSent
+ 101              		.code	16
+ 102              		.thumb_func
+ 104              	IO1_OnBlockSent:
+ 105              	.LFB3:
+  92:../Sources/Events.c **** 
+  93:../Sources/Events.c **** /*
+  94:../Sources/Events.c **** ** ===================================================================
+  95:../Sources/Events.c **** **     Event       :  IO1_OnBlockSent (module Events)
+  96:../Sources/Events.c **** **
+  97:../Sources/Events.c **** **     Component   :  IO1 [Serial_LDD]
+  98:../Sources/Events.c **** **     Description :
+  99:../Sources/Events.c **** **         This event is called after the last character from the
+ 100:../Sources/Events.c **** **         output buffer is moved to the transmitter. 
+ 101:../Sources/Events.c **** **     Parameters  :
+ 102:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 103:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+ 104:../Sources/Events.c **** **                           RTOS specific data. This pointer is passed
+ 105:../Sources/Events.c **** **                           as the parameter of Init method.
+ 106:../Sources/Events.c **** **     Returns     : Nothing
+ 107:../Sources/Events.c **** ** ===================================================================
+ 108:../Sources/Events.c **** */
+ 109:../Sources/Events.c **** void IO1_OnBlockSent(LDD_TUserData *UserDataPtr)
+ 110:../Sources/Events.c **** {
+ 106              		.loc 1 110 0
+ 107              		.cfi_startproc
+ 108 0000 80B5     		push	{r7, lr}
+ 109              	.LCFI7:
+ 110              		.cfi_def_cfa_offset 8
+ 111              		.cfi_offset 7, -8
+ 112              		.cfi_offset 14, -4
+ 113 0002 82B0     		sub	sp, sp, #8
+ 114              	.LCFI8:
+ 115              		.cfi_def_cfa_offset 16
+ 116 0004 00AF     		add	r7, sp, #0
+ 117              	.LCFI9:
+ 118              		.cfi_def_cfa_register 7
+ 119 0006 7860     		str	r0, [r7, #4]
+ 111:../Sources/Events.c ****   /* Write your code here ... */
+ 112:../Sources/Events.c **** }
+ 120              		.loc 1 112 0
+ 121 0008 BD46     		mov	sp, r7
+ 122 000a 02B0     		add	sp, sp, #8
+ 123              		@ sp needed for prologue
+ 124 000c 80BD     		pop	{r7, pc}
+ 125              		.cfi_endproc
+ 126              	.LFE3:
+ 128 000e C046     		.section	.text.SS0_OnBlockSent,"ax",%progbits
+ 129              		.align	2
+ 130              		.global	SS0_OnBlockSent
+ 131              		.code	16
+ 132              		.thumb_func
+ 134              	SS0_OnBlockSent:
+ 135              	.LFB4:
+ 113:../Sources/Events.c **** 
+ 114:../Sources/Events.c **** 
+ 115:../Sources/Events.c **** /*
+ 116:../Sources/Events.c **** ** ===================================================================
+ 117:../Sources/Events.c **** **     Event       :  SS0_OnBlockSent (module Events)
+ 118:../Sources/Events.c **** **
+ 119:../Sources/Events.c **** **     Component   :  SS0 [SPISlave_LDD]
+ 120:../Sources/Events.c **** **     Description :
+ 121:../Sources/Events.c **** **         This event is called after the last character from the
+ 122:../Sources/Events.c **** **         output buffer is moved to the transmitter. This event is
+ 123:../Sources/Events.c **** **         available only if the SendBlock method is enabled.
+ 124:../Sources/Events.c **** **     Parameters  :
+ 125:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 126:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+ 127:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+ 128:../Sources/Events.c **** **                           as the parameter of Init method. 
+ 129:../Sources/Events.c **** **     Returns     : Nothing
+ 130:../Sources/Events.c **** ** ===================================================================
+ 131:../Sources/Events.c **** */
+ 132:../Sources/Events.c **** void SS0_OnBlockSent(LDD_TUserData *UserDataPtr)
+ 133:../Sources/Events.c **** {
+ 136              		.loc 1 133 0
+ 137              		.cfi_startproc
+ 138 0000 80B5     		push	{r7, lr}
+ 139              	.LCFI10:
+ 140              		.cfi_def_cfa_offset 8
+ 141              		.cfi_offset 7, -8
+ 142              		.cfi_offset 14, -4
+ 143 0002 82B0     		sub	sp, sp, #8
+ 144              	.LCFI11:
+ 145              		.cfi_def_cfa_offset 16
+ 146 0004 00AF     		add	r7, sp, #0
+ 147              	.LCFI12:
+ 148              		.cfi_def_cfa_register 7
+ 149 0006 7860     		str	r0, [r7, #4]
+ 134:../Sources/Events.c ****   /* Write your code here ... */
+ 135:../Sources/Events.c **** 
+ 136:../Sources/Events.c **** }
+ 150              		.loc 1 136 0
+ 151 0008 BD46     		mov	sp, r7
+ 152 000a 02B0     		add	sp, sp, #8
+ 153              		@ sp needed for prologue
+ 154 000c 80BD     		pop	{r7, pc}
+ 155              		.cfi_endproc
+ 156              	.LFE4:
+ 158 000e C046     		.section	.rodata
+ 159              		.align	2
+ 160              	.LC1:
+ 161 0000 0A536C61 		.ascii	"\012Slave: Data send to master...\000"
+ 161      76653A20 
+ 161      44617461 
+ 161      2073656E 
+ 161      6420746F 
+ 162 001f 00       		.section	.text.SS0_OnBlockReceived,"ax",%progbits
+ 163              		.align	2
+ 164              		.global	SS0_OnBlockReceived
+ 165              		.code	16
+ 166              		.thumb_func
+ 168              	SS0_OnBlockReceived:
+ 169              	.LFB5:
+ 137:../Sources/Events.c **** 
+ 138:../Sources/Events.c **** /*
+ 139:../Sources/Events.c **** ** ===================================================================
+ 140:../Sources/Events.c **** **     Event       :  SS0_OnBlockReceived (module Events)
+ 141:../Sources/Events.c **** **
+ 142:../Sources/Events.c **** **     Component   :  SS0 [SPISlave_LDD]
+ 143:../Sources/Events.c **** **     Description :
+ 144:../Sources/Events.c **** **         This event is called when the requested number of data is
+ 145:../Sources/Events.c **** **         moved to the input buffer. This method is available only if
+ 146:../Sources/Events.c **** **         the ReceiveBlock method is enabled.
+ 147:../Sources/Events.c **** **     Parameters  :
+ 148:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 149:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+ 150:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+ 151:../Sources/Events.c **** **                           as the parameter of Init method. 
+ 152:../Sources/Events.c **** **     Returns     : Nothing
+ 153:../Sources/Events.c **** ** ===================================================================
+ 154:../Sources/Events.c **** */
+ 155:../Sources/Events.c **** void SS0_OnBlockReceived(LDD_TUserData *UserDataPtr)
+ 156:../Sources/Events.c **** {
+ 170              		.loc 1 156 0
+ 171              		.cfi_startproc
+ 172 0000 80B5     		push	{r7, lr}
+ 173              	.LCFI13:
+ 174              		.cfi_def_cfa_offset 8
+ 175              		.cfi_offset 7, -8
+ 176              		.cfi_offset 14, -4
+ 177 0002 82B0     		sub	sp, sp, #8
+ 178              	.LCFI14:
+ 179              		.cfi_def_cfa_offset 16
+ 180 0004 00AF     		add	r7, sp, #0
+ 181              	.LCFI15:
+ 182              		.cfi_def_cfa_register 7
+ 183 0006 7860     		str	r0, [r7, #4]
+ 157:../Sources/Events.c ****   /* Write your code here ... */
+ 158:../Sources/Events.c ****   //SlaveReceivedFlg = TRUE;  /* Set MasterReceivedFlg flag */
+ 159:../Sources/Events.c ****   
+ 160:../Sources/Events.c ****   if ( slave_receive[0] == 0x01 )
+ 184              		.loc 1 160 0
+ 185 0008 144B     		ldr	r3, .L9
+ 186 000a 1B78     		ldrb	r3, [r3]
+ 187 000c 012B     		cmp	r3, #1
+ 188 000e 1AD1     		bne	.L7
+ 161:../Sources/Events.c ****   {
+ 162:../Sources/Events.c ****     printf("\nSlave: Data send to master...\n");
+ 189              		.loc 1 162 0
+ 190 0010 134B     		ldr	r3, .L9+4
+ 191 0012 181C     		mov	r0, r3
+ 192 0014 FFF7FEFF 		bl	puts
+ 163:../Sources/Events.c ****     slave_send[0]=0x02;
+ 193              		.loc 1 163 0
+ 194 0018 124B     		ldr	r3, .L9+8
+ 195 001a 0222     		mov	r2, #2
+ 196 001c 1A70     		strb	r2, [r3]
+ 164:../Sources/Events.c ****     slave_send[13]=0x04;
+ 197              		.loc 1 164 0
+ 198 001e 114B     		ldr	r3, .L9+8
+ 199 0020 0422     		mov	r2, #4
+ 200 0022 5A73     		strb	r2, [r3, #13]
+ 165:../Sources/Events.c ****     SS0_SendBlock(SS0_DeviceData, slave_send, DATA_SIZE);
+ 201              		.loc 1 165 0
+ 202 0024 104B     		ldr	r3, .L9+12
+ 203 0026 5A68     		ldr	r2, [r3, #4]
+ 204 0028 0E4B     		ldr	r3, .L9+8
+ 205 002a 101C     		mov	r0, r2
+ 206 002c 191C     		mov	r1, r3
+ 207 002e 0E22     		mov	r2, #14
+ 208 0030 FFF7FEFF 		bl	SS0_SendBlock
+ 166:../Sources/Events.c ****     SS0_ReceiveBlock(SS0_DeviceData, slave_receive, COMM_SIZE);
+ 209              		.loc 1 166 0
+ 210 0034 0C4B     		ldr	r3, .L9+12
+ 211 0036 5A68     		ldr	r2, [r3, #4]
+ 212 0038 084B     		ldr	r3, .L9
+ 213 003a 101C     		mov	r0, r2
+ 214 003c 191C     		mov	r1, r3
+ 215 003e 0122     		mov	r2, #1
+ 216 0040 FFF7FEFF 		bl	SS0_ReceiveBlock
+ 217 0044 07E0     		b	.L6
+ 218              	.L7:
+ 167:../Sources/Events.c ****   }
+ 168:../Sources/Events.c ****   else  
+ 169:../Sources/Events.c ****     SS0_ReceiveBlock(SS0_DeviceData, slave_receive, COMM_SIZE);
+ 219              		.loc 1 169 0
+ 220 0046 084B     		ldr	r3, .L9+12
+ 221 0048 5A68     		ldr	r2, [r3, #4]
+ 222 004a 044B     		ldr	r3, .L9
+ 223 004c 101C     		mov	r0, r2
+ 224 004e 191C     		mov	r1, r3
+ 225 0050 0122     		mov	r2, #1
+ 226 0052 FFF7FEFF 		bl	SS0_ReceiveBlock
+ 227              	.L6:
+ 170:../Sources/Events.c **** }
+ 228              		.loc 1 170 0
+ 229 0056 BD46     		mov	sp, r7
+ 230 0058 02B0     		add	sp, sp, #8
+ 231              		@ sp needed for prologue
+ 232 005a 80BD     		pop	{r7, pc}
+ 233              	.L10:
+ 234              		.align	2
+ 235              	.L9:
+ 236 005c 00000000 		.word	slave_receive
+ 237 0060 00000000 		.word	.LC1
+ 238 0064 00000000 		.word	slave_send
+ 239 0068 00000000 		.word	PE_LDD_DeviceDataList
+ 240              		.cfi_endproc
+ 241              	.LFE5:
+ 243              		.section	.text.uart_putchar,"ax",%progbits
+ 244              		.align	2
+ 245              		.global	uart_putchar
+ 246              		.code	16
+ 247              		.thumb_func
+ 249              	uart_putchar:
+ 250              	.LFB6:
+ 171:../Sources/Events.c **** 
+ 172:../Sources/Events.c **** 
+ 173:../Sources/Events.c **** /*
+ 174:../Sources/Events.c **** ** ===================================================================
+ 175:../Sources/Events.c **** **     Function    : uart_putchar
+ 176:../Sources/Events.c **** **
+ 177:../Sources/Events.c **** **     Description :
+ 178:../Sources/Events.c **** **         This function sends one character to the desired UART port.
+ 179:../Sources/Events.c **** **         It was written to patch a CodeWarrior bug with the printf
+ 180:../Sources/Events.c **** **         function.
+ 181:../Sources/Events.c **** **     Parameters  :
+ 182:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 183:../Sources/Events.c **** **         ch              - Character to be sent to the UART
+ 184:../Sources/Events.c **** **         uart_port_num   - Specifies which UART to send the 
+ 185:../Sources/Events.c **** **         					 character to.   
+ 186:../Sources/Events.c **** **                           
+ 187:../Sources/Events.c **** **     Returns     : Nothing
+ 188:../Sources/Events.c **** ** ===================================================================
+ 189:../Sources/Events.c **** */
+ 190:../Sources/Events.c **** void uart_putchar (int uart_port_num, char ch)
+ 191:../Sources/Events.c **** {
+ 251              		.loc 1 191 0
+ 252              		.cfi_startproc
+ 253 0000 80B5     		push	{r7, lr}
+ 254              	.LCFI16:
+ 255              		.cfi_def_cfa_offset 8
+ 256              		.cfi_offset 7, -8
+ 257              		.cfi_offset 14, -4
+ 258 0002 82B0     		sub	sp, sp, #8
+ 259              	.LCFI17:
+ 260              		.cfi_def_cfa_offset 16
+ 261 0004 00AF     		add	r7, sp, #0
+ 262              	.LCFI18:
+ 263              		.cfi_def_cfa_register 7
+ 264 0006 7860     		str	r0, [r7, #4]
+ 265 0008 0A1C     		mov	r2, r1
+ 266 000a FB1C     		add	r3, r7, #3
+ 267 000c 1A70     		strb	r2, [r3]
+ 192:../Sources/Events.c **** 	if (uart_port_num == 0)
+ 268              		.loc 1 192 0
+ 269 000e 7B68     		ldr	r3, [r7, #4]
+ 270 0010 002B     		cmp	r3, #0
+ 271 0012 0CD1     		bne	.L12
+ 193:../Sources/Events.c **** 	{
+ 194:../Sources/Events.c ****       /* Wait until space is available in the FIFO */
+ 195:../Sources/Events.c ****       while(!(UART0_S1 & UART_S1_TDRE_MASK));
+ 272              		.loc 1 195 0
+ 273 0014 C046     		mov	r8, r8
+ 274              	.L13:
+ 275              		.loc 1 195 0 is_stmt 0
+ 276 0016 154B     		ldr	r3, .L19
+ 277 0018 1B79     		ldrb	r3, [r3, #4]
+ 278 001a DBB2     		uxtb	r3, r3
+ 279 001c DBB2     		uxtb	r3, r3
+ 280 001e 5BB2     		sxtb	r3, r3
+ 281 0020 002B     		cmp	r3, #0
+ 282 0022 F8DA     		bge	.L13
+ 196:../Sources/Events.c ****     
+ 197:../Sources/Events.c ****       /* Send the character */
+ 198:../Sources/Events.c ****       UART0_D = (uint8)ch;
+ 283              		.loc 1 198 0 is_stmt 1
+ 284 0024 114B     		ldr	r3, .L19
+ 285 0026 FA1C     		add	r2, r7, #3
+ 286 0028 1278     		ldrb	r2, [r2]
+ 287 002a DA71     		strb	r2, [r3, #7]
+ 288 002c 1BE0     		b	.L11
+ 289              	.L12:
+ 199:../Sources/Events.c **** 	}
+ 200:../Sources/Events.c **** 	else if (uart_port_num == 1)
+ 290              		.loc 1 200 0
+ 291 002e 7B68     		ldr	r3, [r7, #4]
+ 292 0030 012B     		cmp	r3, #1
+ 293 0032 0CD1     		bne	.L18
+ 201:../Sources/Events.c **** 	{
+ 202:../Sources/Events.c **** 	  /* Wait until space is available in the FIFO */
+ 203:../Sources/Events.c **** 	  while(!(UART1_S1 & UART_S1_TDRE_MASK));
+ 294              		.loc 1 203 0
+ 295 0034 C046     		mov	r8, r8
+ 296              	.L16:
+ 297              		.loc 1 203 0 is_stmt 0
+ 298 0036 0E4B     		ldr	r3, .L19+4
+ 299 0038 1B79     		ldrb	r3, [r3, #4]
+ 300 003a DBB2     		uxtb	r3, r3
+ 301 003c DBB2     		uxtb	r3, r3
+ 302 003e 5BB2     		sxtb	r3, r3
+ 303 0040 002B     		cmp	r3, #0
+ 304 0042 F8DA     		bge	.L16
+ 204:../Sources/Events.c **** 	   
+ 205:../Sources/Events.c **** 	  /* Send the character */
+ 206:../Sources/Events.c **** 	  UART1_D = (uint8)ch;
+ 305              		.loc 1 206 0 is_stmt 1
+ 306 0044 0A4B     		ldr	r3, .L19+4
+ 307 0046 FA1C     		add	r2, r7, #3
+ 308 0048 1278     		ldrb	r2, [r2]
+ 309 004a DA71     		strb	r2, [r3, #7]
+ 310 004c 0BE0     		b	.L11
+ 311              	.L18:
+ 207:../Sources/Events.c **** 	}
+ 208:../Sources/Events.c **** 	else
+ 209:../Sources/Events.c **** 	{
+ 210:../Sources/Events.c **** 	  /* Wait until space is available in the FIFO */
+ 211:../Sources/Events.c **** 	  while(!(UART2_S1 & UART_S1_TDRE_MASK));
+ 312              		.loc 1 211 0
+ 313 004e C046     		mov	r8, r8
+ 314              	.L17:
+ 315              		.loc 1 211 0 is_stmt 0
+ 316 0050 084B     		ldr	r3, .L19+8
+ 317 0052 1B79     		ldrb	r3, [r3, #4]
+ 318 0054 DBB2     		uxtb	r3, r3
+ 319 0056 DBB2     		uxtb	r3, r3
+ 320 0058 5BB2     		sxtb	r3, r3
+ 321 005a 002B     		cmp	r3, #0
+ 322 005c F8DA     		bge	.L17
+ 212:../Sources/Events.c **** 	  
+ 213:../Sources/Events.c **** 	  /* Send the character */
+ 214:../Sources/Events.c **** 	  UART2_D = (uint8)ch;
+ 323              		.loc 1 214 0 is_stmt 1
+ 324 005e 054B     		ldr	r3, .L19+8
+ 325 0060 FA1C     		add	r2, r7, #3
+ 326 0062 1278     		ldrb	r2, [r2]
+ 327 0064 DA71     		strb	r2, [r3, #7]
+ 328              	.L11:
+ 215:../Sources/Events.c **** 	}
+ 216:../Sources/Events.c ****  }
+ 329              		.loc 1 216 0
+ 330 0066 BD46     		mov	sp, r7
+ 331 0068 02B0     		add	sp, sp, #8
+ 332              		@ sp needed for prologue
+ 333 006a 80BD     		pop	{r7, pc}
+ 334              	.L20:
+ 335              		.align	2
+ 336              	.L19:
+ 337 006c 00A00640 		.word	1074176000
+ 338 0070 00B00640 		.word	1074180096
+ 339 0074 00C00640 		.word	1074184192
+ 340              		.cfi_endproc
+ 341              	.LFE6:
+ 343              		.section	.text.uart_getchar,"ax",%progbits
+ 344              		.align	2
+ 345              		.global	uart_getchar
+ 346              		.code	16
+ 347              		.thumb_func
+ 349              	uart_getchar:
+ 350              	.LFB7:
+ 217:../Sources/Events.c **** 
+ 218:../Sources/Events.c **** /*
+ 219:../Sources/Events.c **** ** ===================================================================
+ 220:../Sources/Events.c **** **     Function    : uart_getchar
+ 221:../Sources/Events.c **** **
+ 222:../Sources/Events.c **** **     Description :
+ 223:../Sources/Events.c **** **         This function gets one character to the desired UART port.
+ 224:../Sources/Events.c **** **         It was written to patch a CodeWarrior bug with the getchar
+ 225:../Sources/Events.c **** **         function.
+ 226:../Sources/Events.c **** **     Parameters  :
+ 227:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 228:../Sources/Events.c **** **         uart_port_num   - Specifies which UART to get the 
+ 229:../Sources/Events.c **** **         					 character from.   
+ 230:../Sources/Events.c **** **                           
+ 231:../Sources/Events.c **** **     Returns     : character (UARTx_D)
+ 232:../Sources/Events.c **** ** ===================================================================
+ 233:../Sources/Events.c **** */
+ 234:../Sources/Events.c **** char uart_getchar (int uart_port_num)
+ 235:../Sources/Events.c **** {
+ 351              		.loc 1 235 0
+ 352              		.cfi_startproc
+ 353 0000 80B5     		push	{r7, lr}
+ 354              	.LCFI19:
+ 355              		.cfi_def_cfa_offset 8
+ 356              		.cfi_offset 7, -8
+ 357              		.cfi_offset 14, -4
+ 358 0002 82B0     		sub	sp, sp, #8
+ 359              	.LCFI20:
+ 360              		.cfi_def_cfa_offset 16
+ 361 0004 00AF     		add	r7, sp, #0
+ 362              	.LCFI21:
+ 363              		.cfi_def_cfa_register 7
+ 364 0006 7860     		str	r0, [r7, #4]
+ 236:../Sources/Events.c **** 	if (uart_port_num == 0)
+ 365              		.loc 1 236 0
+ 366 0008 7B68     		ldr	r3, [r7, #4]
+ 367 000a 002B     		cmp	r3, #0
+ 368 000c 0BD1     		bne	.L22
+ 237:../Sources/Events.c **** 	{
+ 238:../Sources/Events.c ****       /* Wait until space is available in the FIFO */
+ 239:../Sources/Events.c ****       while(!(UART0_S1 & UART_S1_RDRF_MASK));
+ 369              		.loc 1 239 0
+ 370 000e C046     		mov	r8, r8
+ 371              	.L23:
+ 372              		.loc 1 239 0 is_stmt 0
+ 373 0010 144B     		ldr	r3, .L29
+ 374 0012 1B79     		ldrb	r3, [r3, #4]
+ 375 0014 DBB2     		uxtb	r3, r3
+ 376 0016 1A1C     		mov	r2, r3
+ 377 0018 2023     		mov	r3, #32
+ 378 001a 1340     		and	r3, r2
+ 379 001c F8D0     		beq	.L23
+ 240:../Sources/Events.c ****     
+ 241:../Sources/Events.c ****       /* Send the character */
+ 242:../Sources/Events.c ****       return (uint8)UART0_D;
+ 380              		.loc 1 242 0 is_stmt 1
+ 381 001e 114B     		ldr	r3, .L29
+ 382 0020 DB79     		ldrb	r3, [r3, #7]
+ 383 0022 DBB2     		uxtb	r3, r3
+ 384 0024 19E0     		b	.L24
+ 385              	.L22:
+ 243:../Sources/Events.c **** 	}
+ 244:../Sources/Events.c **** 	else if (uart_port_num == 1)
+ 386              		.loc 1 244 0
+ 387 0026 7B68     		ldr	r3, [r7, #4]
+ 388 0028 012B     		cmp	r3, #1
+ 389 002a 0BD1     		bne	.L28
+ 245:../Sources/Events.c **** 	{
+ 246:../Sources/Events.c **** 	  /* Wait until space is available in the FIFO */
+ 247:../Sources/Events.c **** 	  while(!(UART1_S1 & UART_S1_RDRF_MASK));
+ 390              		.loc 1 247 0
+ 391 002c C046     		mov	r8, r8
+ 392              	.L26:
+ 393              		.loc 1 247 0 is_stmt 0
+ 394 002e 0E4B     		ldr	r3, .L29+4
+ 395 0030 1B79     		ldrb	r3, [r3, #4]
+ 396 0032 DBB2     		uxtb	r3, r3
+ 397 0034 1A1C     		mov	r2, r3
+ 398 0036 2023     		mov	r3, #32
+ 399 0038 1340     		and	r3, r2
+ 400 003a F8D0     		beq	.L26
+ 248:../Sources/Events.c **** 	   
+ 249:../Sources/Events.c **** 	  /* Send the character */
+ 250:../Sources/Events.c **** 	  return (uint8)UART1_D;
+ 401              		.loc 1 250 0 is_stmt 1
+ 402 003c 0A4B     		ldr	r3, .L29+4
+ 403 003e DB79     		ldrb	r3, [r3, #7]
+ 404 0040 DBB2     		uxtb	r3, r3
+ 405 0042 0AE0     		b	.L24
+ 406              	.L28:
+ 251:../Sources/Events.c **** 	}
+ 252:../Sources/Events.c **** 	else
+ 253:../Sources/Events.c **** 	{
+ 254:../Sources/Events.c **** 	  /* Wait until space is available in the FIFO */
+ 255:../Sources/Events.c **** 	  while(!(UART2_S1 & UART_S1_RDRF_MASK));
+ 407              		.loc 1 255 0
+ 408 0044 C046     		mov	r8, r8
+ 409              	.L27:
+ 410              		.loc 1 255 0 is_stmt 0
+ 411 0046 094B     		ldr	r3, .L29+8
+ 412 0048 1B79     		ldrb	r3, [r3, #4]
+ 413 004a DBB2     		uxtb	r3, r3
+ 414 004c 1A1C     		mov	r2, r3
+ 415 004e 2023     		mov	r3, #32
+ 416 0050 1340     		and	r3, r2
+ 417 0052 F8D0     		beq	.L27
+ 256:../Sources/Events.c **** 	  
+ 257:../Sources/Events.c **** 	  /* Send the character */
+ 258:../Sources/Events.c **** 	  return (uint8)UART2_D;
+ 418              		.loc 1 258 0 is_stmt 1
+ 419 0054 054B     		ldr	r3, .L29+8
+ 420 0056 DB79     		ldrb	r3, [r3, #7]
+ 421 0058 DBB2     		uxtb	r3, r3
+ 422              	.L24:
+ 259:../Sources/Events.c **** 	}
+ 260:../Sources/Events.c ****  }
+ 423              		.loc 1 260 0
+ 424 005a 181C     		mov	r0, r3
+ 425 005c BD46     		mov	sp, r7
+ 426 005e 02B0     		add	sp, sp, #8
+ 427              		@ sp needed for prologue
+ 428 0060 80BD     		pop	{r7, pc}
+ 429              	.L30:
+ 430 0062 C046     		.align	2
+ 431              	.L29:
+ 432 0064 00A00640 		.word	1074176000
+ 433 0068 00B00640 		.word	1074180096
+ 434 006c 00C00640 		.word	1074184192
+ 435              		.cfi_endproc
+ 436              	.LFE7:
+ 438              		.text
+ 439              	.Letext0:
+ 440              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 441              		.file 3 "D:/kuaipan/SEMG/MEMS_KL25_PIN32/spi_demo_slave/Generated_Code/PE_Types.h"
+ 442              		.file 4 "D:/kuaipan/SEMG/MEMS_KL25_PIN32/spi_demo_slave/Generated_Code/IO_Map.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 Events.c
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:18     .text.Cpu_OnNMIINT:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:23     .text.Cpu_OnNMIINT:00000000 Cpu_OnNMIINT
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:44     .text.Cpu_OnHardFault:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:49     .text.Cpu_OnHardFault:00000000 Cpu_OnHardFault
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:69     .text.IO1_OnBlockReceived:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:74     .text.IO1_OnBlockReceived:00000000 IO1_OnBlockReceived
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:99     .text.IO1_OnBlockSent:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:104    .text.IO1_OnBlockSent:00000000 IO1_OnBlockSent
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:129    .text.SS0_OnBlockSent:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:134    .text.SS0_OnBlockSent:00000000 SS0_OnBlockSent
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:159    .rodata:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:163    .text.SS0_OnBlockReceived:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:168    .text.SS0_OnBlockReceived:00000000 SS0_OnBlockReceived
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:236    .text.SS0_OnBlockReceived:0000005c $d
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:244    .text.uart_putchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:249    .text.uart_putchar:00000000 uart_putchar
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:337    .text.uart_putchar:0000006c $d
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:344    .text.uart_getchar:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:349    .text.uart_getchar:00000000 uart_getchar
+C:\Users\lab\AppData\Local\Temp\ccwpyRMO.s:432    .text.uart_getchar:00000064 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+puts
+SS0_SendBlock
+SS0_ReceiveBlock
+slave_receive
+slave_send
+PE_LDD_DeviceDataList

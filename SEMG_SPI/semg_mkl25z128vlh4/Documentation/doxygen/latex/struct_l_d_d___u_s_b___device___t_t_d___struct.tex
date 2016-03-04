@@ -1,0 +1,46 @@
+\hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct}{\section{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct Struct Reference}
+\label{struct_l_d_d___u_s_b___device___t_t_d___struct}\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+}
+
+
+{\ttfamily \#include $<$P\-E\-\_\-\-Types.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac26d0354d0c874cd4e4580525d70c0c1}{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Head} \hyperlink{struct_l_d_d___u_s_b___device___t_t_d___struct_a7f3947a676f6ecd32e3fb342b7f07a35}{Head}
+\item 
+\hyperlink{group___p_e___types__module_gacf5f7e704d87aba90dc002ed7c0d28b4}{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-T\-Transfer\-State} \hyperlink{struct_l_d_d___u_s_b___device___t_t_d___struct_aca23e3743f56dc73206b79f885e9130f}{Transfer\-State}
+\item 
+uint16\-\_\-t \hyperlink{struct_l_d_d___u_s_b___device___t_t_d___struct_aeffbf1300fce5fc9ebf98f5760a96d38}{Transmitted\-Data\-Size}
+\item 
+\hyperlink{group___p_e___types__module_ga9936cce5f7b95eff5c8ee57e854d97b3}{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-Transfer\-Done\-Calback} $\ast$ \hyperlink{struct_l_d_d___u_s_b___device___t_t_d___struct_aaff3a74a2abea1e6b530ecfdaff8c584}{Callback\-Fn\-Ptr}
+\item 
+uint8\-\_\-t $\ast$ \hyperlink{struct_l_d_d___u_s_b___device___t_t_d___struct_ab1f3a3912ae70d748c5891aa91804de4}{Param\-Ptr}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Device transfer descriptor structure 
+
+\subsection{Field Documentation}
+\hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct_aaff3a74a2abea1e6b530ecfdaff8c584}{\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}!Callback\-Fn\-Ptr@{Callback\-Fn\-Ptr}}
+\index{Callback\-Fn\-Ptr@{Callback\-Fn\-Ptr}!LDD_USB_Device_TTD_Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+\subsubsection[{Callback\-Fn\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-Transfer\-Done\-Calback}$\ast$ L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct\-::\-Callback\-Fn\-Ptr}}\label{struct_l_d_d___u_s_b___device___t_t_d___struct_aaff3a74a2abea1e6b530ecfdaff8c584}
+Address of the callback function. Must be set by the caller \hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct_a7f3947a676f6ecd32e3fb342b7f07a35}{\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}!Head@{Head}}
+\index{Head@{Head}!LDD_USB_Device_TTD_Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+\subsubsection[{Head}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Head} L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct\-::\-Head}}\label{struct_l_d_d___u_s_b___device___t_t_d___struct_a7f3947a676f6ecd32e3fb342b7f07a35}
+Td head data, not changed by the driver \hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct_ab1f3a3912ae70d748c5891aa91804de4}{\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}!Param\-Ptr@{Param\-Ptr}}
+\index{Param\-Ptr@{Param\-Ptr}!LDD_USB_Device_TTD_Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+\subsubsection[{Param\-Ptr}]{\setlength{\rightskip}{0pt plus 5cm}uint8\-\_\-t$\ast$ L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct\-::\-Param\-Ptr}}\label{struct_l_d_d___u_s_b___device___t_t_d___struct_ab1f3a3912ae70d748c5891aa91804de4}
+User parameter. Not changed by the driver \hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct_aca23e3743f56dc73206b79f885e9130f}{\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}!Transfer\-State@{Transfer\-State}}
+\index{Transfer\-State@{Transfer\-State}!LDD_USB_Device_TTD_Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+\subsubsection[{Transfer\-State}]{\setlength{\rightskip}{0pt plus 5cm}{\bf L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-T\-Transfer\-State} L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct\-::\-Transfer\-State}}\label{struct_l_d_d___u_s_b___device___t_t_d___struct_aca23e3743f56dc73206b79f885e9130f}
+Transfer state. Set by the driver \hypertarget{struct_l_d_d___u_s_b___device___t_t_d___struct_aeffbf1300fce5fc9ebf98f5760a96d38}{\index{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}!Transmitted\-Data\-Size@{Transmitted\-Data\-Size}}
+\index{Transmitted\-Data\-Size@{Transmitted\-Data\-Size}!LDD_USB_Device_TTD_Struct@{L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct}}
+\subsubsection[{Transmitted\-Data\-Size}]{\setlength{\rightskip}{0pt plus 5cm}uint16\-\_\-t L\-D\-D\-\_\-\-U\-S\-B\-\_\-\-Device\-\_\-\-T\-T\-D\-\_\-\-Struct\-::\-Transmitted\-Data\-Size}}\label{struct_l_d_d___u_s_b___device___t_t_d___struct_aeffbf1300fce5fc9ebf98f5760a96d38}
+Transmitted data size. Set by the driver 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\hyperlink{_p_e___types_8h}{P\-E\-\_\-\-Types.\-h}\end{DoxyCompactItemize}

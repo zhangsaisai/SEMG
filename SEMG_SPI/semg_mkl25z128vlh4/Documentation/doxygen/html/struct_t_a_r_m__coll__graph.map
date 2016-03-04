@@ -1,0 +1,5 @@
+<map id="TARM" name="TARM">
+<area shape="rect" id="node2" href="$struct_t_a_r_m_setting.html" title="TARMSetting" alt="" coords="5,5,104,32"/>
+<area shape="rect" id="node3" href="$struct_t_a_r_m_data.html" title="TARMData" alt="" coords="128,5,213,32"/>
+<area shape="rect" id="node4" href="$struct_t_a_r_m_status.html" title="TARMStatus" alt="" coords="237,5,333,32"/>
+</map>

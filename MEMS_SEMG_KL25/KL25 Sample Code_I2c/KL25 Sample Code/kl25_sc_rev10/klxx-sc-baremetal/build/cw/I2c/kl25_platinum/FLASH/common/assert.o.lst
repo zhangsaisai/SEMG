@@ -1,0 +1,120 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"assert.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.assert_failed,"ax",%progbits
+  18              		.align	2
+  19              		.global	assert_failed
+  20              		.code	16
+  21              		.thumb_func
+  23              	assert_failed:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****  * File:        assert.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****  * Purpose:     Provide macro for software assertions
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****  * Notes:       ASSERT macro defined in assert.h calls assert_failed()
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** #include "common.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** 
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** const char ASSERT_FAILED_STR[] = "Assertion failed in %s at line %d\n";
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** 
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** /********************************************************************/
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** void
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** assert_failed(char *file, int line)
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** {
+  26              		.loc 1 15 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 08B5     		push	{r3, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 3, -8
+  33              		.cfi_offset 14, -4
+  34              		.loc 1 15 0
+  35 0002 031C     		mov	r3, r0
+  36 0004 0A1C     		mov	r2, r1
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****     int i;
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****     
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****     printf(ASSERT_FAILED_STR, file, line);
+  37              		.loc 1 18 0
+  38 0006 0748     		ldr	r0, .L10
+  39              	.LVL1:
+  40 0008 191C     		mov	r1, r3
+  41              	.LVL2:
+  42 000a FFF7FEFF 		bl	printf
+  43              	.LVL3:
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** 
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****     while (1)
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****     {
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** //        platform_led_display(0xFF);
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****         for (i = 100000; i; i--) ;
+  44              		.loc 1 23 0
+  45 000e 0649     		ldr	r1, .L10+4
+  46              	.L8:
+  47              	.LVL4:
+  48              		.loc 1 23 0 is_stmt 0
+  49 0010 0029     		cmp	r1, #0
+  50 0012 04D1     		bne	.L3
+  51              		.loc 1 23 0
+  52 0014 0448     		ldr	r0, .L10+4
+  53              	.LVL5:
+  54              	.L4:
+  55 0016 0238     		sub	r0, r0, #2
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c **** //        platform_led_display(0x00);
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****         for (i = 100000; i; i--) ;
+  56              		.loc 1 25 0 is_stmt 1
+  57 0018 0028     		cmp	r0, #0
+  58 001a FCD1     		bne	.L4
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****         for (i = 100000; i; i--) ;
+  59              		.loc 1 23 0
+  60 001c 0249     		ldr	r1, .L10+4
+  61              	.L3:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\assert.c ****         for (i = 100000; i; i--) ;
+  62              		.loc 1 23 0 is_stmt 0
+  63 001e 0139     		sub	r1, r1, #1
+  64 0020 F6E7     		b	.L8
+  65              	.L11:
+  66 0022 C046     		.align	2
+  67              	.L10:
+  68 0024 00000000 		.word	.LANCHOR0
+  69 0028 A0860100 		.word	100000
+  70              		.cfi_endproc
+  71              	.LFE0:
+  73              		.global	ASSERT_FAILED_STR
+  74              		.section	.rodata.ASSERT_FAILED_STR,"a",%progbits
+  75              		.align	2
+  76              		.set	.LANCHOR0,. + 0
+  79              	ASSERT_FAILED_STR:
+  80 0000 41737365 		.ascii	"Assertion failed in %s at line %d\012\000"
+  80      7274696F 
+  80      6E206661 
+  80      696C6564 
+  80      20696E20 
+  81 0023 00       		.text
+  82              	.Letext0:
+DEFINED SYMBOLS
+                            *ABS*:00000000 assert.c
+C:\Users\lab\AppData\Local\Temp\ccaInyYV.s:18     .text.assert_failed:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccaInyYV.s:23     .text.assert_failed:00000000 assert_failed
+C:\Users\lab\AppData\Local\Temp\ccaInyYV.s:68     .text.assert_failed:00000024 $d
+C:\Users\lab\AppData\Local\Temp\ccaInyYV.s:79     .rodata.ASSERT_FAILED_STR:00000000 ASSERT_FAILED_STR
+C:\Users\lab\AppData\Local\Temp\ccaInyYV.s:75     .rodata.ASSERT_FAILED_STR:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf

@@ -1,0 +1,7 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Generated_Code/DMAT_M_SPI_TX.h" name="E:/workspace/semg_mkl15z128vlh4/Generated_Code/DMAT_M_SPI_TX.h">
+<area shape="rect" id="node2" href="$_p_e___types_8h.html" title="PE_Types.h &#45; contains definitions of basic types, register access macros and hardware specific macros..." alt="" coords="117,245,211,272"/>
+<area shape="rect" id="node4" href="$_p_e___error_8h.html" title="This component &quot;PE_Error&quot; contains internal definitions of the error constants. " alt="" coords="5,245,91,272"/>
+<area shape="rect" id="node5" href="$_p_e___const_8h.html" title="This component &quot;PE_Const&quot; contains internal definitions of the constants. " alt="" coords="341,245,432,272"/>
+<area shape="rect" id="node7" href="$_d_m_a___c_t_r_l_8h.html" title="This embedded component implements initialization and runtime handling of an on&#45;chip DMA controller..." alt="" coords="241,96,343,123"/>
+<area shape="rect" id="node8" href="$_cpu_8h.html" title="Cpu.h" alt="" coords="136,171,192,197"/>
+</map>

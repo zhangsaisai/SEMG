@@ -1,0 +1,29 @@
+\hypertarget{_bit_i_o___u_p_r_d_y_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.c File Reference}
+\label{_bit_i_o___u_p_r_d_y_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.\-c}}
+}
+
+
+The H\-A\-L Bit\-I\-O component provides a low level A\-P\-I for unified access to general purpose digital input/output pins across various device designs.  
+
+
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___bit_i_o___u_p_r_d_y__module_ga16fba3e6a57959037ec1b6f4183a93bf}{Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Initializes the device. Allocates memory for the device data structure, allocates interrupt vectors and sets interrupt priority, sets pin routing, sets timing, etc. If the \char`\"{}\-Enable
+    in init. code\char`\"{} is set to \char`\"{}yes\char`\"{} value then the device is also enabled(see the description of the Enable() method). In this case the Enable() method is not necessary and needn't to be generated. \end{DoxyCompactList}\item 
+bool \hyperlink{group___bit_i_o___u_p_r_d_y__module_ga81bcdf8e406ba157db74916e9e92fe1b}{Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y\-\_\-\-Get\-Val} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Returns the input/output value. If the direction is \mbox{[}input\mbox{]} then the input value of the pin is read and returned. If the direction is \mbox{[}output\mbox{]} then the last written value is read and returned (see $<$\-Safe mode$>$=\char`\"{}\char`\"{}$>$ property for limitations). This method cannot be disabled if direction is \mbox{[}input\mbox{]}. \end{DoxyCompactList}\item 
+void \hyperlink{group___bit_i_o___u_p_r_d_y__module_gaf732785b20487680826483805a012205}{Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y\-\_\-\-Put\-Val} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, bool Val)
+\begin{DoxyCompactList}\small\item\em The specified output value is set. If the direction is {\bfseries  input}, the component saves the value to a memory or a register and this value will be written to the pin after switching to the output mode (using {\ttfamily Set\-Dir(\-T\-R\-U\-E)}; see \href{BitIOProperties.html#SafeMode}{\tt Safe mode} property for limitations). If the direction is {\bfseries output}, it writes the value to the pin. (Method is available only if the direction = $<$u$>${\ttfamily output}$<$/u$>$ or $<$u$>${\ttfamily  input/output}$<$/u$>$). \end{DoxyCompactList}\item 
+void \hyperlink{group___bit_i_o___u_p_r_d_y__module_gae41a939598ee06853fa018667b9ba27a}{Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y\-\_\-\-Clr\-Val} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Clears (set to zero) the output value. It is equivalent to the \mbox{[}Put\-Val(\-F\-A\-L\-S\-E)\mbox{]}. This method is available only if the direction = \-\_\-\mbox{[}output\mbox{]}\-\_\- or \-\_\-\mbox{[}input/output\mbox{]}\-\_\-. \end{DoxyCompactList}\item 
+void \hyperlink{group___bit_i_o___u_p_r_d_y__module_gac70117da5c49eebd6eed8745bc7db5ac}{Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y\-\_\-\-Set\-Val} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Sets (to one) the output value. It is equivalent to the \mbox{[}Put\-Val(\-T\-R\-U\-E)\mbox{]}. This method is available only if the direction = \-\_\-\mbox{[}output\mbox{]}\-\_\- or \-\_\-\mbox{[}input/output\mbox{]}\-\_\-. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+The H\-A\-L Bit\-I\-O component provides a low level A\-P\-I for unified access to general purpose digital input/output pins across various device designs. \begin{DoxyVersion}{Version}
+01.\-03 R\-T\-O\-S drivers using H\-A\-L Bit\-I\-O A\-P\-I are simpler and more portable to various microprocessors. 
+\end{DoxyVersion}

@@ -1,0 +1,1240 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"start.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.cpu_identify,"ax",%progbits
+  18              		.align	2
+  19              		.global	cpu_identify
+  20              		.code	16
+  21              		.thumb_func
+  23              	cpu_identify:
+  24              	.LFB1:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * File:	start.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * Purpose:	Kinetis L Family start up routines. 
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * Notes:		
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #include "start.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #include "common.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #include "sysinit.h"
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #include "rcm.h"
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /********************************************************************/
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /*!
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \brief   Kinetis L Family Start
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \return  None
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  *
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * This function calls all of the necessary startup routines and then 
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * branches to the main process.
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  */
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** void start(void)
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** {            
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		/* Disable the watchdog timer */
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     SIM_COPC = 0x00;
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #ifndef CMSIS    // If conforming to CMSIS, we do not need to perform this code
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* Copy any vector or data sections that need to be in RAM */
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	common_startup();
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #endif
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* Perform clock initialization, default UART initialization,
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****      * initializes clock out function, and enables the abort button
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****      */
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	sysinit();
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("\n\r\n\r");
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* Determine the last cause(s) of reset */
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	outSRS();	
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* Determine specific Kinetis L Family device and revision */
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	cpu_identify();
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #ifndef CMSIS    // If conforming to CMSIS, we do not need to perform this code
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* Jump to main process */
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	main();
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	/* No actions to perform after this so wait forever */
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	while(1);
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** #endif 
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** }
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /********************************************************************/
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /*!
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \brief   Kinetis L Family Identify
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \return  None
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  *
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * This is primarly a reporting function that displays information
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * about the specific CPU to the default terminal including:
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * - Kinetis family
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * - package
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * - die revision
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * - P-flash size
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * - Ram size
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  */
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** void cpu_identify (void)
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** {
+  26              		.loc 1 69 0
+  27              		.cfi_startproc
+  28 0000 08B5     		push	{r3, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****   uint16 temp;
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the Kinetis family */
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_FAMID(0x7))>>SIM_SDID_FAMID_SHIFT) 
+  33              		.loc 1 72 0
+  34 0002 604A     		ldr	r2, .L56
+  35 0004 604B     		ldr	r3, .L56+4
+  36 0006 D058     		ldr	r0, [r2, r3]
+  37 0008 4100     		lsl	r1, r0, #1
+  38 000a 4B0F     		lsr	r3, r1, #29
+  39 000c 042B     		cmp	r3, #4
+  40 000e 47D9     		bls	.L50
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {  
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x0:
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL0");
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x1:
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL1");
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x2:
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL2");
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x3:
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL3");
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x4:
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL4");
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("\n\rUnrecognized Kinetis family device.\n\r");  
+  41              		.loc 1 90 0
+  42 0010 5E48     		ldr	r0, .L56+8
+  43 0012 FFF7FEFF 		bl	printf
+  44              	.LVL0:
+  45              	.L9:
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine Sub-Family ID */
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_SUBFAMID(0x7))>>SIM_SDID_SUBFAMID_SHIFT) 
+  46              		.loc 1 95 0
+  47 0016 5C4B     		ldr	r3, .L56+4
+  48 0018 5A48     		ldr	r0, .L56
+  49 001a C258     		ldr	r2, [r0, r3]
+  50 001c 5101     		lsl	r1, r2, #5
+  51 001e 4B0F     		lsr	r3, r1, #29
+  52 0020 042B     		cmp	r3, #4
+  53 0022 53D0     		beq	.L11
+  54 0024 052B     		cmp	r3, #5
+  55 0026 55D0     		beq	.L51
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {  
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x4:
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("4");
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x5:
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("5");
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("\n\rUnrecognized Kinetis sub-family device.\n\r");  
+  56              		.loc 1 104 0
+  57 0028 5948     		ldr	r0, .L56+12
+  58 002a FFF7FEFF 		bl	printf
+  59              	.LVL1:
+  60              	.L13:
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the package size */
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_PINID(0xF))>>SIM_SDID_PINID_SHIFT) 
+  61              		.loc 1 109 0
+  62 002e 5648     		ldr	r0, .L56+4
+  63 0030 544A     		ldr	r2, .L56
+  64 0032 0F23     		mov	r3, #15
+  65 0034 1158     		ldr	r1, [r2, r0]
+  66 0036 1940     		and	r1, r3
+  67 0038 0829     		cmp	r1, #8
+  68 003a 25D9     		bls	.L52
+  69              	.L14:
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {  
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x0:
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("16pin       ");
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x1:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("24pin       ");
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x2:
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("32pin      ");
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x4:
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("48pin      ");
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x5:
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("64pin      ");
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x6:
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("80pin      ");
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x8:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("100pin      ");        
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("\n\rUnrecognized Kinetis package code.      ");  
+  70              		.loc 1 131 0
+  71 003c 5548     		ldr	r0, .L56+16
+  72 003e FFF7FEFF 		bl	printf
+  73              	.LVL2:
+  74              	.L23:
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine Attribute ID */
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_SERIESID(0x7))>>SIM_SDID_SERIESID_SHIFT) 
+  75              		.loc 1 136 0
+  76 0042 514B     		ldr	r3, .L56+4
+  77 0044 4F48     		ldr	r0, .L56
+  78 0046 C258     		ldr	r2, [r0, r3]
+  79 0048 5102     		lsl	r1, r2, #9
+  80 004a 4B0F     		lsr	r3, r1, #29
+  81 004c 012B     		cmp	r3, #1
+  82 004e 23D0     		beq	.L53
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {  
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x1:
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rLow Power Line with Cortex M0+\n\r\n\r");
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("\n\rUnrecognized Kinetis family attribute.\n\r");  
+  83              		.loc 1 142 0
+  84 0050 5148     		ldr	r0, .L56+20
+  85 0052 FFF7FEFF 		bl	printf
+  86              	.LVL3:
+  87              	.L26:
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the System SRAM Size */
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_SRAMSIZE(0x7))>>SIM_SDID_SRAMSIZE_SHIFT) 
+  88              		.loc 1 147 0
+  89 0056 4C48     		ldr	r0, .L56+4
+  90 0058 4A4A     		ldr	r2, .L56
+  91 005a 1158     		ldr	r1, [r2, r0]
+  92 005c 4B03     		lsl	r3, r1, #13
+  93 005e 580F     		lsr	r0, r3, #29
+  94 0060 0728     		cmp	r0, #7
+  95 0062 15D9     		bls	.L54
+  96              	.L27:
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {  
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x0:
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size: 0.5 KB\n\r");
+  97              		.loc 1 150 0
+  98 0064 4D48     		ldr	r0, .L56+24
+  99 0066 FFF7FEFF 		bl	printf
+ 100              	.LVL4:
+ 101              	.L36:
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x1:
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  1 KB\n\r");
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x2:
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  2 KB\n\r");
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x3:
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  4 KB\n\r");
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x4:
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  8 KB\n\r");
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x5:
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  16 KB\n\r");
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x6:
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  32 KB\n\r");
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x7:
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  64 KB\n\r");
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("\n\rUnrecognized SRAM Size.\n\r");  
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }                
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the revision ID */
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     temp = ((SIM_SDID_REVID(0xF))>>SIM_SDID_REVID_SHIFT);
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("Silicon rev %d\n\r ", temp);
+ 102              		.loc 1 180 0
+ 103 006a 0F21     		mov	r1, #15
+ 104 006c 4C48     		ldr	r0, .L56+28
+ 105 006e FFF7FEFF 		bl	printf
+ 106              	.LVL5:
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the flash revision */
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     //flash_identify();    
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Determine the P-flash size */
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****   switch((SIM_FCFG1 & SIM_FCFG1_PFSIZE(0xF))>>SIM_FCFG1_PFSIZE_SHIFT)
+ 107              		.loc 1 186 0
+ 108 0072 4C48     		ldr	r0, .L56+32
+ 109 0074 4349     		ldr	r1, .L56
+ 110 0076 0A58     		ldr	r2, [r1, r0]
+ 111 0078 1301     		lsl	r3, r2, #4
+ 112 007a 180F     		lsr	r0, r3, #28
+ 113 007c 0F28     		cmp	r0, #15
+ 114 007e 13D9     		bls	.L55
+ 115              	.L37:
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     {
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****   	case 0x0:
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  8 KB program flash, 0.25 KB protection region");
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x1:
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  16 KB program flash, 0.5 KB protection region	");
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x3:
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  32 KB program flash, 1 KB protection region	");
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     	case 0x5:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  64 KB program flash, 2 KB protection region	");
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x7:
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  128 KB program flash, 4 KB protection region	");
+ 202:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0x9:
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  256 KB program flash, 4 KB protection region	");
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****         case 0xF:
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  128 KB program flash, 4 KB protection region	");
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 209:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	default:
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		printf("ERR!! Undefined flash size\n\r");  
+ 116              		.loc 1 210 0
+ 117 0080 4948     		ldr	r0, .L56+36
+ 118 0082 FFF7FEFF 		bl	printf
+ 119              	.LVL6:
+ 120              	.L1:
+ 211:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 		break;  	  		
+ 212:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     }
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** }
+ 121              		.loc 1 213 0
+ 122              		@ sp needed for prologue
+ 123 0086 08BD     		pop	{r3, pc}
+ 124              	.LVL7:
+ 125              	.L52:
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_PINID(0xF))>>SIM_SDID_PINID_SHIFT) 
+ 126              		.loc 1 109 0
+ 127 0088 484A     		ldr	r2, .L56+40
+ 128 008a 8800     		lsl	r0, r1, #2
+ 129 008c 1158     		ldr	r1, [r2, r0]
+ 130 008e 8F46     		mov	pc, r1
+ 131              		.section	.rodata.cpu_identify,"a",%progbits
+ 132              		.align	2
+ 133              	.L22:
+ 134 0000 2C010000 		.word	.L15
+ 135 0004 34010000 		.word	.L16
+ 136 0008 3C010000 		.word	.L17
+ 137 000c 3C000000 		.word	.L14
+ 138 0010 44010000 		.word	.L18
+ 139 0014 B8000000 		.word	.L19
+ 140 0018 BE000000 		.word	.L20
+ 141 001c 3C000000 		.word	.L14
+ 142 0020 C4000000 		.word	.L21
+ 143              		.section	.text.cpu_identify
+ 144              	.L54:
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_SRAMSIZE(0x7))>>SIM_SDID_SRAMSIZE_SHIFT) 
+ 145              		.loc 1 147 0
+ 146 0090 474A     		ldr	r2, .L56+44
+ 147 0092 8100     		lsl	r1, r0, #2
+ 148 0094 5358     		ldr	r3, [r2, r1]
+ 149 0096 9F46     		mov	pc, r3
+ 150              		.section	.rodata.cpu_identify
+ 151              		.align	2
+ 152              	.L35:
+ 153 0024 64000000 		.word	.L27
+ 154 0028 5C010000 		.word	.L28
+ 155 002c 4C010000 		.word	.L29
+ 156 0030 64010000 		.word	.L30
+ 157 0034 6C010000 		.word	.L31
+ 158 0038 74010000 		.word	.L32
+ 159 003c 7C010000 		.word	.L33
+ 160 0040 54010000 		.word	.L34
+ 161              		.section	.text.cpu_identify
+ 162              	.L53:
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rLow Power Line with Cortex M0+\n\r\n\r");
+ 163              		.loc 1 139 0
+ 164 0098 4648     		ldr	r0, .L56+48
+ 165 009a FFF7FEFF 		bl	printf
+ 166              	.LVL8:
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 167              		.loc 1 140 0
+ 168 009e DAE7     		b	.L26
+ 169              	.L50:
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     switch((SIM_SDID & SIM_SDID_FAMID(0x7))>>SIM_SDID_FAMID_SHIFT) 
+ 170              		.loc 1 72 0
+ 171 00a0 454A     		ldr	r2, .L56+52
+ 172 00a2 9800     		lsl	r0, r3, #2
+ 173 00a4 1158     		ldr	r1, [r2, r0]
+ 174 00a6 8F46     		mov	pc, r1
+ 175              		.section	.rodata.cpu_identify
+ 176              		.align	2
+ 177              	.L8:
+ 178 0044 EC000000 		.word	.L3
+ 179 0048 F4000000 		.word	.L4
+ 180 004c FC000000 		.word	.L5
+ 181 0050 DC000000 		.word	.L6
+ 182 0054 E4000000 		.word	.L7
+ 183              		.section	.text.cpu_identify
+ 184              	.LVL9:
+ 185              	.L55:
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****   switch((SIM_FCFG1 & SIM_FCFG1_PFSIZE(0xF))>>SIM_FCFG1_PFSIZE_SHIFT)
+ 186              		.loc 1 186 0
+ 187 00a8 444A     		ldr	r2, .L56+56
+ 188 00aa 8100     		lsl	r1, r0, #2
+ 189 00ac 5358     		ldr	r3, [r2, r1]
+ 190 00ae 9F46     		mov	pc, r3
+ 191              		.section	.rodata.cpu_identify
+ 192              		.align	2
+ 193              	.L45:
+ 194 0058 04010000 		.word	.L38
+ 195 005c 0C010000 		.word	.L39
+ 196 0060 80000000 		.word	.L37
+ 197 0064 14010000 		.word	.L40
+ 198 0068 80000000 		.word	.L37
+ 199 006c 1C010000 		.word	.L41
+ 200 0070 80000000 		.word	.L37
+ 201 0074 B0000000 		.word	.L44
+ 202 0078 80000000 		.word	.L37
+ 203 007c 24010000 		.word	.L43
+ 204 0080 80000000 		.word	.L37
+ 205 0084 80000000 		.word	.L37
+ 206 0088 80000000 		.word	.L37
+ 207 008c 80000000 		.word	.L37
+ 208 0090 80000000 		.word	.L37
+ 209 0094 B0000000 		.word	.L44
+ 210              		.section	.text.cpu_identify
+ 211              	.L44:
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  128 KB program flash, 4 KB protection region	");
+ 212              		.loc 1 207 0
+ 213 00b0 4348     		ldr	r0, .L56+60
+ 214 00b2 FFF7FEFF 		bl	printf
+ 215              	.LVL10:
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 216              		.loc 1 208 0
+ 217 00b6 E6E7     		b	.L1
+ 218              	.LVL11:
+ 219              	.L19:
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("64pin      ");
+ 220              		.loc 1 124 0
+ 221 00b8 4248     		ldr	r0, .L56+64
+ 222 00ba FFF7FEFF 		bl	printf
+ 223              	.LVL12:
+ 224              	.L20:
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("80pin      ");
+ 225              		.loc 1 126 0
+ 226 00be 4248     		ldr	r0, .L56+68
+ 227 00c0 FFF7FEFF 		bl	printf
+ 228              	.LVL13:
+ 229              	.L21:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("100pin      ");        
+ 230              		.loc 1 128 0
+ 231 00c4 4148     		ldr	r0, .L56+72
+ 232 00c6 FFF7FEFF 		bl	printf
+ 233              	.LVL14:
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 234              		.loc 1 129 0
+ 235 00ca BAE7     		b	.L23
+ 236              	.L11:
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("4");
+ 237              		.loc 1 98 0
+ 238 00cc 3420     		mov	r0, #52
+ 239 00ce FFF7FEFF 		bl	putchar
+ 240              	.LVL15:
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 241              		.loc 1 99 0
+ 242 00d2 ACE7     		b	.L13
+ 243              	.L51:
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("5");
+ 244              		.loc 1 101 0
+ 245 00d4 3520     		mov	r0, #53
+ 246 00d6 FFF7FEFF 		bl	putchar
+ 247              	.LVL16:
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 248              		.loc 1 102 0
+ 249 00da A8E7     		b	.L13
+ 250              	.L6:
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL3");
+ 251              		.loc 1 84 0
+ 252 00dc 3C48     		ldr	r0, .L56+76
+ 253 00de FFF7FEFF 		bl	printf
+ 254              	.LVL17:
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 255              		.loc 1 85 0
+ 256 00e2 98E7     		b	.L9
+ 257              	.L7:
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL4");
+ 258              		.loc 1 87 0
+ 259 00e4 3B48     		ldr	r0, .L56+80
+ 260 00e6 FFF7FEFF 		bl	printf
+ 261              	.LVL18:
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 262              		.loc 1 88 0
+ 263 00ea 94E7     		b	.L9
+ 264              	.L3:
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL0");
+ 265              		.loc 1 75 0
+ 266 00ec 3A48     		ldr	r0, .L56+84
+ 267 00ee FFF7FEFF 		bl	printf
+ 268              	.LVL19:
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 269              		.loc 1 76 0
+ 270 00f2 90E7     		b	.L9
+ 271              	.L4:
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL1");
+ 272              		.loc 1 78 0
+ 273 00f4 3948     		ldr	r0, .L56+88
+ 274 00f6 FFF7FEFF 		bl	printf
+ 275              	.LVL20:
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 276              		.loc 1 79 0
+ 277 00fa 8CE7     		b	.L9
+ 278              	.L5:
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("\n\rKL2");
+ 279              		.loc 1 81 0
+ 280 00fc 3848     		ldr	r0, .L56+92
+ 281 00fe FFF7FEFF 		bl	printf
+ 282              	.LVL21:
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 283              		.loc 1 82 0
+ 284 0102 88E7     		b	.L9
+ 285              	.LVL22:
+ 286              	.L38:
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  8 KB program flash, 0.25 KB protection region");
+ 287              		.loc 1 189 0
+ 288 0104 3748     		ldr	r0, .L56+96
+ 289 0106 FFF7FEFF 		bl	printf
+ 290              	.LVL23:
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 291              		.loc 1 190 0
+ 292 010a BCE7     		b	.L1
+ 293              	.L39:
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  16 KB program flash, 0.5 KB protection region	");
+ 294              		.loc 1 192 0
+ 295 010c 3648     		ldr	r0, .L56+100
+ 296 010e FFF7FEFF 		bl	printf
+ 297              	.LVL24:
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 298              		.loc 1 193 0
+ 299 0112 B8E7     		b	.L1
+ 300              	.L40:
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  32 KB program flash, 1 KB protection region	");
+ 301              		.loc 1 195 0
+ 302 0114 3548     		ldr	r0, .L56+104
+ 303 0116 FFF7FEFF 		bl	printf
+ 304              	.LVL25:
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 305              		.loc 1 196 0
+ 306 011a B4E7     		b	.L1
+ 307              	.L41:
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  64 KB program flash, 2 KB protection region	");
+ 308              		.loc 1 198 0
+ 309 011c 3448     		ldr	r0, .L56+108
+ 310 011e FFF7FEFF 		bl	printf
+ 311              	.LVL26:
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 312              		.loc 1 199 0
+ 313 0122 B0E7     		b	.L1
+ 314              	.L43:
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("Flash size:  256 KB program flash, 4 KB protection region	");
+ 315              		.loc 1 204 0
+ 316 0124 3348     		ldr	r0, .L56+112
+ 317 0126 FFF7FEFF 		bl	printf
+ 318              	.LVL27:
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 319              		.loc 1 205 0
+ 320 012a ACE7     		b	.L1
+ 321              	.LVL28:
+ 322              	.L15:
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("16pin       ");
+ 323              		.loc 1 112 0
+ 324 012c 3248     		ldr	r0, .L56+116
+ 325 012e FFF7FEFF 		bl	printf
+ 326              	.LVL29:
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 327              		.loc 1 113 0
+ 328 0132 86E7     		b	.L23
+ 329              	.L16:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("24pin       ");
+ 330              		.loc 1 115 0
+ 331 0134 3148     		ldr	r0, .L56+120
+ 332 0136 FFF7FEFF 		bl	printf
+ 333              	.LVL30:
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 334              		.loc 1 116 0
+ 335 013a 82E7     		b	.L23
+ 336              	.L17:
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("32pin      ");
+ 337              		.loc 1 118 0
+ 338 013c 3048     		ldr	r0, .L56+124
+ 339 013e FFF7FEFF 		bl	printf
+ 340              	.LVL31:
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 341              		.loc 1 119 0
+ 342 0142 7EE7     		b	.L23
+ 343              	.L18:
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		printf("48pin      ");
+ 344              		.loc 1 121 0
+ 345 0144 2F48     		ldr	r0, .L56+128
+ 346 0146 FFF7FEFF 		bl	printf
+ 347              	.LVL32:
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     		break;
+ 348              		.loc 1 122 0
+ 349 014a 7AE7     		b	.L23
+ 350              	.L29:
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  2 KB\n\r");
+ 351              		.loc 1 156 0
+ 352 014c 2E48     		ldr	r0, .L56+132
+ 353 014e FFF7FEFF 		bl	printf
+ 354              	.LVL33:
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 355              		.loc 1 157 0
+ 356 0152 8AE7     		b	.L36
+ 357              	.L34:
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  64 KB\n\r");
+ 358              		.loc 1 171 0
+ 359 0154 2D48     		ldr	r0, .L56+136
+ 360 0156 FFF7FEFF 		bl	printf
+ 361              	.LVL34:
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 362              		.loc 1 172 0
+ 363 015a 86E7     		b	.L36
+ 364              	.L28:
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  1 KB\n\r");
+ 365              		.loc 1 153 0
+ 366 015c 2C48     		ldr	r0, .L56+140
+ 367 015e FFF7FEFF 		bl	printf
+ 368              	.LVL35:
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 369              		.loc 1 154 0
+ 370 0162 82E7     		b	.L36
+ 371              	.L30:
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  4 KB\n\r");
+ 372              		.loc 1 159 0
+ 373 0164 2B48     		ldr	r0, .L56+144
+ 374 0166 FFF7FEFF 		bl	printf
+ 375              	.LVL36:
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 376              		.loc 1 160 0
+ 377 016a 7EE7     		b	.L36
+ 378              	.L31:
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  8 KB\n\r");
+ 379              		.loc 1 162 0
+ 380 016c 2A48     		ldr	r0, .L56+148
+ 381 016e FFF7FEFF 		bl	printf
+ 382              	.LVL37:
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 383              		.loc 1 163 0
+ 384 0172 7AE7     		b	.L36
+ 385              	.L32:
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  16 KB\n\r");
+ 386              		.loc 1 165 0
+ 387 0174 2948     		ldr	r0, .L56+152
+ 388 0176 FFF7FEFF 		bl	printf
+ 389              	.LVL38:
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 390              		.loc 1 166 0
+ 391 017a 76E7     		b	.L36
+ 392              	.L33:
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           printf("SRAM Size:  32 KB\n\r");
+ 393              		.loc 1 168 0
+ 394 017c 2848     		ldr	r0, .L56+156
+ 395 017e FFF7FEFF 		bl	printf
+ 396              	.LVL39:
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****           break;
+ 397              		.loc 1 169 0
+ 398 0182 72E7     		b	.L36
+ 399              	.L57:
+ 400              		.align	2
+ 401              	.L56:
+ 402 0184 00700440 		.word	1074032640
+ 403 0188 24100000 		.word	4132
+ 404 018c 28000000 		.word	.LC11
+ 405 0190 50000000 		.word	.LC13
+ 406 0194 DC000000 		.word	.LC30
+ 407 0198 30010000 		.word	.LC34
+ 408 019c 5C010000 		.word	.LC37
+ 409 01a0 FC010000 		.word	.LC53
+ 410 01a4 4C100000 		.word	4172
+ 411 01a8 78030000 		.word	.LC68
+ 412 01ac 00000000 		.word	.L22
+ 413 01b0 24000000 		.word	.L35
+ 414 01b4 08010000 		.word	.LC32
+ 415 01b8 44000000 		.word	.L8
+ 416 01bc 58000000 		.word	.L45
+ 417 01c0 00030000 		.word	.LC64
+ 418 01c4 B4000000 		.word	.LC24
+ 419 01c8 C0000000 		.word	.LC26
+ 420 01cc CC000000 		.word	.LC28
+ 421 01d0 18000000 		.word	.LC7
+ 422 01d4 20000000 		.word	.LC9
+ 423 01d8 00000000 		.word	.LC1
+ 424 01dc 08000000 		.word	.LC3
+ 425 01e0 10000000 		.word	.LC5
+ 426 01e4 10020000 		.word	.LC56
+ 427 01e8 4C020000 		.word	.LC58
+ 428 01ec 88020000 		.word	.LC60
+ 429 01f0 C4020000 		.word	.LC62
+ 430 01f4 3C030000 		.word	.LC66
+ 431 01f8 7C000000 		.word	.LC16
+ 432 01fc 8C000000 		.word	.LC18
+ 433 0200 9C000000 		.word	.LC20
+ 434 0204 A8000000 		.word	.LC22
+ 435 0208 84010000 		.word	.LC41
+ 436 020c E8010000 		.word	.LC51
+ 437 0210 70010000 		.word	.LC39
+ 438 0214 98010000 		.word	.LC43
+ 439 0218 AC010000 		.word	.LC45
+ 440 021c C0010000 		.word	.LC47
+ 441 0220 D4010000 		.word	.LC49
+ 442              		.cfi_endproc
+ 443              	.LFE1:
+ 445              		.section	.text.start,"ax",%progbits
+ 446              		.align	2
+ 447              		.global	start
+ 448              		.code	16
+ 449              		.thumb_func
+ 451              	start:
+ 452              	.LFB0:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** {            
+ 453              		.loc 1 23 0
+ 454              		.cfi_startproc
+ 455 0000 08B5     		push	{r3, lr}
+ 456              	.LCFI1:
+ 457              		.cfi_def_cfa_offset 8
+ 458              		.cfi_offset 3, -8
+ 459              		.cfi_offset 14, -4
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     SIM_COPC = 0x00;
+ 460              		.loc 1 25 0
+ 461 0002 094A     		ldr	r2, .L60
+ 462 0004 8823     		mov	r3, #136
+ 463 0006 5801     		lsl	r0, r3, #5
+ 464 0008 0021     		mov	r1, #0
+ 465 000a 1150     		str	r1, [r2, r0]
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	common_startup();
+ 466              		.loc 1 31 0
+ 467 000c FFF7FEFF 		bl	common_startup
+ 468              	.LVL40:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	sysinit();
+ 469              		.loc 1 37 0
+ 470 0010 FFF7FEFF 		bl	sysinit
+ 471              	.LVL41:
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("\n\r\n\r");
+ 472              		.loc 1 39 0
+ 473 0014 0548     		ldr	r0, .L60+4
+ 474 0016 FFF7FEFF 		bl	printf
+ 475              	.LVL42:
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	outSRS();	
+ 476              		.loc 1 42 0
+ 477 001a FFF7FEFF 		bl	outSRS
+ 478              	.LVL43:
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	cpu_identify();
+ 479              		.loc 1 45 0
+ 480 001e FFF7FEFF 		bl	cpu_identify
+ 481              	.LVL44:
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 	main();
+ 482              		.loc 1 49 0
+ 483 0022 FFF7FEFF 		bl	main
+ 484              	.LVL45:
+ 485              	.L59:
+ 486 0026 FEE7     		b	.L59
+ 487              	.L61:
+ 488              		.align	2
+ 489              	.L60:
+ 490 0028 00700440 		.word	1074032640
+ 491 002c 98030000 		.word	.LC70
+ 492              		.cfi_endproc
+ 493              	.LFE0:
+ 495              		.section	.text.flash_identify,"ax",%progbits
+ 496              		.align	2
+ 497              		.global	flash_identify
+ 498              		.code	16
+ 499              		.thumb_func
+ 501              	flash_identify:
+ 502              	.LFB2:
+ 214:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /********************************************************************/
+ 215:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** /*!
+ 216:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \brief   flash Identify
+ 217:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * \return  None
+ 218:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  *
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * This is primarly a reporting function that displays information
+ 220:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * about the specific flash parameters and flash version ID for 
+ 221:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * the current device. These parameters are obtained using a special
+ 222:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * flash command call "read resource." The first four bytes returned
+ 223:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * are the flash parameter revision, and the second four bytes are
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  * the flash version ID.
+ 225:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****  */
+ 226:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** void flash_identify (void)
+ 227:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** {
+ 503              		.loc 1 227 0
+ 504              		.cfi_startproc
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Get the flash parameter version */
+ 229:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 230:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Write the flash FCCOB registers with the values for a read resource command */
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 505              		.loc 1 231 0
+ 506 0000 214A     		ldr	r2, .L67
+ 227:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** {
+ 507              		.loc 1 227 0
+ 508 0002 70B5     		push	{r4, r5, r6, lr}
+ 509              	.LCFI2:
+ 510              		.cfi_def_cfa_offset 16
+ 511              		.cfi_offset 4, -16
+ 512              		.cfi_offset 5, -12
+ 513              		.cfi_offset 6, -8
+ 514              		.cfi_offset 14, -4
+ 232:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB1 = 0x00;
+ 515              		.loc 1 232 0
+ 516 0004 0020     		mov	r0, #0
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 517              		.loc 1 231 0
+ 518 0006 0323     		mov	r3, #3
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB2 = 0x00;
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB3 = 0x00;
+ 235:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB8 = 0x01;
+ 519              		.loc 1 235 0
+ 520 0008 0121     		mov	r1, #1
+ 236:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 237:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* All required FCCOBx registers are written, so launch the command */
+ 238:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FSTAT = FTFA_FSTAT_CCIF_MASK;
+ 521              		.loc 1 238 0
+ 522 000a 8024     		mov	r4, #128
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 523              		.loc 1 231 0
+ 524 000c D371     		strb	r3, [r2, #7]
+ 232:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB1 = 0x00;
+ 525              		.loc 1 232 0
+ 526 000e 9071     		strb	r0, [r2, #6]
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB2 = 0x00;
+ 527              		.loc 1 233 0
+ 528 0010 5071     		strb	r0, [r2, #5]
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB3 = 0x00;
+ 529              		.loc 1 234 0
+ 530 0012 1071     		strb	r0, [r2, #4]
+ 235:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB8 = 0x01;
+ 531              		.loc 1 235 0
+ 532 0014 D173     		strb	r1, [r2, #15]
+ 533              		.loc 1 238 0
+ 534 0016 1470     		strb	r4, [r2]
+ 535              	.L63:
+ 239:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 240:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Wait for the command to complete */
+ 241:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     while(!(FTFA_FSTAT & FTFA_FSTAT_CCIF_MASK));
+ 536              		.loc 1 241 0
+ 537 0018 1578     		ldrb	r5, [r2]
+ 538 001a 1B4C     		ldr	r4, .L67
+ 539 001c 6EB2     		sxtb	r6, r5
+ 540 001e 002E     		cmp	r6, #0
+ 541 0020 FADA     		bge	.L63
+ 242:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     
+ 243:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("Flash parameter version %d ",FTFA_FCCOB4);
+ 542              		.loc 1 243 0
+ 543 0022 E17A     		ldrb	r1, [r4, #11]
+ 544 0024 1948     		ldr	r0, .L67+4
+ 545 0026 FFF7FEFF 		bl	printf
+ 546              	.LVL46:
+ 244:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf(" %d ",FTFA_FCCOB5);
+ 547              		.loc 1 244 0
+ 548 002a 194E     		ldr	r6, .L67+8
+ 549 002c A17A     		ldrb	r1, [r4, #10]
+ 550 002e 301C     		mov	r0, r6
+ 551 0030 FFF7FEFF 		bl	printf
+ 552              	.LVL47:
+ 245:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf(" %d ",FTFA_FCCOB6);
+ 553              		.loc 1 245 0
+ 554 0034 617A     		ldrb	r1, [r4, #9]
+ 555 0036 301C     		mov	r0, r6
+ 556 0038 FFF7FEFF 		bl	printf
+ 557              	.LVL48:
+ 246:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf(" %d\n\r",FTFA_FCCOB7);
+ 558              		.loc 1 246 0
+ 559 003c 217A     		ldrb	r1, [r4, #8]
+ 560 003e 1548     		ldr	r0, .L67+12
+ 561 0040 FFF7FEFF 		bl	printf
+ 562              	.LVL49:
+ 247:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 248:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Get the flash version ID */   
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Write the flash FCCOB registers with the values for a read resource command */
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB1 = 0x00;
+ 253:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB2 = 0x00;
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB3 = 0x04;
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB8 = 0x01;
+ 256:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 257:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* All required FCCOBx registers are written, so launch the command */
+ 258:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FSTAT = FTFA_FSTAT_CCIF_MASK;
+ 563              		.loc 1 258 0
+ 564 0044 8025     		mov	r5, #128
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB1 = 0x00;
+ 565              		.loc 1 252 0
+ 566 0046 0023     		mov	r3, #0
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 567              		.loc 1 251 0
+ 568 0048 0322     		mov	r2, #3
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB3 = 0x04;
+ 569              		.loc 1 254 0
+ 570 004a 0420     		mov	r0, #4
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB8 = 0x01;
+ 571              		.loc 1 255 0
+ 572 004c 0121     		mov	r1, #1
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB0 = 0x03;
+ 573              		.loc 1 251 0
+ 574 004e E271     		strb	r2, [r4, #7]
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB1 = 0x00;
+ 575              		.loc 1 252 0
+ 576 0050 A371     		strb	r3, [r4, #6]
+ 253:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB2 = 0x00;
+ 577              		.loc 1 253 0
+ 578 0052 6371     		strb	r3, [r4, #5]
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB3 = 0x04;
+ 579              		.loc 1 254 0
+ 580 0054 2071     		strb	r0, [r4, #4]
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     FTFA_FCCOB8 = 0x01;
+ 581              		.loc 1 255 0
+ 582 0056 E173     		strb	r1, [r4, #15]
+ 583              		.loc 1 258 0
+ 584 0058 2570     		strb	r5, [r4]
+ 585              	.L64:
+ 259:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 260:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     /* Wait for the command to complete */
+ 261:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     while(!(FTFA_FSTAT & FTFA_FSTAT_CCIF_MASK));
+ 586              		.loc 1 261 0
+ 587 005a 2278     		ldrb	r2, [r4]
+ 588 005c 0A4D     		ldr	r5, .L67
+ 589 005e 53B2     		sxtb	r3, r2
+ 590 0060 002B     		cmp	r3, #0
+ 591 0062 FADA     		bge	.L64
+ 262:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** 
+ 263:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("Flash version ID %d ",FTFA_FCCOB4);  
+ 592              		.loc 1 263 0
+ 593 0064 E97A     		ldrb	r1, [r5, #11]
+ 594 0066 0C48     		ldr	r0, .L67+16
+ 595 0068 FFF7FEFF 		bl	printf
+ 596              	.LVL50:
+ 264:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf(" %d",FTFA_FCCOB5);  
+ 597              		.loc 1 264 0
+ 598 006c A97A     		ldrb	r1, [r5, #10]
+ 599 006e 0B48     		ldr	r0, .L67+20
+ 600 0070 FFF7FEFF 		bl	printf
+ 601              	.LVL51:
+ 265:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf(" %d ",FTFA_FCCOB6);  
+ 602              		.loc 1 265 0
+ 603 0074 697A     		ldrb	r1, [r5, #9]
+ 604 0076 301C     		mov	r0, r6
+ 605 0078 FFF7FEFF 		bl	printf
+ 606              	.LVL52:
+ 266:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c ****     printf("%d\n\r",FTFA_FCCOB7);  
+ 607              		.loc 1 266 0
+ 608 007c 297A     		ldrb	r1, [r5, #8]
+ 609 007e 0848     		ldr	r0, .L67+24
+ 610 0080 FFF7FEFF 		bl	printf
+ 611              	.LVL53:
+ 267:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\start.c **** }
+ 612              		.loc 1 267 0
+ 613              		@ sp needed for prologue
+ 614 0084 70BD     		pop	{r4, r5, r6, pc}
+ 615              	.L68:
+ 616 0086 C046     		.align	2
+ 617              	.L67:
+ 618 0088 00000240 		.word	1073872896
+ 619 008c A0030000 		.word	.LC72
+ 620 0090 BC030000 		.word	.LC74
+ 621 0094 C4030000 		.word	.LC76
+ 622 0098 CC030000 		.word	.LC78
+ 623 009c E4030000 		.word	.LC80
+ 624 00a0 E8030000 		.word	.LC82
+ 625              		.cfi_endproc
+ 626              	.LFE2:
+ 628              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 629              		.align	2
+ 630              	.LC1:
+ 631 0000 0A0D4B4C 		.ascii	"\012\015KL0\000"
+ 631      3000
+ 632 0006 0000     		.space	2
+ 633              	.LC3:
+ 634 0008 0A0D4B4C 		.ascii	"\012\015KL1\000"
+ 634      3100
+ 635 000e 0000     		.space	2
+ 636              	.LC5:
+ 637 0010 0A0D4B4C 		.ascii	"\012\015KL2\000"
+ 637      3200
+ 638 0016 0000     		.space	2
+ 639              	.LC7:
+ 640 0018 0A0D4B4C 		.ascii	"\012\015KL3\000"
+ 640      3300
+ 641 001e 0000     		.space	2
+ 642              	.LC9:
+ 643 0020 0A0D4B4C 		.ascii	"\012\015KL4\000"
+ 643      3400
+ 644 0026 0000     		.space	2
+ 645              	.LC11:
+ 646 0028 0A0D556E 		.ascii	"\012\015Unrecognized Kinetis family device.\012\015"
+ 646      7265636F 
+ 646      676E697A 
+ 646      6564204B 
+ 646      696E6574 
+ 647 004f 00       		.ascii	"\000"
+ 648              	.LC13:
+ 649 0050 0A0D556E 		.ascii	"\012\015Unrecognized Kinetis sub-family device.\012"
+ 649      7265636F 
+ 649      676E697A 
+ 649      6564204B 
+ 649      696E6574 
+ 650 007a 0D00     		.ascii	"\015\000"
+ 651              	.LC16:
+ 652 007c 31367069 		.ascii	"16pin       \000"
+ 652      6E202020 
+ 652      20202020 
+ 652      00
+ 653 0089 000000   		.space	3
+ 654              	.LC18:
+ 655 008c 32347069 		.ascii	"24pin       \000"
+ 655      6E202020 
+ 655      20202020 
+ 655      00
+ 656 0099 000000   		.space	3
+ 657              	.LC20:
+ 658 009c 33327069 		.ascii	"32pin      \000"
+ 658      6E202020 
+ 658      20202000 
+ 659              	.LC22:
+ 660 00a8 34387069 		.ascii	"48pin      \000"
+ 660      6E202020 
+ 660      20202000 
+ 661              	.LC24:
+ 662 00b4 36347069 		.ascii	"64pin      \000"
+ 662      6E202020 
+ 662      20202000 
+ 663              	.LC26:
+ 664 00c0 38307069 		.ascii	"80pin      \000"
+ 664      6E202020 
+ 664      20202000 
+ 665              	.LC28:
+ 666 00cc 31303070 		.ascii	"100pin      \000"
+ 666      696E2020 
+ 666      20202020 
+ 666      00
+ 667 00d9 000000   		.space	3
+ 668              	.LC30:
+ 669 00dc 0A0D556E 		.ascii	"\012\015Unrecognized Kinetis package code.      \000"
+ 669      7265636F 
+ 669      676E697A 
+ 669      6564204B 
+ 669      696E6574 
+ 670 0107 00       		.space	1
+ 671              	.LC32:
+ 672 0108 0A0D4C6F 		.ascii	"\012\015Low Power Line with Cortex M0+\012\015\012\015"
+ 672      7720506F 
+ 672      77657220 
+ 672      4C696E65 
+ 672      20776974 
+ 673 012c 00       		.ascii	"\000"
+ 674 012d 000000   		.space	3
+ 675              	.LC34:
+ 676 0130 0A0D556E 		.ascii	"\012\015Unrecognized Kinetis family attribute.\012\015"
+ 676      7265636F 
+ 676      676E697A 
+ 676      6564204B 
+ 676      696E6574 
+ 677 015a 00       		.ascii	"\000"
+ 678 015b 00       		.space	1
+ 679              	.LC37:
+ 680 015c 5352414D 		.ascii	"SRAM Size: 0.5 KB\012\015\000"
+ 680      2053697A 
+ 680      653A2030 
+ 680      2E35204B 
+ 680      420A0D00 
+ 681              	.LC39:
+ 682 0170 5352414D 		.ascii	"SRAM Size:  1 KB\012\015\000"
+ 682      2053697A 
+ 682      653A2020 
+ 682      31204B42 
+ 682      0A0D00
+ 683 0183 00       		.space	1
+ 684              	.LC41:
+ 685 0184 5352414D 		.ascii	"SRAM Size:  2 KB\012\015\000"
+ 685      2053697A 
+ 685      653A2020 
+ 685      32204B42 
+ 685      0A0D00
+ 686 0197 00       		.space	1
+ 687              	.LC43:
+ 688 0198 5352414D 		.ascii	"SRAM Size:  4 KB\012\015\000"
+ 688      2053697A 
+ 688      653A2020 
+ 688      34204B42 
+ 688      0A0D00
+ 689 01ab 00       		.space	1
+ 690              	.LC45:
+ 691 01ac 5352414D 		.ascii	"SRAM Size:  8 KB\012\015\000"
+ 691      2053697A 
+ 691      653A2020 
+ 691      38204B42 
+ 691      0A0D00
+ 692 01bf 00       		.space	1
+ 693              	.LC47:
+ 694 01c0 5352414D 		.ascii	"SRAM Size:  16 KB\012\015\000"
+ 694      2053697A 
+ 694      653A2020 
+ 694      3136204B 
+ 694      420A0D00 
+ 695              	.LC49:
+ 696 01d4 5352414D 		.ascii	"SRAM Size:  32 KB\012\015\000"
+ 696      2053697A 
+ 696      653A2020 
+ 696      3332204B 
+ 696      420A0D00 
+ 697              	.LC51:
+ 698 01e8 5352414D 		.ascii	"SRAM Size:  64 KB\012\015\000"
+ 698      2053697A 
+ 698      653A2020 
+ 698      3634204B 
+ 698      420A0D00 
+ 699              	.LC53:
+ 700 01fc 53696C69 		.ascii	"Silicon rev %d\012\015 \000"
+ 700      636F6E20 
+ 700      72657620 
+ 700      25640A0D 
+ 700      2000
+ 701 020e 0000     		.space	2
+ 702              	.LC56:
+ 703 0210 466C6173 		.ascii	"Flash size:  8 KB program flash, 0.25 KB protection"
+ 703      68207369 
+ 703      7A653A20 
+ 703      2038204B 
+ 703      42207072 
+ 704 0243 20726567 		.ascii	" region\000"
+ 704      696F6E00 
+ 705 024b 00       		.space	1
+ 706              	.LC58:
+ 707 024c 466C6173 		.ascii	"Flash size:  16 KB program flash, 0.5 KB protection"
+ 707      68207369 
+ 707      7A653A20 
+ 707      20313620 
+ 707      4B422070 
+ 708 027f 20726567 		.ascii	" region\011\000"
+ 708      696F6E09 
+ 708      00
+ 709              	.LC60:
+ 710 0288 466C6173 		.ascii	"Flash size:  32 KB program flash, 1 KB protection r"
+ 710      68207369 
+ 710      7A653A20 
+ 710      20333220 
+ 710      4B422070 
+ 711 02bb 6567696F 		.ascii	"egion\011\000"
+ 711      6E0900
+ 712 02c2 0000     		.space	2
+ 713              	.LC62:
+ 714 02c4 466C6173 		.ascii	"Flash size:  64 KB program flash, 2 KB protection r"
+ 714      68207369 
+ 714      7A653A20 
+ 714      20363420 
+ 714      4B422070 
+ 715 02f7 6567696F 		.ascii	"egion\011\000"
+ 715      6E0900
+ 716 02fe 0000     		.space	2
+ 717              	.LC64:
+ 718 0300 466C6173 		.ascii	"Flash size:  128 KB program flash, 4 KB protection "
+ 718      68207369 
+ 718      7A653A20 
+ 718      20313238 
+ 718      204B4220 
+ 719 0333 72656769 		.ascii	"region\011\000"
+ 719      6F6E0900 
+ 720 033b 00       		.space	1
+ 721              	.LC66:
+ 722 033c 466C6173 		.ascii	"Flash size:  256 KB program flash, 4 KB protection "
+ 722      68207369 
+ 722      7A653A20 
+ 722      20323536 
+ 722      204B4220 
+ 723 036f 72656769 		.ascii	"region\011\000"
+ 723      6F6E0900 
+ 724 0377 00       		.space	1
+ 725              	.LC68:
+ 726 0378 45525221 		.ascii	"ERR!! Undefined flash size\012\015\000"
+ 726      2120556E 
+ 726      64656669 
+ 726      6E656420 
+ 726      666C6173 
+ 727 0395 000000   		.space	3
+ 728              	.LC70:
+ 729 0398 0A0D0A0D 		.ascii	"\012\015\012\015\000"
+ 729      00
+ 730 039d 000000   		.space	3
+ 731              	.LC72:
+ 732 03a0 466C6173 		.ascii	"Flash parameter version %d \000"
+ 732      68207061 
+ 732      72616D65 
+ 732      74657220 
+ 732      76657273 
+ 733              	.LC74:
+ 734 03bc 20256420 		.ascii	" %d \000"
+ 734      00
+ 735 03c1 000000   		.space	3
+ 736              	.LC76:
+ 737 03c4 2025640A 		.ascii	" %d\012\015\000"
+ 737      0D00
+ 738 03ca 0000     		.space	2
+ 739              	.LC78:
+ 740 03cc 466C6173 		.ascii	"Flash version ID %d \000"
+ 740      68207665 
+ 740      7273696F 
+ 740      6E204944 
+ 740      20256420 
+ 741 03e1 000000   		.space	3
+ 742              	.LC80:
+ 743 03e4 20256400 		.ascii	" %d\000"
+ 744              	.LC82:
+ 745 03e8 25640A0D 		.ascii	"%d\012\015\000"
+ 745      00
+ 746 03ed 000000   		.text
+ 747              	.Letext0:
+ 748              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 749              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 750              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 start.c
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:18     .text.cpu_identify:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:23     .text.cpu_identify:00000000 cpu_identify
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:132    .rodata.cpu_identify:00000000 $d
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:402    .text.cpu_identify:00000184 $d
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:446    .text.start:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:451    .text.start:00000000 start
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:490    .text.start:00000028 $d
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:496    .text.flash_identify:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:501    .text.flash_identify:00000000 flash_identify
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:618    .text.flash_identify:00000088 $d
+C:\Users\lab\AppData\Local\Temp\cc9pnfqi.s:629    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf
+putchar
+common_startup
+sysinit
+outSRS
+main

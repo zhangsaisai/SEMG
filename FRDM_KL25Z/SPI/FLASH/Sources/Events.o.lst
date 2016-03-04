@@ -1,0 +1,356 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"Events.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.SM1_OnBlockSent,"ax",%progbits
+  18              		.align	2
+  19              		.global	SM1_OnBlockSent
+  20              		.code	16
+  21              		.thumb_func
+  23              	SM1_OnBlockSent:
+  24              	.LFB0:
+  25              		.file 1 "../Sources/Events.c"
+   1:../Sources/Events.c **** /** ###################################################################
+   2:../Sources/Events.c **** **     Filename    : Events.c
+   3:../Sources/Events.c **** **     Project     : ProcessorExpert
+   4:../Sources/Events.c **** **     Processor   : MKL25Z128VLK4
+   5:../Sources/Events.c **** **     Component   : Events
+   6:../Sources/Events.c **** **     Version     : Driver 01.00
+   7:../Sources/Events.c **** **     Compiler    : GNU C Compiler
+   8:../Sources/Events.c **** **     Date/Time   : 2012-07-09, 11:32, # CodeGen: 0
+   9:../Sources/Events.c **** **     Abstract    :
+  10:../Sources/Events.c **** **         This is user's event module.
+  11:../Sources/Events.c **** **         Put your event handler code here.
+  12:../Sources/Events.c **** **     Settings    :
+  13:../Sources/Events.c **** **     Contents    :
+  14:../Sources/Events.c **** **         Cpu_OnNMIINT - void Cpu_OnNMIINT(void);
+  15:../Sources/Events.c **** **
+  16:../Sources/Events.c **** ** ###################################################################*/
+  17:../Sources/Events.c **** /* MODULE Events */
+  18:../Sources/Events.c **** 
+  19:../Sources/Events.c **** #include "Cpu.h"
+  20:../Sources/Events.c **** #include "Events.h"
+  21:../Sources/Events.c **** #include "SS1.h"
+  22:../Sources/Events.c **** 
+  23:../Sources/Events.c **** /* User includes (#include below this line is not maintained by Processor Expert) */
+  24:../Sources/Events.c **** 
+  25:../Sources/Events.c **** extern  byte buffSlave[6]; /* slave gets msg from master */
+  26:../Sources/Events.c **** extern  LDD_TDeviceData *slaveDevData;
+  27:../Sources/Events.c **** extern  LDD_TDeviceData *masterDevData;
+  28:../Sources/Events.c **** extern  int  i;
+  29:../Sources/Events.c **** /*
+  30:../Sources/Events.c **** ** ===================================================================
+  31:../Sources/Events.c **** **     Event       :  SM1_OnBlockSent (module Events)
+  32:../Sources/Events.c **** **
+  33:../Sources/Events.c **** **     Component   :  SM1 [SPIMaster_LDD]
+  34:../Sources/Events.c **** **     Description :
+  35:../Sources/Events.c **** **         This event is called after the last character from the
+  36:../Sources/Events.c **** **         output buffer is moved to the transmitter. This event is
+  37:../Sources/Events.c **** **         available only if the SendBlock method is enabled.
+  38:../Sources/Events.c **** **     Parameters  :
+  39:../Sources/Events.c **** **         NAME            - DESCRIPTION
+  40:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+  41:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+  42:../Sources/Events.c **** **                           as the parameter of Init method. 
+  43:../Sources/Events.c **** **     Returns     : Nothing
+  44:../Sources/Events.c **** ** ===================================================================
+  45:../Sources/Events.c **** */
+  46:../Sources/Events.c **** void SM1_OnBlockSent(LDD_TUserData *UserDataPtr)
+  47:../Sources/Events.c **** {
+  26              		.loc 1 47 0
+  27              		.cfi_startproc
+  28 0000 80B5     		push	{r7, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 7, -8
+  32              		.cfi_offset 14, -4
+  33 0002 82B0     		sub	sp, sp, #8
+  34              	.LCFI1:
+  35              		.cfi_def_cfa_offset 16
+  36 0004 00AF     		add	r7, sp, #0
+  37              	.LCFI2:
+  38              		.cfi_def_cfa_register 7
+  39 0006 7860     		str	r0, [r7, #4]
+  48:../Sources/Events.c ****   /* Write your code here ... */
+  49:../Sources/Events.c **** }
+  40              		.loc 1 49 0
+  41 0008 BD46     		mov	sp, r7
+  42 000a 02B0     		add	sp, sp, #8
+  43              		@ sp needed for prologue
+  44 000c 80BD     		pop	{r7, pc}
+  45              		.cfi_endproc
+  46              	.LFE0:
+  48 000e C046     		.section	.text.SM1_OnBlockReceived,"ax",%progbits
+  49              		.align	2
+  50              		.global	SM1_OnBlockReceived
+  51              		.code	16
+  52              		.thumb_func
+  54              	SM1_OnBlockReceived:
+  55              	.LFB1:
+  50:../Sources/Events.c **** 
+  51:../Sources/Events.c **** /*
+  52:../Sources/Events.c **** ** ===================================================================
+  53:../Sources/Events.c **** **     Event       :  SM1_OnBlockReceived (module Events)
+  54:../Sources/Events.c **** **
+  55:../Sources/Events.c **** **     Component   :  SM1 [SPIMaster_LDD]
+  56:../Sources/Events.c **** **     Description :
+  57:../Sources/Events.c **** **         This event is called when the requested number of data is
+  58:../Sources/Events.c **** **         moved to the input buffer. This method is available only if
+  59:../Sources/Events.c **** **         the ReceiveBlock method is enabled.
+  60:../Sources/Events.c **** **     Parameters  :
+  61:../Sources/Events.c **** **         NAME            - DESCRIPTION
+  62:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+  63:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+  64:../Sources/Events.c **** **                           as the parameter of Init method. 
+  65:../Sources/Events.c **** **     Returns     : Nothing
+  66:../Sources/Events.c **** ** ===================================================================
+  67:../Sources/Events.c **** */
+  68:../Sources/Events.c **** void SM1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+  69:../Sources/Events.c **** {
+  56              		.loc 1 69 0
+  57              		.cfi_startproc
+  58 0000 80B5     		push	{r7, lr}
+  59              	.LCFI3:
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 7, -8
+  62              		.cfi_offset 14, -4
+  63 0002 84B0     		sub	sp, sp, #16
+  64              	.LCFI4:
+  65              		.cfi_def_cfa_offset 24
+  66 0004 00AF     		add	r7, sp, #0
+  67              	.LCFI5:
+  68              		.cfi_def_cfa_register 7
+  69 0006 7860     		str	r0, [r7, #4]
+  70:../Sources/Events.c ****   uint8_t* MasterReceiveFlag = (LDD_TUserData*) UserDataPtr;
+  70              		.loc 1 70 0
+  71 0008 7B68     		ldr	r3, [r7, #4]
+  72 000a FB60     		str	r3, [r7, #12]
+  71:../Sources/Events.c ****   *MasterReceiveFlag = TRUE;
+  73              		.loc 1 71 0
+  74 000c FB68     		ldr	r3, [r7, #12]
+  75 000e 0122     		mov	r2, #1
+  76 0010 1A70     		strb	r2, [r3]
+  72:../Sources/Events.c **** }
+  77              		.loc 1 72 0
+  78 0012 BD46     		mov	sp, r7
+  79 0014 04B0     		add	sp, sp, #16
+  80              		@ sp needed for prologue
+  81 0016 80BD     		pop	{r7, pc}
+  82              		.cfi_endproc
+  83              	.LFE1:
+  85              		.section	.text.SS1_OnBlockSent,"ax",%progbits
+  86              		.align	2
+  87              		.global	SS1_OnBlockSent
+  88              		.code	16
+  89              		.thumb_func
+  91              	SS1_OnBlockSent:
+  92              	.LFB2:
+  73:../Sources/Events.c **** 
+  74:../Sources/Events.c **** /*
+  75:../Sources/Events.c **** ** ===================================================================
+  76:../Sources/Events.c **** **     Event       :  SS1_OnBlockSent (module Events)
+  77:../Sources/Events.c **** **
+  78:../Sources/Events.c **** **     Component   :  SS1 [SPISlave_LDD]
+  79:../Sources/Events.c **** **     Description :
+  80:../Sources/Events.c **** **         This event is called after the last character from the
+  81:../Sources/Events.c **** **         output buffer is moved to the transmitter. This event is
+  82:../Sources/Events.c **** **         available only if the SendBlock method is enabled.
+  83:../Sources/Events.c **** **     Parameters  :
+  84:../Sources/Events.c **** **         NAME            - DESCRIPTION
+  85:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+  86:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+  87:../Sources/Events.c **** **                           as the parameter of Init method. 
+  88:../Sources/Events.c **** **     Returns     : Nothing
+  89:../Sources/Events.c **** ** ===================================================================
+  90:../Sources/Events.c **** */
+  91:../Sources/Events.c **** void SS1_OnBlockSent(LDD_TUserData *UserDataPtr)
+  92:../Sources/Events.c **** {
+  93              		.loc 1 92 0
+  94              		.cfi_startproc
+  95 0000 80B5     		push	{r7, lr}
+  96              	.LCFI6:
+  97              		.cfi_def_cfa_offset 8
+  98              		.cfi_offset 7, -8
+  99              		.cfi_offset 14, -4
+ 100 0002 82B0     		sub	sp, sp, #8
+ 101              	.LCFI7:
+ 102              		.cfi_def_cfa_offset 16
+ 103 0004 00AF     		add	r7, sp, #0
+ 104              	.LCFI8:
+ 105              		.cfi_def_cfa_register 7
+ 106 0006 7860     		str	r0, [r7, #4]
+  93:../Sources/Events.c ****   /* Write your code here ... */
+  94:../Sources/Events.c **** }
+ 107              		.loc 1 94 0
+ 108 0008 BD46     		mov	sp, r7
+ 109 000a 02B0     		add	sp, sp, #8
+ 110              		@ sp needed for prologue
+ 111 000c 80BD     		pop	{r7, pc}
+ 112              		.cfi_endproc
+ 113              	.LFE2:
+ 115 000e C046     		.section	.text.SS1_OnBlockReceived,"ax",%progbits
+ 116              		.align	2
+ 117              		.global	SS1_OnBlockReceived
+ 118              		.code	16
+ 119              		.thumb_func
+ 121              	SS1_OnBlockReceived:
+ 122              	.LFB3:
+  95:../Sources/Events.c **** 
+  96:../Sources/Events.c **** /*
+  97:../Sources/Events.c **** ** ===================================================================
+  98:../Sources/Events.c **** **     Event       :  SS1_OnBlockReceived (module Events)
+  99:../Sources/Events.c **** **
+ 100:../Sources/Events.c **** **     Component   :  SS1 [SPISlave_LDD]
+ 101:../Sources/Events.c **** **     Description :
+ 102:../Sources/Events.c **** **         This event is called when the requested number of data is
+ 103:../Sources/Events.c **** **         moved to the input buffer. This method is available only if
+ 104:../Sources/Events.c **** **         the ReceiveBlock method is enabled.
+ 105:../Sources/Events.c **** **     Parameters  :
+ 106:../Sources/Events.c **** **         NAME            - DESCRIPTION
+ 107:../Sources/Events.c **** **       * UserDataPtr     - Pointer to the user or
+ 108:../Sources/Events.c **** **                           RTOS specific data. The pointer is passed
+ 109:../Sources/Events.c **** **                           as the parameter of Init method. 
+ 110:../Sources/Events.c **** **     Returns     : Nothing
+ 111:../Sources/Events.c **** ** ===================================================================
+ 112:../Sources/Events.c **** */
+ 113:../Sources/Events.c **** void SS1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+ 114:../Sources/Events.c **** {
+ 123              		.loc 1 114 0
+ 124              		.cfi_startproc
+ 125 0000 80B5     		push	{r7, lr}
+ 126              	.LCFI9:
+ 127              		.cfi_def_cfa_offset 8
+ 128              		.cfi_offset 7, -8
+ 129              		.cfi_offset 14, -4
+ 130 0002 82B0     		sub	sp, sp, #8
+ 131              	.LCFI10:
+ 132              		.cfi_def_cfa_offset 16
+ 133 0004 00AF     		add	r7, sp, #0
+ 134              	.LCFI11:
+ 135              		.cfi_def_cfa_register 7
+ 136 0006 7860     		str	r0, [r7, #4]
+ 115:../Sources/Events.c ****   /* Write your code here ... */
+ 116:../Sources/Events.c **** 	i++;
+ 137              		.loc 1 116 0
+ 138 0008 0B4B     		ldr	r3, .L6
+ 139 000a 1B68     		ldr	r3, [r3]
+ 140 000c 5A1C     		add	r2, r3, #1
+ 141 000e 0A4B     		ldr	r3, .L6
+ 142 0010 1A60     		str	r2, [r3]
+ 117:../Sources/Events.c **** 	if(i>10000)
+ 143              		.loc 1 117 0
+ 144 0012 094B     		ldr	r3, .L6
+ 145 0014 1A68     		ldr	r2, [r3]
+ 146 0016 094B     		ldr	r3, .L6+4
+ 147 0018 9A42     		cmp	r2, r3
+ 148 001a 02DD     		ble	.L5
+ 118:../Sources/Events.c **** 		i=0;
+ 149              		.loc 1 118 0
+ 150 001c 064B     		ldr	r3, .L6
+ 151 001e 0022     		mov	r2, #0
+ 152 0020 1A60     		str	r2, [r3]
+ 153              	.L5:
+ 119:../Sources/Events.c **** 	
+ 120:../Sources/Events.c **** 	//Put request for reading from SPI
+ 121:../Sources/Events.c **** 	SS1_ReceiveBlock(slaveDevData, (LDD_TData*)buffSlave, sizeof(buffSlave)); 
+ 154              		.loc 1 121 0
+ 155 0022 074B     		ldr	r3, .L6+8
+ 156 0024 1A68     		ldr	r2, [r3]
+ 157 0026 074B     		ldr	r3, .L6+12
+ 158 0028 101C     		mov	r0, r2
+ 159 002a 191C     		mov	r1, r3
+ 160 002c 0622     		mov	r2, #6
+ 161 002e FFF7FEFF 		bl	SS1_ReceiveBlock
+ 122:../Sources/Events.c **** 	  	
+ 123:../Sources/Events.c **** }
+ 162              		.loc 1 123 0
+ 163 0032 BD46     		mov	sp, r7
+ 164 0034 02B0     		add	sp, sp, #8
+ 165              		@ sp needed for prologue
+ 166 0036 80BD     		pop	{r7, pc}
+ 167              	.L7:
+ 168              		.align	2
+ 169              	.L6:
+ 170 0038 00000000 		.word	i
+ 171 003c 10270000 		.word	10000
+ 172 0040 00000000 		.word	slaveDevData
+ 173 0044 00000000 		.word	buffSlave
+ 174              		.cfi_endproc
+ 175              	.LFE3:
+ 177              		.section	.text.Cpu_OnNMIINT0,"ax",%progbits
+ 178              		.align	2
+ 179              		.global	Cpu_OnNMIINT0
+ 180              		.code	16
+ 181              		.thumb_func
+ 183              	Cpu_OnNMIINT0:
+ 184              	.LFB4:
+ 124:../Sources/Events.c **** 
+ 125:../Sources/Events.c **** /*
+ 126:../Sources/Events.c **** ** ===================================================================
+ 127:../Sources/Events.c **** **     Event       :  Cpu_OnNMIINT0 (module Events)
+ 128:../Sources/Events.c **** **
+ 129:../Sources/Events.c **** **     Component   :  Cpu [MKL25Z128LK4]
+ 130:../Sources/Events.c **** **     Description :
+ 131:../Sources/Events.c **** **         This event is called when the Non maskable interrupt had
+ 132:../Sources/Events.c **** **         occurred. This event is automatically enabled when the <NMI
+ 133:../Sources/Events.c **** **         interrrupt> property is set to 'Enabled'.
+ 134:../Sources/Events.c **** **     Parameters  : None
+ 135:../Sources/Events.c **** **     Returns     : Nothing
+ 136:../Sources/Events.c **** ** ===================================================================
+ 137:../Sources/Events.c **** */
+ 138:../Sources/Events.c **** void Cpu_OnNMIINT0(void)
+ 139:../Sources/Events.c **** {
+ 185              		.loc 1 139 0
+ 186              		.cfi_startproc
+ 187 0000 80B5     		push	{r7, lr}
+ 188              	.LCFI12:
+ 189              		.cfi_def_cfa_offset 8
+ 190              		.cfi_offset 7, -8
+ 191              		.cfi_offset 14, -4
+ 192 0002 00AF     		add	r7, sp, #0
+ 193              	.LCFI13:
+ 194              		.cfi_def_cfa_register 7
+ 140:../Sources/Events.c ****   /* Write your code here ... */
+ 141:../Sources/Events.c **** }
+ 195              		.loc 1 141 0
+ 196 0004 BD46     		mov	sp, r7
+ 197              		@ sp needed for prologue
+ 198 0006 80BD     		pop	{r7, pc}
+ 199              		.cfi_endproc
+ 200              	.LFE4:
+ 202              		.text
+ 203              	.Letext0:
+ 204              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 205              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/CodeWarrior_Examples/Processor_Expert/Kinetis/TWR-KL25Z48M/
+DEFINED SYMBOLS
+                            *ABS*:00000000 Events.c
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:18     .text.SM1_OnBlockSent:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:23     .text.SM1_OnBlockSent:00000000 SM1_OnBlockSent
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:49     .text.SM1_OnBlockReceived:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:54     .text.SM1_OnBlockReceived:00000000 SM1_OnBlockReceived
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:86     .text.SS1_OnBlockSent:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:91     .text.SS1_OnBlockSent:00000000 SS1_OnBlockSent
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:116    .text.SS1_OnBlockReceived:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:121    .text.SS1_OnBlockReceived:00000000 SS1_OnBlockReceived
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:170    .text.SS1_OnBlockReceived:00000038 $d
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:178    .text.Cpu_OnNMIINT0:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpnxkem.s:183    .text.Cpu_OnNMIINT0:00000000 Cpu_OnNMIINT0
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+SS1_ReceiveBlock
+i
+slaveDevData
+buffSlave

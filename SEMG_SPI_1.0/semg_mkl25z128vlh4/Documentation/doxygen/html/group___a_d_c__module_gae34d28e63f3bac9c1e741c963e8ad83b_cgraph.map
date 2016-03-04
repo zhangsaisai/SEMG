@@ -1,0 +1,6 @@
+<map id="ADCWakeUp" name="ADCWakeUp">
+<area shape="rect" id="node2" href="$group___a_d_c__module.html#ga85039be9a6883ebc1bb2f695515c6651" title="Send command to ADC via SPI1. Please use ADCReadRegister and ADCWriteRegister, but not this function..." alt="" coords="152,56,291,83"/>
+<area shape="rect" id="node3" href="$group___uti.html#ga74f6556b7e12839094c1c547b749a389" title="this method catches the error and print the right error message. " alt="" coords="349,5,480,32"/>
+<area shape="rect" id="node5" href="$group___uti.html#ga9e773733f9f8678fa7f54e54c7e3f316" title="This method delays n Ms roughly with codes calculating the time. Error limit: +4%. " alt="" coords="168,107,275,133"/>
+<area shape="rect" id="node4" href="$group___s_p_i___operation.html#gaa5f377e0c22b59a379b04f910cec62ee" title="This method packs a serious operations of receiving &amp; sending data via SPI1. Receive &amp; send data from..." alt="" coords="339,56,491,83"/>
+</map>

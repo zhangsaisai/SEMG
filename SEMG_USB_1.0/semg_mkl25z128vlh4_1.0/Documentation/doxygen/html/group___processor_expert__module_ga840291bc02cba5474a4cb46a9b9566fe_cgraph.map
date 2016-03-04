@@ -1,0 +1,12 @@
+<map id="main" name="main">
+<area shape="rect" id="node2" href="$group___test__module.html#ga10be9799ca64a9b3ae03649475312e2f" title="Test and output GPIO level via UART. " alt="" coords="162,5,241,32"/>
+<area shape="rect" id="node3" href="$group___user_initialization.html#ga655d748c28aad5b529f5826b50fe1251" title="Initialize on&#45;chip and peripheral devices. The method is called in the main function and will be call..." alt="" coords="168,56,235,83"/>
+<area shape="rect" id="node4" href="$group___a_d_c__module.html#gaa7e8295af4f38b1588ed738440a4cf48" title="MCU sends START command to ADC, ADC starts to convert. This function starts ADC to convert via SPI1..." alt="" coords="104,157,299,184"/>
+<area shape="rect" id="node8" href="$group___uti.html#ga9e773733f9f8678fa7f54e54c7e3f316" title="This method delays n Ms roughly with codes calculating the time. Error limit: +4%. " alt="" coords="379,208,485,235"/>
+<area shape="rect" id="node9" href="$group___a_d_c__module.html#ga8e75384212a08e64cdddf9fec4104248" title="Read conversion data from ADC in RDATAC mode via SPI1. " alt="" coords="347,56,517,83"/>
+<area shape="rect" id="node10" href="$group___proc.html#ga0be47d7fb04d2ba1e3ec8ccf91c5ef21" title="This method splits the ADC raw data to each part of the ADC data structure. " alt="" coords="382,259,482,285"/>
+<area shape="rect" id="node11" href="$group___proc.html#ga5788641a41c63d06ae96f0b5333e8138" title="This method copies ADC data from ADC structure to MCU structure. The format of data in MCU structure..." alt="" coords="113,309,289,336"/>
+<area shape="rect" id="node5" href="$group___a_d_c__module.html#ga85039be9a6883ebc1bb2f695515c6651" title="Send command to ADC via SPI1. Please use ADCReadRegister and ADCWriteRegister, but not this function..." alt="" coords="363,107,501,133"/>
+<area shape="rect" id="node6" href="$group___uti.html#ga74f6556b7e12839094c1c547b749a389" title="this method catches the error and print the right error message. " alt="" coords="576,145,707,172"/>
+<area shape="rect" id="node7" href="$group___s_p_i___operation.html#gaa5f377e0c22b59a379b04f910cec62ee" title="This method packs a serious operations of receiving &amp; sending data via SPI1. Receive &amp; send data from..." alt="" coords="565,69,717,96"/>
+</map>

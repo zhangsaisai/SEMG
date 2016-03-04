@@ -1,0 +1,54 @@
+<CodeGenerationInfo>
+  <ToolchainSettings>
+    <option>
+      <name>PE_G_4PEx_ToolChain_Compiler_SearchUserPaths</name>
+      <values lines_count="4">
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/iofiles"</Line>
+        <Line>"${ProcessorExpertPath}/lib/Kinetis/pdd/inc"</Line>
+        <Line>"${ProjDirPath}/Sources"</Line>
+        <Line>"${ProjDirPath}/Generated_Code"</Line>
+      </values>
+    </option>
+  </ToolchainSettings>
+  <GeneratedFilesList>
+    <GeneratedByPE>
+      <File Name="Project_Settings/Linker_Files/ProcessorExpert.ld" FileDate="2015-07-06, 16:14:39" FileAge="1436170479473" FileType="8" CompNumb="2" />
+      <File Name="Generated_Code/SS_SPI1.h" FileDate="2015-09-10, 14:05:40" FileAge="1441865140449" FileType="45637" CompNumb="6" />
+      <File Name="Documentation/doxygen/pex.css" FileDate="2015-07-06, 16:14:39" FileAge="1436170479258" FileType="16384" CompNumb="2" />
+      <File Name="Generated_Code/SS_SPI1.c" FileDate="2015-09-10, 14:05:40" FileAge="1441865140510" FileType="45637" CompNumb="6" />
+      <File Name="Documentation/ProcessorExpert_SIGNALS.txt" FileDate="2015-10-11, 11:03:32" FileAge="1444532612691" FileType="3072" />
+      <File Name="Documentation/doxygen/pex.doxyfile" FileDate="2015-07-06, 16:14:39" FileAge="1436170479574" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/IO_Map.h" FileDate="2015-07-06, 16:14:39" FileAge="1436170479627" FileType="45637" />
+      <File Name="Documentation/doxygen/ProcessorExpert.txt" FileDate="2015-09-09, 20:28:32" FileAge="1441801712752" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/Vectors.c" FileDate="2015-09-10, 14:05:40" FileAge="1441865140664" FileType="45637" CompNumb="2" />
+      <File Name="Project_Settings/Debugger/MKL25Z128.mem" FileDate="2015-07-06, 16:14:39" FileAge="1436170479550" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/DMA_CTRL.h" FileDate="2015-07-08, 11:19:59" FileAge="1436325599542" FileType="45637" CompNumb="13" />
+      <File Name="Generated_Code/DMA_CTRL.c" FileDate="2015-07-08, 11:19:59" FileAge="1436325599530" FileType="45637" CompNumb="13" />
+      <File Name="Documentation/doxygen/RoutingReport.txt" FileDate="2015-07-06, 16:14:39" FileAge="1436170479578" FileType="45637" CompNumb="2" />
+      <File Name="Sources/ProcessorExpert.c" FileDate="2015-09-10, 14:38:07" FileAge="1441867087745" FileType="128" />
+      <File Name="Documentation/doxygen/DMA_CTRL.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140607" FileType="45637" CompNumb="13" />
+      <File Name="Sources/Events.h" FileDate="2015-09-10, 14:05:40" FileAge="1441865140670" FileType="131328" />
+      <File Name="Generated_Code/Cpu.h" FileDate="2015-07-08, 11:19:59" FileAge="1436325599679" FileType="45637" CompNumb="2" />
+      <File Name="Sources/Events.c" FileDate="2015-09-10, 14:09:55" FileAge="1441865395024" FileType="131328" />
+      <File Name="Generated_Code/Cpu.c" FileDate="2015-09-10, 10:33:14" FileAge="1441852394440" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/PE_Const.h" FileDate="2015-07-06, 16:14:39" FileAge="1436170479631" FileType="45637" />
+      <File Name="Documentation/doxygen/SS_SPI1.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140528" FileType="45637" CompNumb="6" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_RX.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140652" FileType="45637" CompNumb="15" />
+      <File Name="Documentation/doxygen/SM_SPI0.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140658" FileType="45637" CompNumb="30" />
+      <File Name="Generated_Code/PE_Types.h" FileDate="2015-09-09, 20:28:32" FileAge="1441801712741" FileType="45637" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.h" FileDate="2015-07-08, 11:19:59" FileAge="1436325599523" FileType="45637" CompNumb="12" />
+      <File Name="Documentation/doxygen/DMAT_S_SPI_TX.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140647" FileType="45637" CompNumb="12" />
+      <File Name="Generated_Code/PE_Error.h" FileDate="2015-07-06, 16:14:39" FileAge="1436170479635" FileType="45637" />
+      <File Name="Generated_Code/PE_LDD.h" FileDate="2015-09-09, 20:28:32" FileAge="1441801712779" FileType="45637" CompNumb="2" />
+      <File Name="Documentation/ProcessorExpert.txt" FileDate="2015-09-10, 14:05:40" FileAge="1441865140908" FileType="3072" />
+      <File Name="Generated_Code/DMAT_S_SPI_TX.c" FileDate="2015-07-08, 11:19:59" FileAge="1436325599508" FileType="45637" CompNumb="12" />
+      <File Name="Generated_Code/PE_LDD.c" FileDate="2015-09-09, 20:28:32" FileAge="1441801712758" FileType="45637" CompNumb="2" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.h" FileDate="2015-07-08, 11:19:59" FileAge="1436325599427" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/DMAT_S_SPI_RX.c" FileDate="2015-07-08, 11:19:59" FileAge="1436325599423" FileType="45637" CompNumb="15" />
+      <File Name="Generated_Code/SM_SPI0.h" FileDate="2015-09-09, 20:44:15" FileAge="1441802655164" FileType="45637" CompNumb="30" />
+      <File Name="Generated_Code/SM_SPI0.c" FileDate="2015-09-09, 20:44:15" FileAge="1441802655225" FileType="45637" CompNumb="30" />
+      <File Name="Documentation/ProcessorExpert_Settings.xml" FileDate="2015-09-10, 14:05:40" FileAge="1441865140879" FileType="3072" />
+    </GeneratedByPE>
+  </GeneratedFilesList>
+  <CodeGenReference>37</CodeGenReference>
+</CodeGenerationInfo>

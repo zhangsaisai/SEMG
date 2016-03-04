@@ -1,0 +1,259 @@
+\hypertarget{group___cpu__module}{\section{Cpu module documentation}
+\label{group___cpu__module}\index{Cpu module documentation@{Cpu module documentation}}
+}
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_t_cpu_clock_configuration}{T\-Cpu\-Clock\-Configuration}
+\item 
+struct \hyperlink{structt_vector_table}{t\-Vector\-Table}
+\end{DoxyCompactItemize}
+\subsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_gae2f84b335ab99b9e98d41e8a530b1540}{\#define {\bfseries P\-Ecfg\-\_\-\-F\-L\-A\-S\-H}~1\-U}\label{group___cpu__module_gae2f84b335ab99b9e98d41e8a530b1540}
+
+\item 
+\hypertarget{group___cpu__module_gabd20462878cd6205dd20d3303b46b3cb}{\#define {\bfseries Cpu\-\_\-\-On\-N\-M\-I\-I\-N\-T\-\_\-\-E\-V\-E\-N\-T\-\_\-\-E\-N\-A\-B\-L\-E\-D}}\label{group___cpu__module_gabd20462878cd6205dd20d3303b46b3cb}
+
+\item 
+\hypertarget{group___cpu__module_ga532954dc988486bfe48200c796380120}{\#define {\bfseries C\-P\-U\-\_\-\-B\-U\-S\-\_\-\-C\-L\-K\-\_\-\-H\-Z}~24000000\-U /$\ast$ Initial value of the bus clock frequency in Hz $\ast$/}\label{group___cpu__module_ga532954dc988486bfe48200c796380120}
+
+\item 
+\hypertarget{group___cpu__module_ga9dee0abd722c849e54c662ab11a1d2cf}{\#define {\bfseries C\-P\-U\-\_\-\-C\-O\-R\-E\-\_\-\-C\-L\-K\-\_\-\-H\-Z}~48000000\-U /$\ast$ Initial value of the core/system clock frequency in Hz.  $\ast$/}\label{group___cpu__module_ga9dee0abd722c849e54c662ab11a1d2cf}
+
+\item 
+\hypertarget{group___cpu__module_ga37d43e31f65dd620040aec363e95b5a8}{\#define {\bfseries C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-\-N\-U\-M\-B\-E\-R}~0x01\-U /$\ast$ Specifies number of defined clock configurations. $\ast$/}\label{group___cpu__module_ga37d43e31f65dd620040aec363e95b5a8}
+
+\item 
+\hypertarget{group___cpu__module_ga39018ca5854bea36700d3b30f6c08195}{\#define {\bfseries C\-P\-U\-\_\-\-B\-U\-S\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G0}~24000000\-U /$\ast$ Value of the bus clock frequency in the clock configuration 0 in Hz. $\ast$/}\label{group___cpu__module_ga39018ca5854bea36700d3b30f6c08195}
+
+\item 
+\hypertarget{group___cpu__module_ga64b9007ea0c78e588ed565373bcec805}{\#define {\bfseries C\-P\-U\-\_\-\-C\-O\-R\-E\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G0}~48000000\-U /$\ast$ Value of the core/system clock frequency in the clock configuration 0 in Hz. $\ast$/}\label{group___cpu__module_ga64b9007ea0c78e588ed565373bcec805}
+
+\item 
+\hypertarget{group___cpu__module_gacf80ae1c70da6f1932185345fb089ce2}{\#define {\bfseries C\-P\-U\-\_\-\-X\-T\-A\-L\-\_\-\-C\-L\-K\-\_\-\-H\-Z}~8000000\-U /$\ast$ Value of the external crystal or oscillator clock frequency in Hz $\ast$/}\label{group___cpu__module_gacf80ae1c70da6f1932185345fb089ce2}
+
+\item 
+\hypertarget{group___cpu__module_ga925e4835a9fdb52f03bd354d62d6ba0a}{\#define {\bfseries C\-P\-U\-\_\-\-I\-N\-T\-\_\-\-S\-L\-O\-W\-\_\-\-C\-L\-K\-\_\-\-H\-Z}~32768\-U /$\ast$ Value of the slow internal oscillator clock frequency in Hz  $\ast$/}\label{group___cpu__module_ga925e4835a9fdb52f03bd354d62d6ba0a}
+
+\item 
+\hypertarget{group___cpu__module_ga741ad9275688de8051f4bebd98a682bc}{\#define {\bfseries C\-P\-U\-\_\-\-I\-N\-T\-\_\-\-F\-A\-S\-T\-\_\-\-C\-L\-K\-\_\-\-H\-Z}~4000000\-U /$\ast$ Value of the fast internal oscillator clock frequency in Hz  $\ast$/}\label{group___cpu__module_ga741ad9275688de8051f4bebd98a682bc}
+
+\item 
+\hypertarget{group___cpu__module_ga5bf3022570d9bb7a0d666f2dd9db6a34}{\#define {\bfseries C\-P\-U\-\_\-\-F\-A\-M\-I\-L\-Y\-\_\-\-Kinetis}~/$\ast$ Specification of the core type of the selected cpu $\ast$/}\label{group___cpu__module_ga5bf3022570d9bb7a0d666f2dd9db6a34}
+
+\item 
+\hypertarget{group___cpu__module_ga79cde38c714e161a62843763a97857ca}{\#define {\bfseries C\-P\-U\-\_\-\-D\-E\-R\-I\-V\-A\-T\-I\-V\-E\-\_\-\-M\-K\-L25\-Z128\-L\-H4}~/$\ast$ Name of the selected cpu derivative $\ast$/}\label{group___cpu__module_ga79cde38c714e161a62843763a97857ca}
+
+\item 
+\hypertarget{group___cpu__module_gaa7461a2be876b8ec129f8508ade50a3d}{\#define {\bfseries C\-P\-U\-\_\-\-P\-A\-R\-T\-N\-U\-M\-\_\-\-M\-K\-L25\-Z128\-V\-L\-H4}~/$\ast$ Part number of the selected cpu $\ast$/}\label{group___cpu__module_gaa7461a2be876b8ec129f8508ade50a3d}
+
+\item 
+\hypertarget{group___cpu__module_gab62ca27d0a6a531f35842a6e3a94b454}{\#define {\bfseries C\-P\-U\-\_\-\-L\-I\-T\-T\-L\-E\-\_\-\-E\-N\-D\-I\-A\-N}~/$\ast$ The selected cpu uses little endian $\ast$/}\label{group___cpu__module_gab62ca27d0a6a531f35842a6e3a94b454}
+
+\item 
+\hypertarget{group___cpu__module_ga4d7ade6a1c335a7e5233938aa9197157}{\#define {\bfseries C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~0x00\-U /$\ast$ Clock configuration 0 identifier $\ast$/}\label{group___cpu__module_ga4d7ade6a1c335a7e5233938aa9197157}
+
+\item 
+\hypertarget{group___cpu__module_ga6fe0b841d40421ee48af4a4e01e48ddf}{\#define {\bfseries C\-P\-U\-\_\-\-C\-O\-R\-E\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~48000000\-U\-L /$\ast$ Core clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga6fe0b841d40421ee48af4a4e01e48ddf}
+
+\item 
+\hypertarget{group___cpu__module_gaf060a047649b9537eb77354ab7917a8b}{\#define {\bfseries C\-P\-U\-\_\-\-B\-U\-S\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~24000000\-U\-L /$\ast$ Bus clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_gaf060a047649b9537eb77354ab7917a8b}
+
+\item 
+\hypertarget{group___cpu__module_ga706c0d4dd14c93181b7a99badddc9a51}{\#define {\bfseries C\-P\-U\-\_\-\-F\-L\-E\-X\-B\-U\-S\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~0\-U\-L /$\ast$ Flexbus clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga706c0d4dd14c93181b7a99badddc9a51}
+
+\item 
+\hypertarget{group___cpu__module_ga09c9820f38d931a0400b832d2582c6f7}{\#define {\bfseries C\-P\-U\-\_\-\-F\-L\-A\-S\-H\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~0\-U\-L /$\ast$ F\-L\-A\-S\-H clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga09c9820f38d931a0400b832d2582c6f7}
+
+\item 
+\hypertarget{group___cpu__module_ga7bf843fdf59af5fcaf48bea898884a3e}{\#define {\bfseries C\-P\-U\-\_\-\-U\-S\-B\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~0\-U\-L /$\ast$ U\-S\-B clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga7bf843fdf59af5fcaf48bea898884a3e}
+
+\item 
+\hypertarget{group___cpu__module_gad2aaa2918b640ae3833fc84e8f983c3c}{\#define {\bfseries C\-P\-U\-\_\-\-P\-L\-L\-\_\-\-F\-L\-L\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~48000000\-U\-L /$\ast$ P\-L\-L/\-F\-L\-L clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_gad2aaa2918b640ae3833fc84e8f983c3c}
+
+\item 
+\hypertarget{group___cpu__module_ga860e7441eac7d5e35385bcd62b019d9d}{\#define {\bfseries C\-P\-U\-\_\-\-M\-C\-G\-I\-R\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~32768\-U\-L /$\ast$ M\-C\-G internal reference clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga860e7441eac7d5e35385bcd62b019d9d}
+
+\item 
+\hypertarget{group___cpu__module_ga2960ebfe6475f475999ea8f1d5448483}{\#define {\bfseries C\-P\-U\-\_\-\-O\-S\-C\-E\-R\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~8000000\-U\-L /$\ast$ System O\-S\-C external reference clock frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga2960ebfe6475f475999ea8f1d5448483}
+
+\item 
+\hypertarget{group___cpu__module_ga092702a75fd1041eb311850abb022240}{\#define {\bfseries C\-P\-U\-\_\-\-E\-R\-C\-L\-K32\-K\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~1000\-U\-L /$\ast$ External reference clock 32k frequency in clock configuration 0 $\ast$/}\label{group___cpu__module_ga092702a75fd1041eb311850abb022240}
+
+\item 
+\hypertarget{group___cpu__module_gafd8ec2ac4ea47574f95d0e5a6f80807e}{\#define {\bfseries C\-P\-U\-\_\-\-M\-C\-G\-F\-F\-\_\-\-C\-L\-K\-\_\-\-H\-Z\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-0}~15625\-U\-L /$\ast$ M\-C\-G fixed frequency clock $\ast$/}\label{group___cpu__module_gafd8ec2ac4ea47574f95d0e5a6f80807e}
+
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_gabb511c0d4a17e764a053cf1b41d828e8}{typedef void($\ast$const {\bfseries t\-Isr\-Func} )(void)}\label{group___cpu__module_gabb511c0d4a17e764a053cf1b41d828e8}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_gaa92cc6952b1e8d1b04e7cf8a82ce7ce0}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-O\-R\-T\-A)}\label{group___cpu__module_gaa92cc6952b1e8d1b04e7cf8a82ce7ce0}
+
+\item 
+\hypertarget{group___cpu__module_ga89f6e345028fe4a0a105f4f95e1bb85c}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-\-I\-N\-T\-\_\-\-N\-M\-I\-Interrupt)}\label{group___cpu__module_ga89f6e345028fe4a0a105f4f95e1bb85c}
+
+\item 
+\hypertarget{group___cpu__module_ga1399d7e195f7a72fc445cbdc4e2252f9}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Hard\-\_\-\-Fault)}\label{group___cpu__module_ga1399d7e195f7a72fc445cbdc4e2252f9}
+
+\item 
+\hypertarget{group___cpu__module_gafc3465ee692f69b615c95024fad3dd3f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved4)}\label{group___cpu__module_gafc3465ee692f69b615c95024fad3dd3f}
+
+\item 
+\hypertarget{group___cpu__module_ga1cc311da4698e715f4a969e1ef1955de}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved5)}\label{group___cpu__module_ga1cc311da4698e715f4a969e1ef1955de}
+
+\item 
+\hypertarget{group___cpu__module_gaed19bd2d5b9176d51a31f13a9ad8e82e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved6)}\label{group___cpu__module_gaed19bd2d5b9176d51a31f13a9ad8e82e}
+
+\item 
+\hypertarget{group___cpu__module_ga3c7b37b6c7a93eb737f82ae45ae60223}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved7)}\label{group___cpu__module_ga3c7b37b6c7a93eb737f82ae45ae60223}
+
+\item 
+\hypertarget{group___cpu__module_gab64f79a303b847c14887def8c70751be}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved8)}\label{group___cpu__module_gab64f79a303b847c14887def8c70751be}
+
+\item 
+\hypertarget{group___cpu__module_ga57b968ad266b449c4240a8a466dd4bdc}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved9)}\label{group___cpu__module_ga57b968ad266b449c4240a8a466dd4bdc}
+
+\item 
+\hypertarget{group___cpu__module_ga1cc9f2f0950767c87849f1050d47863e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved10)}\label{group___cpu__module_ga1cc9f2f0950767c87849f1050d47863e}
+
+\item 
+\hypertarget{group___cpu__module_gae67065ebf736008c63395db43e36939c}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-V\-Call)}\label{group___cpu__module_gae67065ebf736008c63395db43e36939c}
+
+\item 
+\hypertarget{group___cpu__module_gaf5ea425942f1518bfbd80cc581019b04}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved12)}\label{group___cpu__module_gaf5ea425942f1518bfbd80cc581019b04}
+
+\item 
+\hypertarget{group___cpu__module_gaaafd86f5cd268c236fc9c287e17c1cc3}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved13)}\label{group___cpu__module_gaaafd86f5cd268c236fc9c287e17c1cc3}
+
+\item 
+\hypertarget{group___cpu__module_ga0fd1b1ba53c8b9501ba0fdea93ad4525}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Pendable\-Srv\-Req)}\label{group___cpu__module_ga0fd1b1ba53c8b9501ba0fdea93ad4525}
+
+\item 
+\hypertarget{group___cpu__module_gae908242964ad0fbf3aad29e806bf397e}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved20)}\label{group___cpu__module_gae908242964ad0fbf3aad29e806bf397e}
+
+\item 
+\hypertarget{group___cpu__module_ga368451747e5586e96beec939da11520a}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-F\-T\-F\-A)}\label{group___cpu__module_ga368451747e5586e96beec939da11520a}
+
+\item 
+\hypertarget{group___cpu__module_ga047c4793d4d1a8dac9c217861ff2dc07}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-V\-D\-\_\-\-L\-V\-W)}\label{group___cpu__module_ga047c4793d4d1a8dac9c217861ff2dc07}
+
+\item 
+\hypertarget{group___cpu__module_gab004a200fe392292ecb92586b0be5a5a}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-L\-W)}\label{group___cpu__module_gab004a200fe392292ecb92586b0be5a5a}
+
+\item 
+\hypertarget{group___cpu__module_ga29171c333e905fed19dc3f0862c77edd}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-I2\-C0)}\label{group___cpu__module_ga29171c333e905fed19dc3f0862c77edd}
+
+\item 
+\hypertarget{group___cpu__module_ga962a22125e77214ea609073dbeea57eb}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-I2\-C1)}\label{group___cpu__module_ga962a22125e77214ea609073dbeea57eb}
+
+\item 
+\hypertarget{group___cpu__module_ga38f534263a761285f2c2f9e09eead654}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-P\-I0)}\label{group___cpu__module_ga38f534263a761285f2c2f9e09eead654}
+
+\item 
+\hypertarget{group___cpu__module_gaab3d985e484f1bd29995c2c696d32c43}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-S\-P\-I1)}\label{group___cpu__module_gaab3d985e484f1bd29995c2c696d32c43}
+
+\item 
+\hypertarget{group___cpu__module_gaecb823a7a5bc02652c9aeddba8c15f5f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T0)}\label{group___cpu__module_gaecb823a7a5bc02652c9aeddba8c15f5f}
+
+\item 
+\hypertarget{group___cpu__module_gab6dbbce88f00d88665f497d866a003e6}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T1)}\label{group___cpu__module_gab6dbbce88f00d88665f497d866a003e6}
+
+\item 
+\hypertarget{group___cpu__module_ga2401974d290ab484a38f630309e1a866}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-A\-R\-T2)}\label{group___cpu__module_ga2401974d290ab484a38f630309e1a866}
+
+\item 
+\hypertarget{group___cpu__module_gad4dd609809c8f53a88e260a23246d404}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-A\-D\-C0)}\label{group___cpu__module_gad4dd609809c8f53a88e260a23246d404}
+
+\item 
+\hypertarget{group___cpu__module_ga92f6a9c4eec1faab98dea4e8474cdb4f}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-C\-M\-P0)}\label{group___cpu__module_ga92f6a9c4eec1faab98dea4e8474cdb4f}
+
+\item 
+\hypertarget{group___cpu__module_ga4e86419a3aad53c4b3891ffcbf506822}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M0)}\label{group___cpu__module_ga4e86419a3aad53c4b3891ffcbf506822}
+
+\item 
+\hypertarget{group___cpu__module_ga264b6c3608162b22f626cd745db54024}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M1)}\label{group___cpu__module_ga264b6c3608162b22f626cd745db54024}
+
+\item 
+\hypertarget{group___cpu__module_ga78862c7201b90d0782fc17e9aaf43027}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-P\-M2)}\label{group___cpu__module_ga78862c7201b90d0782fc17e9aaf43027}
+
+\item 
+\hypertarget{group___cpu__module_ga3bf61532de21952d55b627d9c6db8252}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-R\-T\-C)}\label{group___cpu__module_ga3bf61532de21952d55b627d9c6db8252}
+
+\item 
+\hypertarget{group___cpu__module_ga8821889007f30ee161aafd07fb76ae75}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-R\-T\-C\-\_\-\-Seconds)}\label{group___cpu__module_ga8821889007f30ee161aafd07fb76ae75}
+
+\item 
+\hypertarget{group___cpu__module_gae327ed03c9a6b77f7b8bf9b5175e8986}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-I\-T)}\label{group___cpu__module_gae327ed03c9a6b77f7b8bf9b5175e8986}
+
+\item 
+\hypertarget{group___cpu__module_ga1d03bdc93abf0ca3b92642b20485be0d}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved39)}\label{group___cpu__module_ga1d03bdc93abf0ca3b92642b20485be0d}
+
+\item 
+\hypertarget{group___cpu__module_gaf14541bf6cab203acbc8bc8a39766d53}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-U\-S\-B0)}\label{group___cpu__module_gaf14541bf6cab203acbc8bc8a39766d53}
+
+\item 
+\hypertarget{group___cpu__module_ga38c2812550216db436b9a04c188806b8}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-D\-A\-C0)}\label{group___cpu__module_ga38c2812550216db436b9a04c188806b8}
+
+\item 
+\hypertarget{group___cpu__module_gab80ccc1a0f979348431373976332e165}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-T\-S\-I0)}\label{group___cpu__module_gab80ccc1a0f979348431373976332e165}
+
+\item 
+\hypertarget{group___cpu__module_ga911962460fde9d3de79fa1d9b4838959}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-M\-C\-G)}\label{group___cpu__module_ga911962460fde9d3de79fa1d9b4838959}
+
+\item 
+\hypertarget{group___cpu__module_ga1106f7d4b21c4da019f0aced16612135}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-L\-P\-Timer)}\label{group___cpu__module_ga1106f7d4b21c4da019f0aced16612135}
+
+\item 
+\hypertarget{group___cpu__module_ga6e85aa4261d6eb4f1a4ef96d38368414}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-Reserved45)}\label{group___cpu__module_ga6e85aa4261d6eb4f1a4ef96d38368414}
+
+\item 
+\hypertarget{group___cpu__module_gada70f6e2afb564cf49abd9676d709001}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Cpu\-\_\-iv\-I\-N\-T\-\_\-\-P\-O\-R\-T\-D)}\label{group___cpu__module_gada70f6e2afb564cf49abd9676d709001}
+
+\item 
+\hypertarget{group___cpu__module_ga32a8d86789a3326b3120bf1e1c1d4252}{void {\bfseries \-\_\-\-\_\-init\-\_\-hardware} (void)}\label{group___cpu__module_ga32a8d86789a3326b3120bf1e1c1d4252}
+
+\item 
+\hypertarget{group___cpu__module_ga95039f54c45f24c1b4ed640fa2f63f11}{void {\bfseries P\-E\-\_\-low\-\_\-level\-\_\-init} (void)}\label{group___cpu__module_ga95039f54c45f24c1b4ed640fa2f63f11}
+
+\item 
+\hypertarget{group___cpu__module_ga2d9b5b981f451cdf47bf43b4f9cc9e03}{{\bfseries \-\_\-\-\_\-attribute\-\_\-\-\_\-} ((section(\char`\"{}.cfmconfig\char`\"{}))) const}\label{group___cpu__module_ga2d9b5b981f451cdf47bf43b4f9cc9e03}
+
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-reg}}\label{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}
+
+\item 
+\hypertarget{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-lock} = 0x00\-U}\label{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}
+
+\item 
+const \hyperlink{struct_t_cpu_clock_configuration}{T\-Cpu\-Clock\-Configuration} \hyperlink{group___cpu__module_gab69281f0e90d16198a5595ed7f471441}{P\-E\-\_\-\-Cpu\-Clock\-Configurations} \mbox{[}C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-\-N\-U\-M\-B\-E\-R\mbox{]}
+\item 
+\hypertarget{group___cpu__module_ga17baaa5ab2c8895394c51a01248c5195}{const \hyperlink{structt_vector_table}{t\-Vector\-Table} {\bfseries \-\_\-\-\_\-vect\-\_\-table}}\label{group___cpu__module_ga17baaa5ab2c8895394c51a01248c5195}
+
+\item 
+\hypertarget{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-reg}}\label{group___cpu__module_ga326c16dd0db38f80ec48c7727d764481}
+
+\item 
+\hypertarget{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}{volatile uint8\-\_\-t {\bfseries S\-R\-\_\-lock}}\label{group___cpu__module_ga08ee8b0f642aeef5bbbce3bb4ec1bb28}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Variable Documentation}
+\hypertarget{group___cpu__module_gab69281f0e90d16198a5595ed7f471441}{\index{Cpu module documentation@{Cpu module documentation}!P\-E\-\_\-\-Cpu\-Clock\-Configurations@{P\-E\-\_\-\-Cpu\-Clock\-Configurations}}
+\index{P\-E\-\_\-\-Cpu\-Clock\-Configurations@{P\-E\-\_\-\-Cpu\-Clock\-Configurations}!Cpu module documentation@{Cpu module documentation}}
+\subsubsection[{P\-E\-\_\-\-Cpu\-Clock\-Configurations}]{\setlength{\rightskip}{0pt plus 5cm}const {\bf T\-Cpu\-Clock\-Configuration} P\-E\-\_\-\-Cpu\-Clock\-Configurations\mbox{[}C\-P\-U\-\_\-\-C\-L\-O\-C\-K\-\_\-\-C\-O\-N\-F\-I\-G\-\_\-\-N\-U\-M\-B\-E\-R\mbox{]}}}\label{group___cpu__module_gab69281f0e90d16198a5595ed7f471441}
+The array of clock configurations (frequencies) configured in configured clock configurations of the C\-P\-U component. 

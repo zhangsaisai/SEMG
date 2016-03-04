@@ -1,0 +1,5 @@
+<map id="TADC" name="TADC">
+<area shape="rect" id="node2" href="$struct_t_a_d_c_data.html" title="TADCData" alt="" coords="5,5,88,32"/>
+<area shape="rect" id="node3" href="$struct_t_a_d_c_setting.html" title="TADCSetting" alt="" coords="113,5,209,32"/>
+<area shape="rect" id="node4" href="$struct_t_a_d_c_status.html" title="TADCStatus" alt="" coords="234,5,328,32"/>
+</map>

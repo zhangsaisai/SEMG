@@ -1,0 +1,70 @@
+\hypertarget{struct_t_a_d_c_data}{\section{T\-A\-D\-C\-Data Struct Reference}
+\label{struct_t_a_d_c_data}\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}}
+}
+
+
+{\ttfamily \#include $<$Macros.\-h$>$}
+
+\subsection*{Data Fields}
+\begin{DoxyCompactItemize}
+\item 
+byte \hyperlink{struct_t_a_d_c_data_a1801fde7da36697bfb69b689e69dcea0}{head}
+\item 
+byte \hyperlink{struct_t_a_d_c_data_af4ececaa8f89b0c4f7fc0a5e8af51957}{loff\-Stat\-P}
+\item 
+byte \hyperlink{struct_t_a_d_c_data_a514639df5e96bcd485f3f1265b69c8ad}{loff\-Stat\-N}
+\item 
+byte \hyperlink{struct_t_a_d_c_data_a5c28a29a781e6c6cf83bed5d0c1b4669}{reg\-G\-P\-I\-O\-Data}
+\item 
+byte \hyperlink{struct_t_a_d_c_data_a6f8de47858b52ff0e3612ebff5b3680b}{raw\-Data} \mbox{[}\hyperlink{group___a_d_c_const_ga324659f8cc7fd46c718a4b405c0753d6}{R\-A\-W\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}\mbox{]}
+\item 
+int16 \hyperlink{struct_t_a_d_c_data_a51d30c3c2c3622e1e6e521cb8100209d}{channel\-Data} \mbox{[}\hyperlink{group___a_d_c_const_gadee91c7f97e44412335dbe4713a29613}{U\-S\-I\-N\-G\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-\-C\-O\-U\-N\-T}\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A structure of channel data from A\-D\-C.
+
+\begin{DoxyVerb} ---------------------------------------------------------------------------------------------------------
+ |  Head   |   LOFF_STATP    |   LOFF_STATN    |GPIO[4:7]|                  CH[1-8] Data                 |
+ ---------------------------------------------------------------------------------------------------------
+ | 1 1 0 0 | x x x x x x x x | x x x x x x x x | x x x x | CH1 | CH2 | CH3 | CH4 | CH5 | CH6 | CH7 | CH8 |
+ ---------------------------------------------------------------------------------------------------------
+ |                        3Bytes                         |                  8*2=16Bytes                  |
+ ---------------------------------------------------------------------------------------------------------
+
+ -----------------------------------------------------------------
+ | M |                       CHn Data                        | L |
+ -----------------------------------------------------------------
+ |1 5|1 4|1 3|1 2|1 1|1 0| 9 | 8 | 7 | 6 | 5 | 4 | 3 | 2 | 1 | 0 |
+ -----------------------------------------------------------------
+ | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x | x |
+ -----------------------------------------------------------------
+ |             1Byte             |             1Byte             |
+ -----------------------------------------------------------------\end{DoxyVerb}
+ 
+
+\subsection{Field Documentation}
+\hypertarget{struct_t_a_d_c_data_a51d30c3c2c3622e1e6e521cb8100209d}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!channel\-Data@{channel\-Data}}
+\index{channel\-Data@{channel\-Data}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{channel\-Data}]{\setlength{\rightskip}{0pt plus 5cm}int16 T\-A\-D\-C\-Data\-::channel\-Data\mbox{[}{\bf U\-S\-I\-N\-G\-\_\-\-C\-H\-A\-N\-N\-E\-L\-\_\-\-C\-O\-U\-N\-T}\mbox{]}}}\label{struct_t_a_d_c_data_a51d30c3c2c3622e1e6e521cb8100209d}
+The value of every channel's data, transformed from raw data. \hypertarget{struct_t_a_d_c_data_a1801fde7da36697bfb69b689e69dcea0}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!head@{head}}
+\index{head@{head}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{head}]{\setlength{\rightskip}{0pt plus 5cm}byte T\-A\-D\-C\-Data\-::head}}\label{struct_t_a_d_c_data_a1801fde7da36697bfb69b689e69dcea0}
+The head bits of data should always be 0b00001100. \hypertarget{struct_t_a_d_c_data_a514639df5e96bcd485f3f1265b69c8ad}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!loff\-Stat\-N@{loff\-Stat\-N}}
+\index{loff\-Stat\-N@{loff\-Stat\-N}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{loff\-Stat\-N}]{\setlength{\rightskip}{0pt plus 5cm}byte T\-A\-D\-C\-Data\-::loff\-Stat\-N}}\label{struct_t_a_d_c_data_a514639df5e96bcd485f3f1265b69c8ad}
+The value of the register L\-O\-F\-F\-\_\-\-S\-T\-A\-T\-N. \hypertarget{struct_t_a_d_c_data_af4ececaa8f89b0c4f7fc0a5e8af51957}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!loff\-Stat\-P@{loff\-Stat\-P}}
+\index{loff\-Stat\-P@{loff\-Stat\-P}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{loff\-Stat\-P}]{\setlength{\rightskip}{0pt plus 5cm}byte T\-A\-D\-C\-Data\-::loff\-Stat\-P}}\label{struct_t_a_d_c_data_af4ececaa8f89b0c4f7fc0a5e8af51957}
+The value of the register L\-O\-F\-F\-\_\-\-S\-T\-A\-T\-P. \hypertarget{struct_t_a_d_c_data_a6f8de47858b52ff0e3612ebff5b3680b}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!raw\-Data@{raw\-Data}}
+\index{raw\-Data@{raw\-Data}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{raw\-Data}]{\setlength{\rightskip}{0pt plus 5cm}byte T\-A\-D\-C\-Data\-::raw\-Data\mbox{[}{\bf R\-A\-W\-\_\-\-D\-A\-T\-A\-\_\-\-S\-I\-Z\-E}\mbox{]}}}\label{struct_t_a_d_c_data_a6f8de47858b52ff0e3612ebff5b3680b}
+The raw data from A\-D\-C, including status bytes. \hypertarget{struct_t_a_d_c_data_a5c28a29a781e6c6cf83bed5d0c1b4669}{\index{T\-A\-D\-C\-Data@{T\-A\-D\-C\-Data}!reg\-G\-P\-I\-O\-Data@{reg\-G\-P\-I\-O\-Data}}
+\index{reg\-G\-P\-I\-O\-Data@{reg\-G\-P\-I\-O\-Data}!TADCData@{T\-A\-D\-C\-Data}}
+\subsubsection[{reg\-G\-P\-I\-O\-Data}]{\setlength{\rightskip}{0pt plus 5cm}byte T\-A\-D\-C\-Data\-::reg\-G\-P\-I\-O\-Data}}\label{struct_t_a_d_c_data_a5c28a29a781e6c6cf83bed5d0c1b4669}
+The value of bit\mbox{[}4-\/7\mbox{]} of the register G\-P\-I\-O. 
+
+The documentation for this struct was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\hyperlink{_macros_8h}{Macros.\-h}\end{DoxyCompactItemize}

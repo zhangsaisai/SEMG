@@ -1,0 +1,541 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"arm_cm0.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.stop,"ax",%progbits
+  18              		.align	2
+  19              		.global	stop
+  20              		.code	16
+  21              		.thumb_func
+  23              	stop:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * File:		arm_cm0.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Purpose:		Generic high-level routines for ARM Cortex M4 processors
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Notes:
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #include "common.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Configures the ARM system control register for STOP (deep sleep) mode
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * and then executes the WFI instruction to enter the mode.
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * none
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Note: Might want to change this later to allow for passing in a parameter
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *       to optionally set the sleep on exit bit.
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void stop (void)
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {
+  26              		.loc 1 23 0
+  27              		.cfi_startproc
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	/* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;	
+  28              		.loc 1 25 0
+  29 0000 044A     		ldr	r2, .L2
+  30 0002 D123     		mov	r3, #209
+  31 0004 1B01     		lsl	r3, r3, #4
+  32 0006 D058     		ldr	r0, [r2, r3]
+  33 0008 0421     		mov	r1, #4
+  34 000a 0143     		orr	r1, r0
+  35 000c D150     		str	r1, [r2, r3]
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	/* WFI instruction will start entry into STOP mode */
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #ifndef KEIL
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         // If not using KEIL's uVision use the standard assembly command
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	asm("WFI");
+  36              		.loc 1 30 0
+  37              	@ 30 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-ba
+  38 000e 30BF     		WFI
+  39              	@ 0 "" 2
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #else
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         // If using KEIL's uVision, use the CMSIS intrinsic
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	__wfi();
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #endif
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+  40              		.loc 1 35 0
+  41              		.code	16
+  42              		@ sp needed for prologue
+  43 0010 7047     		bx	lr
+  44              	.L3:
+  45 0012 C046     		.align	2
+  46              	.L2:
+  47 0014 00E000E0 		.word	-536813568
+  48              		.cfi_endproc
+  49              	.LFE0:
+  51              		.section	.text.wait,"ax",%progbits
+  52              		.align	2
+  53              		.global	wait
+  54              		.code	16
+  55              		.thumb_func
+  57              	wait:
+  58              	.LFB1:
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Configures the ARM system control register for WAIT (sleep) mode
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * and then executes the WFI instruction to enter the mode.
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * none
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Note: Might want to change this later to allow for passing in a parameter
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *       to optionally set the sleep on exit bit.
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void wait (void)
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {
+  59              		.loc 1 49 0
+  60              		.cfi_startproc
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	/* Clear the SLEEPDEEP bit to make sure we go into WAIT (sleep) mode instead
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	 * of deep sleep.
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	 */
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	SCB_SCR &= ~SCB_SCR_SLEEPDEEP_MASK;	
+  61              		.loc 1 53 0
+  62 0000 044A     		ldr	r2, .L5
+  63 0002 D123     		mov	r3, #209
+  64 0004 1B01     		lsl	r3, r3, #4
+  65 0006 D158     		ldr	r1, [r2, r3]
+  66 0008 0420     		mov	r0, #4
+  67 000a 8143     		bic	r1, r0
+  68 000c D150     		str	r1, [r2, r3]
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	/* WFI instruction will start entry into WAIT mode */
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #ifndef KEIL
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         // If not using KEIL's uVision use the standard assembly command
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 	asm("WFI");
+  69              		.loc 1 58 0
+  70              	@ 58 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-ba
+  71 000e 30BF     		WFI
+  72              	@ 0 "" 2
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #else
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         // If using KEIL's uVision, use the CMSIS intrinsic
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     __wfi();
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #endif
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+  73              		.loc 1 63 0
+  74              		.code	16
+  75              		@ sp needed for prologue
+  76 0010 7047     		bx	lr
+  77              	.L6:
+  78 0012 C046     		.align	2
+  79              	.L5:
+  80 0014 00E000E0 		.word	-536813568
+  81              		.cfi_endproc
+  82              	.LFE1:
+  84              		.section	.text.write_vtor,"ax",%progbits
+  85              		.align	2
+  86              		.global	write_vtor
+  87              		.code	16
+  88              		.thumb_func
+  90              	write_vtor:
+  91              	.LFB2:
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Change the value of the vector table offset register to the specified value.
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * vtor     new value to write to the VTOR
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void write_vtor (int vtor)
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {
+  92              		.loc 1 73 0
+  93              		.cfi_startproc
+  94              	.LVL0:
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         /* Write the VTOR with the new value */
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         SCB_VTOR = vtor;	
+  95              		.loc 1 75 0
+  96 0000 014B     		ldr	r3, .L8
+  97 0002 024A     		ldr	r2, .L8+4
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+  98              		.loc 1 76 0
+  99              		@ sp needed for prologue
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         SCB_VTOR = vtor;	
+ 100              		.loc 1 75 0
+ 101 0004 D050     		str	r0, [r2, r3]
+ 102              		.loc 1 76 0
+ 103 0006 7047     		bx	lr
+ 104              	.L9:
+ 105              		.align	2
+ 106              	.L8:
+ 107 0008 080D0000 		.word	3336
+ 108 000c 00E000E0 		.word	-536813568
+ 109              		.cfi_endproc
+ 110              	.LFE2:
+ 112              		.section	.text.enable_irq,"ax",%progbits
+ 113              		.align	2
+ 114              		.global	enable_irq
+ 115              		.code	16
+ 116              		.thumb_func
+ 118              	enable_irq:
+ 119              	.LFB3:
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Initialize the NVIC to enable the specified IRQ.
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * 
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * NOTE: The function only initializes the NVIC to enable a single IRQ. 
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Interrupts will also need to be enabled in the ARM core. This can be 
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * done using the EnableInterrupts macro.
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * irq    irq number to be enabled (the irq number NOT the vector number)
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** #ifndef CMSIS
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void enable_irq (int irq)
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {   
+ 120              		.loc 1 91 0
+ 121              		.cfi_startproc
+ 122              	.LVL1:
+ 123 0000 38B5     		push	{r3, r4, r5, lr}
+ 124              	.LCFI0:
+ 125              		.cfi_def_cfa_offset 16
+ 126              		.cfi_offset 3, -16
+ 127              		.cfi_offset 4, -12
+ 128              		.cfi_offset 5, -8
+ 129              		.cfi_offset 14, -4
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     /* Make sure that the IRQ is an allowable number. Up to 32 is 
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * used.
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      *
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * NOTE: If you are using the interrupt definitions from the header
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * file, you MUST SUBTRACT 16!!!
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      */
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (irq > 32)
+ 130              		.loc 1 98 0
+ 131 0002 2028     		cmp	r0, #32
+ 132 0004 12DC     		bgt	.L14
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to enable irq function!\n");
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     else
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     {
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****       /* Set the ICPR and ISER registers accordingly */
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****       NVIC_ICPR |= 1 << (irq%32);
+ 133              		.loc 1 103 0
+ 134 0006 C117     		asr	r1, r0, #31
+ 135 0008 C90E     		lsr	r1, r1, #27
+ 136 000a 4018     		add	r0, r0, r1
+ 137              	.LVL2:
+ 138 000c 1F25     		mov	r5, #31
+ 139 000e 094B     		ldr	r3, .L15
+ 140 0010 2840     		and	r0, r5
+ 141 0012 C022     		mov	r2, #192
+ 142 0014 5200     		lsl	r2, r2, #1
+ 143 0016 411A     		sub	r1, r0, r1
+ 144 0018 0120     		mov	r0, #1
+ 145 001a 9C58     		ldr	r4, [r3, r2]
+ 146 001c 8840     		lsl	r0, r0, r1
+ 147 001e 051C     		mov	r5, r0
+ 148 0020 2543     		orr	r5, r4
+ 149 0022 9D50     		str	r5, [r3, r2]
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****       NVIC_ISER |= 1 << (irq%32);
+ 150              		.loc 1 104 0
+ 151 0024 1A68     		ldr	r2, [r3]
+ 152 0026 1043     		orr	r0, r2
+ 153 0028 1860     		str	r0, [r3]
+ 154              	.L10:
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     }
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+ 155              		.loc 1 106 0
+ 156              		@ sp needed for prologue
+ 157 002a 38BD     		pop	{r3, r4, r5, pc}
+ 158              	.LVL3:
+ 159              	.L14:
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to enable irq function!\n");
+ 160              		.loc 1 99 0
+ 161 002c 0248     		ldr	r0, .L15+4
+ 162              	.LVL4:
+ 163 002e FFF7FEFF 		bl	puts
+ 164              	.LVL5:
+ 165 0032 FAE7     		b	.L10
+ 166              	.L16:
+ 167              		.align	2
+ 168              	.L15:
+ 169 0034 00E100E0 		.word	-536813312
+ 170 0038 00000000 		.word	.LC0
+ 171              		.cfi_endproc
+ 172              	.LFE3:
+ 174              		.section	.text.disable_irq,"ax",%progbits
+ 175              		.align	2
+ 176              		.global	disable_irq
+ 177              		.code	16
+ 178              		.thumb_func
+ 180              	disable_irq:
+ 181              	.LFB4:
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Initialize the NVIC to disable the specified IRQ.
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * 
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * NOTE: The function only initializes the NVIC to disable a single IRQ. 
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * If you want to disable all interrupts, then use the DisableInterrupts
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * macro instead. 
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * irq    irq number to be disabled (the irq number NOT the vector number)
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void disable_irq (int irq)
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {
+ 182              		.loc 1 120 0
+ 183              		.cfi_startproc
+ 184              	.LVL6:
+ 185 0000 08B5     		push	{r3, lr}
+ 186              	.LCFI1:
+ 187              		.cfi_def_cfa_offset 8
+ 188              		.cfi_offset 3, -8
+ 189              		.cfi_offset 14, -4
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     /* Make sure that the IRQ is an allowable number. Right now up to 32 is 
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * used.
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      *
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * NOTE: If you are using the interrupt definitions from the header
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * file, you MUST SUBTRACT 16!!!
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      */
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (irq > 32)
+ 190              		.loc 1 128 0
+ 191 0002 2028     		cmp	r0, #32
+ 192 0004 0BDC     		bgt	.L20
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to disable irq function!\n");
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     else
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****       /* Set the ICER register accordingly */
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****       NVIC_ICER = 1 << (irq%32);
+ 193              		.loc 1 132 0
+ 194 0006 C317     		asr	r3, r0, #31
+ 195 0008 D90E     		lsr	r1, r3, #27
+ 196 000a 4018     		add	r0, r0, r1
+ 197              	.LVL7:
+ 198 000c 1F22     		mov	r2, #31
+ 199 000e 1040     		and	r0, r2
+ 200 0010 431A     		sub	r3, r0, r1
+ 201 0012 0121     		mov	r1, #1
+ 202 0014 9940     		lsl	r1, r1, r3
+ 203 0016 044B     		ldr	r3, .L21
+ 204 0018 8022     		mov	r2, #128
+ 205 001a 9950     		str	r1, [r3, r2]
+ 206              	.L17:
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+ 207              		.loc 1 133 0
+ 208              		@ sp needed for prologue
+ 209 001c 08BD     		pop	{r3, pc}
+ 210              	.LVL8:
+ 211              	.L20:
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to disable irq function!\n");
+ 212              		.loc 1 129 0
+ 213 001e 0348     		ldr	r0, .L21+4
+ 214              	.LVL9:
+ 215 0020 FFF7FEFF 		bl	puts
+ 216              	.LVL10:
+ 217 0024 FAE7     		b	.L17
+ 218              	.L22:
+ 219 0026 C046     		.align	2
+ 220              	.L21:
+ 221 0028 00E100E0 		.word	-536813312
+ 222 002c 38000000 		.word	.LC2
+ 223              		.cfi_endproc
+ 224              	.LFE4:
+ 226              		.section	.text.set_irq_priority,"ax",%progbits
+ 227              		.align	2
+ 228              		.global	set_irq_priority
+ 229              		.code	16
+ 230              		.thumb_func
+ 232              	set_irq_priority:
+ 233              	.LFB5:
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /***********************************************************************/
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** /*
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Initialize the NVIC to set specified IRQ priority.
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * 
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * NOTE: The function only initializes the NVIC to set a single IRQ priority. 
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Interrupts will also need to be enabled in the ARM core. This can be 
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * done using the EnableInterrupts macro.
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  *
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * Parameters:
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * irq    irq number to be enabled (the irq number NOT the vector number)
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  * prio   irq priority. 0-3 levels. 0 max priority
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****  */
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** void set_irq_priority (int irq, int prio)
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** {   
+ 234              		.loc 1 148 0
+ 235              		.cfi_startproc
+ 236              	.LVL11:
+ 237 0000 10B5     		push	{r4, lr}
+ 238              	.LCFI2:
+ 239              		.cfi_def_cfa_offset 8
+ 240              		.cfi_offset 4, -8
+ 241              		.cfi_offset 14, -4
+ 242              		.loc 1 148 0
+ 243 0002 0C1C     		mov	r4, r1
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     /*irq priority pointer*/
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     uint8 *prio_reg;
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     uint8 err = 0;
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     uint8 div = 0;
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     /* Make sure that the IRQ is an allowable number. Right now up to 32 is 
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * used.
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      *
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * NOTE: If you are using the interrupt definitions from the header
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      * file, you MUST SUBTRACT 16!!!
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****      */
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (irq > 32)
+ 244              		.loc 1 160 0
+ 245 0004 2028     		cmp	r0, #32
+ 246 0006 0CDC     		bgt	.L29
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     {
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to priority irq function!\n");
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         err = 1;
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     }
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** 
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (prio > 3)
+ 247              		.loc 1 166 0
+ 248 0008 0329     		cmp	r1, #3
+ 249 000a 0FDC     		bgt	.L26
+ 250              	.LVL12:
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     {
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid priority value passed to priority irq function!\n");
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         err = 1;
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     }
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (err != 1)
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     {
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         /* Determine which of the NVICIPx corresponds to the irq */
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         div = irq / 4;
+ 251              		.loc 1 175 0
+ 252 000c C317     		asr	r3, r0, #31
+ 253 000e 990F     		lsr	r1, r3, #30
+ 254              	.LVL13:
+ 255 0010 0818     		add	r0, r1, r0
+ 256              	.LVL14:
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         prio_reg = (uint8 *)((uint32)&NVIC_IP(div));
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         /* Assign priority to IRQ */
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         *prio_reg = ( (prio&0x3) << (8 - ARM_INTERRUPT_LEVEL_BITS) );             
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     }
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c **** }
+ 257              		.loc 1 180 0
+ 258 0012 8205     		lsl	r2, r0, #22
+ 259 0014 130E     		lsr	r3, r2, #24
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         *prio_reg = ( (prio&0x3) << (8 - ARM_INTERRUPT_LEVEL_BITS) );             
+ 260              		.loc 1 178 0
+ 261 0016 0748     		ldr	r0, .L30
+ 262 0018 9900     		lsl	r1, r3, #2
+ 263 001a 0A18     		add	r2, r1, r0
+ 264 001c A401     		lsl	r4, r4, #6
+ 265              	.LVL15:
+ 266 001e 1470     		strb	r4, [r2]
+ 267              	.LVL16:
+ 268              	.L23:
+ 269              		.loc 1 180 0
+ 270              		@ sp needed for prologue
+ 271 0020 10BD     		pop	{r4, pc}
+ 272              	.LVL17:
+ 273              	.L29:
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid IRQ value passed to priority irq function!\n");
+ 274              		.loc 1 162 0
+ 275 0022 0548     		ldr	r0, .L30+4
+ 276              	.LVL18:
+ 277 0024 FFF7FEFF 		bl	puts
+ 278              	.LVL19:
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****     if (prio > 3)
+ 279              		.loc 1 166 0
+ 280 0028 032C     		cmp	r4, #3
+ 281 002a F9DD     		ble	.L23
+ 282              	.LVL20:
+ 283              	.L26:
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\arm_cm0.c ****         printf("\nERR! Invalid priority value passed to priority irq function!\n");
+ 284              		.loc 1 168 0
+ 285 002c 0348     		ldr	r0, .L30+8
+ 286 002e FFF7FEFF 		bl	puts
+ 287              	.LVL21:
+ 288 0032 F5E7     		b	.L23
+ 289              	.L31:
+ 290              		.align	2
+ 291              	.L30:
+ 292 0034 00E400E0 		.word	-536812544
+ 293 0038 70000000 		.word	.LC4
+ 294 003c AC000000 		.word	.LC6
+ 295              		.cfi_endproc
+ 296              	.LFE5:
+ 298              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 299              		.align	2
+ 300              	.LC0:
+ 301 0000 0A455252 		.ascii	"\012ERR! Invalid IRQ value passed to enable irq fun"
+ 301      2120496E 
+ 301      76616C69 
+ 301      64204952 
+ 301      51207661 
+ 302 0030 6374696F 		.ascii	"ction!\000"
+ 302      6E2100
+ 303 0037 00       		.space	1
+ 304              	.LC2:
+ 305 0038 0A455252 		.ascii	"\012ERR! Invalid IRQ value passed to disable irq fu"
+ 305      2120496E 
+ 305      76616C69 
+ 305      64204952 
+ 305      51207661 
+ 306 0068 6E637469 		.ascii	"nction!\000"
+ 306      6F6E2100 
+ 307              	.LC4:
+ 308 0070 0A455252 		.ascii	"\012ERR! Invalid IRQ value passed to priority irq f"
+ 308      2120496E 
+ 308      76616C69 
+ 308      64204952 
+ 308      51207661 
+ 309 00a0 756E6374 		.ascii	"unction!\000"
+ 309      696F6E21 
+ 309      00
+ 310 00a9 000000   		.space	3
+ 311              	.LC6:
+ 312 00ac 0A455252 		.ascii	"\012ERR! Invalid priority value passed to priority "
+ 312      2120496E 
+ 312      76616C69 
+ 312      64207072 
+ 312      696F7269 
+ 313 00dc 69727120 		.ascii	"irq function!\000"
+ 313      66756E63 
+ 313      74696F6E 
+ 313      2100
+ 314 00ea 0000     		.text
+ 315              	.Letext0:
+ 316              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 317              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 318              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 arm_cm0.c
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:18     .text.stop:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:23     .text.stop:00000000 stop
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:47     .text.stop:00000014 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:52     .text.wait:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:57     .text.wait:00000000 wait
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:80     .text.wait:00000014 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:85     .text.write_vtor:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:90     .text.write_vtor:00000000 write_vtor
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:107    .text.write_vtor:00000008 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:113    .text.enable_irq:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:118    .text.enable_irq:00000000 enable_irq
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:169    .text.enable_irq:00000034 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:175    .text.disable_irq:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:180    .text.disable_irq:00000000 disable_irq
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:221    .text.disable_irq:00000028 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:227    .text.set_irq_priority:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:232    .text.set_irq_priority:00000000 set_irq_priority
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:292    .text.set_irq_priority:00000034 $d
+C:\Users\lab\AppData\Local\Temp\ccMcrQoL.s:299    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+puts

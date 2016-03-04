@@ -1,0 +1,24 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Generated_Code/PE_LDD.h" name="E:/workspace/semg_mkl15z128vlh4/Generated_Code/PE_LDD.h">
+<area shape="rect" id="node2" href="$_p_e___types_8h.html" title="PE_Types.h &#45; contains definitions of basic types, register access macros and hardware specific macros..." alt="" coords="1649,320,1743,347"/>
+<area shape="rect" id="node4" href="$_p_e___error_8h.html" title="This component &quot;PE_Error&quot; contains internal definitions of the error constants. " alt="" coords="1922,320,2008,347"/>
+<area shape="rect" id="node5" href="$_p_e___const_8h.html" title="This component &quot;PE_Const&quot; contains internal definitions of the constants. " alt="" coords="2033,320,2124,347"/>
+<area shape="rect" id="node6" href="$_s_m___s_p_i1_8h.html" title="This component &quot;SPIMaster_LDD&quot; implements MASTER part of synchronous serial master&#45;slave communicatio..." alt="" coords="363,171,451,197"/>
+<area shape="rect" id="node10" href="$_s_s___s_p_i0_8h.html" title="This component &quot;SPISlave_LDD&quot; implements SLAVE part of synchronous serial master&#45;slave communication..." alt="" coords="99,171,185,197"/>
+<area shape="rect" id="node11" href="$_cs_i_o___u_a_r_t2_8h.html" title="This component generates low&#45;level methods for redirecting console I/O to the selected UART..." alt="" coords="4177,96,4287,123"/>
+<area shape="rect" id="node13" href="$_i_o2_8h.html" title="This component &quot;Serial_LDD&quot; implements an asynchronous serial communication. The component supports d..." alt="" coords="1905,96,1959,123"/>
+<area shape="rect" id="node14" href="$_sys_tick_8h.html" title="This file implements the SysTick (SysTick) module initialization according to the Peripheral Initiali..." alt="" coords="2420,171,2500,197"/>
+<area shape="rect" id="node15" href="$_bit_i_o___n_o_t___p_w_d_n_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="589,171,731,197"/>
+<area shape="rect" id="node17" href="$_bit_i_o___n_o_t___r_e_s_e_t_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="790,171,935,197"/>
+<area shape="rect" id="node18" href="$_bit_i_o___s_t_a_r_t_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="1213,171,1323,197"/>
+<area shape="rect" id="node19" href="$_bit_i_o___d_a_i_s_y___i_n_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="1682,171,1808,197"/>
+<area shape="rect" id="node20" href="$_bit_i_o___u_p_r_d_y_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="1008,171,1123,197"/>
+<area shape="rect" id="node21" href="$_bit_i_o___c_l_k_s_e_l_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="1483,171,1601,197"/>
+<area shape="rect" id="node22" href="$_e_i_n_t___n_o_t___d_r_d_y_8h.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="2146,171,2283,197"/>
+<area shape="rect" id="node24" href="$_e_i_n_t___s_y_n_c___i_n_t_8h.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="1949,171,2080,197"/>
+<area shape="rect" id="node25" href="$_d_m_a_t___m___s_p_i___t_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="2672,96,2808,123"/>
+<area shape="rect" id="node26" href="$_d_m_a___c_t_r_l_8h.html" title="This embedded component implements initialization and runtime handling of an on&#45;chip DMA controller..." alt="" coords="3385,171,3487,197"/>
+<area shape="rect" id="node29" href="$_d_m_a_t___m___s_p_i___r_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="3025,96,3164,123"/>
+<area shape="rect" id="node30" href="$_d_m_a_t___s___s_p_i___t_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="3457,96,3591,123"/>
+<area shape="rect" id="node31" href="$_d_m_a_t___s___s_p_i___r_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="3817,96,3953,123"/>
+<area shape="rect" id="node8" href="$_cpu_8h.html" title="Cpu.h" alt="" coords="1884,245,1940,272"/>
+</map>

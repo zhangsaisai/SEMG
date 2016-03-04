@@ -1,0 +1,720 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"rtc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.rtc_reg_report,"ax",%progbits
+  18              		.align	2
+  19              		.global	rtc_reg_report
+  20              		.code	16
+  21              		.thumb_func
+  23              	rtc_reg_report:
+  24              	.LFB1:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  * File:        rtc.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  * Purpose:     Provide common RTC routines
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  * Notes:       
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *              
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  */
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #include "common.h"
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #include "rtc.h"
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #ifndef CMSIS
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #include "arm_cm0.h"
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #endif
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** /********************************************************************/
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** /*
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  * Initialize the RTC
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  * Parameters:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *  seconds         Start value of seconds register
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *  alarm           Time in seconds of first alarm. Set to 0xFFFFFFFF to effectively disable alarm
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *  c_interval      Interval at which to apply time compensation can range from 1 second (0x0) to 2
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *  c_value         Compensation value ranges from -127 32kHz cycles to +128 32 kHz cycles
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *                  80h Time prescaler register overflows every 32896 clock cycles.
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *                  FFh Time prescaler register overflows every 32769 clock cycles.
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *                  00h Time prescaler register overflows every 32768 clock cycles.
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *                  01h Time prescaler register overflows every 32767 clock cycles.
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *                  7Fh Time prescaler register overflows every 32641 clock cycles.
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  *  interrupt       TRUE or FALSE
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  */
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** void rtc_init(uint32 seconds, uint32 alarm, uint8 c_interval, uint8 c_value, uint8 interrupt) 
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   int i;
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   /*enable the clock to SRTC module register space*/
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   SIM_SCGC6 |= SIM_SCGC6_RTC_MASK;
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   /*Only VBAT_POR has an effect on the SRTC, RESET to the part does not, so you must manually reset
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   /*clear the software reset bit*/
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     printf("Generating SoftWare reset to SRTC\n");
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #ifdef CMSIS
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     NVIC_DisableIRQ((IRQn_Type)interrupt);
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     NVIC_DisableIRQ((IRQn_Type)(interrupt+1));
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #else
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     disable_irq(interrupt);
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     disable_irq(interrupt+1);
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #endif
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR  = RTC_CR_SWR_MASK;
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR  &= ~RTC_CR_SWR_MASK;  
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     if (RTC_SR & RTC_SR_TIF_MASK){
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         RTC_TSR = 0x00000000;   //  this action clears the TIF
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         printf("RTC Invalid flag was set - Write to TSR done to clears RTC_SR =  %#02X \n",  (RTC_S
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     }
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   /*Set time compensation parameters*/
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   RTC_TCR = RTC_TCR_CIR(c_interval) | RTC_TCR_TCR(c_value);
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   /*Enable the counter*/
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   if (seconds >0) {
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      /*Enable the interrupt*/
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      if(interrupt >1){
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #ifdef CMSIS
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****          NVIC_EnableIRQ((IRQn_Type)interrupt);
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #else
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         enable_irq(interrupt);
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #endif
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      }
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      /*Enable the oscillator*/
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR |= RTC_CR_OSCE_MASK;
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     /*Wait to all the 32 kHz to stabilize, refer to the crystal startup time in the crystal datashe
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     for(i=0;i<0x600000;i++);
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****  
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER |= RTC_IER_TSIE_MASK;
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_SR |= RTC_SR_TCE_MASK;
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     /*Configure the timer seconds and alarm registers*/
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_TSR = seconds;
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   } else {
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER &= ~RTC_IER_TSIE_MASK;
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   }
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   if (alarm >0) {
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER |= RTC_IER_TAIE_MASK;
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_SR |= RTC_SR_TCE_MASK;
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     /*Configure the timer seconds and alarm registers*/
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_TAR = alarm;
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      /*Enable the interrupt*/
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      if(interrupt >1){
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #ifdef CMSIS
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****          NVIC_EnableIRQ((IRQn_Type)interrupt);
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #else
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         enable_irq(interrupt);
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** #endif
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      }
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      /*Enable the oscillator*/
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR |= RTC_CR_OSCE_MASK;
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     /*Wait to all the 32 kHz to stabilize, refer to the crystal startup time in the crystal datashe
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     for(i=0;i<0x600000;i++);
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   } else {
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER &= ~RTC_IER_TAIE_MASK;
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   }
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   rtc_reg_report();
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** }
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** void rtc_reg_report (void) {
+  26              		.loc 1 110 0
+  27              		.cfi_startproc
+  28 0000 10B5     		push	{r4, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 4, -8
+  32              		.cfi_offset 14, -4
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    printf("RTC_TSR    = 0x%02X,    ",    (RTC_TSR)) ;
+  33              		.loc 1 111 0
+  34 0002 114C     		ldr	r4, .L2
+  35 0004 1148     		ldr	r0, .L2+4
+  36 0006 2168     		ldr	r1, [r4]
+  37 0008 FFF7FEFF 		bl	printf
+  38              	.LVL0:
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_TPR    = 0x%02X\n",       (RTC_TPR)) ;
+  39              		.loc 1 112 0
+  40 000c 6168     		ldr	r1, [r4, #4]
+  41 000e 1048     		ldr	r0, .L2+8
+  42 0010 FFF7FEFF 		bl	printf
+  43              	.LVL1:
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_TAR    = 0x%02X,    ",    (RTC_TAR)) ;
+  44              		.loc 1 113 0
+  45 0014 A168     		ldr	r1, [r4, #8]
+  46 0016 0F48     		ldr	r0, .L2+12
+  47 0018 FFF7FEFF 		bl	printf
+  48              	.LVL2:
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_TCR    = 0x%02X\n",       (RTC_TCR)) ;
+  49              		.loc 1 114 0
+  50 001c E168     		ldr	r1, [r4, #12]
+  51 001e 0E48     		ldr	r0, .L2+16
+  52 0020 FFF7FEFF 		bl	printf
+  53              	.LVL3:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_CR     = 0x%02X,    ",    (RTC_CR)) ;
+  54              		.loc 1 115 0
+  55 0024 2169     		ldr	r1, [r4, #16]
+  56 0026 0D48     		ldr	r0, .L2+20
+  57 0028 FFF7FEFF 		bl	printf
+  58              	.LVL4:
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_SR     = 0x%02X\n",       (RTC_SR)) ;
+  59              		.loc 1 116 0
+  60 002c 6169     		ldr	r1, [r4, #20]
+  61 002e 0C48     		ldr	r0, .L2+24
+  62 0030 FFF7FEFF 		bl	printf
+  63              	.LVL5:
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_LR     = 0x%02X,    ",    (RTC_LR)) ;
+  64              		.loc 1 117 0
+  65 0034 A169     		ldr	r1, [r4, #24]
+  66 0036 0B48     		ldr	r0, .L2+28
+  67 0038 FFF7FEFF 		bl	printf
+  68              	.LVL6:
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   printf("RTC_IER    = 0x%02X\n",       (RTC_IER)) ;
+  69              		.loc 1 118 0
+  70 003c E169     		ldr	r1, [r4, #28]
+  71 003e 0A48     		ldr	r0, .L2+32
+  72 0040 FFF7FEFF 		bl	printf
+  73              	.LVL7:
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** }
+  74              		.loc 1 119 0
+  75              		@ sp needed for prologue
+  76 0044 10BD     		pop	{r4, pc}
+  77              	.L3:
+  78 0046 C046     		.align	2
+  79              	.L2:
+  80 0048 00D00340 		.word	1073991680
+  81 004c 00000000 		.word	.LC0
+  82 0050 1C000000 		.word	.LC2
+  83 0054 34000000 		.word	.LC4
+  84 0058 50000000 		.word	.LC6
+  85 005c 68000000 		.word	.LC8
+  86 0060 84000000 		.word	.LC10
+  87 0064 9C000000 		.word	.LC12
+  88 0068 B8000000 		.word	.LC14
+  89              		.cfi_endproc
+  90              	.LFE1:
+  92              		.section	.text.rtc_init,"ax",%progbits
+  93              		.align	2
+  94              		.global	rtc_init
+  95              		.code	16
+  96              		.thumb_func
+  98              	rtc_init:
+  99              	.LFB0:
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 100              		.loc 1 36 0
+ 101              		.cfi_startproc
+ 102              	.LVL8:
+ 103 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 104              	.LCFI1:
+ 105              		.cfi_def_cfa_offset 20
+ 106              		.cfi_offset 4, -20
+ 107              		.cfi_offset 5, -16
+ 108              		.cfi_offset 6, -12
+ 109              		.cfi_offset 7, -8
+ 110              		.cfi_offset 14, -4
+ 111 0002 5746     		mov	r7, sl
+ 112 0004 4E46     		mov	r6, r9
+ 113 0006 4546     		mov	r5, r8
+ 114 0008 E0B4     		push	{r5, r6, r7}
+ 115              	.LCFI2:
+ 116              		.cfi_def_cfa_offset 32
+ 117              		.cfi_offset 8, -32
+ 118              		.cfi_offset 9, -28
+ 119              		.cfi_offset 10, -24
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   SIM_SCGC6 |= SIM_SCGC6_RTC_MASK;
+ 120              		.loc 1 40 0
+ 121 000a 354C     		ldr	r4, .L17
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 122              		.loc 1 36 0
+ 123 000c 8046     		mov	r8, r0
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   SIM_SCGC6 |= SIM_SCGC6_RTC_MASK;
+ 124              		.loc 1 40 0
+ 125 000e 3548     		ldr	r0, .L17+4
+ 126              	.LVL9:
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 127              		.loc 1 36 0
+ 128 0010 0F1C     		mov	r7, r1
+ 129 0012 9246     		mov	sl, r2
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   SIM_SCGC6 |= SIM_SCGC6_RTC_MASK;
+ 130              		.loc 1 40 0
+ 131 0014 0159     		ldr	r1, [r0, r4]
+ 132              	.LVL10:
+ 133 0016 8022     		mov	r2, #128
+ 134              	.LVL11:
+ 135 0018 9605     		lsl	r6, r2, #22
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 136              		.loc 1 36 0
+ 137 001a 9946     		mov	r9, r3
+ 138 001c 08AB     		add	r3, sp, #32
+ 139              	.LVL12:
+ 140 001e 1D78     		ldrb	r5, [r3]
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   SIM_SCGC6 |= SIM_SCGC6_RTC_MASK;
+ 141              		.loc 1 40 0
+ 142 0020 0E43     		orr	r6, r1
+ 143 0022 0651     		str	r6, [r0, r4]
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     printf("Generating SoftWare reset to SRTC\n");
+ 144              		.loc 1 44 0
+ 145 0024 3048     		ldr	r0, .L17+8
+ 146 0026 FFF7FEFF 		bl	puts
+ 147              	.LVL13:
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     disable_irq(interrupt);
+ 148              		.loc 1 49 0
+ 149 002a 281C     		mov	r0, r5
+ 150 002c FFF7FEFF 		bl	disable_irq
+ 151              	.LVL14:
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     disable_irq(interrupt+1);
+ 152              		.loc 1 50 0
+ 153 0030 681C     		add	r0, r5, #1
+ 154 0032 FFF7FEFF 		bl	disable_irq
+ 155              	.LVL15:
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR  = RTC_CR_SWR_MASK;
+ 156              		.loc 1 52 0
+ 157 0036 2D48     		ldr	r0, .L17+12
+ 158 0038 0124     		mov	r4, #1
+ 159 003a 0461     		str	r4, [r0, #16]
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR  &= ~RTC_CR_SWR_MASK;  
+ 160              		.loc 1 53 0
+ 161 003c 0369     		ldr	r3, [r0, #16]
+ 162 003e A343     		bic	r3, r4
+ 163 0040 0361     		str	r3, [r0, #16]
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     if (RTC_SR & RTC_SR_TIF_MASK){
+ 164              		.loc 1 55 0
+ 165 0042 4169     		ldr	r1, [r0, #20]
+ 166 0044 0C42     		tst	r4, r1
+ 167 0046 44D1     		bne	.L16
+ 168              	.L5:
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   RTC_TCR = RTC_TCR_CIR(c_interval) | RTC_TCR_TCR(c_value);
+ 169              		.loc 1 60 0
+ 170 0048 5646     		mov	r6, sl
+ 171 004a 3002     		lsl	r0, r6, #8
+ 172 004c 4C46     		mov	r4, r9
+ 173 004e 2749     		ldr	r1, .L17+12
+ 174 0050 2043     		orr	r0, r4
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   if (seconds >0) {
+ 175              		.loc 1 63 0
+ 176 0052 4346     		mov	r3, r8
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   RTC_TCR = RTC_TCR_CIR(c_interval) | RTC_TCR_TCR(c_value);
+ 177              		.loc 1 60 0
+ 178 0054 C860     		str	r0, [r1, #12]
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   if (seconds >0) {
+ 179              		.loc 1 63 0
+ 180 0056 002B     		cmp	r3, #0
+ 181 0058 36D0     		beq	.L6
+ 182              	.LVL16:
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      if(interrupt >1){
+ 183              		.loc 1 65 0
+ 184 005a 012D     		cmp	r5, #1
+ 185 005c 02D9     		bls	.L7
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         enable_irq(interrupt);
+ 186              		.loc 1 69 0
+ 187 005e 281C     		mov	r0, r5
+ 188 0060 FFF7FEFF 		bl	enable_irq
+ 189              	.LVL17:
+ 190              	.L7:
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR |= RTC_CR_OSCE_MASK;
+ 191              		.loc 1 73 0
+ 192 0064 2148     		ldr	r0, .L17+12
+ 193 0066 8021     		mov	r1, #128
+ 194 0068 0469     		ldr	r4, [r0, #16]
+ 195 006a 4B00     		lsl	r3, r1, #1
+ 196 006c 2343     		orr	r3, r4
+ 197 006e 0361     		str	r3, [r0, #16]
+ 198              	.LVL18:
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER |= RTC_IER_TSIE_MASK;
+ 199              		.loc 1 78 0
+ 200 0070 C669     		ldr	r6, [r0, #28]
+ 201 0072 1022     		mov	r2, #16
+ 202 0074 1643     		orr	r6, r2
+ 203 0076 C661     		str	r6, [r0, #28]
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_SR |= RTC_SR_TCE_MASK;
+ 204              		.loc 1 79 0
+ 205 0078 4469     		ldr	r4, [r0, #20]
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_TSR = seconds;
+ 206              		.loc 1 81 0
+ 207 007a 4146     		mov	r1, r8
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_SR |= RTC_SR_TCE_MASK;
+ 208              		.loc 1 79 0
+ 209 007c 2243     		orr	r2, r4
+ 210 007e 4261     		str	r2, [r0, #20]
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_TSR = seconds;
+ 211              		.loc 1 81 0
+ 212 0080 0160     		str	r1, [r0]
+ 213              	.LVL19:
+ 214              	.L8:
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER |= RTC_IER_TAIE_MASK;
+ 215              		.loc 1 87 0
+ 216 0082 1A48     		ldr	r0, .L17+12
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   if (alarm >0) {
+ 217              		.loc 1 86 0
+ 218 0084 002F     		cmp	r7, #0
+ 219 0086 1AD0     		beq	.L9
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER |= RTC_IER_TAIE_MASK;
+ 220              		.loc 1 87 0
+ 221 0088 C369     		ldr	r3, [r0, #28]
+ 222 008a 0426     		mov	r6, #4
+ 223 008c 1E43     		orr	r6, r3
+ 224 008e C661     		str	r6, [r0, #28]
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_SR |= RTC_SR_TCE_MASK;
+ 225              		.loc 1 88 0
+ 226 0090 4469     		ldr	r4, [r0, #20]
+ 227 0092 1022     		mov	r2, #16
+ 228 0094 2243     		orr	r2, r4
+ 229 0096 4261     		str	r2, [r0, #20]
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_TAR = alarm;
+ 230              		.loc 1 90 0
+ 231 0098 8760     		str	r7, [r0, #8]
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      if(interrupt >1){
+ 232              		.loc 1 92 0
+ 233 009a 012D     		cmp	r5, #1
+ 234 009c 02D9     		bls	.L10
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         enable_irq(interrupt);
+ 235              		.loc 1 96 0
+ 236 009e 281C     		mov	r0, r5
+ 237 00a0 FFF7FEFF 		bl	enable_irq
+ 238              	.LVL20:
+ 239              	.L10:
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_CR |= RTC_CR_OSCE_MASK;
+ 240              		.loc 1 100 0
+ 241 00a4 1148     		ldr	r0, .L17+12
+ 242 00a6 8027     		mov	r7, #128
+ 243              	.LVL21:
+ 244 00a8 0169     		ldr	r1, [r0, #16]
+ 245 00aa 7D00     		lsl	r5, r7, #1
+ 246 00ac 0D43     		orr	r5, r1
+ 247 00ae 0561     		str	r5, [r0, #16]
+ 248              	.LVL22:
+ 249              	.L11:
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****   rtc_reg_report();
+ 250              		.loc 1 107 0
+ 251 00b0 FFF7FEFF 		bl	rtc_reg_report
+ 252              	.LVL23:
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** }
+ 253              		.loc 1 108 0
+ 254              		@ sp needed for prologue
+ 255              	.LVL24:
+ 256 00b4 1CBC     		pop	{r2, r3, r4}
+ 257 00b6 9046     		mov	r8, r2
+ 258 00b8 9946     		mov	r9, r3
+ 259 00ba A246     		mov	sl, r4
+ 260 00bc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 261              	.LVL25:
+ 262              	.L9:
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER &= ~RTC_IER_TAIE_MASK;
+ 263              		.loc 1 105 0
+ 264 00be C769     		ldr	r7, [r0, #28]
+ 265              	.LVL26:
+ 266 00c0 0425     		mov	r5, #4
+ 267 00c2 AF43     		bic	r7, r5
+ 268 00c4 C761     		str	r7, [r0, #28]
+ 269 00c6 F3E7     		b	.L11
+ 270              	.LVL27:
+ 271              	.L6:
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     RTC_IER &= ~RTC_IER_TSIE_MASK;
+ 272              		.loc 1 84 0
+ 273 00c8 CE69     		ldr	r6, [r1, #28]
+ 274 00ca 1022     		mov	r2, #16
+ 275 00cc 9643     		bic	r6, r2
+ 276 00ce CE61     		str	r6, [r1, #28]
+ 277 00d0 D7E7     		b	.L8
+ 278              	.LVL28:
+ 279              	.L16:
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         RTC_TSR = 0x00000000;   //  this action clears the TIF
+ 280              		.loc 1 56 0
+ 281 00d2 0022     		mov	r2, #0
+ 282 00d4 0260     		str	r2, [r0]
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****         printf("RTC Invalid flag was set - Write to TSR done to clears RTC_SR =  %#02X \n",  (RTC_S
+ 283              		.loc 1 57 0
+ 284 00d6 4169     		ldr	r1, [r0, #20]
+ 285 00d8 0548     		ldr	r0, .L17+16
+ 286 00da FFF7FEFF 		bl	printf
+ 287              	.LVL29:
+ 288 00de B3E7     		b	.L5
+ 289              	.L18:
+ 290              		.align	2
+ 291              	.L17:
+ 292 00e0 3C100000 		.word	4156
+ 293 00e4 00700440 		.word	1074032640
+ 294 00e8 D0000000 		.word	.LC16
+ 295 00ec 00D00340 		.word	1073991680
+ 296 00f0 F4000000 		.word	.LC18
+ 297              		.cfi_endproc
+ 298              	.LFE0:
+ 300              		.section	.text.rtc_isr,"ax",%progbits
+ 301              		.align	2
+ 302              		.global	rtc_isr
+ 303              		.code	16
+ 304              		.thumb_func
+ 306              	rtc_isr:
+ 307              	.LFB2:
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** void rtc_isr(void) 
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 308              		.loc 1 122 0
+ 309              		.cfi_startproc
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    GPIOB_PSOR = 0x00080000;           // set Port B 19 indicate wakeup
+ 310              		.loc 1 123 0
+ 311 0000 8022     		mov	r2, #128
+ 312 0002 174B     		ldr	r3, .L34
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** {
+ 313              		.loc 1 122 0
+ 314 0004 10B5     		push	{r4, lr}
+ 315              	.LCFI3:
+ 316              		.cfi_def_cfa_offset 8
+ 317              		.cfi_offset 4, -8
+ 318              		.cfi_offset 14, -4
+ 319              		.loc 1 123 0
+ 320 0006 1003     		lsl	r0, r2, #12
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    if((RTC_SR & RTC_SR_TIF_MASK)== 0x01)
+ 321              		.loc 1 125 0
+ 322 0008 164C     		ldr	r4, .L34+4
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    GPIOB_PSOR = 0x00080000;           // set Port B 19 indicate wakeup
+ 323              		.loc 1 123 0
+ 324 000a 5860     		str	r0, [r3, #4]
+ 325              		.loc 1 125 0
+ 326 000c 6169     		ldr	r1, [r4, #20]
+ 327 000e CA07     		lsl	r2, r1, #31
+ 328 0010 1CD4     		bmi	.L32
+ 329              	.L20:
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      {
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****        printf("SRTC time invalid interrupt entered...\r\n");
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TIF 
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** 
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****      }	
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    if((RTC_SR & RTC_SR_TOF_MASK) == 0x02)
+ 330              		.loc 1 133 0
+ 331 0012 144C     		ldr	r4, .L34+4
+ 332 0014 6169     		ldr	r1, [r4, #20]
+ 333 0016 8A07     		lsl	r2, r1, #30
+ 334 0018 0ED4     		bmi	.L33
+ 335              	.L21:
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    {
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   printf("SRTC time overflow interrupt entered...\r\n");
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TOF
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    }	 	
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    if((RTC_SR & RTC_SR_TAF_MASK) == 0x04)
+ 336              		.loc 1 139 0
+ 337 001a 124C     		ldr	r4, .L34+4
+ 338 001c 6169     		ldr	r1, [r4, #20]
+ 339 001e 4A07     		lsl	r2, r1, #29
+ 340 0020 09D5     		bpl	.L19
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    {
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   printf("SRTC alarm interrupt entered...\r\n");
+ 341              		.loc 1 141 0
+ 342 0022 1148     		ldr	r0, .L34+8
+ 343 0024 FFF7FEFF 		bl	puts
+ 344              	.LVL30:
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****            printf("Time Seconds Register value is: %i\n", RTC_TSR);
+ 345              		.loc 1 142 0
+ 346 0028 2168     		ldr	r1, [r4]
+ 347 002a 1048     		ldr	r0, .L34+12
+ 348 002c FFF7FEFF 		bl	printf
+ 349              	.LVL31:
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TAR += 11;// Write new alarm value, to generate an alarm every second add 1
+ 350              		.loc 1 143 0
+ 351 0030 A068     		ldr	r0, [r4, #8]
+ 352 0032 0B30     		add	r0, r0, #11
+ 353 0034 A060     		str	r0, [r4, #8]
+ 354              	.L19:
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    }	
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****     return;
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c **** }
+ 355              		.loc 1 146 0
+ 356              		@ sp needed for prologue
+ 357 0036 10BD     		pop	{r4, pc}
+ 358              	.L33:
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   printf("SRTC time overflow interrupt entered...\r\n");
+ 359              		.loc 1 135 0
+ 360 0038 0D48     		ldr	r0, .L34+16
+ 361 003a FFF7FEFF 		bl	puts
+ 362              	.LVL32:
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 363              		.loc 1 136 0
+ 364 003e 6069     		ldr	r0, [r4, #20]
+ 365 0040 0722     		mov	r2, #7
+ 366 0042 1040     		and	r0, r2
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TOF
+ 367              		.loc 1 137 0
+ 368 0044 0023     		mov	r3, #0
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 369              		.loc 1 136 0
+ 370 0046 6061     		str	r0, [r4, #20]
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TOF
+ 371              		.loc 1 137 0
+ 372 0048 2360     		str	r3, [r4]
+ 373 004a E6E7     		b	.L21
+ 374              	.L32:
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****        printf("SRTC time invalid interrupt entered...\r\n");
+ 375              		.loc 1 127 0
+ 376 004c 0948     		ldr	r0, .L34+20
+ 377 004e FFF7FEFF 		bl	puts
+ 378              	.LVL33:
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 379              		.loc 1 128 0
+ 380 0052 6069     		ldr	r0, [r4, #20]
+ 381 0054 0722     		mov	r2, #7
+ 382 0056 1040     		and	r0, r2
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TIF 
+ 383              		.loc 1 129 0
+ 384 0058 0023     		mov	r3, #0
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_SR &= 0x07;  //clear TCE, or RTC_TSR can  not be written
+ 385              		.loc 1 128 0
+ 386 005a 6061     		str	r0, [r4, #20]
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc\rtc.c ****    	   RTC_TSR = 0x00000000;  //clear TIF 
+ 387              		.loc 1 129 0
+ 388 005c 2360     		str	r3, [r4]
+ 389 005e D8E7     		b	.L20
+ 390              	.L35:
+ 391              		.align	2
+ 392              	.L34:
+ 393 0060 40F00F40 		.word	1074786368
+ 394 0064 00D00340 		.word	1073991680
+ 395 0068 94010000 		.word	.LC24
+ 396 006c B8010000 		.word	.LC26
+ 397 0070 68010000 		.word	.LC22
+ 398 0074 40010000 		.word	.LC20
+ 399              		.cfi_endproc
+ 400              	.LFE2:
+ 402              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 403              		.align	2
+ 404              	.LC0:
+ 405 0000 5254435F 		.ascii	"RTC_TSR    = 0x%02X,    \000"
+ 405      54535220 
+ 405      2020203D 
+ 405      20307825 
+ 405      3032582C 
+ 406 0019 000000   		.space	3
+ 407              	.LC2:
+ 408 001c 5254435F 		.ascii	"RTC_TPR    = 0x%02X\012\000"
+ 408      54505220 
+ 408      2020203D 
+ 408      20307825 
+ 408      3032580A 
+ 409 0031 000000   		.space	3
+ 410              	.LC4:
+ 411 0034 5254435F 		.ascii	"RTC_TAR    = 0x%02X,    \000"
+ 411      54415220 
+ 411      2020203D 
+ 411      20307825 
+ 411      3032582C 
+ 412 004d 000000   		.space	3
+ 413              	.LC6:
+ 414 0050 5254435F 		.ascii	"RTC_TCR    = 0x%02X\012\000"
+ 414      54435220 
+ 414      2020203D 
+ 414      20307825 
+ 414      3032580A 
+ 415 0065 000000   		.space	3
+ 416              	.LC8:
+ 417 0068 5254435F 		.ascii	"RTC_CR     = 0x%02X,    \000"
+ 417      43522020 
+ 417      2020203D 
+ 417      20307825 
+ 417      3032582C 
+ 418 0081 000000   		.space	3
+ 419              	.LC10:
+ 420 0084 5254435F 		.ascii	"RTC_SR     = 0x%02X\012\000"
+ 420      53522020 
+ 420      2020203D 
+ 420      20307825 
+ 420      3032580A 
+ 421 0099 000000   		.space	3
+ 422              	.LC12:
+ 423 009c 5254435F 		.ascii	"RTC_LR     = 0x%02X,    \000"
+ 423      4C522020 
+ 423      2020203D 
+ 423      20307825 
+ 423      3032582C 
+ 424 00b5 000000   		.space	3
+ 425              	.LC14:
+ 426 00b8 5254435F 		.ascii	"RTC_IER    = 0x%02X\012\000"
+ 426      49455220 
+ 426      2020203D 
+ 426      20307825 
+ 426      3032580A 
+ 427 00cd 000000   		.space	3
+ 428              	.LC16:
+ 429 00d0 47656E65 		.ascii	"Generating SoftWare reset to SRTC\000"
+ 429      72617469 
+ 429      6E672053 
+ 429      6F667457 
+ 429      61726520 
+ 430 00f2 0000     		.space	2
+ 431              	.LC18:
+ 432 00f4 52544320 		.ascii	"RTC Invalid flag was set - Write to TSR done to cle"
+ 432      496E7661 
+ 432      6C696420 
+ 432      666C6167 
+ 432      20776173 
+ 433 0127 61727320 		.ascii	"ars RTC_SR =  %#02X \012\000"
+ 433      5254435F 
+ 433      5352203D 
+ 433      20202523 
+ 433      30325820 
+ 434 013d 000000   		.space	3
+ 435              	.LC20:
+ 436 0140 53525443 		.ascii	"SRTC time invalid interrupt entered...\015\000"
+ 436      2074696D 
+ 436      6520696E 
+ 436      76616C69 
+ 436      6420696E 
+ 437              	.LC22:
+ 438 0168 53525443 		.ascii	"SRTC time overflow interrupt entered...\015\000"
+ 438      2074696D 
+ 438      65206F76 
+ 438      6572666C 
+ 438      6F772069 
+ 439 0191 000000   		.space	3
+ 440              	.LC24:
+ 441 0194 53525443 		.ascii	"SRTC alarm interrupt entered...\015\000"
+ 441      20616C61 
+ 441      726D2069 
+ 441      6E746572 
+ 441      72757074 
+ 442 01b5 000000   		.space	3
+ 443              	.LC26:
+ 444 01b8 54696D65 		.ascii	"Time Seconds Register value is: %i\012\000"
+ 444      20536563 
+ 444      6F6E6473 
+ 444      20526567 
+ 444      69737465 
+ 445              		.text
+ 446              	.Letext0:
+ 447              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 448              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 449              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 rtc.c
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:18     .text.rtc_reg_report:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:23     .text.rtc_reg_report:00000000 rtc_reg_report
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:80     .text.rtc_reg_report:00000048 $d
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:93     .text.rtc_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:98     .text.rtc_init:00000000 rtc_init
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:292    .text.rtc_init:000000e0 $d
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:301    .text.rtc_isr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:306    .text.rtc_isr:00000000 rtc_isr
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:393    .text.rtc_isr:00000060 $d
+C:\Users\lab\AppData\Local\Temp\ccu8mzRg.s:403    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf
+puts
+disable_irq
+enable_irq

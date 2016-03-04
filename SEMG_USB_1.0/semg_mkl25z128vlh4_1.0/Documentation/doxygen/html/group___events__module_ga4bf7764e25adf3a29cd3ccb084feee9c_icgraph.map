@@ -1,0 +1,3 @@
+<map id="DMAT_S_SPI_RX_OnError" name="DMAT_S_SPI_RX_OnError">
+<area shape="rect" id="node2" href="$group___d_m_a_t___s___s_p_i___r_x__module.html#ga37c9769ae1f8aef614b95ba793ef2025" title="Initializes the DMATransfer component. Allocates memory for the device data structure. This method can be called only once. Before the second call of Init() the Deinit() must be called first. " alt="" coords="232,5,381,32"/>
+</map>

@@ -1,0 +1,749 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"hal_dev_mma8451.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.hal_dev_mma8451_read_reg,"ax",%progbits
+  18              		.align	2
+  19              		.global	hal_dev_mma8451_read_reg
+  20              		.code	16
+  21              		.thumb_func
+  23              	hal_dev_mma8451_read_reg:
+  24              	.LFB1:
+  25              		.file 1 "../project/hal_dev_mma8451.c"
+   1:../project/hal_dev_mma8451.c **** 
+   2:../project/hal_dev_mma8451.c **** 
+   3:../project/hal_dev_mma8451.c **** #include "common.h"
+   4:../project/hal_dev_mma8451.c **** #include "global.h"
+   5:../project/hal_dev_mma8451.c **** #include "hal_i2c_ex.h"
+   6:../project/hal_dev_mma8451.c **** 
+   7:../project/hal_dev_mma8451.c **** 
+   8:../project/hal_dev_mma8451.c **** #define I2C_ADDR_MMA8451 (0x1d<<1)
+   9:../project/hal_dev_mma8451.c **** #define I2C0_B I2C0_BASE_PTR
+  10:../project/hal_dev_mma8451.c **** 
+  11:../project/hal_dev_mma8451.c **** /*
+  12:../project/hal_dev_mma8451.c ****     This delay is very important, it may cause w-r operation failure.
+  13:../project/hal_dev_mma8451.c ****     The delay time is dependent on the current baudrate.
+  14:../project/hal_dev_mma8451.c ****     It must be equal or longer than at least on clock of current baudrate.
+  15:../project/hal_dev_mma8451.c ****     So, if you set to a higher baudrate, the loop value can be reduced from 4000 to 20, depending o
+  16:../project/hal_dev_mma8451.c **** */
+  17:../project/hal_dev_mma8451.c **** static void pause(void)
+  18:../project/hal_dev_mma8451.c **** {
+  19:../project/hal_dev_mma8451.c ****     int n;
+  20:../project/hal_dev_mma8451.c ****     for(n=0; n<4000; n++)
+  21:../project/hal_dev_mma8451.c ****         asm("nop");
+  22:../project/hal_dev_mma8451.c **** }
+  23:../project/hal_dev_mma8451.c **** u8 hal_dev_mma8451_read_reg(u8 addr)
+  24:../project/hal_dev_mma8451.c **** {
+  26              		.loc 1 24 0
+  27              		.cfi_startproc
+  28              	.LVL0:
+  29 0000 10B5     		push	{r4, lr}
+  30              	.LCFI0:
+  31              		.cfi_def_cfa_offset 8
+  32              		.cfi_offset 4, -8
+  33              		.cfi_offset 14, -4
+  34              		.loc 1 24 0
+  35 0002 041C     		mov	r4, r0
+  25:../project/hal_dev_mma8451.c ****     u8 result;
+  26:../project/hal_dev_mma8451.c **** 
+  27:../project/hal_dev_mma8451.c ****     i2c_start(I2C0_B);
+  36              		.loc 1 27 0
+  37 0004 1E48     		ldr	r0, .L6
+  38              	.LVL1:
+  39 0006 FFF7FEFF 		bl	i2c_start
+  40              	.LVL2:
+  28:../project/hal_dev_mma8451.c **** 
+  29:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, I2C_ADDR_MMA8451 | I2C_WRITE);
+  41              		.loc 1 29 0
+  42 000a 3A21     		mov	r1, #58
+  43 000c 1C48     		ldr	r0, .L6
+  44 000e FFF7FEFF 		bl	i2c_write_byte
+  45              	.LVL3:
+  30:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+  46              		.loc 1 30 0
+  47 0012 1B48     		ldr	r0, .L6
+  48 0014 FFF7FEFF 		bl	i2c_wait
+  49              	.LVL4:
+  31:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+  50              		.loc 1 31 0
+  51 0018 1948     		ldr	r0, .L6
+  52 001a FFF7FEFF 		bl	i2c_get_ack
+  53              	.LVL5:
+  32:../project/hal_dev_mma8451.c **** 
+  33:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, addr);
+  54              		.loc 1 33 0
+  55 001e 211C     		mov	r1, r4
+  56 0020 1748     		ldr	r0, .L6
+  57 0022 FFF7FEFF 		bl	i2c_write_byte
+  58              	.LVL6:
+  34:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+  59              		.loc 1 34 0
+  60 0026 1648     		ldr	r0, .L6
+  61 0028 FFF7FEFF 		bl	i2c_wait
+  62              	.LVL7:
+  35:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+  63              		.loc 1 35 0
+  64 002c 1448     		ldr	r0, .L6
+  65 002e FFF7FEFF 		bl	i2c_get_ack
+  66              	.LVL8:
+  36:../project/hal_dev_mma8451.c **** 
+  37:../project/hal_dev_mma8451.c ****     i2c_repeated_start(I2C0_B);
+  67              		.loc 1 37 0
+  68 0032 1348     		ldr	r0, .L6
+  69 0034 FFF7FEFF 		bl	i2c_repeated_start
+  70              	.LVL9:
+  38:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, I2C_ADDR_MMA8451 | I2C_READ);
+  71              		.loc 1 38 0
+  72 0038 3B21     		mov	r1, #59
+  73 003a 1148     		ldr	r0, .L6
+  74 003c FFF7FEFF 		bl	i2c_write_byte
+  75              	.LVL10:
+  39:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+  76              		.loc 1 39 0
+  77 0040 0F48     		ldr	r0, .L6
+  78 0042 FFF7FEFF 		bl	i2c_wait
+  79              	.LVL11:
+  40:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+  80              		.loc 1 40 0
+  81 0046 0E48     		ldr	r0, .L6
+  82 0048 FFF7FEFF 		bl	i2c_get_ack
+  83              	.LVL12:
+  41:../project/hal_dev_mma8451.c **** 
+  42:../project/hal_dev_mma8451.c ****     i2c_set_rx_mode(I2C0_B);
+  84              		.loc 1 42 0
+  85 004c 0C48     		ldr	r0, .L6
+  86 004e FFF7FEFF 		bl	i2c_set_rx_mode
+  87              	.LVL13:
+  43:../project/hal_dev_mma8451.c **** 
+  44:../project/hal_dev_mma8451.c ****     i2c_give_nack(I2C0_B);
+  88              		.loc 1 44 0
+  89 0052 0B48     		ldr	r0, .L6
+  90 0054 FFF7FEFF 		bl	i2c_give_nack
+  91              	.LVL14:
+  45:../project/hal_dev_mma8451.c ****     result = i2c_read_byte(I2C0_B);
+  92              		.loc 1 45 0
+  93 0058 0948     		ldr	r0, .L6
+  94 005a FFF7FEFF 		bl	i2c_read_byte
+  95              	.LVL15:
+  46:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+  96              		.loc 1 46 0
+  97 005e 0848     		ldr	r0, .L6
+  98 0060 FFF7FEFF 		bl	i2c_wait
+  99              	.LVL16:
+  47:../project/hal_dev_mma8451.c **** 
+  48:../project/hal_dev_mma8451.c ****     i2c_stop(I2C0_B);
+ 100              		.loc 1 48 0
+ 101 0064 0648     		ldr	r0, .L6
+ 102 0066 FFF7FEFF 		bl	i2c_stop
+ 103              	.LVL17:
+  49:../project/hal_dev_mma8451.c ****     result = i2c_read_byte(I2C0_B);
+ 104              		.loc 1 49 0
+ 105 006a 0548     		ldr	r0, .L6
+ 106 006c FFF7FEFF 		bl	i2c_read_byte
+ 107              	.LVL18:
+ 108 0070 FA23     		mov	r3, #250
+ 109 0072 1901     		lsl	r1, r3, #4
+ 110              	.LVL19:
+ 111              	.L2:
+ 112              	.LBB6:
+ 113              	.LBB7:
+  21:../project/hal_dev_mma8451.c ****         asm("nop");
+ 114              		.loc 1 21 0
+ 115              	@ 21 "../project/hal_dev_mma8451.c" 1
+ 116 0074 C046     		nop
+ 117              	@ 0 "" 2
+ 118              	@ 21 "../project/hal_dev_mma8451.c" 1
+ 119 0076 C046     		nop
+ 120              	@ 0 "" 2
+ 121              		.code	16
+ 122 0078 0239     		sub	r1, r1, #2
+  20:../project/hal_dev_mma8451.c ****     for(n=0; n<4000; n++)
+ 123              		.loc 1 20 0
+ 124 007a 0029     		cmp	r1, #0
+ 125 007c FAD1     		bne	.L2
+ 126              	.LBE7:
+ 127              	.LBE6:
+  50:../project/hal_dev_mma8451.c ****     pause();
+  51:../project/hal_dev_mma8451.c ****     return result;
+  52:../project/hal_dev_mma8451.c **** }
+ 128              		.loc 1 52 0
+ 129              		@ sp needed for prologue
+ 130 007e 10BD     		pop	{r4, pc}
+ 131              	.L7:
+ 132              		.align	2
+ 133              	.L6:
+ 134 0080 00600640 		.word	1074159616
+ 135              		.cfi_endproc
+ 136              	.LFE1:
+ 138              		.section	.text.hal_dev_mma8451_write_reg,"ax",%progbits
+ 139              		.align	2
+ 140              		.global	hal_dev_mma8451_write_reg
+ 141              		.code	16
+ 142              		.thumb_func
+ 144              	hal_dev_mma8451_write_reg:
+ 145              	.LFB2:
+  53:../project/hal_dev_mma8451.c **** void hal_dev_mma8451_write_reg(u8 addr, u8 data)
+  54:../project/hal_dev_mma8451.c **** {
+ 146              		.loc 1 54 0
+ 147              		.cfi_startproc
+ 148              	.LVL20:
+ 149 0000 38B5     		push	{r3, r4, r5, lr}
+ 150              	.LCFI1:
+ 151              		.cfi_def_cfa_offset 16
+ 152              		.cfi_offset 3, -16
+ 153              		.cfi_offset 4, -12
+ 154              		.cfi_offset 5, -8
+ 155              		.cfi_offset 14, -4
+ 156              		.loc 1 54 0
+ 157 0002 051C     		mov	r5, r0
+  55:../project/hal_dev_mma8451.c ****     i2c_start(I2C0_B);
+ 158              		.loc 1 55 0
+ 159 0004 1648     		ldr	r0, .L12
+ 160              	.LVL21:
+  54:../project/hal_dev_mma8451.c **** {
+ 161              		.loc 1 54 0
+ 162 0006 0C1C     		mov	r4, r1
+ 163              		.loc 1 55 0
+ 164 0008 FFF7FEFF 		bl	i2c_start
+ 165              	.LVL22:
+  56:../project/hal_dev_mma8451.c **** 
+  57:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, I2C_ADDR_MMA8451|I2C_WRITE);
+ 166              		.loc 1 57 0
+ 167 000c 3A21     		mov	r1, #58
+ 168 000e 1448     		ldr	r0, .L12
+ 169 0010 FFF7FEFF 		bl	i2c_write_byte
+ 170              	.LVL23:
+  58:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+ 171              		.loc 1 58 0
+ 172 0014 1248     		ldr	r0, .L12
+ 173 0016 FFF7FEFF 		bl	i2c_wait
+ 174              	.LVL24:
+  59:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+ 175              		.loc 1 59 0
+ 176 001a 1148     		ldr	r0, .L12
+ 177 001c FFF7FEFF 		bl	i2c_get_ack
+ 178              	.LVL25:
+  60:../project/hal_dev_mma8451.c **** 
+  61:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, addr);
+ 179              		.loc 1 61 0
+ 180 0020 291C     		mov	r1, r5
+ 181 0022 0F48     		ldr	r0, .L12
+ 182 0024 FFF7FEFF 		bl	i2c_write_byte
+ 183              	.LVL26:
+  62:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+ 184              		.loc 1 62 0
+ 185 0028 0D48     		ldr	r0, .L12
+ 186 002a FFF7FEFF 		bl	i2c_wait
+ 187              	.LVL27:
+  63:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+ 188              		.loc 1 63 0
+ 189 002e 0C48     		ldr	r0, .L12
+ 190 0030 FFF7FEFF 		bl	i2c_get_ack
+ 191              	.LVL28:
+  64:../project/hal_dev_mma8451.c **** 
+  65:../project/hal_dev_mma8451.c ****     i2c_write_byte(I2C0_B, data);
+ 192              		.loc 1 65 0
+ 193 0034 211C     		mov	r1, r4
+ 194 0036 0A48     		ldr	r0, .L12
+ 195 0038 FFF7FEFF 		bl	i2c_write_byte
+ 196              	.LVL29:
+  66:../project/hal_dev_mma8451.c ****     i2c_wait(I2C0_B);
+ 197              		.loc 1 66 0
+ 198 003c 0848     		ldr	r0, .L12
+ 199 003e FFF7FEFF 		bl	i2c_wait
+ 200              	.LVL30:
+  67:../project/hal_dev_mma8451.c ****     i2c_get_ack(I2C0_B);
+ 201              		.loc 1 67 0
+ 202 0042 0748     		ldr	r0, .L12
+ 203 0044 FFF7FEFF 		bl	i2c_get_ack
+ 204              	.LVL31:
+  68:../project/hal_dev_mma8451.c **** 
+  69:../project/hal_dev_mma8451.c ****     i2c_stop(I2C0_B);
+ 205              		.loc 1 69 0
+ 206 0048 0548     		ldr	r0, .L12
+ 207 004a FFF7FEFF 		bl	i2c_stop
+ 208              	.LVL32:
+ 209 004e FA23     		mov	r3, #250
+ 210 0050 1801     		lsl	r0, r3, #4
+ 211              	.LVL33:
+ 212              	.L9:
+ 213              	.LBB8:
+ 214              	.LBB9:
+  21:../project/hal_dev_mma8451.c ****         asm("nop");
+ 215              		.loc 1 21 0
+ 216              	@ 21 "../project/hal_dev_mma8451.c" 1
+ 217 0052 C046     		nop
+ 218              	@ 0 "" 2
+ 219              	@ 21 "../project/hal_dev_mma8451.c" 1
+ 220 0054 C046     		nop
+ 221              	@ 0 "" 2
+ 222              		.code	16
+ 223 0056 0238     		sub	r0, r0, #2
+  20:../project/hal_dev_mma8451.c ****     for(n=0; n<4000; n++)
+ 224              		.loc 1 20 0
+ 225 0058 0028     		cmp	r0, #0
+ 226 005a FAD1     		bne	.L9
+ 227              	.LBE9:
+ 228              	.LBE8:
+  70:../project/hal_dev_mma8451.c ****     pause();
+  71:../project/hal_dev_mma8451.c **** }
+ 229              		.loc 1 71 0
+ 230              		@ sp needed for prologue
+ 231 005c 38BD     		pop	{r3, r4, r5, pc}
+ 232              	.L13:
+ 233 005e C046     		.align	2
+ 234              	.L12:
+ 235 0060 00600640 		.word	1074159616
+ 236              		.cfi_endproc
+ 237              	.LFE2:
+ 239              		.section	.text.hal_dev_mma8451_init,"ax",%progbits
+ 240              		.align	2
+ 241              		.global	hal_dev_mma8451_init
+ 242              		.code	16
+ 243              		.thumb_func
+ 245              	hal_dev_mma8451_init:
+ 246              	.LFB5:
+  72:../project/hal_dev_mma8451.c **** 
+  73:../project/hal_dev_mma8451.c **** static void to_active_mode(void)
+  74:../project/hal_dev_mma8451.c **** {
+  75:../project/hal_dev_mma8451.c ****     u8 v;
+  76:../project/hal_dev_mma8451.c ****     v = hal_dev_mma8451_read_reg(0x2a);
+  77:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2a,v|0x01);
+  78:../project/hal_dev_mma8451.c **** }
+  79:../project/hal_dev_mma8451.c **** static void to_standby_mode(void)
+  80:../project/hal_dev_mma8451.c **** {
+  81:../project/hal_dev_mma8451.c ****     u8 v;
+  82:../project/hal_dev_mma8451.c ****     v = hal_dev_mma8451_read_reg(0x2a);
+  83:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2a,v&0x7e);
+  84:../project/hal_dev_mma8451.c **** }
+  85:../project/hal_dev_mma8451.c **** void hal_dev_mma8451_init(void)
+  86:../project/hal_dev_mma8451.c **** {
+ 247              		.loc 1 86 0
+ 248              		.cfi_startproc
+ 249 0000 08B5     		push	{r3, lr}
+ 250              	.LCFI2:
+ 251              		.cfi_def_cfa_offset 8
+ 252              		.cfi_offset 3, -8
+ 253              		.cfi_offset 14, -4
+ 254              	.LBB12:
+ 255              	.LBB13:
+  82:../project/hal_dev_mma8451.c ****     v = hal_dev_mma8451_read_reg(0x2a);
+ 256              		.loc 1 82 0
+ 257 0002 2A20     		mov	r0, #42
+ 258 0004 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 259              	.LVL34:
+  83:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2a,v&0x7e);
+ 260              		.loc 1 83 0
+ 261 0008 7E21     		mov	r1, #126
+ 262 000a 0140     		and	r1, r0
+ 263 000c 2A20     		mov	r0, #42
+ 264              	.LVL35:
+ 265 000e FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 266              	.LVL36:
+ 267              	.LBE13:
+ 268              	.LBE12:
+  87:../project/hal_dev_mma8451.c ****     to_standby_mode();
+  88:../project/hal_dev_mma8451.c **** }
+ 269              		.loc 1 88 0
+ 270              		@ sp needed for prologue
+ 271 0012 08BD     		pop	{r3, pc}
+ 272              		.cfi_endproc
+ 273              	.LFE5:
+ 275              		.section	.text.hal_dev_mma8451_test_reg_rw,"ax",%progbits
+ 276              		.align	2
+ 277              		.global	hal_dev_mma8451_test_reg_rw
+ 278              		.code	16
+ 279              		.thumb_func
+ 281              	hal_dev_mma8451_test_reg_rw:
+ 282              	.LFB6:
+  89:../project/hal_dev_mma8451.c **** 
+  90:../project/hal_dev_mma8451.c **** ////////////////////////////////////////////////////////////////////////
+  91:../project/hal_dev_mma8451.c **** 
+  92:../project/hal_dev_mma8451.c **** bool hal_dev_mma8451_test_reg_rw(void)
+  93:../project/hal_dev_mma8451.c **** {
+ 283              		.loc 1 93 0
+ 284              		.cfi_startproc
+ 285 0000 10B5     		push	{r4, lr}
+ 286              	.LCFI3:
+ 287              		.cfi_def_cfa_offset 8
+ 288              		.cfi_offset 4, -8
+ 289              		.cfi_offset 14, -4
+  94:../project/hal_dev_mma8451.c ****     u8 d;
+  95:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 290              		.loc 1 95 0
+ 291 0002 2F20     		mov	r0, #47
+ 292 0004 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 293              	.LVL37:
+  96:../project/hal_dev_mma8451.c ****     printf("d=%x\n",d);
+ 294              		.loc 1 96 0
+ 295 0008 194C     		ldr	r4, .L16
+  95:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 296              		.loc 1 95 0
+ 297 000a 011C     		mov	r1, r0
+ 298              	.LVL38:
+ 299              		.loc 1 96 0
+ 300 000c 201C     		mov	r0, r4
+ 301              	.LVL39:
+ 302 000e FFF7FEFF 		bl	printf
+ 303              	.LVL40:
+  97:../project/hal_dev_mma8451.c ****     
+  98:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2f,0xaa);
+ 304              		.loc 1 98 0
+ 305 0012 AA21     		mov	r1, #170
+ 306 0014 2F20     		mov	r0, #47
+ 307 0016 FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 308              	.LVL41:
+  99:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 309              		.loc 1 99 0
+ 310 001a 2F20     		mov	r0, #47
+ 311 001c FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 312              	.LVL42:
+ 313 0020 011C     		mov	r1, r0
+ 314              	.LVL43:
+ 100:../project/hal_dev_mma8451.c ****     printf("d=%x\n",d);
+ 315              		.loc 1 100 0
+ 316 0022 201C     		mov	r0, r4
+ 317              	.LVL44:
+ 318 0024 FFF7FEFF 		bl	printf
+ 319              	.LVL45:
+ 101:../project/hal_dev_mma8451.c ****     
+ 102:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2f,0x55);
+ 320              		.loc 1 102 0
+ 321 0028 5521     		mov	r1, #85
+ 322 002a 2F20     		mov	r0, #47
+ 323 002c FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 324              	.LVL46:
+ 103:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 325              		.loc 1 103 0
+ 326 0030 2F20     		mov	r0, #47
+ 327 0032 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 328              	.LVL47:
+ 329 0036 011C     		mov	r1, r0
+ 330              	.LVL48:
+ 104:../project/hal_dev_mma8451.c ****     printf("d=%x\n",d);
+ 331              		.loc 1 104 0
+ 332 0038 201C     		mov	r0, r4
+ 333              	.LVL49:
+ 334 003a FFF7FEFF 		bl	printf
+ 335              	.LVL50:
+ 105:../project/hal_dev_mma8451.c **** 
+ 106:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2f,0xff);
+ 336              		.loc 1 106 0
+ 337 003e FF21     		mov	r1, #255
+ 338 0040 2F20     		mov	r0, #47
+ 339 0042 FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 340              	.LVL51:
+ 107:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 341              		.loc 1 107 0
+ 342 0046 2F20     		mov	r0, #47
+ 343 0048 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 344              	.LVL52:
+ 345 004c 011C     		mov	r1, r0
+ 346              	.LVL53:
+ 108:../project/hal_dev_mma8451.c ****     printf("d=%x\n",d);
+ 347              		.loc 1 108 0
+ 348 004e 201C     		mov	r0, r4
+ 349              	.LVL54:
+ 350 0050 FFF7FEFF 		bl	printf
+ 351              	.LVL55:
+ 109:../project/hal_dev_mma8451.c **** 
+ 110:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2f,0x00);
+ 352              		.loc 1 110 0
+ 353 0054 0021     		mov	r1, #0
+ 354 0056 2F20     		mov	r0, #47
+ 355 0058 FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 356              	.LVL56:
+ 111:../project/hal_dev_mma8451.c ****     d = hal_dev_mma8451_read_reg(0x2f);
+ 357              		.loc 1 111 0
+ 358 005c 2F20     		mov	r0, #47
+ 359 005e FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 360              	.LVL57:
+ 361 0062 011C     		mov	r1, r0
+ 362              	.LVL58:
+ 112:../project/hal_dev_mma8451.c ****     printf("d=%x\n",d);
+ 363              		.loc 1 112 0
+ 364 0064 201C     		mov	r0, r4
+ 365              	.LVL59:
+ 366 0066 FFF7FEFF 		bl	printf
+ 367              	.LVL60:
+ 113:../project/hal_dev_mma8451.c ****     return 0;
+ 114:../project/hal_dev_mma8451.c **** }
+ 368              		.loc 1 114 0
+ 369              		@ sp needed for prologue
+ 370 006a 0020     		mov	r0, #0
+ 371 006c 10BD     		pop	{r4, pc}
+ 372              	.L17:
+ 373 006e C046     		.align	2
+ 374              	.L16:
+ 375 0070 00000000 		.word	.LC0
+ 376              		.cfi_endproc
+ 377              	.LFE6:
+ 379              		.section	.text.hal_dev_mma8451_test_function,"ax",%progbits
+ 380              		.align	2
+ 381              		.global	hal_dev_mma8451_test_function
+ 382              		.code	16
+ 383              		.thumb_func
+ 385              	hal_dev_mma8451_test_function:
+ 386              	.LFB7:
+ 115:../project/hal_dev_mma8451.c **** 
+ 116:../project/hal_dev_mma8451.c **** void hal_dev_mma8451_test_function(void)
+ 117:../project/hal_dev_mma8451.c **** {
+ 387              		.loc 1 117 0
+ 388              		.cfi_startproc
+ 389 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 390              	.LCFI4:
+ 391              		.cfi_def_cfa_offset 20
+ 392              		.cfi_offset 4, -20
+ 393              		.cfi_offset 5, -16
+ 394              		.cfi_offset 6, -12
+ 395              		.cfi_offset 7, -8
+ 396              		.cfi_offset 14, -4
+ 397 0002 5746     		mov	r7, sl
+ 398 0004 4E46     		mov	r6, r9
+ 399 0006 4546     		mov	r5, r8
+ 400 0008 E0B4     		push	{r5, r6, r7}
+ 401              	.LCFI5:
+ 402              		.cfi_def_cfa_offset 32
+ 403              		.cfi_offset 8, -32
+ 404              		.cfi_offset 9, -28
+ 405              		.cfi_offset 10, -24
+ 406              	.LBB16:
+ 407              	.LBB17:
+  76:../project/hal_dev_mma8451.c ****     v = hal_dev_mma8451_read_reg(0x2a);
+ 408              		.loc 1 76 0
+ 409 000a 2A20     		mov	r0, #42
+ 410 000c FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 411              	.LVL61:
+  77:../project/hal_dev_mma8451.c ****     hal_dev_mma8451_write_reg(0x2a,v|0x01);
+ 412              		.loc 1 77 0
+ 413 0010 0123     		mov	r3, #1
+ 414 0012 011C     		mov	r1, r0
+ 415 0014 1943     		orr	r1, r3
+ 416 0016 C9B2     		uxtb	r1, r1
+ 417 0018 2A20     		mov	r0, #42
+ 418              	.LVL62:
+ 419 001a FFF7FEFF 		bl	hal_dev_mma8451_write_reg
+ 420              	.LVL63:
+ 421              	.LBE17:
+ 422              	.LBE16:
+ 118:../project/hal_dev_mma8451.c ****     s16 resultx;
+ 119:../project/hal_dev_mma8451.c ****     s16 resulty;
+ 120:../project/hal_dev_mma8451.c ****     s16 resultz;
+ 121:../project/hal_dev_mma8451.c **** 
+ 122:../project/hal_dev_mma8451.c ****     to_active_mode();
+ 123:../project/hal_dev_mma8451.c **** 
+ 124:../project/hal_dev_mma8451.c ****     printf("X     Y     Z\n");
+ 423              		.loc 1 124 0
+ 424 001e 1E48     		ldr	r0, .L27
+ 425 0020 FFF7FEFF 		bl	puts
+ 426              	.LVL64:
+ 427 0024 1D4C     		ldr	r4, .L27+4
+ 428 0026 1E48     		ldr	r0, .L27+8
+ 429 0028 1E4A     		ldr	r2, .L27+12
+ 430 002a A046     		mov	r8, r4
+ 431 002c 8246     		mov	sl, r0
+ 432 002e 9146     		mov	r9, r2
+ 125:../project/hal_dev_mma8451.c **** 
+ 126:../project/hal_dev_mma8451.c ****     while(1)
+ 127:../project/hal_dev_mma8451.c ****     {
+ 128:../project/hal_dev_mma8451.c ****         if((hal_dev_mma8451_read_reg(0x00)&0xf) != 0)
+ 433              		.loc 1 128 0
+ 434 0030 0F24     		mov	r4, #15
+ 435              	.L26:
+ 436 0032 0020     		mov	r0, #0
+ 437 0034 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 438              	.LVL65:
+ 439 0038 0442     		tst	r4, r0
+ 440 003a FAD0     		beq	.L26
+ 441              	.LVL66:
+ 129:../project/hal_dev_mma8451.c ****         {
+ 130:../project/hal_dev_mma8451.c ****             resultx = 0;
+ 131:../project/hal_dev_mma8451.c ****             resulty = 0;
+ 132:../project/hal_dev_mma8451.c ****             resultz = 0;
+ 133:../project/hal_dev_mma8451.c **** 
+ 134:../project/hal_dev_mma8451.c ****             resultx   = hal_dev_mma8451_read_reg(0x01)<<8;
+ 442              		.loc 1 134 0
+ 443 003c 0120     		mov	r0, #1
+ 444 003e FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 445              	.LVL67:
+ 446 0042 0502     		lsl	r5, r0, #8
+ 135:../project/hal_dev_mma8451.c ****             resultx  |= hal_dev_mma8451_read_reg(0x02);
+ 447              		.loc 1 135 0
+ 448 0044 0220     		mov	r0, #2
+ 449 0046 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 450              	.LVL68:
+ 134:../project/hal_dev_mma8451.c ****             resultx   = hal_dev_mma8451_read_reg(0x01)<<8;
+ 451              		.loc 1 134 0
+ 452 004a AEB2     		uxth	r6, r5
+ 453              	.LVL69:
+ 454              		.loc 1 135 0
+ 455 004c 0643     		orr	r6, r0
+ 136:../project/hal_dev_mma8451.c ****             resultx >>= 2;
+ 137:../project/hal_dev_mma8451.c **** 
+ 138:../project/hal_dev_mma8451.c ****             resulty   = hal_dev_mma8451_read_reg(0x03)<<8;
+ 456              		.loc 1 138 0
+ 457 004e 0320     		mov	r0, #3
+ 458 0050 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 459              	.LVL70:
+ 460 0054 0302     		lsl	r3, r0, #8
+ 139:../project/hal_dev_mma8451.c ****             resulty  |= hal_dev_mma8451_read_reg(0x04);
+ 461              		.loc 1 139 0
+ 462 0056 0420     		mov	r0, #4
+ 138:../project/hal_dev_mma8451.c ****             resulty   = hal_dev_mma8451_read_reg(0x03)<<8;
+ 463              		.loc 1 138 0
+ 464 0058 9DB2     		uxth	r5, r3
+ 465              	.LVL71:
+ 466              		.loc 1 139 0
+ 467 005a FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 468              	.LVL72:
+ 469 005e 0543     		orr	r5, r0
+ 140:../project/hal_dev_mma8451.c ****             resulty >>= 2;
+ 141:../project/hal_dev_mma8451.c **** 
+ 142:../project/hal_dev_mma8451.c ****             resultz   = hal_dev_mma8451_read_reg(0x05)<<8;
+ 470              		.loc 1 142 0
+ 471 0060 0520     		mov	r0, #5
+ 472 0062 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 473              	.LVL73:
+ 474 0066 0102     		lsl	r1, r0, #8
+ 143:../project/hal_dev_mma8451.c ****             resultz  |= hal_dev_mma8451_read_reg(0x06);
+ 475              		.loc 1 143 0
+ 476 0068 0620     		mov	r0, #6
+ 135:../project/hal_dev_mma8451.c ****             resultx  |= hal_dev_mma8451_read_reg(0x02);
+ 477              		.loc 1 135 0
+ 478 006a B7B2     		uxth	r7, r6
+ 479              	.LVL74:
+ 139:../project/hal_dev_mma8451.c ****             resulty  |= hal_dev_mma8451_read_reg(0x04);
+ 480              		.loc 1 139 0
+ 481 006c AEB2     		uxth	r6, r5
+ 482              	.LVL75:
+ 142:../project/hal_dev_mma8451.c ****             resultz   = hal_dev_mma8451_read_reg(0x05)<<8;
+ 483              		.loc 1 142 0
+ 484 006e 8DB2     		uxth	r5, r1
+ 485              	.LVL76:
+ 486              		.loc 1 143 0
+ 487 0070 FFF7FEFF 		bl	hal_dev_mma8451_read_reg
+ 488              	.LVL77:
+ 489 0074 0543     		orr	r5, r0
+ 490              	.LVL78:
+ 136:../project/hal_dev_mma8451.c ****             resultx >>= 2;
+ 491              		.loc 1 136 0
+ 492 0076 38B2     		sxth	r0, r7
+ 144:../project/hal_dev_mma8451.c ****             resultz >>= 2;
+ 145:../project/hal_dev_mma8451.c **** 
+ 146:../project/hal_dev_mma8451.c ****             printf("accx = %d\r\n   ",   resultx);
+ 493              		.loc 1 146 0
+ 494 0078 8110     		asr	r1, r0, #2
+ 495 007a 5046     		mov	r0, sl
+ 496 007c FFF7FEFF 		bl	printf
+ 497              	.LVL79:
+ 143:../project/hal_dev_mma8451.c ****             resultz  |= hal_dev_mma8451_read_reg(0x06);
+ 498              		.loc 1 143 0
+ 499 0080 ADB2     		uxth	r5, r5
+ 500              	.LVL80:
+ 140:../project/hal_dev_mma8451.c ****             resulty >>= 2;
+ 501              		.loc 1 140 0
+ 502 0082 32B2     		sxth	r2, r6
+ 147:../project/hal_dev_mma8451.c ****             printf("accy = %d\r\n   ",   resulty);
+ 503              		.loc 1 147 0
+ 504 0084 9110     		asr	r1, r2, #2
+ 505 0086 4846     		mov	r0, r9
+ 144:../project/hal_dev_mma8451.c ****             resultz >>= 2;
+ 506              		.loc 1 144 0
+ 507 0088 2FB2     		sxth	r7, r5
+ 508              	.LVL81:
+ 509              		.loc 1 147 0
+ 510 008a FFF7FEFF 		bl	printf
+ 511              	.LVL82:
+ 148:../project/hal_dev_mma8451.c ****             printf("accz = %d\r\n   ",   resultz);
+ 512              		.loc 1 148 0
+ 513 008e B910     		asr	r1, r7, #2
+ 514 0090 4046     		mov	r0, r8
+ 515 0092 FFF7FEFF 		bl	printf
+ 516              	.LVL83:
+ 517 0096 CCE7     		b	.L26
+ 518              	.L28:
+ 519              		.align	2
+ 520              	.L27:
+ 521 0098 08000000 		.word	.LC2
+ 522 009c 38000000 		.word	.LC8
+ 523 00a0 18000000 		.word	.LC4
+ 524 00a4 28000000 		.word	.LC6
+ 525              		.cfi_endproc
+ 526              	.LFE7:
+ 528              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 529              		.align	2
+ 530              	.LC0:
+ 531 0000 643D2578 		.ascii	"d=%x\012\000"
+ 531      0A00
+ 532 0006 0000     		.space	2
+ 533              	.LC2:
+ 534 0008 58202020 		.ascii	"X     Y     Z\000"
+ 534      20205920 
+ 534      20202020 
+ 534      5A00
+ 535 0016 0000     		.space	2
+ 536              	.LC4:
+ 537 0018 61636378 		.ascii	"accx = %d\015\012   \000"
+ 537      203D2025 
+ 537      640D0A20 
+ 537      202000
+ 538 0027 00       		.space	1
+ 539              	.LC6:
+ 540 0028 61636379 		.ascii	"accy = %d\015\012   \000"
+ 540      203D2025 
+ 540      640D0A20 
+ 540      202000
+ 541 0037 00       		.space	1
+ 542              	.LC8:
+ 543 0038 6163637A 		.ascii	"accz = %d\015\012   \000"
+ 543      203D2025 
+ 543      640D0A20 
+ 543      202000
+ 544 0047 00       		.text
+ 545              	.Letext0:
+ 546              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 547              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 548              		.file 4 "../project/global.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 hal_dev_mma8451.c
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:18     .text.hal_dev_mma8451_read_reg:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:23     .text.hal_dev_mma8451_read_reg:00000000 hal_dev_mma8451_read_reg
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:134    .text.hal_dev_mma8451_read_reg:00000080 $d
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:139    .text.hal_dev_mma8451_write_reg:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:144    .text.hal_dev_mma8451_write_reg:00000000 hal_dev_mma8451_write_reg
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:235    .text.hal_dev_mma8451_write_reg:00000060 $d
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:240    .text.hal_dev_mma8451_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:245    .text.hal_dev_mma8451_init:00000000 hal_dev_mma8451_init
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:276    .text.hal_dev_mma8451_test_reg_rw:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:281    .text.hal_dev_mma8451_test_reg_rw:00000000 hal_dev_mma8451_test_reg_rw
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:375    .text.hal_dev_mma8451_test_reg_rw:00000070 $d
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:380    .text.hal_dev_mma8451_test_function:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:385    .text.hal_dev_mma8451_test_function:00000000 hal_dev_mma8451_test_function
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:521    .text.hal_dev_mma8451_test_function:00000098 $d
+C:\Users\lab\AppData\Local\Temp\ccB9WhLh.s:529    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+i2c_start
+i2c_write_byte
+i2c_wait
+i2c_get_ack
+i2c_repeated_start
+i2c_set_rx_mode
+i2c_give_nack
+i2c_read_byte
+i2c_stop
+printf
+puts

@@ -1,0 +1,41 @@
+\hypertarget{_init_8h}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\-Init.h File Reference}
+\label{_init_8h}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\-Init.\-h@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Headers/\-Init.\-h}}
+}
+
+
+This file contains user initialization of data, on-\/chip and peripheral devices.  
+
+
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___user_initialization_ga655d748c28aad5b529f5826b50fe1251}{User\-Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize on-\/chip and peripheral devices. The method is called in the main function and will be called only once. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains user initialization of data, on-\/chip and peripheral devices. \begin{DoxyVersion}{Version}
+01.\-00 
+\end{DoxyVersion}
+The followings will be initialized\-:
+
+
+\begin{DoxyItemize}
+\item User data 
+\item On-\/chip devices 
+\begin{DoxyItemize}
+\item S\-P\-I0, S\-P\-I1 
+\item S\-P\-I0\-\_\-\-T\-X\-\_\-\-D\-M\-A, S\-P\-I0\-\_\-\-R\-X\-\_\-\-D\-M\-A, S\-P\-I1\-\_\-\-T\-X\-\_\-\-D\-M\-A, S\-P\-I1\-\_\-\-R\-X\-\_\-\-D\-M\-A 
+\item D\-M\-A 
+\item U\-A\-R\-T0, U\-A\-R\-T2 
+\item P\-T\-A2 
+\item P\-T\-B1, P\-T\-B19 
+\item P\-T\-C1, P\-T\-C2 
+\item P\-T\-D4 
+\item P\-T\-E18, P\-T\-E19 
+\end{DoxyItemize}
+\item Peripheral devices 
+\begin{DoxyItemize}
+\item A\-D\-C 
+\end{DoxyItemize}
+\end{DoxyItemize}

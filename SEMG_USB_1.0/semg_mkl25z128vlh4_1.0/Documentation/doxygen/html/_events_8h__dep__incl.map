@@ -1,0 +1,19 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Sources/Events.h" name="E:/workspace/semg_mkl15z128vlh4/Sources/Events.h">
+<area shape="rect" id="node2" href="$_a_d_c_8c.html" title="This file contains ADC operation functions. " alt="" coords="5,187,235,229"/>
+<area shape="rect" id="node3" href="$_events_8c.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="259,187,488,229"/>
+<area shape="rect" id="node4" href="$_init_8c.html" title="This file contains user initialization of data, on&#45;chip and peripheral devices. " alt="" coords="512,187,741,229"/>
+<area shape="rect" id="node5" href="$_processor_expert_8c.html" title="Main module. This module contains user&#39;s application code. " alt="" coords="765,187,995,229"/>
+<area shape="rect" id="node6" href="$_test_8c.html" title="This file contains test functions. " alt="" coords="1019,187,1248,229"/>
+<area shape="rect" id="node7" href="$_cpu_8c.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/Cpu.c" alt="" coords="917,97,1147,138"/>
+<area shape="rect" id="node8" href="$_d_m_a___c_t_r_l_8c.html" title="This embedded component implements initialization and runtime handling of an on&#45;chip DMA controller..." alt="" coords="1171,97,1400,138"/>
+<area shape="rect" id="node9" href="$_d_m_a_t___m___s_p_i___r_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="1424,97,1667,138"/>
+<area shape="rect" id="node10" href="$_d_m_a_t___m___s_p_i___t_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="1691,97,1932,138"/>
+<area shape="rect" id="node11" href="$_d_m_a_t___s___s_p_i___r_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="1957,97,2197,138"/>
+<area shape="rect" id="node12" href="$_d_m_a_t___s___s_p_i___t_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="2222,97,2460,138"/>
+<area shape="rect" id="node13" href="$_e_i_n_t___n_o_t___d_r_d_y_8c.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="2485,97,2728,138"/>
+<area shape="rect" id="node14" href="$_e_i_n_t___s_y_n_c___i_n_t_8c.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="2752,97,2987,138"/>
+<area shape="rect" id="node15" href="$_s_m___s_p_i1_8c.html" title="This component &quot;SPIMaster_LDD&quot; implements MASTER part of synchronous serial master&#45;slave communicatio..." alt="" coords="3011,97,3240,138"/>
+<area shape="rect" id="node16" href="$_s_s___s_p_i0_8c.html" title="This component &quot;SPISlave_LDD&quot; implements SLAVE part of synchronous serial master&#45;slave communication..." alt="" coords="3264,97,3493,138"/>
+<area shape="rect" id="node17" href="$_vectors_8c.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/Vectors.c" alt="" coords="3517,97,3747,138"/>
+<area shape="rect" id="node18" href="$_my_headers_8h.html" title="This file contains all header files created by user. Easy for including header files in other files..." alt="" coords="563,97,792,138"/>
+</map>

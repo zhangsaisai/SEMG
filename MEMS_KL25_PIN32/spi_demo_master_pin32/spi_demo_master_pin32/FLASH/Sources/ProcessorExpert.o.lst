@@ -1,0 +1,385 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"ProcessorExpert.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	SlaveReceivedFlg
+  18              		.section	.bss.SlaveReceivedFlg,"aw",%nobits
+  21              	SlaveReceivedFlg:
+  22 0000 00       		.space	1
+  23              		.global	MasterReceivedFlg
+  24              		.section	.bss.MasterReceivedFlg,"aw",%nobits
+  27              	MasterReceivedFlg:
+  28 0000 00       		.space	1
+  29              		.global	master_send
+  30              		.section	.bss.master_send,"aw",%nobits
+  31              		.align	2
+  34              	master_send:
+  35 0000 00000000 		.space	96
+  35      00000000 
+  35      00000000 
+  35      00000000 
+  35      00000000 
+  36              		.global	slave_send
+  37              		.section	.bss.slave_send,"aw",%nobits
+  38              		.align	2
+  41              	slave_send:
+  42 0000 00000000 		.space	96
+  42      00000000 
+  42      00000000 
+  42      00000000 
+  42      00000000 
+  43              		.global	master_receive
+  44              		.section	.bss.master_receive,"aw",%nobits
+  45              		.align	2
+  48              	master_receive:
+  49 0000 00000000 		.space	96
+  49      00000000 
+  49      00000000 
+  49      00000000 
+  49      00000000 
+  50              		.global	slave_receive
+  51              		.section	.bss.slave_receive,"aw",%nobits
+  52              		.align	2
+  55              	slave_receive:
+  56 0000 00000000 		.space	96
+  56      00000000 
+  56      00000000 
+  56      00000000 
+  56      00000000 
+  57              		.section	.rodata
+  58              		.align	2
+  59              	.LC0:
+  60 0000 0A00     		.ascii	"\012\000"
+  61 0002 0000     		.align	2
+  62              	.LC2:
+  63 0004 2A2A2A2A 		.ascii	"***************************************************"
+  63      2A2A2A2A 
+  63      2A2A2A2A 
+  63      2A2A2A2A 
+  63      2A2A2A2A 
+  64 0037 2A2A2A2A 		.ascii	"*****\000"
+  64      2A00
+  65 003d 000000   		.align	2
+  66              	.LC4:
+  67 0040 2A202020 		.ascii	"*                                                  "
+  67      20202020 
+  67      20202020 
+  67      20202020 
+  67      20202020 
+  68 0073 20202020 		.ascii	"     \000"
+  68      2000
+  69 0079 000000   		.align	2
+  70              	.LC6:
+  71 007c 2A205275 		.ascii	"* Running SPI Demo, Master & Slave exchanged messag"
+  71      6E6E696E 
+  71      67205350 
+  71      49204465 
+  71      6D6F2C20 
+  72 00af 65732020 		.ascii	"es   \000"
+  72      2000
+  73 00b5 000000   		.align	2
+  74              	.LC8:
+  75 00b8 2A204265 		.ascii	"* Before continuing connect SPI0(Master)         \000"
+  75      666F7265 
+  75      20636F6E 
+  75      74696E75 
+  75      696E6720 
+  76 00ea 0000     		.align	2
+  77              	.LC10:
+  78 00ec 2A20746F 		.ascii	"* to SPI1 (Slave) as outlined below              \000"
+  78      20535049 
+  78      31202853 
+  78      6C617665 
+  78      29206173 
+  79 011e 0000     		.align	2
+  80              	.LC12:
+  81 0120 2A202020 		.ascii	"*                                                \000"
+  81      20202020 
+  81      20202020 
+  81      20202020 
+  81      20202020 
+  82 0152 0000     		.align	2
+  83              	.LC14:
+  84 0154 2A204D4F 		.ascii	"* MOSI:  PTA17 (J2 pin 11) to PTE1 (J2 pin 20)   \000"
+  84      53493A20 
+  84      20505441 
+  84      31372028 
+  84      4A322070 
+  85 0186 0000     		.align	2
+  86              	.LC16:
+  87 0188 2A204D49 		.ascii	"* MISO:  PTA16 (J2 pin  9) to PTE3 (J9 pin 11)   \000"
+  87      534F3A20 
+  87      20505441 
+  87      31362028 
+  87      4A322070 
+  88 01ba 0000     		.align	2
+  89              	.LC18:
+  90 01bc 2A205343 		.ascii	"* SCK:   PTC5  (J1 pin  9) to PTE2 (J9 pin  9)   \000"
+  90      4B3A2020 
+  90      20505443 
+  90      35202028 
+  90      4A312070 
+  91 01ee 0000     		.align	2
+  92              	.LC20:
+  93 01f0 2A205043 		.ascii	"* PCS0:  PTC4  (J1 pin  7) to PTE4 (J9 pin 13)   \000"
+  93      53303A20 
+  93      20505443 
+  93      34202028 
+  93      4A312070 
+  94 0222 0000     		.align	2
+  95              	.LC22:
+  96 0224 2A205468 		.ascii	"* Then enter any key to continue                 \000"
+  96      656E2065 
+  96      6E746572 
+  96      20616E79 
+  96      206B6579 
+  97 0256 0000     		.section	.text.main,"ax",%progbits
+  98              		.align	2
+  99              		.global	main
+ 100              		.code	16
+ 101              		.thumb_func
+ 103              	main:
+ 104              	.LFB0:
+ 105              		.file 1 "../Sources/ProcessorExpert.c"
+   1:../Sources/ProcessorExpert.c **** /** ###################################################################
+   2:../Sources/ProcessorExpert.c **** **     Filename    : ProcessorExpert.c
+   3:../Sources/ProcessorExpert.c **** **     Project     : ProcessorExpert
+   4:../Sources/ProcessorExpert.c **** **     Processor   : MKL25Z128VLK4
+   5:../Sources/ProcessorExpert.c **** **     Version     : Driver 01.01
+   6:../Sources/ProcessorExpert.c **** **     Compiler    : GNU C Compiler
+   7:../Sources/ProcessorExpert.c **** **     Date/Time   : 2012-08-08, 16:59, # CodeGen: 0
+   8:../Sources/ProcessorExpert.c **** **     Abstract    :
+   9:../Sources/ProcessorExpert.c **** **         Main module.
+  10:../Sources/ProcessorExpert.c **** **         This module contains user's application code.
+  11:../Sources/ProcessorExpert.c **** **     Settings    :
+  12:../Sources/ProcessorExpert.c **** **     Contents    :
+  13:../Sources/ProcessorExpert.c **** **         No public methods
+  14:../Sources/ProcessorExpert.c **** **
+  15:../Sources/ProcessorExpert.c **** ** ###################################################################*/
+  16:../Sources/ProcessorExpert.c **** /* MODULE ProcessorExpert */
+  17:../Sources/ProcessorExpert.c **** 
+  18:../Sources/ProcessorExpert.c **** 
+  19:../Sources/ProcessorExpert.c **** /* Including needed modules to compile this module/procedure */
+  20:../Sources/ProcessorExpert.c **** #include "Cpu.h"
+  21:../Sources/ProcessorExpert.c **** #include "Events.h"
+  22:../Sources/ProcessorExpert.c **** #include "CsIO1.h"
+  23:../Sources/ProcessorExpert.c **** #include "IO1.h"
+  24:../Sources/ProcessorExpert.c **** #include "SM1.h"
+  25:../Sources/ProcessorExpert.c **** #include "TI1.h"
+  26:../Sources/ProcessorExpert.c **** #include "TimerIntLdd1.h"
+  27:../Sources/ProcessorExpert.c **** #include "TU1.h"
+  28:../Sources/ProcessorExpert.c **** #include "PCS.h"
+  29:../Sources/ProcessorExpert.c **** /* Including shared modules, which are used for whole project */
+  30:../Sources/ProcessorExpert.c **** #include "PE_Types.h"
+  31:../Sources/ProcessorExpert.c **** #include "PE_Error.h"
+  32:../Sources/ProcessorExpert.c **** #include "PE_Const.h"
+  33:../Sources/ProcessorExpert.c **** #include "IO_Map.h"
+  34:../Sources/ProcessorExpert.c **** 
+  35:../Sources/ProcessorExpert.c **** /* User includes (#include below this line is not maintained by Processor Expert) */
+  36:../Sources/ProcessorExpert.c **** #include "stdio.h"
+  37:../Sources/ProcessorExpert.c **** #include <string.h>
+  38:../Sources/ProcessorExpert.c **** 
+  39:../Sources/ProcessorExpert.c **** /* Global Variables */
+  40:../Sources/ProcessorExpert.c **** #define DATA_SIZE 96
+  41:../Sources/ProcessorExpert.c **** #define COMM_SIZE 1
+  42:../Sources/ProcessorExpert.c **** 
+  43:../Sources/ProcessorExpert.c **** volatile bool SlaveReceivedFlg = FALSE;
+  44:../Sources/ProcessorExpert.c **** volatile bool MasterReceivedFlg = FALSE;
+  45:../Sources/ProcessorExpert.c **** 
+  46:../Sources/ProcessorExpert.c **** char master_send[96]    = {0};
+  47:../Sources/ProcessorExpert.c **** char slave_send[96]     = {0};
+  48:../Sources/ProcessorExpert.c **** char master_receive[96] = {0};
+  49:../Sources/ProcessorExpert.c **** char slave_receive[96]  = {0};
+  50:../Sources/ProcessorExpert.c **** 
+  51:../Sources/ProcessorExpert.c **** int main(void)
+  52:../Sources/ProcessorExpert.c **** {
+ 106              		.loc 1 52 0
+ 107              		.cfi_startproc
+ 108 0000 80B5     		push	{r7, lr}
+ 109              	.LCFI0:
+ 110              		.cfi_def_cfa_offset 8
+ 111              		.cfi_offset 7, -8
+ 112              		.cfi_offset 14, -4
+ 113 0002 82B0     		sub	sp, sp, #8
+ 114              	.LCFI1:
+ 115              		.cfi_def_cfa_offset 16
+ 116 0004 00AF     		add	r7, sp, #0
+ 117              	.LCFI2:
+ 118              		.cfi_def_cfa_register 7
+  53:../Sources/ProcessorExpert.c ****   /* Write your local variable definition here */
+  54:../Sources/ProcessorExpert.c ****   uint32 i = 0;
+ 119              		.loc 1 54 0
+ 120 0006 0023     		mov	r3, #0
+ 121 0008 7B60     		str	r3, [r7, #4]
+  55:../Sources/ProcessorExpert.c **** 
+  56:../Sources/ProcessorExpert.c ****   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
+  57:../Sources/ProcessorExpert.c ****   PE_low_level_init();
+ 122              		.loc 1 57 0
+ 123 000a FFF7FEFF 		bl	PE_low_level_init
+  58:../Sources/ProcessorExpert.c ****   /*** End of Processor Expert internal initialization.                    ***/
+  59:../Sources/ProcessorExpert.c **** 
+  60:../Sources/ProcessorExpert.c ****   /* Write your code here */
+  61:../Sources/ProcessorExpert.c ****   
+  62:../Sources/ProcessorExpert.c ****  printf ("\n\n");  
+ 124              		.loc 1 62 0
+ 125 000e 254B     		ldr	r3, .L5
+ 126 0010 181C     		mov	r0, r3
+ 127 0012 FFF7FEFF 		bl	puts
+  63:../Sources/ProcessorExpert.c ****  printf("********************************************************\n");
+ 128              		.loc 1 63 0
+ 129 0016 244B     		ldr	r3, .L5+4
+ 130 0018 181C     		mov	r0, r3
+ 131 001a FFF7FEFF 		bl	puts
+  64:../Sources/ProcessorExpert.c ****  printf("*                                                       \n");
+ 132              		.loc 1 64 0
+ 133 001e 234B     		ldr	r3, .L5+8
+ 134 0020 181C     		mov	r0, r3
+ 135 0022 FFF7FEFF 		bl	puts
+  65:../Sources/ProcessorExpert.c ****  printf("* Running SPI Demo, Master & Slave exchanged messages   \n");
+ 136              		.loc 1 65 0
+ 137 0026 224B     		ldr	r3, .L5+12
+ 138 0028 181C     		mov	r0, r3
+ 139 002a FFF7FEFF 		bl	puts
+  66:../Sources/ProcessorExpert.c ****  printf("* Before continuing connect SPI0(Master)         \n");
+ 140              		.loc 1 66 0
+ 141 002e 214B     		ldr	r3, .L5+16
+ 142 0030 181C     		mov	r0, r3
+ 143 0032 FFF7FEFF 		bl	puts
+  67:../Sources/ProcessorExpert.c ****  printf("* to SPI1 (Slave) as outlined below              \n"); 
+ 144              		.loc 1 67 0
+ 145 0036 204B     		ldr	r3, .L5+20
+ 146 0038 181C     		mov	r0, r3
+ 147 003a FFF7FEFF 		bl	puts
+  68:../Sources/ProcessorExpert.c ****  printf("*                                                \n"); 
+ 148              		.loc 1 68 0
+ 149 003e 1F4B     		ldr	r3, .L5+24
+ 150 0040 181C     		mov	r0, r3
+ 151 0042 FFF7FEFF 		bl	puts
+  69:../Sources/ProcessorExpert.c ****  printf("* MOSI:  PTA17 (J2 pin 11) to PTE1 (J2 pin 20)   \n");
+ 152              		.loc 1 69 0
+ 153 0046 1E4B     		ldr	r3, .L5+28
+ 154 0048 181C     		mov	r0, r3
+ 155 004a FFF7FEFF 		bl	puts
+  70:../Sources/ProcessorExpert.c ****  printf("* MISO:  PTA16 (J2 pin  9) to PTE3 (J9 pin 11)   \n");
+ 156              		.loc 1 70 0
+ 157 004e 1D4B     		ldr	r3, .L5+32
+ 158 0050 181C     		mov	r0, r3
+ 159 0052 FFF7FEFF 		bl	puts
+  71:../Sources/ProcessorExpert.c ****  printf("* SCK:   PTC5  (J1 pin  9) to PTE2 (J9 pin  9)   \n");
+ 160              		.loc 1 71 0
+ 161 0056 1C4B     		ldr	r3, .L5+36
+ 162 0058 181C     		mov	r0, r3
+ 163 005a FFF7FEFF 		bl	puts
+  72:../Sources/ProcessorExpert.c ****  printf("* PCS0:  PTC4  (J1 pin  7) to PTE4 (J9 pin 13)   \n");
+ 164              		.loc 1 72 0
+ 165 005e 1B4B     		ldr	r3, .L5+40
+ 166 0060 181C     		mov	r0, r3
+ 167 0062 FFF7FEFF 		bl	puts
+  73:../Sources/ProcessorExpert.c ****  printf("*                                                \n");
+ 168              		.loc 1 73 0
+ 169 0066 154B     		ldr	r3, .L5+24
+ 170 0068 181C     		mov	r0, r3
+ 171 006a FFF7FEFF 		bl	puts
+  74:../Sources/ProcessorExpert.c ****  printf("* Then enter any key to continue                 \n");
+ 172              		.loc 1 74 0
+ 173 006e 184B     		ldr	r3, .L5+44
+ 174 0070 181C     		mov	r0, r3
+ 175 0072 FFF7FEFF 		bl	puts
+  75:../Sources/ProcessorExpert.c ****  printf("*                                                \n");
+ 176              		.loc 1 75 0
+ 177 0076 114B     		ldr	r3, .L5+24
+ 178 0078 181C     		mov	r0, r3
+ 179 007a FFF7FEFF 		bl	puts
+  76:../Sources/ProcessorExpert.c ****  printf("********************************************************\n");
+ 180              		.loc 1 76 0
+ 181 007e 0A4B     		ldr	r3, .L5+4
+ 182 0080 181C     		mov	r0, r3
+ 183 0082 FFF7FEFF 		bl	puts
+  77:../Sources/ProcessorExpert.c ****  printf ("\n\n");
+ 184              		.loc 1 77 0
+ 185 0086 074B     		ldr	r3, .L5
+ 186 0088 181C     		mov	r0, r3
+ 187 008a FFF7FEFF 		bl	puts
+ 188              	.L4:
+  78:../Sources/ProcessorExpert.c ****     
+  79:../Sources/ProcessorExpert.c **** 
+  80:../Sources/ProcessorExpert.c ****   for(;;){
+  81:../Sources/ProcessorExpert.c ****  
+  82:../Sources/ProcessorExpert.c **** 
+  83:../Sources/ProcessorExpert.c ****       
+  84:../Sources/ProcessorExpert.c ****   for(i=0;i<1000000;i++){} //Delay
+ 189              		.loc 1 84 0
+ 190 008e 0023     		mov	r3, #0
+ 191 0090 7B60     		str	r3, [r7, #4]
+ 192 0092 02E0     		b	.L2
+ 193              	.L3:
+ 194              		.loc 1 84 0 is_stmt 0
+ 195 0094 7B68     		ldr	r3, [r7, #4]
+ 196 0096 0133     		add	r3, r3, #1
+ 197 0098 7B60     		str	r3, [r7, #4]
+ 198              	.L2:
+ 199              		.loc 1 84 0
+ 200 009a 7A68     		ldr	r2, [r7, #4]
+ 201 009c 0D4B     		ldr	r3, .L5+48
+ 202 009e 9A42     		cmp	r2, r3
+ 203 00a0 F8D9     		bls	.L3
+  85:../Sources/ProcessorExpert.c ****   
+  86:../Sources/ProcessorExpert.c ****    }
+ 204              		.loc 1 86 0 is_stmt 1
+ 205 00a2 F4E7     		b	.L4
+ 206              	.L6:
+ 207              		.align	2
+ 208              	.L5:
+ 209 00a4 00000000 		.word	.LC0
+ 210 00a8 04000000 		.word	.LC2
+ 211 00ac 40000000 		.word	.LC4
+ 212 00b0 7C000000 		.word	.LC6
+ 213 00b4 B8000000 		.word	.LC8
+ 214 00b8 EC000000 		.word	.LC10
+ 215 00bc 20010000 		.word	.LC12
+ 216 00c0 54010000 		.word	.LC14
+ 217 00c4 88010000 		.word	.LC16
+ 218 00c8 BC010000 		.word	.LC18
+ 219 00cc F0010000 		.word	.LC20
+ 220 00d0 24020000 		.word	.LC22
+ 221 00d4 3F420F00 		.word	999999
+ 222              		.cfi_endproc
+ 223              	.LFE0:
+ 225              		.text
+ 226              	.Letext0:
+ 227              		.file 2 "D:/kuaipan/SEMG/MEMS_KL25_PIN32/spi_demo_master_pin32/spi_demo_master_pin32/Generated_Cod
+DEFINED SYMBOLS
+                            *ABS*:00000000 ProcessorExpert.c
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:21     .bss.SlaveReceivedFlg:00000000 SlaveReceivedFlg
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:22     .bss.SlaveReceivedFlg:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:27     .bss.MasterReceivedFlg:00000000 MasterReceivedFlg
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:28     .bss.MasterReceivedFlg:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:34     .bss.master_send:00000000 master_send
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:31     .bss.master_send:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:41     .bss.slave_send:00000000 slave_send
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:38     .bss.slave_send:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:48     .bss.master_receive:00000000 master_receive
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:45     .bss.master_receive:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:55     .bss.slave_receive:00000000 slave_receive
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:52     .bss.slave_receive:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:58     .rodata:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:98     .text.main:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:103    .text.main:00000000 main
+C:\Users\lab\AppData\Local\Temp\ccnn6nW7.s:209    .text.main:000000a4 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+PE_low_level_init
+puts

@@ -1,0 +1,1524 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"smc.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.sleep,"ax",%progbits
+  18              		.align	2
+  19              		.global	sleep
+  20              		.code	16
+  21              		.thumb_func
+  23              	sleep:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * File:        smc.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Purpose:     Provides routines for entering low power modes.
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Notes:	Since the wakeup mechanism for low power modes
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              will be application specific, these routines
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              do not include code to setup interrupts to exit
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              from the low power modes. The desired means of
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              low power mode exit should be configured before
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              calling any of these functions.
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              These routines do not include protection to
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              prevent illegal state transitions in the mode
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              controller, and all routines that write to the
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              PMPROT register write a value to allow all
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              possible low power modes (it is write once, so
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              if only the currently requested mode is enabled
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              a different mode couldn't be enabled later on).
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *              
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #include "common.h"
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #include "smc.h"
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /*
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Configures the ARM system control register for WAIT(sleep)mode
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * and then executes the WFI instruction to enter the mode.
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void sleep (void)
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+  26              		.loc 1 36 0
+  27              		.cfi_startproc
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* Clear the SLEEPDEEP bit to make sure we go into WAIT (sleep) 
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * mode instead of deep sleep.
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** SCB_SCR &= ~SCB_SCR_SLEEPDEEP_MASK;
+  28              		.loc 1 40 0
+  29 0000 044A     		ldr	r2, .L2
+  30 0002 D123     		mov	r3, #209
+  31 0004 1B01     		lsl	r3, r3, #4
+  32 0006 D158     		ldr	r1, [r2, r3]
+  33 0008 0420     		mov	r0, #4
+  34 000a 8143     		bic	r1, r0
+  35 000c D150     		str	r1, [r2, r3]
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #ifdef CMSIS
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* WFI instruction will start entry into WAIT mode */
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   asm("WFI");
+  36              		.loc 1 46 0
+  37              	@ 46 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-ba
+  38 000e 30BF     		WFI
+  39              	@ 0 "" 2
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif 
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+  40              		.loc 1 48 0
+  41              		.code	16
+  42              		@ sp needed for prologue
+  43 0010 7047     		bx	lr
+  44              	.L3:
+  45 0012 C046     		.align	2
+  46              	.L2:
+  47 0014 00E000E0 		.word	-536813568
+  48              		.cfi_endproc
+  49              	.LFE0:
+  51              		.section	.text.deepsleep,"ax",%progbits
+  52              		.align	2
+  53              		.global	deepsleep
+  54              		.code	16
+  55              		.thumb_func
+  57              	deepsleep:
+  58              	.LFB1:
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /*
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Configures the ARM system control register for STOP  
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * (deepsleep) mode and then executes the WFI instruction 
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * to enter the mode.
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void deepsleep (void)
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+  59              		.loc 1 61 0
+  60              		.cfi_startproc
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+  61              		.loc 1 63 0
+  62 0000 044A     		ldr	r2, .L5
+  63 0002 D123     		mov	r3, #209
+  64 0004 1B01     		lsl	r3, r3, #4
+  65 0006 D058     		ldr	r0, [r2, r3]
+  66 0008 0421     		mov	r1, #4
+  67 000a 0143     		orr	r1, r0
+  68 000c D150     		str	r1, [r2, r3]
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #ifdef CMSIS
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* WFI instruction will start entry into STOP mode */
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   asm("WFI");
+  69              		.loc 1 69 0
+  70              	@ 69 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-ba
+  71 000e 30BF     		WFI
+  72              	@ 0 "" 2
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+  73              		.loc 1 71 0
+  74              		.code	16
+  75              		@ sp needed for prologue
+  76 0010 7047     		bx	lr
+  77              	.L6:
+  78 0012 C046     		.align	2
+  79              	.L5:
+  80 0014 00E000E0 		.word	-536813568
+  81              		.cfi_endproc
+  82              	.LFE1:
+  84              		.section	.text.enter_wait,"ax",%progbits
+  85              		.align	2
+  86              		.global	enter_wait
+  87              		.code	16
+  88              		.thumb_func
+  90              	enter_wait:
+  91              	.LFB2:
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /********************************************************************/
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* WAIT mode entry routine. Puts the processor into wait mode.
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * In this mode the core clock is disabled (no code executing), but 
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * bus clocks are enabled (peripheral modules are operational). 
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> WAIT
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLPW
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * This function can be used to enter normal wait mode or VLPW
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * mode. If you are executing in normal run mode when calling this
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * function, then you will enter normal wait mode. If you are in VLPR
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * mode when calling this function, then you will enter VLPW mode instead.
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: Some modules include a programmable option to disable them in 
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * wait mode. If those modules are programmed to disable in wait mode, 
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * they will not be able to generate interrupts to wake up the core.
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * WAIT mode is exited using any enabled interrupt or RESET, so no
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * exit_wait routine is needed. 
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * 
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * 
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_wait(void)
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+  92              		.loc 1 98 0
+  93              		.cfi_startproc
+  94 0000 08B5     		push	{r3, lr}
+  95              	.LCFI0:
+  96              		.cfi_def_cfa_offset 8
+  97              		.cfi_offset 3, -8
+  98              		.cfi_offset 14, -4
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #ifdef CMSIS
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     /* Clear the SLEEPDEEP bit to make sure we go into WAIT (sleep) mode instead
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      * of deep sleep.
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      */
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 	SCB_SCR &= ~SCB_SCR_SLEEPDEEP_MASK;
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****         
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     __wfi();
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     wait();
+  99              		.loc 1 107 0
+ 100 0002 FFF7FEFF 		bl	wait
+ 101              	.LVL0:
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 102              		.loc 1 109 0
+ 103              		@ sp needed for prologue
+ 104 0006 08BD     		pop	{r3, pc}
+ 105              		.cfi_endproc
+ 106              	.LFE2:
+ 108              		.section	.text.enter_stop,"ax",%progbits
+ 109              		.align	2
+ 110              		.global	enter_stop
+ 111              		.code	16
+ 112              		.thumb_func
+ 114              	enter_stop:
+ 115              	.LFB3:
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /********************************************************************/
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* STOP mode entry routine. Puts the processor into normal stop mode.
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * In this mode core, bus and peripheral clocks are disabled.
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> STOP
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * This function can be used to enter normal stop mode. 
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * If you are executing in normal run mode when calling this
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * function and AVLP = 0, then you will enter normal stop mode. 
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * If AVLP = 1 with previous write to PMPROT
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * then you will enter VLPS mode instead.
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * STOP mode is exited using any enabled interrupt or RESET, so no
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * exit_stop routine is needed.
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Partial Stop Option:  
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *  0x00 = STOP - Normal Stop Mode
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *  0x40 = PSTOP1 - Partial Stop with both system and bus clocks disabled
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *  0x80 = PSTOP2 - Partial Stop with system clock disabled and bus clock enabled
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *  0xC0 = Reserved
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_stop(unsigned char partial_stop_opt)
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 116              		.loc 1 134 0
+ 117              		.cfi_startproc
+ 118              	.LVL1:
+ 119 0000 08B5     		push	{r3, lr}
+ 120              	.LCFI1:
+ 121              		.cfi_def_cfa_offset 8
+ 122              		.cfi_offset 3, -8
+ 123              		.cfi_offset 14, -4
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* The PMPROT register may have already been written by init code
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      If so then this next write is not done since  
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      PMPROT is write once after RESET  
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      this write-once bit allows the MCU to enter the
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      normal STOP mode.
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      If AVLP is already a 1, VLPS mode is entered instead of normal STOP*/
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = 0;  
+ 124              		.loc 1 141 0
+ 125 0002 0A4B     		ldr	r3, .L9
+ 126 0004 0022     		mov	r2, #0
+ 127 0006 1A70     		strb	r2, [r3]
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b000 for normal STOP mode */
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK;
+ 128              		.loc 1 144 0
+ 129 0008 5A78     		ldrb	r2, [r3, #1]
+ 130 000a 0721     		mov	r1, #7
+ 131 000c 8A43     		bic	r2, r1
+ 132 000e 5A70     		strb	r2, [r3, #1]
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0); 
+ 133              		.loc 1 145 0
+ 134 0010 5A78     		ldrb	r2, [r3, #1]
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PSTOPO_MASK;
+ 135              		.loc 1 146 0
+ 136 0012 3F21     		mov	r1, #63
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0); 
+ 137              		.loc 1 145 0
+ 138 0014 5A70     		strb	r2, [r3, #1]
+ 139              		.loc 1 146 0
+ 140 0016 9A78     		ldrb	r2, [r3, #2]
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL |= partial_stop_opt;
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   partial_stop_opt = SMC_PMCTRL;
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #ifdef CMSIS
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 141              		.loc 1 158 0
+ 142              		@ sp needed for prologue
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PSTOPO_MASK;
+ 143              		.loc 1 146 0
+ 144 0018 0A40     		and	r2, r1
+ 145 001a 9A70     		strb	r2, [r3, #2]
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL |= partial_stop_opt;
+ 146              		.loc 1 147 0
+ 147 001c 9A78     		ldrb	r2, [r3, #2]
+ 148 001e 1043     		orr	r0, r2
+ 149              	.LVL2:
+ 150 0020 9870     		strb	r0, [r3, #2]
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   partial_stop_opt = SMC_PMCTRL;
+ 151              		.loc 1 149 0
+ 152 0022 5B78     		ldrb	r3, [r3, #1]
+ 153              	.LVL3:
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 154              		.loc 1 156 0
+ 155 0024 FFF7FEFF 		bl	stop
+ 156              	.LVL4:
+ 157              		.loc 1 158 0
+ 158 0028 08BD     		pop	{r3, pc}
+ 159              	.L10:
+ 160 002a C046     		.align	2
+ 161              	.L9:
+ 162 002c 00E00740 		.word	1074257920
+ 163              		.cfi_endproc
+ 164              	.LFE3:
+ 166              		.section	.text.enter_vlpr,"ax",%progbits
+ 167              		.align	2
+ 168              		.global	enter_vlpr
+ 169              		.code	16
+ 170              		.thumb_func
+ 172              	enter_vlpr:
+ 173              	.LFB4:
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /****************************************************************/
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLPR mode entry routine.Puts the processor into very low power
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * run mode. In this mode all clocks are enabled, but the core clock limited. 
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * The flash clock is limited to 1MHz or less. 
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLPR
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * exit_vlpr() function can be used 
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * to switch from VLPR back to RUN. 
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * 
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * while in VLPR,VLPW or VLPS the exit to VLPR is not possible  
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Return value : PMSTAT value or error code
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *                PMSTAT = return_value = PMSTAT
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *                         000_0001 Current power mode is RUN
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *                         000_0100 Current power mode is VLPR
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *                ERROR Code =  0x14 - already in VLPR mode
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *                           =  0x24 - REGONS never clear indicating stop regulation
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** int enter_vlpr(void)
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 174              		.loc 1 182 0
+ 175              		.cfi_startproc
+ 176              	.LVL5:
+ 177 0000 10B5     		push	{r4, lr}
+ 178              	.LCFI2:
+ 179              		.cfi_def_cfa_offset 8
+ 180              		.cfi_offset 4, -8
+ 181              		.cfi_offset 14, -4
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   int i; 
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   unsigned int return_value = 0;  //default return value = indicates error
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 4){
+ 182              		.loc 1 185 0
+ 183 0002 174B     		ldr	r3, .L28
+ 184 0004 7F22     		mov	r2, #127
+ 185 0006 D878     		ldrb	r0, [r3, #3]
+ 186 0008 1040     		and	r0, r2
+ 187 000a 0428     		cmp	r0, #4
+ 188 000c 25D0     		beq	.L17
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   unsigned int return_value = 0;  //default return value = indicates error
+ 189              		.loc 1 184 0
+ 190 000e 0020     		mov	r0, #0
+ 191              	.L12:
+ 192              	.LVL6:
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****          return_value = 0x14;
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****          }
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* The PMPROT register may have already been written by init code
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      If so then this next write is not done.  
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      PMPROT is write once after RESET  
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      this write-once bit allows the MCU to enter the
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      very low power modes: VLPR, VLPW, and VLPS   */
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLP_MASK;  
+ 193              		.loc 1 193 0
+ 194 0010 134C     		ldr	r4, .L28
+ 195 0012 2021     		mov	r1, #32
+ 196 0014 2170     		strb	r1, [r4]
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the (for MC1)LPLLSM or (for MC2)STOPM field 
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      to 0b010 for VLPS mode -
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      and RUNM bits to 0b010 for VLPR mode  */
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK; 
+ 197              		.loc 1 198 0
+ 198 0016 6378     		ldrb	r3, [r4, #1]
+ 199 0018 6022     		mov	r2, #96
+ 200 001a 9343     		bic	r3, r2
+ 201 001c 6370     		strb	r3, [r4, #1]
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL  |= SMC_PMCTRL_RUNM(0x2);
+ 202              		.loc 1 199 0
+ 203 001e 6178     		ldrb	r1, [r4, #1]
+ 204 0020 4023     		mov	r3, #64
+ 205 0022 0B43     		orr	r3, r1
+ 206 0024 6370     		strb	r3, [r4, #1]
+ 207              	.LVL7:
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Wait for VLPS regulator mode to be confirmed */
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   for (i = 0 ; i < 10000 ; i++)
+ 202:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     {     /* check that the value of REGONS bit is not 0
+ 203:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              once it is a zero we can stop checking */
+ 204:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) ==0x04){
+ 208              		.loc 1 204 0
+ 209 0026 0F49     		ldr	r1, .L28+4
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL  |= SMC_PMCTRL_RUNM(0x2);
+ 210              		.loc 1 199 0
+ 211 0028 0F4B     		ldr	r3, .L28+8
+ 212              		.loc 1 204 0
+ 213 002a 0422     		mov	r2, #4
+ 214 002c 05E0     		b	.L14
+ 215              	.LVL8:
+ 216              	.L27:
+ 217 002e 8C78     		ldrb	r4, [r1, #2]
+ 218 0030 2242     		tst	r2, r4
+ 219 0032 05D0     		beq	.L13
+ 220 0034 023B     		sub	r3, r3, #2
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   for (i = 0 ; i < 10000 ; i++)
+ 221              		.loc 1 201 0
+ 222 0036 002B     		cmp	r3, #0
+ 223 0038 02D0     		beq	.L13
+ 224              	.L14:
+ 225              		.loc 1 204 0
+ 226 003a 8C78     		ldrb	r4, [r1, #2]
+ 227 003c 2242     		tst	r2, r4
+ 228 003e F6D1     		bne	.L27
+ 229              	.L13:
+ 205:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        /* 0 Regulator is in stop regulation or in transition 
+ 206:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****             to/from it
+ 207:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****           1 MCU is in Run regulation mode */
+ 208:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       }  
+ 209:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       else  break;
+ 210:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     }  
+ 211:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) ==0x04) 
+ 230              		.loc 1 211 0
+ 231 0040 084B     		ldr	r3, .L28+4
+ 232 0042 9978     		ldrb	r1, [r3, #2]
+ 233 0044 4A07     		lsl	r2, r1, #29
+ 234 0046 00D5     		bpl	.L15
+ 212:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     {  
+ 213:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       return_value = 0x24; 
+ 235              		.loc 1 213 0
+ 236 0048 2420     		mov	r0, #36
+ 237              	.LVL9:
+ 238              	.L15:
+ 214:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     }
+ 215:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* SMC_PMSTAT register only exist in Mode Controller 2 MCU versions */
+ 216:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK) == 4)  
+ 239              		.loc 1 216 0
+ 240 004a 054C     		ldr	r4, .L28
+ 241 004c 7F23     		mov	r3, #127
+ 242 004e E278     		ldrb	r2, [r4, #3]
+ 243 0050 1A40     		and	r2, r3
+ 244 0052 042A     		cmp	r2, #4
+ 245 0054 00D1     		bne	.L16
+ 217:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     {
+ 218:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       return_value = SMC_PMSTAT;
+ 246              		.loc 1 218 0
+ 247 0056 E078     		ldrb	r0, [r4, #3]
+ 248              	.LVL10:
+ 249              	.L16:
+ 219:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     }
+ 220:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   return (return_value);
+ 221:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 250              		.loc 1 221 0
+ 251              		@ sp needed for prologue
+ 252 0058 10BD     		pop	{r4, pc}
+ 253              	.LVL11:
+ 254              	.L17:
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****          return_value = 0x14;
+ 255              		.loc 1 186 0
+ 256 005a 1420     		mov	r0, #20
+ 257 005c D8E7     		b	.L12
+ 258              	.L29:
+ 259 005e C046     		.align	2
+ 260              	.L28:
+ 261 0060 00E00740 		.word	1074257920
+ 262 0064 00D00740 		.word	1074253824
+ 263 0068 10270000 		.word	10000
+ 264              		.cfi_endproc
+ 265              	.LFE4:
+ 267              		.section	.text.exit_vlpr,"ax",%progbits
+ 268              		.align	2
+ 269              		.global	exit_vlpr
+ 270              		.code	16
+ 271              		.thumb_func
+ 273              	exit_vlpr:
+ 274              	.LFB5:
+ 222:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /********************************************************************/
+ 223:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLPR mode exit routine. Puts the processor into normal run mode
+ 224:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * from VLPR mode. You can transition from VLPR to normal run using
+ 225:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * this function.
+ 226:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 227:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 228:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> RUN
+ 229:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 230:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 231:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+ 232:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 233:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /********************************************************************/
+ 234:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 235:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void exit_vlpr(void)
+ 236:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 275              		.loc 1 236 0
+ 276              		.cfi_startproc
+ 277 0000 30B5     		push	{r4, r5, lr}
+ 278              	.LCFI3:
+ 279              		.cfi_def_cfa_offset 12
+ 280              		.cfi_offset 4, -12
+ 281              		.cfi_offset 5, -8
+ 282              		.cfi_offset 14, -4
+ 237:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     int i;
+ 238:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     /* check to make sure in VLPR before exiting    */
+ 239:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     if  ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 4) {
+ 283              		.loc 1 239 0
+ 284 0002 194A     		ldr	r2, .L44
+ 285 0004 7F21     		mov	r1, #127
+ 286 0006 D378     		ldrb	r3, [r2, #3]
+ 287 0008 0B40     		and	r3, r1
+ 288 000a 042B     		cmp	r3, #4
+ 289 000c 00D0     		beq	.L41
+ 290              	.L30:
+ 240:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****       
+ 241:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        /* Clear RUNM */
+ 242:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;
+ 243:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****                       
+ 244:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        /* Wait for normal RUN regulation mode to be confirmed */                   
+ 245:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        // 1 PMSTAT MCU is in RUN  mode
+ 246:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        // 4 PMSTAT MCU is in VLPR mode
+ 247:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        for (i=0;i<0xff;i++)
+ 248:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        {
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) == PMC_REGSC_REGONS_MASK)
+ 251:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     	        break;
+ 252:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        }           
+ 253:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     }  //if in VLPR mode
+ 254:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      // else if not in VLPR ignore call
+ 255:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 291              		.loc 1 255 0
+ 292              		@ sp needed for prologue
+ 293 000e 30BD     		pop	{r4, r5, pc}
+ 294              	.L41:
+ 242:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;
+ 295              		.loc 1 242 0
+ 296 0010 5078     		ldrb	r0, [r2, #1]
+ 297 0012 6024     		mov	r4, #96
+ 298 0014 A043     		bic	r0, r4
+ 299 0016 5070     		strb	r0, [r2, #1]
+ 300              	.LVL12:
+ 301 0018 FF21     		mov	r1, #255
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 302              		.loc 1 249 0
+ 303 001a 7F23     		mov	r3, #127
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) == PMC_REGSC_REGONS_MASK)
+ 304              		.loc 1 250 0
+ 305 001c 134D     		ldr	r5, .L44+4
+ 306 001e 0424     		mov	r4, #4
+ 307 0020 0BE0     		b	.L34
+ 308              	.LVL13:
+ 309              	.L32:
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 310              		.loc 1 249 0
+ 311 0022 D078     		ldrb	r0, [r2, #3]
+ 312 0024 0139     		sub	r1, r1, #1
+ 313 0026 1840     		and	r0, r3
+ 314 0028 7F28     		cmp	r0, #127
+ 315 002a 12D0     		beq	.L42
+ 316              	.L36:
+ 317 002c D078     		ldrb	r0, [r2, #3]
+ 318 002e 1840     		and	r0, r3
+ 319 0030 7F28     		cmp	r0, #127
+ 320 0032 15D0     		beq	.L43
+ 321              	.L38:
+ 322 0034 0239     		sub	r1, r1, #2
+ 247:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        for (i=0;i<0xff;i++)
+ 323              		.loc 1 247 0
+ 324 0036 0029     		cmp	r1, #0
+ 325 0038 E9D0     		beq	.L30
+ 326              	.L34:
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 327              		.loc 1 249 0
+ 328 003a D078     		ldrb	r0, [r2, #3]
+ 329 003c 1840     		and	r0, r3
+ 330 003e 7F28     		cmp	r0, #127
+ 331 0040 EFD1     		bne	.L32
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) == PMC_REGSC_REGONS_MASK)
+ 332              		.loc 1 250 0
+ 333 0042 A878     		ldrb	r0, [r5, #2]
+ 334 0044 0442     		tst	r4, r0
+ 335 0046 E2D1     		bne	.L30
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 336              		.loc 1 249 0
+ 337 0048 D078     		ldrb	r0, [r2, #3]
+ 338 004a 0139     		sub	r1, r1, #1
+ 339 004c 1840     		and	r0, r3
+ 340 004e 7F28     		cmp	r0, #127
+ 341 0050 ECD1     		bne	.L36
+ 342              	.L42:
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) == PMC_REGSC_REGONS_MASK)
+ 343              		.loc 1 250 0
+ 344 0052 A878     		ldrb	r0, [r5, #2]
+ 345 0054 0442     		tst	r4, r0
+ 346 0056 DAD1     		bne	.L30
+ 249:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****            if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== SMC_PMSTAT_PMSTAT_MASK)
+ 347              		.loc 1 249 0
+ 348 0058 D078     		ldrb	r0, [r2, #3]
+ 349 005a 1840     		and	r0, r3
+ 350 005c 7F28     		cmp	r0, #127
+ 351 005e E9D1     		bne	.L38
+ 352              	.L43:
+ 250:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****              if ((PMC_REGSC & PMC_REGSC_REGONS_MASK) == PMC_REGSC_REGONS_MASK)
+ 353              		.loc 1 250 0
+ 354 0060 A878     		ldrb	r0, [r5, #2]
+ 355 0062 0442     		tst	r4, r0
+ 356 0064 E6D0     		beq	.L38
+ 357 0066 D2E7     		b	.L30
+ 358              	.L45:
+ 359              		.align	2
+ 360              	.L44:
+ 361 0068 00E00740 		.word	1074257920
+ 362 006c 00D00740 		.word	1074253824
+ 363              		.cfi_endproc
+ 364              	.LFE5:
+ 366              		.section	.text.enter_vlps,"ax",%progbits
+ 367              		.align	2
+ 368              		.global	enter_vlps
+ 369              		.code	16
+ 370              		.thumb_func
+ 372              	enter_vlps:
+ 373              	.LFB6:
+ 256:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 257:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLPS mode entry routine. Puts the processor into VLPS mode 
+ 258:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * directly from run or VLPR modes. 
+ 259:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 260:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 261:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN  -> VLPS
+ 262:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLPS
+ 263:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 264:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Note, when VLPS is entered directly from RUN or VLPR mode, 
+ 265:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * exit to VLPR is disabled by hardware and the system will
+ 266:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * always exit back to RUN.
+ 267:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 268:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:  
+ 269:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+ 270:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 271:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /****************************************************************/
+ 272:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 273:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlps(void)
+ 274:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 374              		.loc 1 274 0
+ 375              		.cfi_startproc
+ 376 0000 00B5     		push	{lr}
+ 377              	.LCFI4:
+ 378              		.cfi_def_cfa_offset 4
+ 379              		.cfi_offset 14, -4
+ 275:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 276:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* The PMPROT register may have already been written by init code
+ 277:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      If so then this next write is not done since  
+ 278:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      PMPROT is write once after RESET 
+ 279:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      allows the MCU to enter the VLPR, VLPW, and VLPS modes.
+ 280:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      If AVLP is already writen to 0 
+ 281:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      Stop is entered instead of VLPS*/
+ 282:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLP_MASK;           
+ 380              		.loc 1 282 0
+ 381 0002 0A4B     		ldr	r3, .L47
+ 382 0004 2022     		mov	r2, #32
+ 383 0006 1A70     		strb	r2, [r3]
+ 283:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b010 for VLPS mode */
+ 284:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 384              		.loc 1 284 0
+ 385 0008 5878     		ldrb	r0, [r3, #1]
+ 386 000a 0721     		mov	r1, #7
+ 387 000c 8843     		bic	r0, r1
+ 388 000e 5870     		strb	r0, [r3, #1]
+ 285:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x2); 
+ 389              		.loc 1 285 0
+ 390 0010 5878     		ldrb	r0, [r3, #1]
+ 391 0012 0222     		mov	r2, #2
+ 392 0014 0243     		orr	r2, r0
+ 393 0016 5A70     		strb	r2, [r3, #1]
+ 286:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 287:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_PMCTRL;
+ 394              		.loc 1 287 0
+ 395 0018 5B78     		ldrb	r3, [r3, #1]
+ 274:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 396              		.loc 1 274 0
+ 397 001a 83B0     		sub	sp, sp, #12
+ 398              	.LCFI5:
+ 399              		.cfi_def_cfa_offset 16
+ 400              		.loc 1 287 0
+ 401 001c 0193     		str	r3, [sp, #4]
+ 402              	.LVL14:
+ 288:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 403              		.loc 1 288 0
+ 404 001e 0199     		ldr	r1, [sp, #4]
+ 405 0020 0131     		add	r1, r1, #1
+ 406              	.LVL15:
+ 407 0022 0191     		str	r1, [sp, #4]
+ 408              	.LVL16:
+ 289:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLPS */
+ 290:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 291:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 292:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 293:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 294:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 295:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 409              		.loc 1 295 0
+ 410 0024 FFF7FEFF 		bl	stop
+ 411              	.LVL17:
+ 296:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 297:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 412              		.loc 1 297 0
+ 413 0028 03B0     		add	sp, sp, #12
+ 414              		@ sp needed for prologue
+ 415 002a 00BD     		pop	{pc}
+ 416              	.L48:
+ 417              		.align	2
+ 418              	.L47:
+ 419 002c 00E00740 		.word	1074257920
+ 420              		.cfi_endproc
+ 421              	.LFE6:
+ 423              		.section	.text.enter_lls,"ax",%progbits
+ 424              		.align	2
+ 425              		.global	enter_lls
+ 426              		.code	16
+ 427              		.thumb_func
+ 429              	enter_lls:
+ 430              	.LFB7:
+ 298:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /****************************************************************/
+ 299:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* LLS mode entry routine. Puts the processor into LLS mode from
+ 300:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * normal run mode or VLPR. 
+ 301:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 302:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 303:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> LLS
+ 304:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> LLS
+ 305:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 306:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: LLS mode will always exit to RUN mode even if you were 
+ 307:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * in VLPR mode before entering LLS.
+ 308:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 309:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from LLS mode is controlled by the LLWU module. Most
+ 310:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in LLS mode, so make
+ 311:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 312:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 313:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 314:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 315:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none
+ 316:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 317:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /********************************************************************/
+ 318:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 319:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_lls(void)
+ 320:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 431              		.loc 1 320 0
+ 432              		.cfi_startproc
+ 433 0000 00B5     		push	{lr}
+ 434              	.LCFI6:
+ 435              		.cfi_def_cfa_offset 4
+ 436              		.cfi_offset 14, -4
+ 321:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 322:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow LLS power modes this write-once 
+ 323:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      bit allows the MCU to enter the LLS low power mode*/
+ 324:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_ALLS_MASK;   
+ 437              		.loc 1 324 0
+ 438 0002 0A4B     		ldr	r3, .L50
+ 439 0004 0822     		mov	r2, #8
+ 440 0006 1A70     		strb	r2, [r3]
+ 325:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b011 for LLS mode  */
+ 326:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 441              		.loc 1 326 0
+ 442 0008 5878     		ldrb	r0, [r3, #1]
+ 443 000a 0721     		mov	r1, #7
+ 444 000c 8843     		bic	r0, r1
+ 445 000e 5870     		strb	r0, [r3, #1]
+ 327:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x3); 
+ 446              		.loc 1 327 0
+ 447 0010 5878     		ldrb	r0, [r3, #1]
+ 448 0012 0322     		mov	r2, #3
+ 449 0014 0243     		orr	r2, r0
+ 450 0016 5A70     		strb	r2, [r3, #1]
+ 328:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 329:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_PMCTRL;
+ 451              		.loc 1 329 0
+ 452 0018 5B78     		ldrb	r3, [r3, #1]
+ 320:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 453              		.loc 1 320 0
+ 454 001a 83B0     		sub	sp, sp, #12
+ 455              	.LCFI7:
+ 456              		.cfi_def_cfa_offset 16
+ 457              		.loc 1 329 0
+ 458 001c 0193     		str	r3, [sp, #4]
+ 459              	.LVL18:
+ 330:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 460              		.loc 1 330 0
+ 461 001e 0199     		ldr	r1, [sp, #4]
+ 462 0020 0131     		add	r1, r1, #1
+ 463              	.LVL19:
+ 464 0022 0191     		str	r1, [sp, #4]
+ 465              	.LVL20:
+ 331:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into LLS */
+ 332:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 333:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 334:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 335:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 336:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 337:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 466              		.loc 1 337 0
+ 467 0024 FFF7FEFF 		bl	stop
+ 468              	.LVL21:
+ 338:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 339:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 469              		.loc 1 339 0
+ 470 0028 03B0     		add	sp, sp, #12
+ 471              		@ sp needed for prologue
+ 472 002a 00BD     		pop	{pc}
+ 473              	.L51:
+ 474              		.align	2
+ 475              	.L50:
+ 476 002c 00E00740 		.word	1074257920
+ 477              		.cfi_endproc
+ 478              	.LFE7:
+ 480              		.section	.text.enter_vlls3,"ax",%progbits
+ 481              		.align	2
+ 482              		.global	enter_vlls3
+ 483              		.code	16
+ 484              		.thumb_func
+ 486              	enter_vlls3:
+ 487              	.LFB8:
+ 340:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 341:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLLS3 mode entry routine. Puts the processor into 
+ 342:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLLS3 mode from normal run mode or VLPR. 
+ 343:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 344:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 345:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLLS3
+ 346:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLLS3
+ 347:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 348:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: VLLSx modes will always exit to RUN mode even if you were 
+ 349:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * in VLPR mode before entering VLLSx.
+ 350:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 351:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from VLLSx mode is controlled by the LLWU module. Most
+ 352:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in VLLSx mode, so make
+ 353:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 354:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 355:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 356:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 357:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none  
+ 358:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 359:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /********************************************************************/
+ 360:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 361:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlls3(void)
+ 362:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 488              		.loc 1 362 0
+ 489              		.cfi_startproc
+ 490 0000 00B5     		push	{lr}
+ 491              	.LCFI8:
+ 492              		.cfi_def_cfa_offset 4
+ 493              		.cfi_offset 14, -4
+ 363:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 364:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow VLLS3 power modes */
+ 365:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLLS_MASK;      
+ 494              		.loc 1 365 0
+ 495 0002 0B4B     		ldr	r3, .L53
+ 496 0004 0222     		mov	r2, #2
+ 497 0006 1A70     		strb	r2, [r3]
+ 366:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b100 for VLLS3 mode */
+ 367:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 498              		.loc 1 367 0
+ 499 0008 5878     		ldrb	r0, [r3, #1]
+ 500 000a 0721     		mov	r1, #7
+ 501 000c 8843     		bic	r0, r1
+ 502 000e 5870     		strb	r0, [r3, #1]
+ 368:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 503              		.loc 1 368 0
+ 504 0010 5878     		ldrb	r0, [r3, #1]
+ 505 0012 0422     		mov	r2, #4
+ 506 0014 0243     		orr	r2, r0
+ 369:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* set VLLSM = 0b11 */
+ 370:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL =  SMC_STOPCTRL_VLLSM(3);          
+ 507              		.loc 1 370 0
+ 508 0016 0321     		mov	r1, #3
+ 368:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 509              		.loc 1 368 0
+ 510 0018 5A70     		strb	r2, [r3, #1]
+ 511              		.loc 1 370 0
+ 512 001a 9970     		strb	r1, [r3, #2]
+ 371:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 372:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_STOPCTRL;
+ 513              		.loc 1 372 0
+ 514 001c 9B78     		ldrb	r3, [r3, #2]
+ 362:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 515              		.loc 1 362 0
+ 516 001e 83B0     		sub	sp, sp, #12
+ 517              	.LCFI9:
+ 518              		.cfi_def_cfa_offset 16
+ 519              		.loc 1 372 0
+ 520 0020 0193     		str	r3, [sp, #4]
+ 521              	.LVL22:
+ 373:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 522              		.loc 1 373 0
+ 523 0022 0198     		ldr	r0, [sp, #4]
+ 524 0024 0130     		add	r0, r0, #1
+ 525              	.LVL23:
+ 526 0026 0190     		str	r0, [sp, #4]
+ 527              	.LVL24:
+ 374:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLLS3 */
+ 375:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 376:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 377:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 378:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 379:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 380:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 528              		.loc 1 380 0
+ 529 0028 FFF7FEFF 		bl	stop
+ 530              	.LVL25:
+ 381:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 382:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 531              		.loc 1 382 0
+ 532 002c 03B0     		add	sp, sp, #12
+ 533              		@ sp needed for prologue
+ 534 002e 00BD     		pop	{pc}
+ 535              	.L54:
+ 536              		.align	2
+ 537              	.L53:
+ 538 0030 00E00740 		.word	1074257920
+ 539              		.cfi_endproc
+ 540              	.LFE8:
+ 542              		.section	.text.enter_vlls2,"ax",%progbits
+ 543              		.align	2
+ 544              		.global	enter_vlls2
+ 545              		.code	16
+ 546              		.thumb_func
+ 548              	enter_vlls2:
+ 549              	.LFB9:
+ 383:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 384:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLLS2 mode entry routine. Puts the processor into 
+ 385:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLLS2 mode from normal run mode or VLPR. 
+ 386:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 387:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 388:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLLS2
+ 389:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLLS2
+ 390:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 391:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: VLLSx modes will always exit to RUN mode even  
+ 392:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *       if you werein VLPR mode before entering VLLSx.
+ 393:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 394:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from VLLSx mode is controlled by the LLWU module. Most
+ 395:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in VLLSx mode, so make
+ 396:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 397:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 398:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 399:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 400:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none  
+ 401:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 402:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /********************************************************************/
+ 403:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 404:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlls2(void)
+ 405:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 550              		.loc 1 405 0
+ 551              		.cfi_startproc
+ 552 0000 00B5     		push	{lr}
+ 553              	.LCFI10:
+ 554              		.cfi_def_cfa_offset 4
+ 555              		.cfi_offset 14, -4
+ 406:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 407:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow VLLS2 power modes */
+ 408:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLLS_MASK;      
+ 556              		.loc 1 408 0
+ 557 0002 0B4B     		ldr	r3, .L56
+ 558 0004 0222     		mov	r2, #2
+ 559 0006 1A70     		strb	r2, [r3]
+ 409:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b100 for VLLS2 mode */
+ 410:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 560              		.loc 1 410 0
+ 561 0008 5978     		ldrb	r1, [r3, #1]
+ 562 000a 0720     		mov	r0, #7
+ 563 000c 8143     		bic	r1, r0
+ 564 000e 5970     		strb	r1, [r3, #1]
+ 411:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 565              		.loc 1 411 0
+ 566 0010 5878     		ldrb	r0, [r3, #1]
+ 567 0012 0421     		mov	r1, #4
+ 568 0014 0143     		orr	r1, r0
+ 569 0016 5970     		strb	r1, [r3, #1]
+ 412:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* set VLLSM = 0b10 */
+ 413:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL =  SMC_STOPCTRL_VLLSM(2);                
+ 570              		.loc 1 413 0
+ 571 0018 9A70     		strb	r2, [r3, #2]
+ 414:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 415:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_STOPCTRL;
+ 572              		.loc 1 415 0
+ 573 001a 9B78     		ldrb	r3, [r3, #2]
+ 405:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 574              		.loc 1 405 0
+ 575 001c 83B0     		sub	sp, sp, #12
+ 576              	.LCFI11:
+ 577              		.cfi_def_cfa_offset 16
+ 578              		.loc 1 415 0
+ 579 001e 0193     		str	r3, [sp, #4]
+ 580              	.LVL26:
+ 416:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 581              		.loc 1 416 0
+ 582 0020 019A     		ldr	r2, [sp, #4]
+ 583 0022 0132     		add	r2, r2, #1
+ 584              	.LVL27:
+ 585 0024 0192     		str	r2, [sp, #4]
+ 586              	.LVL28:
+ 417:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLLS2 */
+ 418:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 419:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 420:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 421:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 422:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 423:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 587              		.loc 1 423 0
+ 588 0026 FFF7FEFF 		bl	stop
+ 589              	.LVL29:
+ 424:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 425:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 590              		.loc 1 425 0
+ 591 002a 03B0     		add	sp, sp, #12
+ 592              		@ sp needed for prologue
+ 593 002c 00BD     		pop	{pc}
+ 594              	.L57:
+ 595 002e C046     		.align	2
+ 596              	.L56:
+ 597 0030 00E00740 		.word	1074257920
+ 598              		.cfi_endproc
+ 599              	.LFE9:
+ 601              		.section	.text.enter_vlls1,"ax",%progbits
+ 602              		.align	2
+ 603              		.global	enter_vlls1
+ 604              		.code	16
+ 605              		.thumb_func
+ 607              	enter_vlls1:
+ 608              	.LFB10:
+ 426:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 427:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLLS1 mode entry routine. Puts the processor into 
+ 428:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLLS1 mode from normal run mode or VLPR. 
+ 429:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 430:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 431:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLLS1
+ 432:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLLS1
+ 433:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 434:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: VLLSx modes will always exit to RUN mode even if you were 
+ 435:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * in VLPR mode before entering VLLSx.
+ 436:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 437:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from VLLSx mode is controlled by the LLWU module. Most
+ 438:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in VLLSx mode, so make
+ 439:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 440:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 441:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 442:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 443:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * none  
+ 444:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 445:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /********************************************************************/
+ 446:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 447:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlls1(void)
+ 448:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 609              		.loc 1 448 0
+ 610              		.cfi_startproc
+ 611 0000 00B5     		push	{lr}
+ 612              	.LCFI12:
+ 613              		.cfi_def_cfa_offset 4
+ 614              		.cfi_offset 14, -4
+ 449:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 450:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLLS_MASK;
+ 615              		.loc 1 450 0
+ 616 0002 0B4B     		ldr	r3, .L59
+ 617 0004 0222     		mov	r2, #2
+ 618 0006 1A70     		strb	r2, [r3]
+ 451:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     
+ 452:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow all possible power modes */
+ 453:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b100 for VLLS1 mode */
+ 454:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 619              		.loc 1 454 0
+ 620 0008 5878     		ldrb	r0, [r3, #1]
+ 621 000a 0721     		mov	r1, #7
+ 622 000c 8843     		bic	r0, r1
+ 623 000e 5870     		strb	r0, [r3, #1]
+ 455:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 624              		.loc 1 455 0
+ 625 0010 5878     		ldrb	r0, [r3, #1]
+ 626 0012 0422     		mov	r2, #4
+ 627 0014 0243     		orr	r2, r0
+ 456:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* set VLLSM = 0b01 */
+ 457:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL =  SMC_STOPCTRL_VLLSM(1);          
+ 628              		.loc 1 457 0
+ 629 0016 0121     		mov	r1, #1
+ 455:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 630              		.loc 1 455 0
+ 631 0018 5A70     		strb	r2, [r3, #1]
+ 632              		.loc 1 457 0
+ 633 001a 9970     		strb	r1, [r3, #2]
+ 458:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 459:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_STOPCTRL;
+ 634              		.loc 1 459 0
+ 635 001c 9B78     		ldrb	r3, [r3, #2]
+ 448:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 636              		.loc 1 448 0
+ 637 001e 83B0     		sub	sp, sp, #12
+ 638              	.LCFI13:
+ 639              		.cfi_def_cfa_offset 16
+ 640              		.loc 1 459 0
+ 641 0020 0193     		str	r3, [sp, #4]
+ 642              	.LVL30:
+ 460:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 643              		.loc 1 460 0
+ 644 0022 0198     		ldr	r0, [sp, #4]
+ 645 0024 0130     		add	r0, r0, #1
+ 646              	.LVL31:
+ 647 0026 0190     		str	r0, [sp, #4]
+ 648              	.LVL32:
+ 461:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLLS1 */
+ 462:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 463:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 464:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 465:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 466:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 467:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 649              		.loc 1 467 0
+ 650 0028 FFF7FEFF 		bl	stop
+ 651              	.LVL33:
+ 468:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 469:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 652              		.loc 1 469 0
+ 653 002c 03B0     		add	sp, sp, #12
+ 654              		@ sp needed for prologue
+ 655 002e 00BD     		pop	{pc}
+ 656              	.L60:
+ 657              		.align	2
+ 658              	.L59:
+ 659 0030 00E00740 		.word	1074257920
+ 660              		.cfi_endproc
+ 661              	.LFE10:
+ 663              		.section	.text.enter_vlls0,"ax",%progbits
+ 664              		.align	2
+ 665              		.global	enter_vlls0
+ 666              		.code	16
+ 667              		.thumb_func
+ 669              	enter_vlls0:
+ 670              	.LFB11:
+ 470:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 471:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /********************************************************************/
+ 472:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLLS0 mode entry routine. Puts the processor into VLLS0 mode from
+ 473:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * normal run mode or VLPR. 
+ 474:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 475:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 476:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLLS0
+ 477:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLLS0
+ 478:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 479:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: VLLSx modes will always exit to RUN mode even if you were 
+ 480:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * in VLPR mode before entering VLLSx.
+ 481:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 482:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from VLLSx mode is controlled by the LLWU module. Most
+ 483:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in VLLSx mode, so make
+ 484:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 485:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 486:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 487:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 488:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * PORPO_value - 0 POR detect circuit is enabled in VLLS0
+ 489:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *               1 POR detect circuit is disabled in VLLS0
+ 490:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 491:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  /***************************************************************/
+ 492:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** 
+ 493:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlls0(unsigned char PORPO_value )
+ 494:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 671              		.loc 1 494 0
+ 672              		.cfi_startproc
+ 673              	.LVL34:
+ 674 0000 10B5     		push	{r4, lr}
+ 675              	.LCFI14:
+ 676              		.cfi_def_cfa_offset 8
+ 677              		.cfi_offset 4, -8
+ 678              		.cfi_offset 14, -4
+ 495:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   int i;
+ 496:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow all possible power modes */
+ 497:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLLS_MASK;   
+ 679              		.loc 1 497 0
+ 680 0002 1C4A     		ldr	r2, .L76
+ 681 0004 0223     		mov	r3, #2
+ 682 0006 1370     		strb	r3, [r2]
+ 498:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 4){
+ 683              		.loc 1 498 0
+ 684 0008 D478     		ldrb	r4, [r2, #3]
+ 685 000a 7F21     		mov	r1, #127
+ 686 000c 0C40     		and	r4, r1
+ 687 000e 042C     		cmp	r4, #4
+ 688 0010 18D0     		beq	.L62
+ 689              	.L63:
+ 499:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;   // go back to RUN mode temporarily
+ 500:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      for (i=0;i<0xff;i++)
+ 501:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        {
+ 502:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 503:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     	 break;
+ 504:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        }
+ 505:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   }
+ 506:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b100 for VLLS0 mode */
+ 507:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 690              		.loc 1 507 0
+ 691 0012 184B     		ldr	r3, .L76
+ 692 0014 0722     		mov	r2, #7
+ 693 0016 5978     		ldrb	r1, [r3, #1]
+ 508:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 509:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* set VLLSM = 0b00 */
+ 510:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_VLLSM_MASK;
+ 511:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PORPO_MASK;
+ 512:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL |=  (PORPO_value <<SMC_STOPCTRL_PORPO_SHIFT) 
+ 694              		.loc 1 512 0
+ 695 0018 4001     		lsl	r0, r0, #5
+ 696              	.LVL35:
+ 507:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 697              		.loc 1 507 0
+ 698 001a 9143     		bic	r1, r2
+ 699 001c 5970     		strb	r1, [r3, #1]
+ 508:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 700              		.loc 1 508 0
+ 701 001e 5C78     		ldrb	r4, [r3, #1]
+ 702 0020 0421     		mov	r1, #4
+ 703 0022 2143     		orr	r1, r4
+ 704 0024 5970     		strb	r1, [r3, #1]
+ 510:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_VLLSM_MASK;
+ 705              		.loc 1 510 0
+ 706 0026 9C78     		ldrb	r4, [r3, #2]
+ 511:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PORPO_MASK;
+ 707              		.loc 1 511 0
+ 708 0028 2021     		mov	r1, #32
+ 510:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_VLLSM_MASK;
+ 709              		.loc 1 510 0
+ 710 002a 9443     		bic	r4, r2
+ 711 002c 9C70     		strb	r4, [r3, #2]
+ 511:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PORPO_MASK;
+ 712              		.loc 1 511 0
+ 713 002e 9C78     		ldrb	r4, [r3, #2]
+ 513:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****                  | SMC_STOPCTRL_VLLSM(0);          
+ 514:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 515:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   PORPO_value = SMC_STOPCTRL;
+ 516:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLLS0 */
+ 517:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 518:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 519:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 520:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 521:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 522:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 523:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 524:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 714              		.loc 1 524 0
+ 715              		@ sp needed for prologue
+ 511:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_PORPO_MASK;
+ 716              		.loc 1 511 0
+ 717 0030 8C43     		bic	r4, r1
+ 718 0032 9C70     		strb	r4, [r3, #2]
+ 512:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL |=  (PORPO_value <<SMC_STOPCTRL_PORPO_SHIFT) 
+ 719              		.loc 1 512 0
+ 720 0034 9A78     		ldrb	r2, [r3, #2]
+ 721 0036 1043     		orr	r0, r2
+ 722 0038 C4B2     		uxtb	r4, r0
+ 723 003a 9C70     		strb	r4, [r3, #2]
+ 515:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   PORPO_value = SMC_STOPCTRL;
+ 724              		.loc 1 515 0
+ 725 003c 9B78     		ldrb	r3, [r3, #2]
+ 726              	.LVL36:
+ 522:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 727              		.loc 1 522 0
+ 728 003e FFF7FEFF 		bl	stop
+ 729              	.LVL37:
+ 730              		.loc 1 524 0
+ 731 0042 10BD     		pop	{r4, pc}
+ 732              	.LVL38:
+ 733              	.L62:
+ 499:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;   // go back to RUN mode temporarily
+ 734              		.loc 1 499 0
+ 735 0044 5378     		ldrb	r3, [r2, #1]
+ 736 0046 6024     		mov	r4, #96
+ 737 0048 A343     		bic	r3, r4
+ 738 004a 5370     		strb	r3, [r2, #1]
+ 739              	.LVL39:
+ 740 004c FF21     		mov	r1, #255
+ 502:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 741              		.loc 1 502 0
+ 742 004e 7F23     		mov	r3, #127
+ 743 0050 0AE0     		b	.L64
+ 744              	.LVL40:
+ 745              	.L75:
+ 746 0052 D478     		ldrb	r4, [r2, #3]
+ 747 0054 1C40     		and	r4, r3
+ 748 0056 012C     		cmp	r4, #1
+ 749 0058 DBD0     		beq	.L63
+ 750 005a D478     		ldrb	r4, [r2, #3]
+ 751 005c 1C40     		and	r4, r3
+ 752 005e 012C     		cmp	r4, #1
+ 753 0060 D7D0     		beq	.L63
+ 754 0062 0339     		sub	r1, r1, #3
+ 500:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      for (i=0;i<0xff;i++)
+ 755              		.loc 1 500 0
+ 756 0064 0029     		cmp	r1, #0
+ 757 0066 D4D0     		beq	.L63
+ 758              	.L64:
+ 502:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 759              		.loc 1 502 0
+ 760 0068 D478     		ldrb	r4, [r2, #3]
+ 761 006a 1C40     		and	r4, r3
+ 762 006c 012C     		cmp	r4, #1
+ 763 006e F0D1     		bne	.L75
+ 764 0070 CFE7     		b	.L63
+ 765              	.L77:
+ 766 0072 C046     		.align	2
+ 767              	.L76:
+ 768 0074 00E00740 		.word	1074257920
+ 769              		.cfi_endproc
+ 770              	.LFE11:
+ 772              		.section	.text.enter_vlls0_nopor,"ax",%progbits
+ 773              		.align	2
+ 774              		.global	enter_vlls0_nopor
+ 775              		.code	16
+ 776              		.thumb_func
+ 778              	enter_vlls0_nopor:
+ 779              	.LFB12:
+ 525:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 526:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /* VLLS0 mode entry routine. Puts the processor into VLLS0 mode from
+ 527:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * normal run mode or VLPR with the POR circuit disabled
+ 528:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 529:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Mode transitions:
+ 530:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * RUN -> VLLS0
+ 531:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * VLPR -> VLLS0
+ 532:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 533:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * NOTE: VLLSx modes will always exit to RUN mode even if you were 
+ 534:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * in VLPR mode before entering VLLSx.
+ 535:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 536:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Wakeup from VLLSx mode is controlled by the LLWU module. Most
+ 537:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * modules cannot issue a wakeup interrupt in VLLSx mode, so make
+ 538:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * sure to setup the desired wakeup sources in the LLWU before 
+ 539:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * calling this function.
+ 540:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  *
+ 541:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * Parameters:
+ 542:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  * PORPO = 1-  POR detect circuit is disabled in VLLS0
+ 543:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****  */
+ 544:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** /***************************************************************/
+ 545:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** void enter_vlls0_nopor(void)
+ 546:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 780              		.loc 1 546 0
+ 781              		.cfi_startproc
+ 782 0000 00B5     		push	{lr}
+ 783              	.LCFI15:
+ 784              		.cfi_def_cfa_offset 4
+ 785              		.cfi_offset 14, -4
+ 547:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   volatile unsigned int dummyread;
+ 548:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   int i;
+ 549:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Write to PMPROT to allow all possible power modes */
+ 550:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMPROT = SMC_PMPROT_AVLLS_MASK;   
+ 786              		.loc 1 550 0
+ 787 0002 1B4A     		ldr	r2, .L93
+ 788 0004 0223     		mov	r3, #2
+ 789 0006 1370     		strb	r3, [r2]
+ 551:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 4){
+ 790              		.loc 1 551 0
+ 791 0008 D078     		ldrb	r0, [r2, #3]
+ 792 000a 7F21     		mov	r1, #127
+ 546:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** {
+ 793              		.loc 1 546 0
+ 794 000c 83B0     		sub	sp, sp, #12
+ 795              	.LCFI16:
+ 796              		.cfi_def_cfa_offset 16
+ 797              		.loc 1 551 0
+ 798 000e 0840     		and	r0, r1
+ 799 0010 0428     		cmp	r0, #4
+ 800 0012 16D0     		beq	.L79
+ 801              	.L80:
+ 552:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;   // go back to RUN mode temporarily
+ 553:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      for (i=0;i<0xff;i++)
+ 554:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        {
+ 555:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 556:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****     	 break;
+ 557:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        }
+ 558:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   }
+ 559:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the STOPM field to 0b100 for VLLS0 mode */
+ 560:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL &= ~SMC_PMCTRL_STOPM_MASK; 
+ 802              		.loc 1 560 0
+ 803 0014 164B     		ldr	r3, .L93
+ 804 0016 0722     		mov	r2, #7
+ 805 0018 5978     		ldrb	r1, [r3, #1]
+ 806 001a 9143     		bic	r1, r2
+ 807 001c 5970     		strb	r1, [r3, #1]
+ 561:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_PMCTRL |=  SMC_PMCTRL_STOPM(0x4); 
+ 808              		.loc 1 561 0
+ 809 001e 5878     		ldrb	r0, [r3, #1]
+ 810 0020 0421     		mov	r1, #4
+ 811 0022 0143     		orr	r1, r0
+ 812 0024 5970     		strb	r1, [r3, #1]
+ 562:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* set VLLSM = 00 * and PORPO = 1 */
+ 563:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_VLLSM_MASK;
+ 813              		.loc 1 563 0
+ 814 0026 9878     		ldrb	r0, [r3, #2]
+ 564:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL =  SMC_STOPCTRL_VLLSM(0) | SMC_STOPCTRL_PORPO_MASK;  
+ 815              		.loc 1 564 0
+ 816 0028 2021     		mov	r1, #32
+ 563:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SMC_STOPCTRL &= ~SMC_STOPCTRL_VLLSM_MASK;
+ 817              		.loc 1 563 0
+ 818 002a 9043     		bic	r0, r2
+ 819 002c 9870     		strb	r0, [r3, #2]
+ 820              		.loc 1 564 0
+ 821 002e 9970     		strb	r1, [r3, #2]
+ 565:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /*wait for write to complete to SMC before stopping core */  
+ 566:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread = SMC_STOPCTRL;
+ 822              		.loc 1 566 0
+ 823 0030 9B78     		ldrb	r3, [r3, #2]
+ 824 0032 0193     		str	r3, [sp, #4]
+ 825              	.LVL41:
+ 567:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   dummyread++;
+ 826              		.loc 1 567 0
+ 827 0034 0198     		ldr	r0, [sp, #4]
+ 828 0036 0130     		add	r0, r0, #1
+ 829              	.LVL42:
+ 830 0038 0190     		str	r0, [sp, #4]
+ 831              	.LVL43:
+ 568:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Now execute the stop instruction to go into VLLS0 */
+ 569:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   #ifdef CMSIS
+ 570:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   /* Set the SLEEPDEEP bit to enable deep sleep mode (STOP) */
+ 571:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   SCB_SCR |= SCB_SCR_SLEEPDEEP_MASK;
+ 572:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   __wfi();
+ 573:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #else
+ 574:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****   stop();
+ 832              		.loc 1 574 0
+ 833 003a FFF7FEFF 		bl	stop
+ 834              	.LVL44:
+ 575:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** #endif
+ 576:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c **** }
+ 835              		.loc 1 576 0
+ 836 003e 03B0     		add	sp, sp, #12
+ 837              		@ sp needed for prologue
+ 838 0040 00BD     		pop	{pc}
+ 839              	.LVL45:
+ 840              	.L79:
+ 552:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      SMC_PMCTRL &= ~SMC_PMCTRL_RUNM_MASK;   // go back to RUN mode temporarily
+ 841              		.loc 1 552 0
+ 842 0042 5378     		ldrb	r3, [r2, #1]
+ 843 0044 6020     		mov	r0, #96
+ 844 0046 8343     		bic	r3, r0
+ 845 0048 5370     		strb	r3, [r2, #1]
+ 846              	.LVL46:
+ 847 004a FF21     		mov	r1, #255
+ 555:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 848              		.loc 1 555 0
+ 849 004c 7F23     		mov	r3, #127
+ 850 004e 0AE0     		b	.L81
+ 851              	.LVL47:
+ 852              	.L92:
+ 853 0050 D078     		ldrb	r0, [r2, #3]
+ 854 0052 1840     		and	r0, r3
+ 855 0054 0128     		cmp	r0, #1
+ 856 0056 DDD0     		beq	.L80
+ 857 0058 D078     		ldrb	r0, [r2, #3]
+ 858 005a 1840     		and	r0, r3
+ 859 005c 0128     		cmp	r0, #1
+ 860 005e D9D0     		beq	.L80
+ 861 0060 0339     		sub	r1, r1, #3
+ 553:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****      for (i=0;i<0xff;i++)
+ 862              		.loc 1 553 0
+ 863 0062 0029     		cmp	r1, #0
+ 864 0064 D6D0     		beq	.L80
+ 865              	.L81:
+ 555:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc\smc.c ****        if ((SMC_PMSTAT & SMC_PMSTAT_PMSTAT_MASK)== 1)
+ 866              		.loc 1 555 0
+ 867 0066 D078     		ldrb	r0, [r2, #3]
+ 868 0068 1840     		and	r0, r3
+ 869 006a 0128     		cmp	r0, #1
+ 870 006c F0D1     		bne	.L92
+ 871 006e D1E7     		b	.L80
+ 872              	.L94:
+ 873              		.align	2
+ 874              	.L93:
+ 875 0070 00E00740 		.word	1074257920
+ 876              		.cfi_endproc
+ 877              	.LFE12:
+ 879              		.text
+ 880              	.Letext0:
+ 881              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 882              		.file 3 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 smc.c
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:18     .text.sleep:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:23     .text.sleep:00000000 sleep
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:47     .text.sleep:00000014 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:52     .text.deepsleep:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:57     .text.deepsleep:00000000 deepsleep
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:80     .text.deepsleep:00000014 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:85     .text.enter_wait:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:90     .text.enter_wait:00000000 enter_wait
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:109    .text.enter_stop:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:114    .text.enter_stop:00000000 enter_stop
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:162    .text.enter_stop:0000002c $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:167    .text.enter_vlpr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:172    .text.enter_vlpr:00000000 enter_vlpr
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:261    .text.enter_vlpr:00000060 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:268    .text.exit_vlpr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:273    .text.exit_vlpr:00000000 exit_vlpr
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:361    .text.exit_vlpr:00000068 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:367    .text.enter_vlps:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:372    .text.enter_vlps:00000000 enter_vlps
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:419    .text.enter_vlps:0000002c $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:424    .text.enter_lls:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:429    .text.enter_lls:00000000 enter_lls
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:476    .text.enter_lls:0000002c $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:481    .text.enter_vlls3:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:486    .text.enter_vlls3:00000000 enter_vlls3
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:538    .text.enter_vlls3:00000030 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:543    .text.enter_vlls2:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:548    .text.enter_vlls2:00000000 enter_vlls2
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:597    .text.enter_vlls2:00000030 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:602    .text.enter_vlls1:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:607    .text.enter_vlls1:00000000 enter_vlls1
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:659    .text.enter_vlls1:00000030 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:664    .text.enter_vlls0:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:669    .text.enter_vlls0:00000000 enter_vlls0
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:768    .text.enter_vlls0:00000074 $d
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:773    .text.enter_vlls0_nopor:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:778    .text.enter_vlls0_nopor:00000000 enter_vlls0_nopor
+C:\Users\lab\AppData\Local\Temp\ccSozGVf.s:875    .text.enter_vlls0_nopor:00000070 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+wait
+stop

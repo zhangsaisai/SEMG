@@ -1,0 +1,297 @@
+\hypertarget{group___events__module}{\section{Events module documentation}
+\label{group___events__module}\index{Events module documentation@{Events module documentation}}
+}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___events__module_ga960d094664356278ac5472d45a6ea2f3}{void \hyperlink{group___events__module_ga960d094664356278ac5472d45a6ea2f3}{Cpu\-\_\-\-On\-N\-M\-I\-I\-N\-T} (void)}\label{group___events__module_ga960d094664356278ac5472d45a6ea2f3}
+
+\begin{DoxyCompactList}\small\item\em This event is called when the Non maskable interrupt had occurred. This event is automatically enabled when the \mbox{[}N\-M\-I interrupt\mbox{]} property is set to 'Enabled'. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga52e0cf25d8a4434745cf278f39e0a64c}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called after the last character from the output buffer is moved to the transmitter. This event is available only if the Send\-Block method is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_gab4ceb0c6a2bb862adca96870b7c9b12e}{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called when the requested number of data is moved to the input buffer. This method is available only if the Receive\-Block method is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga72a1f9d4a6051ecc888818cca58f3fdb}{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called after the last character from the output buffer is moved to the transmitter. This event is available only if the Send\-Block method is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga8b79c4a95ebfccf4a54c88d8a780d92f}{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called when the requested number of data is moved to the input buffer. This method is available only if the Receive\-Block method is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga657b9d2b194dae2bf4287eb4d8c8e512}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called when an active signal edge/level has occurred. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga52662597d7ac93aa02b83239e5a6b645}{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called when an active signal edge/level has occurred. \end{DoxyCompactList}\item 
+\hypertarget{group___events__module_ga62cacd25ae2e957c1d8f473f3ee4bac9}{void \hyperlink{group___events__module_ga62cacd25ae2e957c1d8f473f3ee4bac9}{Sys\-Tick\-\_\-\-On\-Interrupt} (void)}\label{group___events__module_ga62cacd25ae2e957c1d8f473f3ee4bac9}
+
+\begin{DoxyCompactList}\small\item\em This event is called when a Sys\-Tick countdown has been 0. \end{DoxyCompactList}\item 
+\hypertarget{group___events__module_ga15d641eb67ba475a486d9e9199682c3a}{{\bfseries P\-E\-\_\-\-I\-S\-R} (Sys\-Tick\-\_\-\-Interrupt)}\label{group___events__module_ga15d641eb67ba475a486d9e9199682c3a}
+
+\item 
+void \hyperlink{group___events__module_ga31b7ba39777bc5353b7921bb262d12a4}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_gab11607160ff8e1edbe6197aec1b0b2c7}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga9d4a2ec96c400f79ae13781eb5dcf3e2}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga8d43f53c81d3fbbee3bd6ab11d5bd3d9}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_gae35965160aeff0693a4eee5ddd97584f}{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga4bf7764e25adf3a29cd3ccb084feee9c}{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga0774ec3156b1a121218108baa8852a83}{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_ga9eed688c4eacb771ba10300b98abcb0f}{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. \end{DoxyCompactList}\item 
+void \hyperlink{group___events__module_gae1c716eeadc2c10887b42dacac33de1f}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This event is called when an active signal edge/level has occurred. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___events__module_gae2271189dea2220fcee9b0af8941bde3}{volatile bool {\bfseries is\-Start} = F\-A\-L\-S\-E}\label{group___events__module_gae2271189dea2220fcee9b0af8941bde3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\hypertarget{group___events__module_ga31b7ba39777bc5353b7921bb262d12a4}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}}
+\index{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga31b7ba39777bc5353b7921bb262d12a4}
+
+
+Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_gab11607160ff8e1edbe6197aec1b0b2c7}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}}
+\index{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_gab11607160ff8e1edbe6197aec1b0b2c7}
+
+
+Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga9d4a2ec96c400f79ae13781eb5dcf3e2}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}}
+\index{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga9d4a2ec96c400f79ae13781eb5dcf3e2}
+
+
+Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga8d43f53c81d3fbbee3bd6ab11d5bd3d9}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}}
+\index{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga8d43f53c81d3fbbee3bd6ab11d5bd3d9}
+
+
+Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_gae35965160aeff0693a4eee5ddd97584f}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}}
+\index{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_gae35965160aeff0693a4eee5ddd97584f}
+
+
+Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga4bf7764e25adf3a29cd3ccb084feee9c}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}}
+\index{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-On\-Error (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga4bf7764e25adf3a29cd3ccb084feee9c}
+
+
+Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga0774ec3156b1a121218108baa8852a83}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}}
+\index{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Complete (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga0774ec3156b1a121218108baa8852a83}
+
+
+Called at the end of a D\-M\-A transfer. If the Half complete property in initialization section is anabled, this event is also called when current major iteration count reaches the halfway point. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga9eed688c4eacb771ba10300b98abcb0f}{\index{Events module documentation@{Events module documentation}!D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}}
+\index{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error@{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}!Events module documentation@{Events module documentation}}
+\subsubsection[{D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error}]{\setlength{\rightskip}{0pt plus 5cm}void D\-M\-A\-T\-\_\-\-S\-\_\-\-S\-P\-I\-\_\-\-T\-X\-\_\-\-On\-Error (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga9eed688c4eacb771ba10300b98abcb0f}
+
+
+Called when error in channel settings is detected. See Set\-Event\-Mask() and Get\-Event\-Mask() methods. This event is enabled only if Interrupts property in Channel select section is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. This pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga657b9d2b194dae2bf4287eb4d8c8e512}{\index{Events module documentation@{Events module documentation}!E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt}}
+\index{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt}!Events module documentation@{Events module documentation}}
+\subsubsection[{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-On\-Interrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga657b9d2b194dae2bf4287eb4d8c8e512}
+
+
+This event is called when an active signal edge/level has occurred. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to R\-T\-O\-S device data structure pointer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_gae1c716eeadc2c10887b42dacac33de1f}{\index{Events module documentation@{Events module documentation}!E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt}}
+\index{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt}!Events module documentation@{Events module documentation}}
+\subsubsection[{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y1\-\_\-\-On\-Interrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_gae1c716eeadc2c10887b42dacac33de1f}
+
+
+This event is called when an active signal edge/level has occurred. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to R\-T\-O\-S device data structure pointer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga52662597d7ac93aa02b83239e5a6b645}{\index{Events module documentation@{Events module documentation}!E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt}}
+\index{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt@{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt}!Events module documentation@{Events module documentation}}
+\subsubsection[{E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt}]{\setlength{\rightskip}{0pt plus 5cm}void E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T\-\_\-\-On\-Interrupt (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga52662597d7ac93aa02b83239e5a6b645}
+
+
+This event is called when an active signal edge/level has occurred. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to R\-T\-O\-S device data structure pointer. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga8b79c4a95ebfccf4a54c88d8a780d92f}{\index{Events module documentation@{Events module documentation}!S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received@{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received}}
+\index{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received@{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received}!Events module documentation@{Events module documentation}}
+\subsubsection[{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received}]{\setlength{\rightskip}{0pt plus 5cm}void S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Received (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga8b79c4a95ebfccf4a54c88d8a780d92f}
+
+
+This event is called when the requested number of data is moved to the input buffer. This method is available only if the Receive\-Block method is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. The pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga72a1f9d4a6051ecc888818cca58f3fdb}{\index{Events module documentation@{Events module documentation}!S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent@{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent}}
+\index{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent@{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent}!Events module documentation@{Events module documentation}}
+\subsubsection[{S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent}]{\setlength{\rightskip}{0pt plus 5cm}void S\-M\-\_\-\-S\-P\-I0\-\_\-\-On\-Block\-Sent (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga72a1f9d4a6051ecc888818cca58f3fdb}
+
+
+This event is called after the last character from the output buffer is moved to the transmitter. This event is available only if the Send\-Block method is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. The pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_gab4ceb0c6a2bb862adca96870b7c9b12e}{\index{Events module documentation@{Events module documentation}!S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received@{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received}}
+\index{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received@{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received}!Events module documentation@{Events module documentation}}
+\subsubsection[{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received}]{\setlength{\rightskip}{0pt plus 5cm}void S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Received (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_gab4ceb0c6a2bb862adca96870b7c9b12e}
+
+
+This event is called when the requested number of data is moved to the input buffer. This method is available only if the Receive\-Block method is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. The pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}
+\hypertarget{group___events__module_ga52e0cf25d8a4434745cf278f39e0a64c}{\index{Events module documentation@{Events module documentation}!S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent@{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent}}
+\index{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent@{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent}!Events module documentation@{Events module documentation}}
+\subsubsection[{S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent}]{\setlength{\rightskip}{0pt plus 5cm}void S\-S\-\_\-\-S\-P\-I1\-\_\-\-On\-Block\-Sent (
+\begin{DoxyParamCaption}
+\item[{{\bf L\-D\-D\-\_\-\-T\-User\-Data} $\ast$}]{User\-Data\-Ptr}
+\end{DoxyParamCaption}
+)}}\label{group___events__module_ga52e0cf25d8a4434745cf278f39e0a64c}
+
+
+This event is called after the last character from the output buffer is moved to the transmitter. This event is available only if the Send\-Block method is enabled. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em User\-Data\-Ptr} & -\/ Pointer to the user or R\-T\-O\-S specific data. The pointer is passed as the parameter of Init method. \\
+\hline
+\end{DoxyParams}

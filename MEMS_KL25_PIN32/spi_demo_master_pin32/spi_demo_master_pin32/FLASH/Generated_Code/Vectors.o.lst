@@ -1,0 +1,86 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"Vectors.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	__vect_table
+  18              		.section	.vectortable,"a",%progbits
+  19              		.align	2
+  22              	__vect_table:
+  23 0000 00000000 		.word	__SP_INIT
+  24 0004 00000000 		.word	__thumb_startup
+  25 0008 00000000 		.word	Cpu_INT_NMIInterrupt
+  26 000c 00000000 		.word	Cpu_INT_Hard_FaultInterrupt
+  27 0010 00000000 		.word	Cpu_Interrupt
+  28 0014 00000000 		.word	Cpu_Interrupt
+  29 0018 00000000 		.word	Cpu_Interrupt
+  30 001c 00000000 		.word	Cpu_Interrupt
+  31 0020 00000000 		.word	Cpu_Interrupt
+  32 0024 00000000 		.word	Cpu_Interrupt
+  33 0028 00000000 		.word	Cpu_Interrupt
+  34 002c 00000000 		.word	Cpu_Interrupt
+  35 0030 00000000 		.word	Cpu_Interrupt
+  36 0034 00000000 		.word	Cpu_Interrupt
+  37 0038 00000000 		.word	Cpu_Interrupt
+  38 003c 00000000 		.word	Cpu_Interrupt
+  39 0040 00000000 		.word	Cpu_Interrupt
+  40 0044 00000000 		.word	Cpu_Interrupt
+  41 0048 00000000 		.word	Cpu_Interrupt
+  42 004c 00000000 		.word	Cpu_Interrupt
+  43 0050 00000000 		.word	Cpu_Interrupt
+  44 0054 00000000 		.word	Cpu_Interrupt
+  45 0058 00000000 		.word	Cpu_Interrupt
+  46 005c 00000000 		.word	Cpu_Interrupt
+  47 0060 00000000 		.word	Cpu_Interrupt
+  48 0064 00000000 		.word	Cpu_Interrupt
+  49 0068 00000000 		.word	SM1_Interrupt
+  50 006c 00000000 		.word	Cpu_Interrupt
+  51 0070 00000000 		.word	Cpu_Interrupt
+  52 0074 00000000 		.word	Cpu_Interrupt
+  53 0078 00000000 		.word	Cpu_Interrupt
+  54 007c 00000000 		.word	Cpu_Interrupt
+  55 0080 00000000 		.word	Cpu_Interrupt
+  56 0084 00000000 		.word	TU1_Interrupt
+  57 0088 00000000 		.word	Cpu_Interrupt
+  58 008c 00000000 		.word	Cpu_Interrupt
+  59 0090 00000000 		.word	Cpu_Interrupt
+  60 0094 00000000 		.word	Cpu_Interrupt
+  61 0098 00000000 		.word	Cpu_Interrupt
+  62 009c 00000000 		.word	Cpu_Interrupt
+  63 00a0 00000000 		.word	Cpu_Interrupt
+  64 00a4 00000000 		.word	Cpu_Interrupt
+  65 00a8 00000000 		.word	Cpu_Interrupt
+  66 00ac 00000000 		.word	Cpu_Interrupt
+  67 00b0 00000000 		.word	Cpu_Interrupt
+  68 00b4 00000000 		.word	Cpu_Interrupt
+  69 00b8 00000000 		.word	Cpu_Interrupt
+  70 00bc 00000000 		.word	Cpu_Interrupt
+  71              		.text
+  72              	.Letext0:
+  73              		.file 1 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+  74              		.file 2 "../Generated_Code/Cpu.h"
+  75              		.file 3 "../Generated_Code/Vectors.c"
+DEFINED SYMBOLS
+                            *ABS*:00000000 Vectors.c
+C:\Users\lab\AppData\Local\Temp\ccrq4oob.s:22     .vectortable:00000000 __vect_table
+C:\Users\lab\AppData\Local\Temp\ccrq4oob.s:19     .vectortable:00000000 $d
+
+UNDEFINED SYMBOLS
+__SP_INIT
+__thumb_startup
+Cpu_INT_NMIInterrupt
+Cpu_INT_Hard_FaultInterrupt
+Cpu_Interrupt
+SM1_Interrupt
+TU1_Interrupt

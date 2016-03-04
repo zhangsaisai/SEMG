@@ -1,0 +1,25 @@
+var group___a_d_c__module =
+[
+    [ "ADCConfigure", "group___a_d_c__module.html#ga2ec520f84e11f40a1d6e28004f143df5", null ],
+    [ "ADCDataInit", "group___a_d_c__module.html#gad964ca16935d2f9704e1e047861072ea", null ],
+    [ "ADCDisable", "group___a_d_c__module.html#gaee3c6f1b7638a7cf2ece62f97e507655", null ],
+    [ "ADCEnable", "group___a_d_c__module.html#ga55fa03d1036f43603a3a0776e1068c8a", null ],
+    [ "ADCInit", "group___a_d_c__module.html#ga0c711fb302e26085c0b47c83f53b263f", null ],
+    [ "ADCReadContinuousData", "group___a_d_c__module.html#ga8e75384212a08e64cdddf9fec4104248", null ],
+    [ "ADCReadData", "group___a_d_c__module.html#gac52d9692bf2114d7a9d22042099d087b", null ],
+    [ "ADCReadDataContinuous", "group___a_d_c__module.html#ga006599cf1a3384ae5bab076c52b99db8", null ],
+    [ "ADCReadRegister", "group___a_d_c__module.html#ga5a9a35fa254e8230cbc9be8858660f22", null ],
+    [ "ADCResetByCommand", "group___a_d_c__module.html#gaa6ed128c952696b046a47a2ae9d3ec1e", null ],
+    [ "ADCResetByHardware", "group___a_d_c__module.html#gaac2da2d21a0153782e5c806878c45605", null ],
+    [ "ADCSendCommand", "group___a_d_c__module.html#ga0c4f12b67a2d24c0a3f37b6f4d8a4df2", null ],
+    [ "ADCStandBy", "group___a_d_c__module.html#gac1be36a504b6060dd86bb74c0ac9dff3", null ],
+    [ "ADCStartConvertByCommand", "group___a_d_c__module.html#ga7f6ee96c5b2a3d3466992aa468a5a27f", null ],
+    [ "ADCStartConvertByHardware", "group___a_d_c__module.html#ga3121ea29554dad5d44b0f93f44d4615a", null ],
+    [ "ADCStopConvertByCommand", "group___a_d_c__module.html#ga2444bbfdc43b6d1dd3cf27d62b41db39", null ],
+    [ "ADCStopConvertByHardware", "group___a_d_c__module.html#gae7522edc164dc387abff35a130b268f7", null ],
+    [ "ADCStopReadDataContinuous", "group___a_d_c__module.html#ga9cdb5ac2b155fab1a7510f980ea450ce", null ],
+    [ "ADCWakeUp", "group___a_d_c__module.html#gace4858ead7841b0d2b078b5b33573740", null ],
+    [ "ADCWriteRegister", "group___a_d_c__module.html#ga607e77df260f2c971d948c580a933280", null ],
+    [ "DisableADCSPI", "group___a_d_c__module.html#gaaff16de9519f1d376e1103692d7dd44d", null ],
+    [ "EnableADCSPI", "group___a_d_c__module.html#ga6d15fbab721231334a4ea44c8df9d3f5", null ]
+];

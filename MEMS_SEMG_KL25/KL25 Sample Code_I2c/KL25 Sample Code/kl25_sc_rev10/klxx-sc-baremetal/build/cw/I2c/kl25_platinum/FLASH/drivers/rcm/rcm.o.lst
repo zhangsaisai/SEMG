@@ -1,0 +1,528 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"rcm.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.outSRS,"ax",%progbits
+  18              		.align	2
+  19              		.global	outSRS
+  20              		.code	16
+  21              		.thumb_func
+  23              	outSRS:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  * File:        rcm.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  * Purpose:     Provides routines for the reset controller module
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  *              
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  */
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** #include "common.h"
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** #include "rcm.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** /* OutSRS routine - checks the value in the SRS registers and sends
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  * messages to the terminal announcing the status at the start of the 
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  * code.
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****  */
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** void outSRS(void){                         //[outSRS]
+  26              		.loc 1 14 0
+  27              		.cfi_startproc
+  28 0000 10B5     		push	{r4, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 4, -8
+  32              		.cfi_offset 14, -4
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****   
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS1 & RCM_SRS1_SACKERR_MASK)
+  33              		.loc 1 17 0
+  34 0002 5A4B     		ldr	r3, .L64
+  35 0004 5878     		ldrb	r0, [r3, #1]
+  36 0006 8206     		lsl	r2, r0, #26
+  37 0008 00D5     		bpl	.LCB18
+  38 000a 8FE0     		b	.L48	@long jump
+  39              	.LCB18:
+  40              	.L2:
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rStop Mode Acknowledge Error Reset");
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS1 & RCM_SRS1_MDM_AP_MASK)
+  41              		.loc 1 19 0
+  42 000c 5749     		ldr	r1, .L64
+  43 000e 4A78     		ldrb	r2, [r1, #1]
+  44 0010 1207     		lsl	r2, r2, #28
+  45 0012 00D5     		bpl	.LCB29
+  46 0014 86E0     		b	.L49	@long jump
+  47              	.LCB29:
+  48              	.L3:
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rMDM-AP Reset");
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS1 & RCM_SRS1_SW_MASK)
+  49              		.loc 1 21 0
+  50 0016 554C     		ldr	r4, .L64
+  51 0018 6378     		ldrb	r3, [r4, #1]
+  52 001a 5A07     		lsl	r2, r3, #29
+  53 001c 00D5     		bpl	.LCB40
+  54 001e 7DE0     		b	.L50	@long jump
+  55              	.LCB40:
+  56              	.L4:
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rSoftware Reset");
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS1 & RCM_SRS1_LOCKUP_MASK)
+  57              		.loc 1 23 0
+  58 0020 5248     		ldr	r0, .L64
+  59 0022 4178     		ldrb	r1, [r0, #1]
+  60 0024 8A07     		lsl	r2, r1, #30
+  61 0026 00D5     		bpl	.LCB51
+  62 0028 6BE0     		b	.L51	@long jump
+  63              	.LCB51:
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rCore Lockup Event Reset");
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_POR_MASK)
+  64              		.loc 1 26 0
+  65 002a 504A     		ldr	r2, .L64
+  66 002c 1478     		ldrb	r4, [r2]
+  67 002e 63B2     		sxtb	r3, r4
+  68 0030 002B     		cmp	r3, #0
+  69 0032 00DA     		bge	.LCB57
+  70 0034 6EE0     		b	.L52	@long jump
+  71              	.LCB57:
+  72              	.L6:
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rPower-on Reset");
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_PIN_MASK)
+  73              		.loc 1 28 0
+  74 0036 4D48     		ldr	r0, .L64
+  75 0038 0178     		ldrb	r1, [r0]
+  76 003a 4A06     		lsl	r2, r1, #25
+  77 003c 5DD4     		bmi	.L53
+  78              	.L7:
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rExternal Pin Reset");
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_WDOG_MASK)
+  79              		.loc 1 30 0
+  80 003e 4B4A     		ldr	r2, .L64
+  81 0040 1478     		ldrb	r4, [r2]
+  82 0042 A206     		lsl	r2, r4, #26
+  83 0044 55D4     		bmi	.L54
+  84              	.L8:
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rWatchdog(COP) Reset");
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_LOC_MASK)
+  85              		.loc 1 32 0
+  86 0046 494B     		ldr	r3, .L64
+  87 0048 1878     		ldrb	r0, [r3]
+  88 004a 4207     		lsl	r2, r0, #29
+  89 004c 4DD4     		bmi	.L55
+  90              	.L9:
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLoss of External Clock Reset");
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_LOL_MASK)
+  91              		.loc 1 34 0
+  92 004e 4749     		ldr	r1, .L64
+  93 0050 0A78     		ldrb	r2, [r1]
+  94 0052 1207     		lsl	r2, r2, #28
+  95 0054 45D4     		bmi	.L56
+  96              	.L10:
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLoss of Lock in PLL Reset");
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_LVD_MASK)
+  97              		.loc 1 36 0
+  98 0056 454C     		ldr	r4, .L64
+  99 0058 2378     		ldrb	r3, [r4]
+ 100 005a 9A07     		lsl	r2, r3, #30
+ 101 005c 3DD4     		bmi	.L57
+ 102              	.L11:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLow-voltage Detect Reset");
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_WAKEUP_MASK)
+ 103              		.loc 1 38 0
+ 104 005e 4348     		ldr	r0, .L64
+ 105 0060 0178     		ldrb	r1, [r0]
+ 106 0062 CA07     		lsl	r2, r1, #31
+ 107 0064 10D4     		bmi	.L58
+ 108              	.L13:
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****         {
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           printf("\n\r[outSRS]Wakeup bit set from low power mode ");
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if ((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 3)
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("LLS exit ") ;
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS0 exit ") ;
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS1 exit ") ;
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS2 exit") ;
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS3 exit ") ; 
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	}
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****         if ((RCM_SRS0 == 0) && (RCM_SRS1 == 0)) 
+ 109              		.loc 1 53 0
+ 110 0066 414C     		ldr	r4, .L64
+ 111 0068 2378     		ldrb	r3, [r4]
+ 112 006a 002B     		cmp	r3, #0
+ 113 006c 02D1     		bne	.L1
+ 114              		.loc 1 53 0 is_stmt 0
+ 115 006e 6278     		ldrb	r2, [r4, #1]
+ 116 0070 002A     		cmp	r2, #0
+ 117 0072 00D0     		beq	.L59
+ 118              	.L1:
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****         {
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	       printf("[outSRS]RCM_SRS0 is ZERO   = %#02X \r\n\r", (RCM_SRS0))  ;
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	       printf("[outSRS]RCM_SRS1 is ZERO   = %#02X \r\n\r", (RCM_SRS1))  ;	 
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****         }
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****   }
+ 119              		.loc 1 58 0 is_stmt 1
+ 120              		@ sp needed for prologue
+ 121 0074 10BD     		pop	{r4, pc}
+ 122              	.L59:
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	       printf("[outSRS]RCM_SRS0 is ZERO   = %#02X \r\n\r", (RCM_SRS0))  ;
+ 123              		.loc 1 55 0
+ 124 0076 2178     		ldrb	r1, [r4]
+ 125 0078 3D48     		ldr	r0, .L64+4
+ 126 007a FFF7FEFF 		bl	printf
+ 127              	.LVL0:
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	       printf("[outSRS]RCM_SRS1 is ZERO   = %#02X \r\n\r", (RCM_SRS1))  ;	 
+ 128              		.loc 1 56 0
+ 129 007e 6178     		ldrb	r1, [r4, #1]
+ 130 0080 3C48     		ldr	r0, .L64+8
+ 131 0082 FFF7FEFF 		bl	printf
+ 132              	.LVL1:
+ 133 0086 F5E7     		b	.L1
+ 134              	.L58:
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           printf("\n\r[outSRS]Wakeup bit set from low power mode ");
+ 135              		.loc 1 40 0
+ 136 0088 3B48     		ldr	r0, .L64+12
+ 137 008a FFF7FEFF 		bl	printf
+ 138              	.LVL2:
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if ((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 3)
+ 139              		.loc 1 41 0
+ 140 008e 3B4A     		ldr	r2, .L64+16
+ 141 0090 0723     		mov	r3, #7
+ 142 0092 5478     		ldrb	r4, [r2, #1]
+ 143 0094 1C40     		and	r4, r3
+ 144 0096 032C     		cmp	r4, #3
+ 145 0098 63D0     		beq	.L60
+ 146              	.L14:
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 147              		.loc 1 43 0
+ 148 009a 3848     		ldr	r0, .L64+16
+ 149 009c 0724     		mov	r4, #7
+ 150 009e 4178     		ldrb	r1, [r0, #1]
+ 151 00a0 2140     		and	r1, r4
+ 152 00a2 0429     		cmp	r1, #4
+ 153 00a4 56D0     		beq	.L61
+ 154              	.L15:
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 155              		.loc 1 45 0
+ 156 00a6 3548     		ldr	r0, .L64+16
+ 157 00a8 0723     		mov	r3, #7
+ 158 00aa 4178     		ldrb	r1, [r0, #1]
+ 159 00ac 1940     		and	r1, r3
+ 160 00ae 0429     		cmp	r1, #4
+ 161 00b0 48D0     		beq	.L62
+ 162              	.L16:
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 163              		.loc 1 47 0
+ 164 00b2 324A     		ldr	r2, .L64+16
+ 165 00b4 0721     		mov	r1, #7
+ 166 00b6 5078     		ldrb	r0, [r2, #1]
+ 167 00b8 0840     		and	r0, r1
+ 168 00ba 0428     		cmp	r0, #4
+ 169 00bc 3AD0     		beq	.L63
+ 170              	.L17:
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 171              		.loc 1 49 0
+ 172 00be 2F4C     		ldr	r4, .L64+16
+ 173 00c0 0720     		mov	r0, #7
+ 174 00c2 6278     		ldrb	r2, [r4, #1]
+ 175 00c4 0240     		and	r2, r0
+ 176 00c6 042A     		cmp	r2, #4
+ 177 00c8 CDD1     		bne	.L13
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 178              		.loc 1 49 0 is_stmt 0
+ 179 00ca A178     		ldrb	r1, [r4, #2]
+ 180 00cc 0840     		and	r0, r1
+ 181 00ce 0328     		cmp	r0, #3
+ 182 00d0 C9D1     		bne	.L13
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS3 exit ") ; 
+ 183              		.loc 1 50 0 is_stmt 1
+ 184 00d2 2B48     		ldr	r0, .L64+20
+ 185 00d4 FFF7FEFF 		bl	printf
+ 186              	.LVL3:
+ 187 00d8 C5E7     		b	.L13
+ 188              	.L57:
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLow-voltage Detect Reset");
+ 189              		.loc 1 37 0
+ 190 00da 2A48     		ldr	r0, .L64+24
+ 191 00dc FFF7FEFF 		bl	printf
+ 192              	.LVL4:
+ 193 00e0 BDE7     		b	.L11
+ 194              	.L56:
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLoss of Lock in PLL Reset");
+ 195              		.loc 1 35 0
+ 196 00e2 2948     		ldr	r0, .L64+28
+ 197 00e4 FFF7FEFF 		bl	printf
+ 198              	.LVL5:
+ 199 00e8 B5E7     		b	.L10
+ 200              	.L55:
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rLoss of External Clock Reset");
+ 201              		.loc 1 33 0
+ 202 00ea 2848     		ldr	r0, .L64+32
+ 203 00ec FFF7FEFF 		bl	printf
+ 204              	.LVL6:
+ 205 00f0 ADE7     		b	.L9
+ 206              	.L54:
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rWatchdog(COP) Reset");
+ 207              		.loc 1 31 0
+ 208 00f2 2748     		ldr	r0, .L64+36
+ 209 00f4 FFF7FEFF 		bl	printf
+ 210              	.LVL7:
+ 211 00f8 A5E7     		b	.L8
+ 212              	.L53:
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rExternal Pin Reset");
+ 213              		.loc 1 29 0
+ 214 00fa 2648     		ldr	r0, .L64+40
+ 215 00fc FFF7FEFF 		bl	printf
+ 216              	.LVL8:
+ 217 0100 9DE7     		b	.L7
+ 218              	.L51:
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rCore Lockup Event Reset");
+ 219              		.loc 1 24 0
+ 220 0102 2548     		ldr	r0, .L64+44
+ 221 0104 FFF7FEFF 		bl	printf
+ 222              	.LVL9:
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 	if (RCM_SRS0 & RCM_SRS0_POR_MASK)
+ 223              		.loc 1 26 0
+ 224 0108 184A     		ldr	r2, .L64
+ 225 010a 1478     		ldrb	r4, [r2]
+ 226 010c 63B2     		sxtb	r3, r4
+ 227 010e 002B     		cmp	r3, #0
+ 228 0110 00DB     		blt	.LCB266
+ 229 0112 90E7     		b	.L6	@long jump
+ 230              	.LCB266:
+ 231              	.L52:
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rPower-on Reset");
+ 232              		.loc 1 27 0
+ 233 0114 2148     		ldr	r0, .L64+48
+ 234 0116 FFF7FEFF 		bl	printf
+ 235              	.LVL10:
+ 236 011a 8CE7     		b	.L6
+ 237              	.L50:
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rSoftware Reset");
+ 238              		.loc 1 22 0
+ 239 011c 2048     		ldr	r0, .L64+52
+ 240 011e FFF7FEFF 		bl	printf
+ 241              	.LVL11:
+ 242 0122 7DE7     		b	.L4
+ 243              	.L49:
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rMDM-AP Reset");
+ 244              		.loc 1 20 0
+ 245 0124 1F48     		ldr	r0, .L64+56
+ 246 0126 FFF7FEFF 		bl	printf
+ 247              	.LVL12:
+ 248 012a 74E7     		b	.L3
+ 249              	.L48:
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c **** 		printf("\n\rStop Mode Acknowledge Error Reset");
+ 250              		.loc 1 18 0
+ 251 012c 1E48     		ldr	r0, .L64+60
+ 252 012e FFF7FEFF 		bl	printf
+ 253              	.LVL13:
+ 254 0132 6BE7     		b	.L2
+ 255              	.L63:
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 256              		.loc 1 47 0
+ 257 0134 9378     		ldrb	r3, [r2, #2]
+ 258 0136 1940     		and	r1, r3
+ 259 0138 0229     		cmp	r1, #2
+ 260 013a C0D1     		bne	.L17
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS2 exit") ;
+ 261              		.loc 1 48 0
+ 262 013c 1B48     		ldr	r0, .L64+64
+ 263 013e FFF7FEFF 		bl	printf
+ 264              	.LVL14:
+ 265 0142 BCE7     		b	.L17
+ 266              	.L62:
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 267              		.loc 1 45 0
+ 268 0144 8478     		ldrb	r4, [r0, #2]
+ 269 0146 2340     		and	r3, r4
+ 270 0148 012B     		cmp	r3, #1
+ 271 014a B2D1     		bne	.L16
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS1 exit ") ;
+ 272              		.loc 1 46 0
+ 273 014c 1848     		ldr	r0, .L64+68
+ 274 014e FFF7FEFF 		bl	printf
+ 275              	.LVL15:
+ 276 0152 AEE7     		b	.L16
+ 277              	.L61:
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****           if (((SMC_PMCTRL & SMC_PMCTRL_STOPM_MASK)== 4) && ((SMC_STOPCTRL & SMC_STOPCTRL_VLLSM_MAS
+ 278              		.loc 1 43 0
+ 279 0154 8278     		ldrb	r2, [r0, #2]
+ 280 0156 1442     		tst	r4, r2
+ 281 0158 A5D1     		bne	.L15
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("VLLS0 exit ") ;
+ 282              		.loc 1 44 0
+ 283 015a 1648     		ldr	r0, .L64+72
+ 284 015c FFF7FEFF 		bl	printf
+ 285              	.LVL16:
+ 286 0160 A1E7     		b	.L15
+ 287              	.L60:
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm\rcm.c ****             printf("LLS exit ") ;
+ 288              		.loc 1 42 0
+ 289 0162 1548     		ldr	r0, .L64+76
+ 290 0164 FFF7FEFF 		bl	printf
+ 291              	.LVL17:
+ 292 0168 97E7     		b	.L14
+ 293              	.L65:
+ 294 016a C046     		.align	2
+ 295              	.L64:
+ 296 016c 00F00740 		.word	1074262016
+ 297 0170 6C010000 		.word	.LC32
+ 298 0174 94010000 		.word	.LC34
+ 299 0178 00010000 		.word	.LC20
+ 300 017c 00E00740 		.word	1074257920
+ 301 0180 60010000 		.word	.LC30
+ 302 0184 E4000000 		.word	.LC18
+ 303 0188 C8000000 		.word	.LC16
+ 304 018c A8000000 		.word	.LC14
+ 305 0190 90000000 		.word	.LC12
+ 306 0194 78000000 		.word	.LC10
+ 307 0198 48000000 		.word	.LC6
+ 308 019c 64000000 		.word	.LC8
+ 309 01a0 34000000 		.word	.LC4
+ 310 01a4 24000000 		.word	.LC2
+ 311 01a8 00000000 		.word	.LC0
+ 312 01ac 54010000 		.word	.LC28
+ 313 01b0 48010000 		.word	.LC26
+ 314 01b4 3C010000 		.word	.LC24
+ 315 01b8 30010000 		.word	.LC22
+ 316              		.cfi_endproc
+ 317              	.LFE0:
+ 319              		.section	.rodata.str1.4,"aMS",%progbits,1
+ 320              		.align	2
+ 321              	.LC0:
+ 322 0000 0A0D5374 		.ascii	"\012\015Stop Mode Acknowledge Error Reset\000"
+ 322      6F70204D 
+ 322      6F646520 
+ 322      41636B6E 
+ 322      6F776C65 
+ 323              	.LC2:
+ 324 0024 0A0D4D44 		.ascii	"\012\015MDM-AP Reset\000"
+ 324      4D2D4150 
+ 324      20526573 
+ 324      657400
+ 325 0033 00       		.space	1
+ 326              	.LC4:
+ 327 0034 0A0D536F 		.ascii	"\012\015Software Reset\000"
+ 327      66747761 
+ 327      72652052 
+ 327      65736574 
+ 327      00
+ 328 0045 000000   		.space	3
+ 329              	.LC6:
+ 330 0048 0A0D436F 		.ascii	"\012\015Core Lockup Event Reset\000"
+ 330      7265204C 
+ 330      6F636B75 
+ 330      70204576 
+ 330      656E7420 
+ 331 0062 0000     		.space	2
+ 332              	.LC8:
+ 333 0064 0A0D506F 		.ascii	"\012\015Power-on Reset\000"
+ 333      7765722D 
+ 333      6F6E2052 
+ 333      65736574 
+ 333      00
+ 334 0075 000000   		.space	3
+ 335              	.LC10:
+ 336 0078 0A0D4578 		.ascii	"\012\015External Pin Reset\000"
+ 336      7465726E 
+ 336      616C2050 
+ 336      696E2052 
+ 336      65736574 
+ 337 008d 000000   		.space	3
+ 338              	.LC12:
+ 339 0090 0A0D5761 		.ascii	"\012\015Watchdog(COP) Reset\000"
+ 339      74636864 
+ 339      6F672843 
+ 339      4F502920 
+ 339      52657365 
+ 340 00a6 0000     		.space	2
+ 341              	.LC14:
+ 342 00a8 0A0D4C6F 		.ascii	"\012\015Loss of External Clock Reset\000"
+ 342      7373206F 
+ 342      66204578 
+ 342      7465726E 
+ 342      616C2043 
+ 343 00c7 00       		.space	1
+ 344              	.LC16:
+ 345 00c8 0A0D4C6F 		.ascii	"\012\015Loss of Lock in PLL Reset\000"
+ 345      7373206F 
+ 345      66204C6F 
+ 345      636B2069 
+ 345      6E20504C 
+ 346              	.LC18:
+ 347 00e4 0A0D4C6F 		.ascii	"\012\015Low-voltage Detect Reset\000"
+ 347      772D766F 
+ 347      6C746167 
+ 347      65204465 
+ 347      74656374 
+ 348 00ff 00       		.space	1
+ 349              	.LC20:
+ 350 0100 0A0D5B6F 		.ascii	"\012\015[outSRS]Wakeup bit set from low power mode "
+ 350      75745352 
+ 350      535D5761 
+ 350      6B657570 
+ 350      20626974 
+ 351 012d 00       		.ascii	"\000"
+ 352 012e 0000     		.space	2
+ 353              	.LC22:
+ 354 0130 4C4C5320 		.ascii	"LLS exit \000"
+ 354      65786974 
+ 354      2000
+ 355 013a 0000     		.space	2
+ 356              	.LC24:
+ 357 013c 564C4C53 		.ascii	"VLLS0 exit \000"
+ 357      30206578 
+ 357      69742000 
+ 358              	.LC26:
+ 359 0148 564C4C53 		.ascii	"VLLS1 exit \000"
+ 359      31206578 
+ 359      69742000 
+ 360              	.LC28:
+ 361 0154 564C4C53 		.ascii	"VLLS2 exit\000"
+ 361      32206578 
+ 361      697400
+ 362 015f 00       		.space	1
+ 363              	.LC30:
+ 364 0160 564C4C53 		.ascii	"VLLS3 exit \000"
+ 364      33206578 
+ 364      69742000 
+ 365              	.LC32:
+ 366 016c 5B6F7574 		.ascii	"[outSRS]RCM_SRS0 is ZERO   = %#02X \015\012\015\000"
+ 366      5352535D 
+ 366      52434D5F 
+ 366      53525330 
+ 366      20697320 
+ 367 0193 00       		.space	1
+ 368              	.LC34:
+ 369 0194 5B6F7574 		.ascii	"[outSRS]RCM_SRS1 is ZERO   = %#02X \015\012\015\000"
+ 369      5352535D 
+ 369      52434D5F 
+ 369      53525331 
+ 369      20697320 
+ 370 01bb 00       		.text
+ 371              	.Letext0:
+ 372              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 373              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+DEFINED SYMBOLS
+                            *ABS*:00000000 rcm.c
+C:\Users\lab\AppData\Local\Temp\ccBb8N46.s:18     .text.outSRS:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccBb8N46.s:23     .text.outSRS:00000000 outSRS
+C:\Users\lab\AppData\Local\Temp\ccBb8N46.s:296    .text.outSRS:0000016c $d
+C:\Users\lab\AppData\Local\Temp\ccBb8N46.s:320    .rodata.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+printf

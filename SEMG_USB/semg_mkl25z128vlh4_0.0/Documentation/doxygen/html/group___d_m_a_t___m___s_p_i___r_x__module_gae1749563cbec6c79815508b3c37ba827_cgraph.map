@@ -1,0 +1,5 @@
+<map id="DMAT_M_SPI_RX_Init" name="DMAT_M_SPI_RX_Init">
+<area shape="rect" id="node2" href="$group___events__module.html#ga31b7ba39777bc5353b7921bb262d12a4" title="Called at the end of a DMA transfer. If the Half complete property in initialization section is anabl..." alt="" coords="206,5,413,32"/>
+<area shape="rect" id="node3" href="$group___events__module.html#gab11607160ff8e1edbe6197aec1b0b2c7" title="Called when error in channel settings is detected. See SetEventMask() and GetEventMask() methods..." alt="" coords="220,56,399,83"/>
+<area shape="rect" id="node4" href="$group___d_m_a___c_t_r_l__module.html#ga553f7520948665feb02a5442ce5fb2cc" title="Initializes the device according to design&#45;time configuration properties. Allocates memory for the de..." alt="" coords="252,107,367,133"/>
+</map>

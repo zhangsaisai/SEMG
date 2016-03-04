@@ -1,0 +1,216 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 6
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"ProcessorExpert.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.global	SlaveReceivedFlg
+  18              		.section	.bss.SlaveReceivedFlg,"aw",%nobits
+  21              	SlaveReceivedFlg:
+  22 0000 00       		.space	1
+  23              		.global	MasterReceivedFlg
+  24              		.section	.bss.MasterReceivedFlg,"aw",%nobits
+  27              	MasterReceivedFlg:
+  28 0000 00       		.space	1
+  29              		.global	master_send
+  30              		.section	.bss.master_send,"aw",%nobits
+  31              		.align	2
+  34              	master_send:
+  35 0000 00000000 		.space	14
+  35      00000000 
+  35      00000000 
+  35      0000
+  36              		.global	slave_send
+  37 000e 0000     		.section	.bss.slave_send,"aw",%nobits
+  38              		.align	2
+  41              	slave_send:
+  42 0000 00000000 		.space	14
+  42      00000000 
+  42      00000000 
+  42      0000
+  43              		.global	master_receive
+  44 000e 0000     		.section	.bss.master_receive,"aw",%nobits
+  45              		.align	2
+  48              	master_receive:
+  49 0000 00000000 		.space	14
+  49      00000000 
+  49      00000000 
+  49      0000
+  50              		.global	slave_receive
+  51 000e 0000     		.section	.bss.slave_receive,"aw",%nobits
+  52              		.align	2
+  55              	slave_receive:
+  56 0000 00000000 		.space	14
+  56      00000000 
+  56      00000000 
+  56      0000
+  57 000e 0000     		.section	.text.main,"ax",%progbits
+  58              		.align	2
+  59              		.global	main
+  60              		.code	16
+  61              		.thumb_func
+  63              	main:
+  64              	.LFB0:
+  65              		.file 1 "../Sources/ProcessorExpert.c"
+   1:../Sources/ProcessorExpert.c **** /** ###################################################################
+   2:../Sources/ProcessorExpert.c **** **     Filename    : ProcessorExpert.c
+   3:../Sources/ProcessorExpert.c **** **     Project     : ProcessorExpert
+   4:../Sources/ProcessorExpert.c **** **     Processor   : MKL25Z128VLK4
+   5:../Sources/ProcessorExpert.c **** **     Version     : Driver 01.01
+   6:../Sources/ProcessorExpert.c **** **     Compiler    : GNU C Compiler
+   7:../Sources/ProcessorExpert.c **** **     Date/Time   : 2012-08-08, 16:59, # CodeGen: 0
+   8:../Sources/ProcessorExpert.c **** **     Abstract    :
+   9:../Sources/ProcessorExpert.c **** **         Main module.
+  10:../Sources/ProcessorExpert.c **** **         This module contains user's application code.
+  11:../Sources/ProcessorExpert.c **** **     Settings    :
+  12:../Sources/ProcessorExpert.c **** **     Contents    :
+  13:../Sources/ProcessorExpert.c **** **         No public methods
+  14:../Sources/ProcessorExpert.c **** **
+  15:../Sources/ProcessorExpert.c **** ** ###################################################################*/
+  16:../Sources/ProcessorExpert.c **** /* MODULE ProcessorExpert */
+  17:../Sources/ProcessorExpert.c **** 
+  18:../Sources/ProcessorExpert.c **** 
+  19:../Sources/ProcessorExpert.c **** /* Including needed modules to compile this module/procedure */
+  20:../Sources/ProcessorExpert.c **** #include "Cpu.h"
+  21:../Sources/ProcessorExpert.c **** #include "Events.h"
+  22:../Sources/ProcessorExpert.c **** #include "CsIO1.h"
+  23:../Sources/ProcessorExpert.c **** #include "IO1.h"
+  24:../Sources/ProcessorExpert.c **** #include "SM1.h"
+  25:../Sources/ProcessorExpert.c **** #include "TI1.h"
+  26:../Sources/ProcessorExpert.c **** #include "TimerIntLdd1.h"
+  27:../Sources/ProcessorExpert.c **** #include "TU1.h"
+  28:../Sources/ProcessorExpert.c **** #include "PCS.h"
+  29:../Sources/ProcessorExpert.c **** /* Including shared modules, which are used for whole project */
+  30:../Sources/ProcessorExpert.c **** #include "PE_Types.h"
+  31:../Sources/ProcessorExpert.c **** #include "PE_Error.h"
+  32:../Sources/ProcessorExpert.c **** #include "PE_Const.h"
+  33:../Sources/ProcessorExpert.c **** #include "IO_Map.h"
+  34:../Sources/ProcessorExpert.c **** 
+  35:../Sources/ProcessorExpert.c **** /* User includes (#include below this line is not maintained by Processor Expert) */
+  36:../Sources/ProcessorExpert.c **** #include "stdio.h"
+  37:../Sources/ProcessorExpert.c **** #include <string.h>
+  38:../Sources/ProcessorExpert.c **** 
+  39:../Sources/ProcessorExpert.c **** /* Global Variables */
+  40:../Sources/ProcessorExpert.c **** #define DATA_SIZE 14
+  41:../Sources/ProcessorExpert.c **** #define COMM_SIZE 1
+  42:../Sources/ProcessorExpert.c **** 
+  43:../Sources/ProcessorExpert.c **** volatile bool SlaveReceivedFlg = FALSE;
+  44:../Sources/ProcessorExpert.c **** volatile bool MasterReceivedFlg = FALSE;
+  45:../Sources/ProcessorExpert.c **** 
+  46:../Sources/ProcessorExpert.c **** char master_send[14]    = {0};
+  47:../Sources/ProcessorExpert.c **** char slave_send[14]     = {0};
+  48:../Sources/ProcessorExpert.c **** char master_receive[14] = {0};
+  49:../Sources/ProcessorExpert.c **** char slave_receive[14]  = {0};
+  50:../Sources/ProcessorExpert.c **** 
+  51:../Sources/ProcessorExpert.c **** int main(void)
+  52:../Sources/ProcessorExpert.c **** {
+  66              		.loc 1 52 0
+  67              		.cfi_startproc
+  68 0000 80B5     		push	{r7, lr}
+  69              	.LCFI0:
+  70              		.cfi_def_cfa_offset 8
+  71              		.cfi_offset 7, -8
+  72              		.cfi_offset 14, -4
+  73 0002 82B0     		sub	sp, sp, #8
+  74              	.LCFI1:
+  75              		.cfi_def_cfa_offset 16
+  76 0004 00AF     		add	r7, sp, #0
+  77              	.LCFI2:
+  78              		.cfi_def_cfa_register 7
+  53:../Sources/ProcessorExpert.c ****   /* Write your local variable definition here */
+  54:../Sources/ProcessorExpert.c ****   uint32 i = 0;
+  79              		.loc 1 54 0
+  80 0006 0023     		mov	r3, #0
+  81 0008 7B60     		str	r3, [r7, #4]
+  55:../Sources/ProcessorExpert.c **** 
+  56:../Sources/ProcessorExpert.c ****   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
+  57:../Sources/ProcessorExpert.c ****   PE_low_level_init();
+  82              		.loc 1 57 0
+  83 000a FFF7FEFF 		bl	PE_low_level_init
+  84              	.L4:
+  58:../Sources/ProcessorExpert.c ****   /*** End of Processor Expert internal initialization.                    ***/
+  59:../Sources/ProcessorExpert.c **** 
+  60:../Sources/ProcessorExpert.c ****   /* Write your code here */
+  61:../Sources/ProcessorExpert.c ****   
+  62:../Sources/ProcessorExpert.c ****  //printf ("\n\n");  
+  63:../Sources/ProcessorExpert.c ****  //printf("********************************************************\n");
+  64:../Sources/ProcessorExpert.c ****  //printf("*                                                       \n");
+  65:../Sources/ProcessorExpert.c ****  //printf("* Running SPI Demo, Master & Slave exchanged messages   \n");
+  66:../Sources/ProcessorExpert.c ****  //printf("* Before continuing connect SPI0(Master)         \n");
+  67:../Sources/ProcessorExpert.c ****  //printf("* to SPI1 (Slave) as outlined below              \n"); 
+  68:../Sources/ProcessorExpert.c ****  //printf("*                                                \n"); 
+  69:../Sources/ProcessorExpert.c ****  //printf("* MOSI:  PTA17 (J2 pin 11) to PTE1 (J2 pin 20)   \n");
+  70:../Sources/ProcessorExpert.c ****  //printf("* MISO:  PTA16 (J2 pin  9) to PTE3 (J9 pin 11)   \n");
+  71:../Sources/ProcessorExpert.c ****  //printf("* SCK:   PTC5  (J1 pin  9) to PTE2 (J9 pin  9)   \n");
+  72:../Sources/ProcessorExpert.c ****  //printf("* PCS0:  PTC4  (J1 pin  7) to PTE4 (J9 pin 13)   \n");
+  73:../Sources/ProcessorExpert.c ****  //printf("*                                                \n");
+  74:../Sources/ProcessorExpert.c ****  //printf("* Then enter any key to continue                 \n");
+  75:../Sources/ProcessorExpert.c ****  //printf("*                                                \n");
+  76:../Sources/ProcessorExpert.c ****  //printf("********************************************************\n");
+  77:../Sources/ProcessorExpert.c ****  //printf ("\n\n");
+  78:../Sources/ProcessorExpert.c ****     
+  79:../Sources/ProcessorExpert.c **** 
+  80:../Sources/ProcessorExpert.c ****   for(;;){
+  81:../Sources/ProcessorExpert.c ****  
+  82:../Sources/ProcessorExpert.c **** 
+  83:../Sources/ProcessorExpert.c ****       
+  84:../Sources/ProcessorExpert.c ****   for(i=0;i<1000000;i++){} //Delay
+  85              		.loc 1 84 0
+  86 000e 0023     		mov	r3, #0
+  87 0010 7B60     		str	r3, [r7, #4]
+  88 0012 02E0     		b	.L2
+  89              	.L3:
+  90              		.loc 1 84 0 is_stmt 0
+  91 0014 7B68     		ldr	r3, [r7, #4]
+  92 0016 0133     		add	r3, r3, #1
+  93 0018 7B60     		str	r3, [r7, #4]
+  94              	.L2:
+  95              		.loc 1 84 0
+  96 001a 7A68     		ldr	r2, [r7, #4]
+  97 001c 014B     		ldr	r3, .L5
+  98 001e 9A42     		cmp	r2, r3
+  99 0020 F8D9     		bls	.L3
+  85:../Sources/ProcessorExpert.c ****   
+  86:../Sources/ProcessorExpert.c ****    }
+ 100              		.loc 1 86 0 is_stmt 1
+ 101 0022 F4E7     		b	.L4
+ 102              	.L6:
+ 103              		.align	2
+ 104              	.L5:
+ 105 0024 3F420F00 		.word	999999
+ 106              		.cfi_endproc
+ 107              	.LFE0:
+ 109              		.text
+ 110              	.Letext0:
+ 111              		.file 2 "D:/kuaipan/SEMG/MEMS_KL25_PIN32/spi_demo_master/Generated_Code/PE_Types.h"
+DEFINED SYMBOLS
+                            *ABS*:00000000 ProcessorExpert.c
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:21     .bss.SlaveReceivedFlg:00000000 SlaveReceivedFlg
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:22     .bss.SlaveReceivedFlg:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:27     .bss.MasterReceivedFlg:00000000 MasterReceivedFlg
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:28     .bss.MasterReceivedFlg:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:34     .bss.master_send:00000000 master_send
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:31     .bss.master_send:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:41     .bss.slave_send:00000000 slave_send
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:38     .bss.slave_send:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:48     .bss.master_receive:00000000 master_receive
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:45     .bss.master_receive:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:55     .bss.slave_receive:00000000 slave_receive
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:52     .bss.slave_receive:00000000 $d
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:58     .text.main:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:63     .text.main:00000000 main
+C:\Users\lab\AppData\Local\Temp\ccjPjbqb.s:105    .text.main:00000024 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+PE_low_level_init

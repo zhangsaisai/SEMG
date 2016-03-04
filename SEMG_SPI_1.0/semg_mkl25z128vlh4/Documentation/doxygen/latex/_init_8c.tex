@@ -1,0 +1,63 @@
+\hypertarget{_init_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Init.c File Reference}
+\label{_init_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Init.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Sources/\-Init.\-c}}
+}
+
+
+This file contains user initialization of data, on-\/chip and peripheral devices.  
+
+
+{\ttfamily \#include \char`\"{}Sys\-Tick.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\-S\-\_\-\-S\-P\-I1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}S\-M\-\_\-\-S\-P\-I0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-I\-N\-T\-\_\-\-S\-Y\-N\-C\-\_\-\-I\-N\-T.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-U\-P\-R\-D\-Y.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-R\-E\-S\-E\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-S\-T\-A\-R\-T0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-C\-S0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-R\-E\-S\-E\-T1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Bit\-I\-O\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-C\-S1.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Types.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Error.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}P\-E\-\_\-\-Const.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}I\-O\-\_\-\-Map.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Events.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}Cpu.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-T\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-\_\-\-C\-T\-R\-L.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}My\-Headers.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}string.\-h\char`\"{}}\\*
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group___user_initialization_ga655d748c28aad5b529f5826b50fe1251}{User\-Init} (void)
+\begin{DoxyCompactList}\small\item\em Initialize on-\/chip and peripheral devices. The method is called in the main function and will be called only once. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This file contains user initialization of data, on-\/chip and peripheral devices. \begin{DoxyVersion}{Version}
+01.\-00 
+\end{DoxyVersion}
+The followings will be initialized\-:
+
+
+\begin{DoxyItemize}
+\item User data 
+\item On-\/chip devices 
+\begin{DoxyItemize}
+\item S\-P\-I0, S\-P\-I1 
+\item S\-P\-I0\-\_\-\-T\-X\-\_\-\-D\-M\-A, S\-P\-I0\-\_\-\-R\-X\-\_\-\-D\-M\-A, S\-P\-I1\-\_\-\-T\-X\-\_\-\-D\-M\-A, S\-P\-I1\-\_\-\-R\-X\-\_\-\-D\-M\-A 
+\item D\-M\-A 
+\item U\-A\-R\-T0, U\-A\-R\-T2 
+\item P\-T\-A2 
+\item P\-T\-B1, P\-T\-B19 
+\item P\-T\-C1, P\-T\-C2 
+\item P\-T\-D4 
+\item P\-T\-E18, P\-T\-E19 
+\end{DoxyItemize}
+\item Peripheral devices 
+\begin{DoxyItemize}
+\item A\-D\-C 
+\end{DoxyItemize}
+\end{DoxyItemize}

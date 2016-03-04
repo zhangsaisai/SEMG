@@ -1,0 +1,171 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"nmi_isr_handler.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.nmi_isr,"ax",%progbits
+  18              		.align	2
+  19              		.global	nmi_isr
+  20              		.code	16
+  21              		.thumb_func
+  23              	nmi_isr:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** /* File:         nmi_isr_handler.c
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****  * Purpose:     Provides routines for handling nmi isr.
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****  *
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****  * Notes:	
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****  *              
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** void nmi_isr(void);
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** 
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** #include "common.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** #include "nmi_isr_handler.h"
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** 
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** #ifdef CMSIS
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** void NMI_Handler(void)
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** #else
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** void nmi_isr(void)
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** #endif
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** {
+  26              		.loc 1 17 0
+  27              		.cfi_startproc
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   int i;
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** /*    issue with rev 0 silicon - if in CPO and NMI taken, exit CPO */
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   if(MCM_CPO & MCM_CPO_CPOACK_MASK){
+  28              		.loc 1 20 0
+  29 0000 0F49     		ldr	r1, .L14
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** {
+  30              		.loc 1 17 0
+  31 0002 00B5     		push	{lr}
+  32              	.LCFI0:
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 14, -4
+  35              		.loc 1 20 0
+  36 0004 0B6C     		ldr	r3, [r1, #64]
+  37 0006 9A07     		lsl	r2, r3, #30
+  38 0008 08D5     		bpl	.L5
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****       MCM_CPO &= ~MCM_CPO_CPOREQ_MASK;
+  39              		.loc 1 21 0
+  40 000a 0B6C     		ldr	r3, [r1, #64]
+  41 000c 0122     		mov	r2, #1
+  42 000e 9343     		bic	r3, r2
+  43 0010 0B64     		str	r3, [r1, #64]
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****       while (MCM_CPO & MCM_CPO_CPOACK_MASK);                
+  44              		.loc 1 22 0
+  45 0012 0220     		mov	r0, #2
+  46              	.L3:
+  47              		.loc 1 22 0 is_stmt 0
+  48 0014 0B6C     		ldr	r3, [r1, #64]
+  49 0016 1842     		tst	r0, r3
+  50 0018 FCD1     		bne	.L3
+  51              	.L1:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   } else 
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   for(i= 0;i<0x1ffff;i++){
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****      if ((FGPIOA_PDIR & 0x00000010) == 0x10)   // if pin returns high stop
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****        break;  // debounce
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   }
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****    return;  
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** }
+  52              		.loc 1 29 0 is_stmt 1
+  53              		@ sp needed for prologue
+  54 001a 00BD     		pop	{pc}
+  55              	.L5:
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****      if ((FGPIOA_PDIR & 0x00000010) == 0x10)   // if pin returns high stop
+  56              		.loc 1 25 0
+  57 001c 094A     		ldr	r2, .L14+4
+  58 001e 1021     		mov	r1, #16
+  59 0020 1069     		ldr	r0, [r2, #16]
+  60 0022 0142     		tst	r1, r0
+  61 0024 F9D1     		bne	.L1
+  62              	.LVL0:
+  63 0026 084B     		ldr	r3, .L14+8
+  64 0028 05E0     		b	.L2
+  65              	.L13:
+  66 002a 1069     		ldr	r0, [r2, #16]
+  67 002c 0142     		tst	r1, r0
+  68 002e F4D1     		bne	.L1
+  69 0030 023B     		sub	r3, r3, #2
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   for(i= 0;i<0x1ffff;i++){
+  70              		.loc 1 24 0
+  71 0032 002B     		cmp	r3, #0
+  72 0034 F1D0     		beq	.L1
+  73              	.L2:
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****      if ((FGPIOA_PDIR & 0x00000010) == 0x10)   // if pin returns high stop
+  74              		.loc 1 25 0
+  75 0036 1069     		ldr	r0, [r2, #16]
+  76 0038 0142     		tst	r1, r0
+  77 003a F6D0     		beq	.L13
+  78 003c EDE7     		b	.L1
+  79              	.L15:
+  80 003e C046     		.align	2
+  81              	.L14:
+  82 0040 003000F0 		.word	-268423168
+  83 0044 00F00FF8 		.word	-133173248
+  84 0048 FEFF0100 		.word	131070
+  85              		.cfi_endproc
+  86              	.LFE0:
+  88              		.section	.text.enable_NMI_button,"ax",%progbits
+  89              		.align	2
+  90              		.global	enable_NMI_button
+  91              		.code	16
+  92              		.thumb_func
+  94              	enable_NMI_button:
+  95              	.LFB1:
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** 
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** void enable_NMI_button(void)
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** {
+  96              		.loc 1 32 0
+  97              		.cfi_startproc
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****     /* Configure the PTA4 pin for its NMI function */
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   PORTA_PCR4 =  PORT_PCR_PS_MASK |
+  98              		.loc 1 35 0
+  99 0000 014A     		ldr	r2, .L17
+ 100 0002 024B     		ldr	r3, .L17+4
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****                 PORT_PCR_PE_MASK | 
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****                 PORT_PCR_PFE_MASK |
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****                 PORT_PCR_MUX(7); /* NMI Falling edge */    
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****    // NMI is alt7 function for this pin
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****     
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c **** }
+ 101              		.loc 1 41 0
+ 102              		@ sp needed for prologue
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\nmi_isr_handler.c ****   PORTA_PCR4 =  PORT_PCR_PS_MASK |
+ 103              		.loc 1 35 0
+ 104 0004 1A61     		str	r2, [r3, #16]
+ 105              		.loc 1 41 0
+ 106 0006 7047     		bx	lr
+ 107              	.L18:
+ 108              		.align	2
+ 109              	.L17:
+ 110 0008 13070000 		.word	1811
+ 111 000c 00900440 		.word	1074040832
+ 112              		.cfi_endproc
+ 113              	.LFE1:
+ 115              		.text
+ 116              	.Letext0:
+ 117              		.file 2 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 118              		.file 3 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 nmi_isr_handler.c
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:18     .text.nmi_isr:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:23     .text.nmi_isr:00000000 nmi_isr
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:82     .text.nmi_isr:00000040 $d
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:89     .text.enable_NMI_button:00000000 $t
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:94     .text.enable_NMI_button:00000000 enable_NMI_button
+C:\Users\lab\AppData\Local\Temp\cct08A5d.s:110    .text.enable_NMI_button:00000008 $d
+                     .debug_frame:00000010 $d
+
+NO UNDEFINED SYMBOLS

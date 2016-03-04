@@ -1,0 +1,36 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Sources/Test.c" name="E:/workspace/semg_mkl15z128vlh4/Sources/Test.c">
+<area shape="rect" id="node2" href="$_s_m___s_p_i1_8h.html" title="This component &quot;SPIMaster_LDD&quot; implements MASTER part of synchronous serial master&#45;slave communicatio..." alt="" coords="1513,320,1601,347"/>
+<area shape="rect" id="node3" href="$_p_e___types_8h.html" title="PE_Types.h &#45; contains definitions of basic types, register access macros and hardware specific macros..." alt="" coords="3833,469,3927,496"/>
+<area shape="rect" id="node5" href="$_p_e___error_8h.html" title="This component &quot;PE_Error&quot; contains internal definitions of the error constants. " alt="" coords="1530,469,1616,496"/>
+<area shape="rect" id="node6" href="$_p_e___const_8h.html" title="This component &quot;PE_Const&quot; contains internal definitions of the constants. " alt="" coords="2469,469,2560,496"/>
+<area shape="rect" id="node8" href="$_cpu_8h.html" title="Cpu.h" alt="" coords="1712,395,1768,421"/>
+<area shape="rect" id="node10" href="$_s_s___s_p_i0_8h.html" title="This component &quot;SPISlave_LDD&quot; implements SLAVE part of synchronous serial master&#45;slave communication..." alt="" coords="1325,320,1411,347"/>
+<area shape="rect" id="node11" href="$_bit_i_o___n_o_t___p_w_d_n_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="1930,320,2072,347"/>
+<area shape="rect" id="node13" href="$_bit_i_o___n_o_t___r_e_s_e_t_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="3382,320,3527,347"/>
+<area shape="rect" id="node14" href="$_bit_i_o___s_t_a_r_t_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="3558,320,3668,347"/>
+<area shape="rect" id="node15" href="$_bit_i_o___d_a_i_s_y___i_n_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="2457,320,2583,347"/>
+<area shape="rect" id="node16" href="$_bit_i_o___c_l_k_s_e_l_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="2314,320,2432,347"/>
+<area shape="rect" id="node17" href="$_events_8h.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="2152,171,2224,197"/>
+<area shape="rect" id="node33" href="$_my_headers_8h.html" title="This file contains all header files created by user. Easy for including header files in other files..." alt="" coords="4573,96,4672,123"/>
+<area shape="rect" id="node18" href="$_cs_i_o___u_a_r_t2_8h.html" title="This component generates low&#45;level methods for redirecting console I/O to the selected UART..." alt="" coords="4057,245,4167,272"/>
+<area shape="rect" id="node20" href="$_i_o2_8h.html" title="This component &quot;Serial_LDD&quot; implements an asynchronous serial communication. The component supports d..." alt="" coords="2035,245,2088,272"/>
+<area shape="rect" id="node21" href="$_sys_tick_8h.html" title="This file implements the SysTick (SysTick) module initialization according to the Peripheral Initiali..." alt="" coords="2109,320,2189,347"/>
+<area shape="rect" id="node22" href="$_bit_i_o___u_p_r_d_y_8h.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="2608,320,2723,347"/>
+<area shape="rect" id="node23" href="$_e_i_n_t___n_o_t___d_r_d_y_8h.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="2999,320,3136,347"/>
+<area shape="rect" id="node25" href="$_e_i_n_t___s_y_n_c___i_n_t_8h.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="3223,320,3353,347"/>
+<area shape="rect" id="node26" href="$_d_m_a_t___m___s_p_i___t_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="1025,245,1161,272"/>
+<area shape="rect" id="node27" href="$_d_m_a___c_t_r_l_8h.html" title="This embedded component implements initialization and runtime handling of an on&#45;chip DMA controller..." alt="" coords="904,320,1005,347"/>
+<area shape="rect" id="node30" href="$_d_m_a_t___m___s_p_i___r_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="544,245,683,272"/>
+<area shape="rect" id="node31" href="$_d_m_a_t___s___s_p_i___t_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="1186,245,1320,272"/>
+<area shape="rect" id="node32" href="$_d_m_a_t___s___s_p_i___r_x_8h.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="815,245,951,272"/>
+<area shape="rect" id="node34" href="$_settings_8h.html" title="This file contains device and environment settings. " alt="" coords="4871,320,4952,347"/>
+<area shape="rect" id="node35" href="$_macros_8h.html" title="This file contains user macros used in this project. " alt="" coords="4627,245,4703,272"/>
+<area shape="rect" id="node36" href="$_globals_8h.html" title="This file defines global variables used in this project. " alt="" coords="4873,171,4951,197"/>
+<area shape="rect" id="node37" href="$_aliases_8h.html" title="This file contains ports and functions aliases. Aliases guarantee minimum modification of code..." alt="" coords="4975,171,5051,197"/>
+<area shape="rect" id="node38" href="$_a_d_c_8h.html" title="This file contains ADC operation functions. " alt="" coords="4710,171,4769,197"/>
+<area shape="rect" id="node39" href="$_init_8h.html" title="This file contains user initialization of data, on&#45;chip and peripheral devices. " alt="" coords="4501,171,4552,197"/>
+<area shape="rect" id="node40" href="$_process_8h.html" title="This file contains functions for kinds of data processing. " alt="" coords="4345,171,4425,197"/>
+<area shape="rect" id="node41" href="$_test_8h.html" title="This file contains test functions. " alt="" coords="4627,171,4685,197"/>
+<area shape="rect" id="node42" href="$_utilities_8h.html" title="This file contains general functions used in this project. " alt="" coords="4426,245,4501,272"/>
+<area shape="rect" id="node43" href="$_s_p_i_8h.html" title="This file contains high level functions on receiving and sending data via SPI. " alt="" coords="4794,171,4848,197"/>
+</map>

@@ -1,0 +1,40 @@
+\hypertarget{_e_i_n_t___a_d___n_o_t___d_r_d_y0_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.c File Reference}
+\label{_e_i_n_t___a_d___n_o_t___d_r_d_y0_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.\-c}}
+}
+
+
+This component, \char`\"{}\-Ext\-Int\-\_\-\-L\-D\-D\char`\"{}, provide a low level A\-P\-I for unified access of external interrupts handling across various device designs. The component uses one pin which generates interrupt on selected edge.  
+
+
+{\ttfamily \#include \char`\"{}Events.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_e_i_n_t___a_d___n_o_t___d_r_d_y0___t_device_data}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-T\-Device\-Data}
+\end{DoxyCompactItemize}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga6289c9344d850ed52c43c8e58a61ef0d}{typedef struct \\*
+\hyperlink{struct_e_i_n_t___a_d___n_o_t___d_r_d_y0___t_device_data}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-T\-Device\-Data} $\ast$ {\bfseries E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-T\-Device\-Data\-Ptr}}\label{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga6289c9344d850ed52c43c8e58a61ef0d}
+
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga8fdfdf050efb6e96f32eb368d3973f62}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em This method initializes the associated peripheral(s) and the component internal variables. The method is called automatically as a part of the application initialization code. \end{DoxyCompactList}\item 
+void \hyperlink{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_gae37e9771827244ada4beed22069ed403}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-Enable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Enable the component -\/ the external events are accepted. This method is available only if H\-W module allows enable/disable of the interrupt. \end{DoxyCompactList}\item 
+void \hyperlink{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga4588bd6095c97bca113999707136f299}{E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-Disable} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Disable the component -\/ the external events are not accepted. This method is available only if H\-W module allows enable/disable of the interrupt. \end{DoxyCompactList}\item 
+\hypertarget{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga9060a2a8a07e5af757e56267504e8428}{void {\bfseries E\-I\-N\-T\-\_\-\-A\-D\-\_\-\-N\-O\-T\-\_\-\-D\-R\-D\-Y0\-\_\-\-Interrupt} (void)}\label{group___e_i_n_t___a_d___n_o_t___d_r_d_y0__module_ga9060a2a8a07e5af757e56267504e8428}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This component, \char`\"{}\-Ext\-Int\-\_\-\-L\-D\-D\char`\"{}, provide a low level A\-P\-I for unified access of external interrupts handling across various device designs. The component uses one pin which generates interrupt on selected edge. \begin{DoxyVersion}{Version}
+01.\-02 
+\end{DoxyVersion}

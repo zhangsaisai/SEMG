@@ -1,0 +1,52 @@
+\hypertarget{_d_m_a_t___m___s_p_i___r_x_8c}{\section{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.c File Reference}
+\label{_d_m_a_t___m___s_p_i___r_x_8c}\index{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-c@{E\-:/workspace/semg\-\_\-mkl25z128vlh4/\-Generated\-\_\-\-Code/\-D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-c}}
+}
+
+
+This embedded component implements a D\-M\-A transfer channel descriptor definition.  
+
+
+{\ttfamily \#include \char`\"{}Events.\-h\char`\"{}}\\*
+{\ttfamily \#include \char`\"{}D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X.\-h\char`\"{}}\\*
+\subsection*{Data Structures}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_d_m_a_t___m___s_p_i___r_x___t_device_data}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-T\-Device\-Data}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$ \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_gae1749563cbec6c79815508b3c37ba827}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Init} (\hyperlink{group___p_e___types__module_ga0b66a73f87238a782318aa0be7578e35}{L\-D\-D\-\_\-\-T\-User\-Data} $\ast$User\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Initializes the D\-M\-A\-Transfer component. Allocates memory for the device data structure. This method can be called only once. Before the second call of Init() the Deinit() must be called first. \end{DoxyCompactList}\item 
+void \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_ga9de8df48ffcbfc74c12902bd2caeda53}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Deinit} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em Deinitializes the D\-M\-A\-Transfer component. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_ga94c354d7c7c0b56a1aed784fcb0e3d77}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Allocate\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method allocates D\-M\-A channel for the D\-M\-A transfer. This method must be called before D\-M\-A channel is initialized. Otherwise E\-R\-R\-\_\-\-N\-O\-T\-A\-V\-A\-I\-L error code is returned after call of D\-M\-A\-\_\-\-L\-D\-D channel methods. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_gafc57e74b4003c05c870480ab0c3a8432}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Enable\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method initializes and/or enables the D\-M\-A channel allocated for the D\-M\-A transfer defined by the transfer descriptor input parameter Descriptor\-Ptr. First call of this method on given D\-M\-A channel initializes it and enables H\-W requests if Peripheral device or Always enabled trigger source is selected in transfer descriptor Trigger source type item. This method can be also used together with Disable method to temporary switch On/\-Off the D\-M\-A channel H\-W requests. In such case D\-M\-A channel registers are not reinitialized again. New initialization of D\-M\-A channel can be done via Set\-Channel\-Descriptor\-Update method which reinitializes whole channel with new transfer descriptor. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_ga9b4e1d431dc3f67f2e9e4a52486ba2f2}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Disable\-Channel} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr)
+\begin{DoxyCompactList}\small\item\em The method disables the D\-M\-A channel allocated for the D\-M\-A transfer. However, it is still possible to start transfer explicitly as S\-W transfer requests via Start\-Channel\-Transfer method. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_gae7eb2ac56c2a0231dc8509c53c2a8d0b}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Set\-Source\-Address} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{group___p_e___types__module_gab8287f62db7ff96992355760b652cd07}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Address} Address)
+\begin{DoxyCompactList}\small\item\em The method sets an data source address for to be transferred by the D\-M\-A channel allocated for the D\-M\-A transfer. This method can be used to update D\-M\-A transfer source address when D\-M\-A channel is enabled. New source address is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new source address can be optionally checked for consistency with rest of the transfer descriptor data. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_ga902c844d7c70f4c7d494f83e65f58cd2}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Set\-Destination\-Address} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{group___p_e___types__module_gab8287f62db7ff96992355760b652cd07}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Address} Address)
+\begin{DoxyCompactList}\small\item\em The method sets an data destination address for to be transferred by the D\-M\-A channel allocated for the D\-M\-A transfer. This method can be used to update D\-M\-A transfer destination address when D\-M\-A channel is enabled. New destination address is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new source address can be optionally checked for consistency with rest of the transfer descriptor data. \end{DoxyCompactList}\item 
+\hyperlink{group___p_e___types__module_ga24c2b045fd04e79e85f261ce4df35588}{L\-D\-D\-\_\-\-T\-Error} \hyperlink{group___d_m_a_t___m___s_p_i___r_x__module_ga060c809d41d04bdf1d7b974bf4b61730}{D\-M\-A\-T\-\_\-\-M\-\_\-\-S\-P\-I\-\_\-\-R\-X\-\_\-\-Set\-Byte\-Count} (\hyperlink{group___p_e___types__module_gac5cf1362f1f0e3a2ce71b1bf2276d091}{L\-D\-D\-\_\-\-T\-Device\-Data} $\ast$Device\-Data\-Ptr, \hyperlink{group___p_e___types__module_gac001a681eb67942fa78ac9b62ba3b0d6}{L\-D\-D\-\_\-\-D\-M\-A\-\_\-\-T\-Byte\-Count} Byte\-Count)
+\begin{DoxyCompactList}\small\item\em The method sets a byte count (size of data) to be transferred for the D\-M\-A transfer. This method can be used to update D\-M\-A transfer byte count when D\-M\-A channel is enabled. New transfer byte count is stored in transfer descriptor and written to associated D\-M\-A channel registers. The new transfer byte count can be optionally checked for consistency with rest of the transfer descriptor data. If nested operation is used, the method sets the minor (inner) loop byte count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{group___d_m_a_t___m___s_p_i___r_x__module_gaec0c7bbae454d68acac84afc8d7a6319}{volatile byte $\ast$ {\bfseries S\-P\-I0\-Rx\-D\-M\-A\-Data\-Source\-Buffer} = N\-U\-L\-L}\label{group___d_m_a_t___m___s_p_i___r_x__module_gaec0c7bbae454d68acac84afc8d7a6319}
+
+\item 
+\hypertarget{group___d_m_a_t___m___s_p_i___r_x__module_ga5ebc388863f0f751162da7451b5e6da6}{volatile byte $\ast$ {\bfseries S\-P\-I0\-Rx\-D\-M\-A\-Data\-Destination\-Buffer} = N\-U\-L\-L}\label{group___d_m_a_t___m___s_p_i___r_x__module_ga5ebc388863f0f751162da7451b5e6da6}
+
+\item 
+\hypertarget{group___d_m_a_t___m___s_p_i___r_x__module_ga8773080b35e9c0c3c7d706d7eac1e8d3}{volatile uint8\-\_\-t {\bfseries S\-P\-I0\-Rx\-D\-M\-A\-Byte\-Count} = 0}\label{group___d_m_a_t___m___s_p_i___r_x__module_ga8773080b35e9c0c3c7d706d7eac1e8d3}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This embedded component implements a D\-M\-A transfer channel descriptor definition. \begin{DoxyVersion}{Version}
+01.\-08 
+\end{DoxyVersion}

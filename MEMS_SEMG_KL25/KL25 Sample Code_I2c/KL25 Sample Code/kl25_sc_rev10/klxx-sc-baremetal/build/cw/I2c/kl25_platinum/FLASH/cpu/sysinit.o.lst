@@ -1,0 +1,554 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"sysinit.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.enable_abort_button,"ax",%progbits
+  18              		.align	2
+  19              		.global	enable_abort_button
+  20              		.code	16
+  21              		.thumb_func
+  23              	enable_abort_button:
+  24              	.LFB1:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  * File:        sysinit.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  * Purpose:     Kinetis L Family Configuration
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  *              Initializes processor to a default state
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  *
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  * Notes:
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  *
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  *
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  */
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #include "common.h"
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #include "sysinit.h"
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #include "UART.h"
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /********************************************************************/
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /* System clock frequency variables - Represents the current system clock
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  * settings
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  */
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int mcg_clk_hz;
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int mcg_clk_khz;
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int core_clk_khz;
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int periph_clk_khz;
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int pll_clk_khz;
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** int uart0_clk_khz;
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** uint32 uart0_clk_hz;
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** extern uint32_t SystemCoreClock;
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /********************************************************************/
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** void sysinit (void)
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         /* Enable all of the port clocks. These have to be enabled to configure
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * pin muxing options, so most code will need all of these on anyway.
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          */
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SCGC5 |= (SIM_SCGC5_PORTA_MASK
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                       | SIM_SCGC5_PORTB_MASK
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                       | SIM_SCGC5_PORTC_MASK
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                       | SIM_SCGC5_PORTD_MASK
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                       | SIM_SCGC5_PORTE_MASK );
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // Release hold with ACKISO:  Only has an effect if recovering from VLLS1, VLLS2, or VLLS3
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // if ACKISO is set you must clear ackiso before calling pll_init 
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         //    or pll init hangs waiting for OSC to initialize
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // if osc enabled in low power modes - enable it first before ack
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // if I/O needs to be maintained without glitches enable outputs and modules first before a
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (PMC_REGSC &  PMC_REGSC_ACKISO_MASK)
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         PMC_REGSC |= PMC_REGSC_ACKISO_MASK;
+  50:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+  51:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #ifdef ENABLE_CLKOUT
+  52:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // Initialize trace clk functionality
+  53:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         clk_out_init();
+  54:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif
+  55:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  56:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #if defined(NO_PLL_INIT)
+  57:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         // If PLL initialization is not desired, set FLL to 48 MHz clock in default FEI mode
+  58:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         MCG_C4 |= (MCG_C4_DRST_DRS(1) | MCG_C4_DMX32_MASK);
+  59:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         mcg_clk_hz = 21000000; //FEI mode
+  60:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+  61:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SOPT2 &= ~SIM_SOPT2_PLLFLLSEL_MASK; // clear PLLFLLSEL to select the FLL for this clock
+  62:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+  63:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         uart0_clk_khz = (mcg_clk_hz / 1000); // the uart0 clock frequency will equal the FLL freque
+  64:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        
+  65:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #else 
+  66:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* Ramp up the system clock */
+  67:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* Set the system dividers */
+  68:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* NOTE: The PLL init will not configure the system clock dividers,
+  69:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         * so they must be configured appropriately before calling the PLL
+  70:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         * init function to ensure that clocks remain in valid ranges.
+  71:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         */  
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_CLKDIV1 = ( 0
+  73:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                         | SIM_CLKDIV1_OUTDIV1(0)
+  74:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                         | SIM_CLKDIV1_OUTDIV4(1) );
+  75:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****  
+  76:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #ifndef CMSIS
+  77:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* Initialize PLL */
+  78:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* PLL will be the source for MCG CLKOUT so the core, system, and flash clocks are derived f
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        mcg_clk_hz = pll_init(CLK0_FREQ_HZ,  /* CLKIN0 frequency */
+  80:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                              LOW_POWER,     /* Set the oscillator for low power mode */
+  81:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                              CLK0_TYPE,     /* Crystal or canned oscillator clock input */
+  82:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                              PLL0_PRDIV,    /* PLL predivider value */
+  83:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                              PLL0_VDIV,     /* PLL multiplier */
+  84:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                              MCGOUT);       /* Use the output from this PLL as the MCGOUT */
+  85:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #else
+  86:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** mcg_clk_hz = SystemCoreClock;
+  87:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif
+  88:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        /* Check the value returned from pll_init() to make sure there wasn't an error */
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        if (mcg_clk_hz < 0x100)
+  90:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          while(1);
+  91:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        SIM_SOPT2 |= SIM_SOPT2_PLLFLLSEL_MASK; // set PLLFLLSEL to select the PLL for this clock sou
+  93:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        uart0_clk_khz = ((mcg_clk_hz / 2) / 1000); // UART0 clock frequency will equal half the PLL 
+  95:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif      
+  96:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+  97:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	/*
+  98:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * Use the value obtained from the pll_init function to define variables
+  99:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	 * for the core clock in kHz and also the peripheral clock. These
+ 100:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	 * variables can be used by other functions that need awareness of the
+ 101:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	 * system frequency.
+ 102:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	 */
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         mcg_clk_khz = mcg_clk_hz / 1000;
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	core_clk_khz = mcg_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV1_MASK) >> 28)+ 1);
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         periph_clk_khz = core_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> 16)+ 1);
+ 106:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 107:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         /* Enable pin interrupt for the abort button - PTA4 */
+ 108:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         /* This pin could also be used as the NMI interrupt, but since the NMI
+ 109:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * is level sensitive each button press will cause multiple interrupts.
+ 110:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * Using the GPIO interrupt instead means we can configure for an edge
+ 111:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * sensitive interrupt instead = one interrupt per button press.
+ 112:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          */
+ 113:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #ifndef DISABLE_ABORT_BUTTON
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         enable_abort_button();
+ 115:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif        
+ 116:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 117:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (TERM_PORT_NUM == 0)
+ 118:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         {
+ 119:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	  /* Enable the pins for the selected UART */
+ 120:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #ifdef FREEDOM
+ 121:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           /* Enable the UART_TXD function on PTA1 */
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           PORTA_PCR1 = PORT_PCR_MUX(0x2);
+ 123:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           
+ 124:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           /* Enable the UART_TXD function on PTA2 */
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           PORTA_PCR2 = PORT_PCR_MUX(0x2);
+ 126:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           
+ 127:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #else
+ 128:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           /* Enable the UART_TXD function on PTA14 */
+ 129:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	  PORTA_PCR14 = PORT_PCR_MUX(0x3); // UART0 is alt3 function for this pin
+ 130:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		
+ 131:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	  /* Enable the UART_RXD function on PTA15 */
+ 132:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	  PORTA_PCR15 = PORT_PCR_MUX(0x3); // UART0 is alt3 function for this pin
+ 133:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif
+ 134:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           SIM_SOPT2 |= SIM_SOPT2_UART0SRC(1); // select the PLLFLLCLK as UART0 clock source
+ 136:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         }
+ 137:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	if (TERM_PORT_NUM == 1)
+ 138:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	{
+ 139:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                 /* Enable the UART_TXD function on PTC4 */
+ 140:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		PORTC_PCR4 = PORT_PCR_MUX(0x3); // UART1 is alt3 function for this pin
+ 141:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		
+ 142:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		/* Enable the UART_RXD function on PTC3 */
+ 143:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		PORTC_PCR3 = PORT_PCR_MUX(0x3); // UART1 is alt3 function for this pin
+ 144:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	}
+ 145:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 146:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (TERM_PORT_NUM == 2)
+ 147:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	{
+ 148:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****                  /* Enable the UART_TXD function on PTD3 */
+ 149:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		PORTD_PCR3 = PORT_PCR_MUX(0x3); // UART2 is alt3 function for this pin
+ 150:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		
+ 151:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		/* Enable the UART_RXD function on PTD2 */
+ 152:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   		PORTD_PCR2 = PORT_PCR_MUX(0x3); // UART2 is alt3 function for this pin
+ 153:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	}
+ 154:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 155:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	/* UART0 is clocked asynchronously to the core clock, but all other UARTs are
+ 156:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * clocked from the peripheral clock. So we have to determine which clock
+ 157:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          * to send to the UART_init function.
+ 158:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****          */
+ 159:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (TERM_PORT_NUM == 0)
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****             uart0_init (UART0_BASE_PTR, uart0_clk_khz, TERMINAL_BAUD);
+ 161:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         else if (TERM_PORT_NUM == 1)
+ 162:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	    uart_init (UART1_BASE_PTR, periph_clk_khz, TERMINAL_BAUD);
+ 163:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         else if (TERM_PORT_NUM == 2)
+ 164:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****             uart_init (UART2_BASE_PTR, periph_clk_khz, TERMINAL_BAUD);
+ 165:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         else
+ 166:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           while(1);
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** }
+ 168:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /********************************************************************/
+ 169:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** void enable_abort_button(void)
+ 170:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+  26              		.loc 1 170 0
+  27              		.cfi_startproc
+  28 0000 08B5     		push	{r3, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+ 171:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     /* Configure the PTA4 pin for its GPIO function */
+ 172:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     PORTA_PCR4 = PORT_PCR_MUX(0x1); // GPIO is alt1 function for this pin
+  33              		.loc 1 172 0
+  34 0002 8022     		mov	r2, #128
+  35 0004 054B     		ldr	r3, .L2
+  36 0006 5000     		lsl	r0, r2, #1
+  37 0008 1861     		str	r0, [r3, #16]
+ 173:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     
+ 174:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     /* Configure the PTA4 pin for rising edge interrupts */
+ 175:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     PORTA_PCR4 |= PORT_PCR_IRQC(0x9); 
+  38              		.loc 1 175 0
+  39 000a 1969     		ldr	r1, [r3, #16]
+  40 000c 9022     		mov	r2, #144
+  41 000e 1003     		lsl	r0, r2, #12
+  42 0010 0843     		orr	r0, r1
+  43 0012 1861     		str	r0, [r3, #16]
+ 176:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     
+ 177:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     /* Enable the associated IRQ in the NVIC */
+ 178:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #ifndef CMSIS
+ 179:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     enable_irq(30);      
+  44              		.loc 1 179 0
+  45 0014 1E20     		mov	r0, #30
+  46 0016 FFF7FEFF 		bl	enable_irq
+  47              	.LVL0:
+ 180:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #else
+ 181:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     NVIC_EnableIRQ(PORTA_IRQn);
+ 182:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** #endif
+ 183:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** }
+  48              		.loc 1 183 0
+  49              		@ sp needed for prologue
+  50 001a 08BD     		pop	{r3, pc}
+  51              	.L3:
+  52              		.align	2
+  53              	.L2:
+  54 001c 00900440 		.word	1074040832
+  55              		.cfi_endproc
+  56              	.LFE1:
+  58              		.global	__aeabi_idiv
+  59              		.global	__aeabi_uidiv
+  60              		.section	.text.sysinit,"ax",%progbits
+  61              		.align	2
+  62              		.global	sysinit
+  63              		.code	16
+  64              		.thumb_func
+  66              	sysinit:
+  67              	.LFB0:
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+  68              		.loc 1 33 0
+  69              		.cfi_startproc
+  70 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  71              	.LCFI1:
+  72              		.cfi_def_cfa_offset 20
+  73              		.cfi_offset 4, -20
+  74              		.cfi_offset 5, -16
+  75              		.cfi_offset 6, -12
+  76              		.cfi_offset 7, -8
+  77              		.cfi_offset 14, -4
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SCGC5 |= (SIM_SCGC5_PORTA_MASK
+  78              		.loc 1 37 0
+  79 0002 324A     		ldr	r2, .L13
+  80 0004 324B     		ldr	r3, .L13+4
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+  81              		.loc 1 33 0
+  82 0006 4746     		mov	r7, r8
+  83 0008 80B4     		push	{r7}
+  84              	.LCFI2:
+  85              		.cfi_def_cfa_offset 24
+  86              		.cfi_offset 8, -24
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SCGC5 |= (SIM_SCGC5_PORTA_MASK
+  87              		.loc 1 37 0
+  88 000a D058     		ldr	r0, [r2, r3]
+  89 000c F821     		mov	r1, #248
+  90 000e 8C01     		lsl	r4, r1, #6
+  91 0010 0443     		orr	r4, r0
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (PMC_REGSC &  PMC_REGSC_ACKISO_MASK)
+  92              		.loc 1 48 0
+  93 0012 304D     		ldr	r5, .L13+8
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SCGC5 |= (SIM_SCGC5_PORTA_MASK
+  94              		.loc 1 37 0
+  95 0014 D450     		str	r4, [r2, r3]
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (PMC_REGSC &  PMC_REGSC_ACKISO_MASK)
+  96              		.loc 1 48 0
+  97 0016 AE78     		ldrb	r6, [r5, #2]
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+  98              		.loc 1 33 0
+  99 0018 82B0     		sub	sp, sp, #8
+ 100              	.LCFI3:
+ 101              		.cfi_def_cfa_offset 32
+  48:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         if (PMC_REGSC &  PMC_REGSC_ACKISO_MASK)
+ 102              		.loc 1 48 0
+ 103 001a 3107     		lsl	r1, r6, #28
+ 104 001c 04D5     		bpl	.L5
+  49:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         PMC_REGSC |= PMC_REGSC_ACKISO_MASK;
+ 105              		.loc 1 49 0
+ 106 001e AF78     		ldrb	r7, [r5, #2]
+ 107 0020 0822     		mov	r2, #8
+ 108 0022 3A43     		orr	r2, r7
+ 109 0024 D3B2     		uxtb	r3, r2
+ 110 0026 AB70     		strb	r3, [r5, #2]
+ 111              	.L5:
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_CLKDIV1 = ( 0
+ 112              		.loc 1 72 0
+ 113 0028 8020     		mov	r0, #128
+ 114 002a 284C     		ldr	r4, .L13
+ 115 002c 2A4F     		ldr	r7, .L13+12
+ 116 002e 4102     		lsl	r1, r0, #9
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        mcg_clk_hz = pll_init(CLK0_FREQ_HZ,  /* CLKIN0 frequency */
+ 117              		.loc 1 79 0
+ 118 0030 0126     		mov	r6, #1
+ 119 0032 1825     		mov	r5, #24
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_CLKDIV1 = ( 0
+ 120              		.loc 1 72 0
+ 121 0034 E151     		str	r1, [r4, r7]
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        mcg_clk_hz = pll_init(CLK0_FREQ_HZ,  /* CLKIN0 frequency */
+ 122              		.loc 1 79 0
+ 123 0036 0122     		mov	r2, #1
+ 124 0038 0196     		str	r6, [sp, #4]
+  72:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_CLKDIV1 = ( 0
+ 125              		.loc 1 72 0
+ 126 003a 8846     		mov	r8, r1
+  79:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        mcg_clk_hz = pll_init(CLK0_FREQ_HZ,  /* CLKIN0 frequency */
+ 127              		.loc 1 79 0
+ 128 003c 0095     		str	r5, [sp]
+ 129 003e 2748     		ldr	r0, .L13+16
+ 130 0040 0021     		mov	r1, #0
+ 131 0042 0423     		mov	r3, #4
+ 132 0044 FFF7FEFF 		bl	pll_init
+ 133              	.LVL1:
+ 134 0048 254A     		ldr	r2, .L13+20
+ 135 004a 061C     		mov	r6, r0
+ 136 004c 1060     		str	r0, [r2]
+  89:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        if (mcg_clk_hz < 0x100)
+ 137              		.loc 1 89 0
+ 138 004e FF28     		cmp	r0, #255
+ 139 0050 00DC     		bgt	.L6
+ 140              	.L11:
+ 141 0052 FEE7     		b	.L11
+ 142              	.L6:
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        SIM_SOPT2 |= SIM_SOPT2_PLLFLLSEL_MASK; // set PLLFLLSEL to select the PLL for this clock sou
+ 143              		.loc 1 92 0
+ 144 0054 234D     		ldr	r5, .L13+24
+ 145 0056 4046     		mov	r0, r8
+ 146 0058 6359     		ldr	r3, [r4, r5]
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        uart0_clk_khz = ((mcg_clk_hz / 2) / 1000); // UART0 clock frequency will equal half the PLL 
+ 147              		.loc 1 94 0
+ 148 005a 2349     		ldr	r1, .L13+28
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        SIM_SOPT2 |= SIM_SOPT2_PLLFLLSEL_MASK; // set PLLFLLSEL to select the PLL for this clock sou
+ 149              		.loc 1 92 0
+ 150 005c 0343     		orr	r3, r0
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        uart0_clk_khz = ((mcg_clk_hz / 2) / 1000); // UART0 clock frequency will equal half the PLL 
+ 151              		.loc 1 94 0
+ 152 005e FA22     		mov	r2, #250
+  92:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        SIM_SOPT2 |= SIM_SOPT2_PLLFLLSEL_MASK; // set PLLFLLSEL to select the PLL for this clock sou
+ 153              		.loc 1 92 0
+ 154 0060 6351     		str	r3, [r4, r5]
+  94:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****        uart0_clk_khz = ((mcg_clk_hz / 2) / 1000); // UART0 clock frequency will equal half the PLL 
+ 155              		.loc 1 94 0
+ 156 0062 8846     		mov	r8, r1
+ 157 0064 301C     		mov	r0, r6
+ 158 0066 D100     		lsl	r1, r2, #3
+ 159 0068 FFF7FEFF 		bl	__aeabi_idiv
+ 160              	.LVL2:
+ 161 006c 4346     		mov	r3, r8
+ 162 006e 1860     		str	r0, [r3]
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         mcg_clk_khz = mcg_clk_hz / 1000;
+ 163              		.loc 1 103 0
+ 164 0070 301C     		mov	r0, r6
+ 165 0072 FA26     		mov	r6, #250
+ 166 0074 B100     		lsl	r1, r6, #2
+ 167 0076 FFF7FEFF 		bl	__aeabi_idiv
+ 168              	.LVL3:
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	core_clk_khz = mcg_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV1_MASK) >> 28)+ 1);
+ 169              		.loc 1 104 0
+ 170 007a E259     		ldr	r2, [r4, r7]
+ 103:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         mcg_clk_khz = mcg_clk_hz / 1000;
+ 171              		.loc 1 103 0
+ 172 007c 1B49     		ldr	r1, .L13+32
+ 173 007e 0860     		str	r0, [r1]
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	core_clk_khz = mcg_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV1_MASK) >> 28)+ 1);
+ 174              		.loc 1 104 0
+ 175 0080 110F     		lsr	r1, r2, #28
+ 176 0082 0131     		add	r1, r1, #1
+ 177 0084 FFF7FEFF 		bl	__aeabi_uidiv
+ 178              	.LVL4:
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         periph_clk_khz = core_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> 16)+ 1);
+ 179              		.loc 1 105 0
+ 180 0088 E759     		ldr	r7, [r4, r7]
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	core_clk_khz = mcg_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV1_MASK) >> 28)+ 1);
+ 181              		.loc 1 104 0
+ 182 008a 194B     		ldr	r3, .L13+36
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         periph_clk_khz = core_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> 16)+ 1);
+ 183              		.loc 1 105 0
+ 184 008c 7E03     		lsl	r6, r7, #13
+ 185 008e 710F     		lsr	r1, r6, #29
+ 104:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****   	core_clk_khz = mcg_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV1_MASK) >> 28)+ 1);
+ 186              		.loc 1 104 0
+ 187 0090 1860     		str	r0, [r3]
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         periph_clk_khz = core_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> 16)+ 1);
+ 188              		.loc 1 105 0
+ 189 0092 0131     		add	r1, r1, #1
+ 190 0094 FFF7FEFF 		bl	__aeabi_uidiv
+ 191              	.LVL5:
+ 192 0098 1649     		ldr	r1, .L13+40
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           SIM_SOPT2 |= SIM_SOPT2_UART0SRC(1); // select the PLLFLLCLK as UART0 clock source
+ 193              		.loc 1 135 0
+ 194 009a 8026     		mov	r6, #128
+ 105:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         periph_clk_khz = core_clk_khz / (((SIM_CLKDIV1 & SIM_CLKDIV1_OUTDIV4_MASK) >> 16)+ 1);
+ 195              		.loc 1 105 0
+ 196 009c 0860     		str	r0, [r1]
+ 114:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         enable_abort_button();
+ 197              		.loc 1 114 0
+ 198 009e FFF7FEFF 		bl	enable_abort_button
+ 199              	.LVL6:
+ 122:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           PORTA_PCR1 = PORT_PCR_MUX(0x2);
+ 200              		.loc 1 122 0
+ 201 00a2 1548     		ldr	r0, .L13+44
+ 202 00a4 8022     		mov	r2, #128
+ 203 00a6 9300     		lsl	r3, r2, #2
+ 204 00a8 4360     		str	r3, [r0, #4]
+ 125:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           PORTA_PCR2 = PORT_PCR_MUX(0x2);
+ 205              		.loc 1 125 0
+ 206 00aa 8360     		str	r3, [r0, #8]
+ 135:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****           SIM_SOPT2 |= SIM_SOPT2_UART0SRC(1); // select the PLLFLLCLK as UART0 clock source
+ 207              		.loc 1 135 0
+ 208 00ac 6759     		ldr	r7, [r4, r5]
+ 209 00ae F104     		lsl	r1, r6, #19
+ 210 00b0 3943     		orr	r1, r7
+ 211 00b2 6151     		str	r1, [r4, r5]
+ 160:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****             uart0_init (UART0_BASE_PTR, uart0_clk_khz, TERMINAL_BAUD);
+ 212              		.loc 1 160 0
+ 213 00b4 4446     		mov	r4, r8
+ 214 00b6 E125     		mov	r5, #225
+ 215 00b8 2168     		ldr	r1, [r4]
+ 216 00ba 1048     		ldr	r0, .L13+48
+ 217 00bc 6A02     		lsl	r2, r5, #9
+ 218 00be FFF7FEFF 		bl	uart0_init
+ 219              	.LVL7:
+ 167:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** }
+ 220              		.loc 1 167 0
+ 221 00c2 02B0     		add	sp, sp, #8
+ 222              		@ sp needed for prologue
+ 223 00c4 04BC     		pop	{r2}
+ 224 00c6 9046     		mov	r8, r2
+ 225 00c8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 226              	.L14:
+ 227 00ca C046     		.align	2
+ 228              	.L13:
+ 229 00cc 00700440 		.word	1074032640
+ 230 00d0 38100000 		.word	4152
+ 231 00d4 00D00740 		.word	1074253824
+ 232 00d8 44100000 		.word	4164
+ 233 00dc 00127A00 		.word	8000000
+ 234 00e0 00000000 		.word	mcg_clk_hz
+ 235 00e4 04100000 		.word	4100
+ 236 00e8 00000000 		.word	uart0_clk_khz
+ 237 00ec 00000000 		.word	mcg_clk_khz
+ 238 00f0 00000000 		.word	core_clk_khz
+ 239 00f4 00000000 		.word	periph_clk_khz
+ 240 00f8 00900440 		.word	1074040832
+ 241 00fc 00A00640 		.word	1074176000
+ 242              		.cfi_endproc
+ 243              	.LFE0:
+ 245              		.section	.text.clk_out_init,"ax",%progbits
+ 246              		.align	2
+ 247              		.global	clk_out_init
+ 248              		.code	16
+ 249              		.thumb_func
+ 251              	clk_out_init:
+ 252              	.LFB2:
+ 184:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /********************************************************************/
+ 185:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+ 186:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** /********************************************************************/
+ 187:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** void clk_out_init(void)
+ 188:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** {
+ 253              		.loc 1 188 0
+ 254              		.cfi_startproc
+ 189:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 
+ 190:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     // If you are using UART1 for serial communications do not
+ 191:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     // initialize the clock out function or you may break the UART!
+ 192:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     if (TERM_PORT_NUM != 1)
+ 193:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     {
+ 194:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         /* Enable the CLKOUT function on PTC3 (alt5 function) */
+ 195:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** 	PORTC_PCR3 = ( PORT_PCR_MUX(0x5));
+ 255              		.loc 1 195 0
+ 256 0000 A022     		mov	r2, #160
+ 257 0002 054B     		ldr	r3, .L16
+ 258 0004 D000     		lsl	r0, r2, #3
+ 259 0006 D860     		str	r0, [r3, #12]
+ 196:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 197:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         /* Select the CLKOUT in the SMI_SOPT2 mux to be bus clk*/
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SOPT2 |= SIM_SOPT2_CLKOUTSEL(2);
+ 260              		.loc 1 198 0
+ 261 0008 044A     		ldr	r2, .L16+4
+ 262 000a 054B     		ldr	r3, .L16+8
+ 263 000c 4021     		mov	r1, #64
+ 264 000e D058     		ldr	r0, [r2, r3]
+ 199:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****     }
+ 200:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         
+ 201:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c **** }
+ 265              		.loc 1 201 0
+ 266              		@ sp needed for prologue
+ 198:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu\sysinit.c ****         SIM_SOPT2 |= SIM_SOPT2_CLKOUTSEL(2);
+ 267              		.loc 1 198 0
+ 268 0010 0143     		orr	r1, r0
+ 269 0012 D150     		str	r1, [r2, r3]
+ 270              		.loc 1 201 0
+ 271 0014 7047     		bx	lr
+ 272              	.L17:
+ 273 0016 C046     		.align	2
+ 274              	.L16:
+ 275 0018 00B00440 		.word	1074049024
+ 276 001c 00700440 		.word	1074032640
+ 277 0020 04100000 		.word	4100
+ 278              		.cfi_endproc
+ 279              	.LFE2:
+ 281              		.comm	uart0_clk_hz,4,4
+ 282              		.comm	uart0_clk_khz,4,4
+ 283              		.comm	pll_clk_khz,4,4
+ 284              		.comm	periph_clk_khz,4,4
+ 285              		.comm	core_clk_khz,4,4
+ 286              		.comm	mcg_clk_khz,4,4
+ 287              		.comm	mcg_clk_hz,4,4
+ 288              		.text
+ 289              	.Letext0:
+ 290              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 291              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+ 292              		.file 4 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+DEFINED SYMBOLS
+                            *ABS*:00000000 sysinit.c
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:18     .text.enable_abort_button:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:23     .text.enable_abort_button:00000000 enable_abort_button
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:54     .text.enable_abort_button:0000001c $d
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:61     .text.sysinit:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:66     .text.sysinit:00000000 sysinit
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:229    .text.sysinit:000000cc $d
+                            *COM*:00000004 mcg_clk_hz
+                            *COM*:00000004 uart0_clk_khz
+                            *COM*:00000004 mcg_clk_khz
+                            *COM*:00000004 core_clk_khz
+                            *COM*:00000004 periph_clk_khz
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:246    .text.clk_out_init:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:251    .text.clk_out_init:00000000 clk_out_init
+C:\Users\lab\AppData\Local\Temp\ccpStAiu.s:275    .text.clk_out_init:00000018 $d
+                            *COM*:00000004 uart0_clk_hz
+                            *COM*:00000004 pll_clk_khz
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+enable_irq
+__aeabi_idiv
+__aeabi_uidiv
+pll_init
+uart0_init

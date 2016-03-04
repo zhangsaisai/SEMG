@@ -1,0 +1,2 @@
+1.在pack_data原先的函数中，chDataCnt计满100个，即采集满100次时，chDataCnt清0（//chDataCnt %= CHANNEL_DATA_COUNT;）。而有可能会出现在刚刚计满100个后，马上将其清0.而随后在交换缓存时，chDataCnt即为0，因此会出现需要填充100个数据的情况。
+2.在pack_data函数中，在计满100个后，不将chDataCnt清0.在交换缓存函数中，再将chDataCnt清0.

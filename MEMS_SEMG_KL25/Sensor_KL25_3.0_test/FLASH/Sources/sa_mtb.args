@@ -1,0 +1,29 @@
+-mcpu=cortex-m0
+-mthumb
+-mfloat-abi=soft
+-g3
+-gdwarf-2
+-gstrict-dwarf
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Sources"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Sources/USB"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Project_Headers"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Generated_Code"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Compents/calculate"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Compents/delay"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Compents/function"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Compents/hmc5883"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Compents/mpu6050"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Project_Settings/Startup_Code"
+-I"E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include"
+-I"E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_Runtime/include"
+-I"D:/kuaipan/SEMG/MEMS_SEMG_KL25/Sensor_KL25_3.0_test/Generated_Code"
+-I"E:/Freescale/CW MCU v10.5/MCU/ProcessorExpert/lib/Kinetis/iofiles"
+-I"E:/Freescale/CW MCU v10.5/MCU/ProcessorExpert/lib/Kinetis/pdd/inc"
+-O0
+-ffunction-sections
+-fdata-sections
+-Wall
+-std=gnu99
+-c
+-fmessage-length=0
+-specs=ewl_c_noio.specs

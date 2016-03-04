@@ -1,0 +1,318 @@
+/** ###################################################################
+**     Filename    : Events.c
+**     Project     : ProcessorExpert
+**     Processor   : MKL25Z128VLK4
+**     Component   : Events
+**     Version     : Driver 01.00
+**     Compiler    : GNU C Compiler
+**     Date/Time   : 2012-08-08, 16:59, # CodeGen: 0
+**     Abstract    :
+**         This is user's event module.
+**         Put your event handler code here.
+**     Settings    :
+**     Contents    :
+**         Cpu_OnNMIINT - void Cpu_OnNMIINT(void);
+**
+** ###################################################################*/
+/* MODULE Events */
+
+#include "Cpu.h"
+#include "Events.h"
+
+/* User includes (#include below this line is not maintained by Processor Expert) */
+#include <string.h>
+
+/* Global Variables */
+#define DATA_SIZE 14
+#define COMM_SIZE 1
+extern volatile bool SlaveReceivedFlg;
+extern volatile bool MasterReceivedFlg;
+extern char master_send[14];
+extern char bslave_send[14];
+extern char master_receive[14];
+extern char slave_receive[14];
+
+/*
+** ===================================================================
+**     Event       :  Cpu_OnNMIINT (module Events)
+**
+**     Component   :  Cpu [MKL25Z128LK4]
+**     Description :
+**         This event is called when the Non maskable interrupt had
+**         occurred. This event is automatically enabled when the <NMI
+**         interrrupt> property is set to 'Enabled'.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void Cpu_OnNMIINT(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  Cpu_OnHardFault (module Events)
+**
+**     Component   :  Cpu [MKL25Z128LK4]
+**     Description :
+**         This event is called when the Hard Fault exception had
+**         occurred. This event is automatically enabled when the <Hard
+**         Fault> property is set to 'Enabled'.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void Cpu_OnHardFault(void)
+{
+  /* Write your code here ... */
+}
+
+/*
+** ===================================================================
+**     Event       :  IO1_OnBlockReceived (module Events)
+**
+**     Component   :  IO1 [Serial_LDD]
+**     Description :
+**         This event is called when the requested number of data is
+**         moved to the input buffer.
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**       * UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method.
+**     Returns     : Nothing
+** ===================================================================
+*/
+void IO1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */  
+
+}
+
+/*
+** ===================================================================
+**     Event       :  IO1_OnBlockSent (module Events)
+**
+**     Component   :  IO1 [Serial_LDD]
+**     Description :
+**         This event is called after the last character from the
+**         output buffer is moved to the transmitter. 
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**       * UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. This pointer is passed
+**                           as the parameter of Init method.
+**     Returns     : Nothing
+** ===================================================================
+*/
+void IO1_OnBlockSent(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
+}
+
+
+/*
+** ===================================================================
+**     Event       :  SM1_OnBlockSent (module Events)
+**
+**     Component   :  SM1 [SPIMaster_LDD]
+**     Description :
+**         This event is called after the last character from the
+**         output buffer is moved to the transmitter. This event is
+**         available only if the SendBlock method is enabled.
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**       * UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer is passed
+**                           as the parameter of Init method. 
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SM1_OnBlockSent(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
+
+}
+
+/*
+** ===================================================================
+**     Event       :  SM1_OnBlockReceived (module Events)
+**
+**     Component   :  SM1 [SPIMaster_LDD]
+**     Description :
+**         This event is called when the requested number of data is
+**         moved to the input buffer. This method is available only if
+**         the ReceiveBlock method is enabled.
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**       * UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer is passed
+**                           as the parameter of Init method. 
+**     Returns     : Nothing
+** ===================================================================
+*/
+void SM1_OnBlockReceived(LDD_TUserData *UserDataPtr)
+{
+  /* Write your code here ... */
+    MasterReceivedFlg = TRUE;  /* Set MasterReceivedFlg flag */
+   
+    if ((strcmp(master_receive, "Data For Slave") == 0))
+    {
+        printf("\nMaster: Master accepted Data...\n");      
+    }
+    else  if((strcmp(master_receive, "dummy" ) == 0))
+    {
+    	  printf("\nMaster: dummy accepted ...\n");
+    }
+    else  if ((strcmp(master_receive, "" ) == 0))
+    {
+      printf("\nMaster received nothing...\n"); 
+    }
+    else 
+       printf("\nMaster received  %x , %x\n",master_receive[0],master_receive[13]); 
+
+}
+
+/*
+** ===================================================================
+**     Function    : uart_putchar
+**
+**     Description :
+**         This function sends one character to the desired UART port.
+**         It was written to patch a CodeWarrior bug with the printf
+**         function.
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**         ch              - Character to be sent to the UART
+**         uart_port_num   - Specifies which UART to send the 
+**         					 character to.   
+**                           
+**     Returns     : Nothing
+** ===================================================================
+*/
+void uart_putchar (int uart_port_num, char ch)
+{
+	if (uart_port_num == 0)
+	{
+      /* Wait until space is available in the FIFO */
+      while(!(UART0_S1 & UART_S1_TDRE_MASK));
+    
+      /* Send the character */
+      UART0_D = (uint8)ch;
+	}
+	else if (uart_port_num == 1)
+	{
+	  /* Wait until space is available in the FIFO */
+	  while(!(UART1_S1 & UART_S1_TDRE_MASK));
+	   
+	  /* Send the character */
+	  UART1_D = (uint8)ch;
+	}
+	else
+	{
+	  /* Wait until space is available in the FIFO */
+	  while(!(UART2_S1 & UART_S1_TDRE_MASK));
+	  
+	  /* Send the character */
+	  UART2_D = (uint8)ch;
+	}
+ }
+
+/*
+** ===================================================================
+**     Function    : uart_getchar
+**
+**     Description :
+**         This function gets one character to the desired UART port.
+**         It was written to patch a CodeWarrior bug with the getchar
+**         function.
+**     Parameters  :
+**         NAME            - DESCRIPTION
+**         uart_port_num   - Specifies which UART to get the 
+**         					 character from.   
+**                           
+**     Returns     : character (UARTx_D)
+** ===================================================================
+*/
+char uart_getchar (int uart_port_num)
+{
+	if (uart_port_num == 0)
+	{
+      /* Wait until space is available in the FIFO */
+      while(!(UART0_S1 & UART_S1_RDRF_MASK));
+    
+      /* Send the character */
+      return (uint8)UART0_D;
+	}
+	else if (uart_port_num == 1)
+	{
+	  /* Wait until space is available in the FIFO */
+	  while(!(UART1_S1 & UART_S1_RDRF_MASK));
+	   
+	  /* Send the character */
+	  return (uint8)UART1_D;
+	}
+	else
+	{
+	  /* Wait until space is available in the FIFO */
+	  while(!(UART2_S1 & UART_S1_RDRF_MASK));
+	  
+	  /* Send the character */
+	  return (uint8)UART2_D;
+	}
+ }
+
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void TI1_OnInterrupt(void)
+{
+  /* Write your code here ... */
+	  int i ;
+	  i = 0;
+	
+	  /* Master sends message 1  */ 
+	  printf("\n\nMaster: Sending command...\n");
+	  PCS_ClrVal(NULL);
+	  for(i=0;i<10;i++){} //Delay
+	  master_send[0] = 0x01;
+	  SM1_SendBlock(SM1_DeviceData, master_send, COMM_SIZE); 
+	  for(i=0;i<100000;i++){} //Delay
+	  PCS_SetVal(NULL);
+	  
+	  /* Master sends dummy message to receive response from slave */
+	  printf("\n\nMaster: Sending data...\n");
+	  PCS_ClrVal(NULL);
+	  for(i=0;i<10;i++){} //Delay
+	  master_send[0] = 0x03; 
+	  SM1_SendBlock(SM1_DeviceData, master_send, DATA_SIZE);   
+	  SM1_ReceiveBlock(SM1_DeviceData, master_receive, DATA_SIZE);
+	  for(i=0;i<100000;i++){} //Delay
+	  //MasterReceivedFlg = FALSE;
+	  //while(!MasterReceivedFlg);
+	  PCS_SetVal(NULL);
+	  MasterReceivedFlg = FALSE;
+}
+
+/* END Events */
+
+/*
+** ###################################################################
+**
+**     This file was created by Processor Expert 10.0 [05.02]
+**     for the Freescale Kinetis series of microcontrollers.
+**
+** ###################################################################
+*/

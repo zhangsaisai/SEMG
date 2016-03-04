@@ -1,0 +1,9 @@
+<map id="User Macros" name="User Macros">
+<area shape="rect" id="node1" href="$group___err_msg.html" title="Error Message" alt="" coords="212,5,319,32"/>
+<area shape="rect" id="node2" href="$group___a_d_c_cmd_reg.html" title="ADC Commands and Registers Map" alt="" coords="149,56,381,83"/>
+<area shape="rect" id="node3" href="$group___sys_const.html" title="System Constants" alt="" coords="200,107,331,133"/>
+<area shape="rect" id="node4" href="$group___a_d_c_const.html" title="ADC Constants" alt="" coords="209,157,321,184"/>
+<area shape="rect" id="node5" href="$group___a_r_m_const.html" title="ARM constants" alt="" coords="209,208,321,235"/>
+<area shape="rect" id="node7" href="$group___d_m_a_const.html" title="DMA constants" alt="" coords="209,259,321,285"/>
+<area shape="rect" id="node8" href="$group___strc_grp.html" title="Structure Group" alt="" coords="208,309,323,336"/>
+</map>

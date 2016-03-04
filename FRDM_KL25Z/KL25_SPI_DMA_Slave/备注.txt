@@ -1,0 +1,29 @@
+1.PE生成DMA，SPI调试成功，DMA能初步通信。
+2.SPI1当作slave，SPI0当作master
+3.SPI0主机为中断模式接收，SPI1从机为DMA发送，没有开启中断。
+4.从机发数据给主机，主机收到的数据与从机发送的数据一致，通过测试。
+5.板内通信的流程：
+                                SM_SPI0_ReceiveBlock(主机使能接收中断，同时将接收缓存初始化)
+                                         |
+                                         |  
+                                         |
+                                  SPI1SendData（从机启动DMA发送数据
+                                         |
+                                         |
+                                         |
+                                  SM_SPI0_SendBlock（主机发送数据，给从机提供时钟）
+                                         |
+                                         |
+                                         |
+                                PE_ISR(SM_SPI0_OnBlockReceived)（进入中断）以下为中断处理函数的内容
+                                         |
+                                 *MasterReceiveFlag = TRUE
+                                                                                                                          （while循环在此处等待接收完成）  
+                                         |                                                                                                                                                                                                                                                     
+                                         |
+                                         |
+                                                                                                                                 清除接受标志，重新进入循环
+
+
+2015.09.24更新：
+1.该程序在DMA板内通信的基础上修改成DMA通信的从机程序。

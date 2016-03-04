@@ -1,0 +1,8 @@
+Project_Settings/Startup_Code/runtime_configuration.h
+Project_Settings/Startup_Code/__arm_start.c
+Project_Settings/Startup_Code/__arm_end.c
+Project_Settings/Debugger/init_kinetis.tcl
+Project_Settings/Debugger/mass_erase_kinetis.tcl
+ProcessorExpert.pe
+.settings/com.freescale.core.ide.newprojectwizard.prefs
+ReferencedRSESystems.xml

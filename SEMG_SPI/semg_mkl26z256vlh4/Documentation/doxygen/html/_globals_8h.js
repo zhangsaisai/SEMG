@@ -1,0 +1,26 @@
+var _globals_8h =
+[
+    [ "dmaControllerDevData", "_globals_8h.html#gadcb3f32e1d6cb09fb77c28128d59c7f4", null ],
+    [ "masterSPI0DevData", "_globals_8h.html#ga5813253b5d8cbea8134608f6bcc99819", null ],
+    [ "masterSPIRxDMADevData", "_globals_8h.html#gab6ca91dbd43f844f187227a060a0bb77", null ],
+    [ "masterSPITxDMADevData", "_globals_8h.html#gafd0056caf5103bca68a726f4f8d7b4c3", null ],
+    [ "portA1DevData", "_globals_8h.html#gac1534206954365f5a87692491a4081f4", null ],
+    [ "portA2DevData", "_globals_8h.html#ga4f56282b5ebc6dd35dba749b0b3fdf46", null ],
+    [ "portA5DevData", "_globals_8h.html#ga10deed43e77a143dfc11843dc05e7d38", null ],
+    [ "portB1DevData", "_globals_8h.html#gad7afc99879ebad5ae27e224ee89048c4", null ],
+    [ "portB2DevData", "_globals_8h.html#ga5df104d1126e0dbdc7b960e99084265f", null ],
+    [ "portC4DevData", "_globals_8h.html#ga0ff194dd67ec822403f056fc699fff93", null ],
+    [ "portC8DevData", "_globals_8h.html#gaade25ee32a0b1553ba709121fa5d7578", null ],
+    [ "portE0DevData", "_globals_8h.html#gaaab8c3a3b8a3fb40f084afa6533a00b3", null ],
+    [ "portE1DevData", "_globals_8h.html#ga2c23ede0809b5c59bc4552b1f8fac379", null ],
+    [ "portE29DevData", "_globals_8h.html#ga1cf1349c7f9c2a8f7fa38cc5de8f5f3d", null ],
+    [ "slaveSPI1DevData", "_globals_8h.html#gad8ac5eb288b57c78161b4c027463a541", null ],
+    [ "slaveSPIRxDMADevData", "_globals_8h.html#ga9f9c068038b7bb68fa3a2e6b426ab473", null ],
+    [ "slaveSPITxDMADevData", "_globals_8h.html#ga4b24fc4b941fe265cc0c37fc63716411", null ],
+    [ "tADC", "_globals_8h.html#gaebcbb78adc896471154fad49dcf9e4fe", null ],
+    [ "tADCPtr", "_globals_8h.html#gac5b8c2fb968c82ec4db40435a7ed5deb", null ],
+    [ "tARM", "_globals_8h.html#ga972a65f6570934796a8c976fdaf313f6", null ],
+    [ "tARMPtr", "_globals_8h.html#gab23eba564757132337b659ce7b4bcf9e", null ],
+    [ "tMCU", "_globals_8h.html#ga1da6113a394709910a14e2420a9d0a25", null ],
+    [ "tMCUPtr", "_globals_8h.html#ga772826721d8d3133eaae07595c5cf644", null ]
+];

@@ -1,0 +1,32 @@
+################################################################################
+# These macros are used by makefiles and argument files.
+# When a space is included in the path and quotes (") cannot be used,
+# a _ESCAPE version of the macro is added that escapes the space with backslash (\).
+################################################################################
+
+export PMC=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc
+export GNU_Make_Install_DirEnv=$(CWInstallLocationEnv)/gnu/bin
+export ProjDirPath=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/build/cw/I2c/kl25_platinum
+export CWInstallLocationEnv=E:/Freescale/CW MCU v10.5
+export PMC_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/pmc
+export CPU=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu
+export UART=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart
+export RTC=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc
+export RCM_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm
+export COMMON_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/common
+export UART_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/uart
+export LPTMR=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/lptmr
+export LPTMR_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/lptmr
+export RCM=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rcm
+export ARMSourceryDirEnv=$(CWInstallLocationEnv)/Cross_Tools/arm-none-eabi-gcc-4_7_3/bin
+export SMC_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc
+export LLWU_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu
+export I2C_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c
+export MCG=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/mcg
+export MCG_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/mcg
+export RTC_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/rtc
+export SMC=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/smc
+export LLWU=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/drivers/llwu
+export COMMON=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common
+export CPU_ESCAPED=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25\ Sample\ Code_I2c/KL25\ Sample\ Code/kl25_sc_rev10/klxx-sc-baremetal/src/cpu
+export I2C=D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/projects/I2c

@@ -1,0 +1,170 @@
+   1              		.cpu cortex-m0
+   2              		.fpu softvfp
+   3              		.eabi_attribute 20, 1
+   4              		.eabi_attribute 21, 1
+   5              		.eabi_attribute 23, 3
+   6              		.eabi_attribute 24, 1
+   7              		.eabi_attribute 25, 1
+   8              		.eabi_attribute 26, 1
+   9              		.eabi_attribute 30, 2
+  10              		.eabi_attribute 34, 0
+  11              		.eabi_attribute 18, 4
+  12              		.code	16
+  13              		.file	"io.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.in_char,"ax",%progbits
+  18              		.align	2
+  19              		.global	in_char
+  20              		.code	16
+  21              		.thumb_func
+  23              	in_char:
+  24              	.LFB0:
+  25              		.file 1 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+   1:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** /*
+   2:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  * File:		io.c
+   3:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  * Purpose:		Serial Input/Output routines
+   4:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  *
+   5:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  * Notes:       TERMINAL_PORT defined in <board>.h
+   6:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  */
+   7:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** 
+   8:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** #include "common.h"
+   9:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** #include "uart.h"
+  10:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** 
+  11:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** /********************************************************************/
+  12:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** char
+  13:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** in_char (void)
+  14:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** {
+  26              		.loc 1 14 0
+  27              		.cfi_startproc
+  28 0000 08B5     		push	{r3, lr}
+  29              	.LCFI0:
+  30              		.cfi_def_cfa_offset 8
+  31              		.cfi_offset 3, -8
+  32              		.cfi_offset 14, -4
+  15:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   if (TERM_PORT_NUM == 0)
+  16:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart0_getchar(UART0_BASE_PTR);
+  33              		.loc 1 16 0
+  34 0002 0248     		ldr	r0, .L2
+  35 0004 FFF7FEFF 		bl	uart0_getchar
+  36              	.LVL0:
+  17:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else if (TERM_PORT_NUM == 1)
+  18:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart_getchar(UART1_BASE_PTR);
+  19:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else
+  20:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart_getchar(UART2_BASE_PTR);
+  21:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****  
+  22:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** }
+  37              		.loc 1 22 0
+  38              		@ sp needed for prologue
+  39 0008 08BD     		pop	{r3, pc}
+  40              	.L3:
+  41 000a C046     		.align	2
+  42              	.L2:
+  43 000c 00A00640 		.word	1074176000
+  44              		.cfi_endproc
+  45              	.LFE0:
+  47              		.section	.text.out_char,"ax",%progbits
+  48              		.align	2
+  49              		.global	out_char
+  50              		.code	16
+  51              		.thumb_func
+  53              	out_char:
+  54              	.LFB1:
+  23:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** /********************************************************************/
+  24:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** void
+  25:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** out_char (char ch)
+  26:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** {
+  55              		.loc 1 26 0
+  56              		.cfi_startproc
+  57              	.LVL1:
+  58 0000 08B5     		push	{r3, lr}
+  59              	.LCFI1:
+  60              		.cfi_def_cfa_offset 8
+  61              		.cfi_offset 3, -8
+  62              		.cfi_offset 14, -4
+  63              		.loc 1 26 0
+  64 0002 011C     		mov	r1, r0
+  27:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   if (TERM_PORT_NUM == 0)
+  28:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     uart0_putchar(UART0_BASE_PTR, ch);
+  65              		.loc 1 28 0
+  66 0004 0148     		ldr	r0, .L5
+  67              	.LVL2:
+  68 0006 FFF7FEFF 		bl	uart0_putchar
+  69              	.LVL3:
+  29:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else if (TERM_PORT_NUM == 1)
+  30:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     uart_putchar(UART1_BASE_PTR, ch);
+  31:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else
+  32:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     uart_putchar(UART2_BASE_PTR, ch);
+  33:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   
+  34:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** }
+  70              		.loc 1 34 0
+  71              		@ sp needed for prologue
+  72 000a 08BD     		pop	{r3, pc}
+  73              	.L6:
+  74              		.align	2
+  75              	.L5:
+  76 000c 00A00640 		.word	1074176000
+  77              		.cfi_endproc
+  78              	.LFE1:
+  80              		.section	.text.char_present,"ax",%progbits
+  81              		.align	2
+  82              		.global	char_present
+  83              		.code	16
+  84              		.thumb_func
+  86              	char_present:
+  87              	.LFB2:
+  35:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** 
+  36:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** /********************************************************************/
+  37:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** int
+  38:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** char_present (void)
+  39:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** {
+  88              		.loc 1 39 0
+  89              		.cfi_startproc
+  90 0000 08B5     		push	{r3, lr}
+  91              	.LCFI2:
+  92              		.cfi_def_cfa_offset 8
+  93              		.cfi_offset 3, -8
+  94              		.cfi_offset 14, -4
+  40:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   if (TERM_PORT_NUM == 0)
+  41:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart0_getchar_present(UART0_BASE_PTR);
+  95              		.loc 1 41 0
+  96 0002 0248     		ldr	r0, .L8
+  97 0004 FFF7FEFF 		bl	uart0_getchar_present
+  98              	.LVL4:
+  42:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else if (TERM_PORT_NUM == 1)
+  43:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart_getchar_present(UART1_BASE_PTR);
+  44:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   else
+  45:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****     return uart_getchar_present(UART2_BASE_PTR);
+  46:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c ****   
+  47:D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-sc-baremetal/src/common\io.c **** }
+  99              		.loc 1 47 0
+ 100              		@ sp needed for prologue
+ 101 0008 08BD     		pop	{r3, pc}
+ 102              	.L9:
+ 103 000a C046     		.align	2
+ 104              	.L8:
+ 105 000c 00A00640 		.word	1074176000
+ 106              		.cfi_endproc
+ 107              	.LFE2:
+ 109              		.text
+ 110              	.Letext0:
+ 111              		.file 2 "D:/kuaipan/SEMG/MEMS_SEMG_KL25/KL25 Sample Code_I2c/KL25 Sample Code/kl25_sc_rev10/klxx-s
+ 112              		.file 3 "E:/Freescale/CW MCU v10.5/MCU/ARM_GCC_Support/ewl/EWL_C/include/cstdint"
+DEFINED SYMBOLS
+                            *ABS*:00000000 io.c
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:18     .text.in_char:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:23     .text.in_char:00000000 in_char
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:43     .text.in_char:0000000c $d
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:48     .text.out_char:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:53     .text.out_char:00000000 out_char
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:76     .text.out_char:0000000c $d
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:81     .text.char_present:00000000 $t
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:86     .text.char_present:00000000 char_present
+C:\Users\lab\AppData\Local\Temp\ccLGuecs.s:105    .text.char_present:0000000c $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+uart0_getchar
+uart0_putchar
+uart0_getchar_present

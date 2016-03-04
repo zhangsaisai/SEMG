@@ -1,0 +1,23 @@
+<map id="E:/workspace/semg_mkl15z128vlh4/Generated_Code/BitIO_UPRDY.h" name="E:/workspace/semg_mkl15z128vlh4/Generated_Code/BitIO_UPRDY.h">
+<area shape="rect" id="node2" href="$_events_8h.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="1821,97,2051,138"/>
+<area shape="rect" id="node5" href="$_init_8c.html" title="This file contains user initialization of data, on&#45;chip and peripheral devices. " alt="" coords="2988,278,3217,319"/>
+<area shape="rect" id="node6" href="$_processor_expert_8c.html" title="Main module. This module contains user&#39;s application code. " alt="" coords="184,278,413,319"/>
+<area shape="rect" id="node8" href="$_cpu_8c.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/Cpu.c" alt="" coords="32,187,261,229"/>
+<area shape="rect" id="node18" href="$_vectors_8c.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/Vectors.c" alt="" coords="3140,187,3369,229"/>
+<area shape="rect" id="node20" href="$_bit_i_o___u_p_r_d_y_8c.html" title="The HAL BitIO component provides a low level API for unified access to general purpose digital input/..." alt="" coords="3444,97,3673,138"/>
+<area shape="rect" id="node21" href="$_p_e___l_d_d_8h.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/PE_LDD.h" alt="" coords="3697,97,3927,138"/>
+<area shape="rect" id="node3" href="$_a_d_c_8c.html" title="This file contains ADC operation functions. " alt="" coords="1923,278,2152,319"/>
+<area shape="rect" id="node4" href="$_events_8c.html" title="This is user&#39;s event module. Put your event handler code here. " alt="" coords="2176,278,2405,319"/>
+<area shape="rect" id="node7" href="$_test_8c.html" title="This file contains test functions. " alt="" coords="1479,278,1708,319"/>
+<area shape="rect" id="node9" href="$_d_m_a___c_t_r_l_8c.html" title="This embedded component implements initialization and runtime handling of an on&#45;chip DMA controller..." alt="" coords="2303,187,2532,229"/>
+<area shape="rect" id="node10" href="$_d_m_a_t___m___s_p_i___r_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="2556,187,2799,229"/>
+<area shape="rect" id="node11" href="$_d_m_a_t___m___s_p_i___t_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="2823,187,3064,229"/>
+<area shape="rect" id="node12" href="$_d_m_a_t___s___s_p_i___r_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="337,187,577,229"/>
+<area shape="rect" id="node13" href="$_d_m_a_t___s___s_p_i___t_x_8c.html" title="This embedded component implements a DMA transfer channel descriptor definition. " alt="" coords="602,187,840,229"/>
+<area shape="rect" id="node14" href="$_e_i_n_t___n_o_t___d_r_d_y_8c.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="865,187,1108,229"/>
+<area shape="rect" id="node15" href="$_e_i_n_t___s_y_n_c___i_n_t_8c.html" title="This component, &quot;ExtInt_LDD&quot;, provide a low level API for unified access of external interrupts handl..." alt="" coords="1132,187,1367,229"/>
+<area shape="rect" id="node16" href="$_s_m___s_p_i1_8c.html" title="This component &quot;SPIMaster_LDD&quot; implements MASTER part of synchronous serial master&#45;slave communicatio..." alt="" coords="1441,187,1671,229"/>
+<area shape="rect" id="node17" href="$_s_s___s_p_i0_8c.html" title="This component &quot;SPISlave_LDD&quot; implements SLAVE part of synchronous serial master&#45;slave communication..." alt="" coords="1695,187,1924,229"/>
+<area shape="rect" id="node19" href="$_my_headers_8h.html" title="This file contains all header files created by user. Easy for including header files in other files..." alt="" coords="1948,187,2177,229"/>
+<area shape="rect" id="node22" href="$_p_e___l_d_d_8c.html" title="E:/workspace/semg_mkl15z128vlh4\l/Generated_Code/PE_LDD.c" alt="" coords="3697,187,3927,229"/>
+</map>

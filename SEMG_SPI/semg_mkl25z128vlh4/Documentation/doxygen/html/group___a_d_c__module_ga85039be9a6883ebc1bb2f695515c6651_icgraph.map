@@ -1,0 +1,12 @@
+<map id="ADCSendCommand" name="ADCSendCommand">
+<area shape="rect" id="node2" href="$group___a_d_c__module.html#ga739a74c1af38253fc979507db8a7fc77" title="Configure the registers of ADC via SPI1. " alt="" coords="241,5,343,32"/>
+<area shape="rect" id="node4" href="$group___a_d_c__module.html#gaa7e8295af4f38b1588ed738440a4cf48" title="MCU sends START command to ADC, ADC starts to convert. This function starts ADC to convert via SPI1..." alt="" coords="195,56,389,83"/>
+<area shape="rect" id="node6" href="$group___a_d_c__module.html#ga46359ab6b6e65236d4322114a792f171" title="MCU sends STOP command to ADC, ADC stops to convert. This function stops ADC to convert via SPI1..." alt="" coords="195,107,389,133"/>
+<area shape="rect" id="node7" href="$group___a_d_c__module.html#ga2409c7c6acb1abc14e9fcd3360ec7d82" title="MCU sends RESET command to ADC, ADC resets. This function resets ADC via SPI1. Avoid sending any comm..." alt="" coords="213,157,371,184"/>
+<area shape="rect" id="node8" href="$group___a_d_c__module.html#gae34d28e63f3bac9c1e741c963e8ad83b" title="Send command WAKEUP to ADC via SPI1 to wake up ADC from low&#45;power standby mode. " alt="" coords="243,208,341,235"/>
+<area shape="rect" id="node9" href="$group___a_d_c__module.html#gadd64f9ec09f151dea512f17c47da0e83" title="Send command STANDBY via SPI1 to make ADC entering the low&#45;power standby mode. " alt="" coords="243,259,341,285"/>
+<area shape="rect" id="node10" href="$group___a_d_c__module.html#gafd2c62b0857ae8f97e6238acc9cdf8cd" title="Send command RDATAC via SPI1 to make the conversion data of ADC can read continuously without command..." alt="" coords="207,309,377,336"/>
+<area shape="rect" id="node11" href="$group___a_d_c__module.html#ga790d06986f2f4bc069ebfe55babd1e87" title="Send command SDATAC to ADC via SPI1 to stop ADC&#39;s RDATAC mode. " alt="" coords="193,360,391,387"/>
+<area shape="rect" id="node3" href="$group___a_d_c__module.html#ga39150f192703c8fc5f1885bc21deee7f" title="Initializes ADC. The method is called in the PeripheralInit function and will be called only once..." alt="" coords="440,5,507,32"/>
+<area shape="rect" id="node5" href="$group___processor_expert__module.html#ga840291bc02cba5474a4cb46a9b9566fe" title="The main function of the project. " alt="" coords="448,56,499,83"/>
+</map>
