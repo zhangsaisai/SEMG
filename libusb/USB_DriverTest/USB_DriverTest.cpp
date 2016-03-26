@@ -5,36 +5,27 @@
 #define	EP1_OUT_SIZE	64
 #define	EP1_IN_SIZE	64
 
+/* Code of bmRequest Type */
+#define GET_REQUEST_MCU            (0xC0)//Get the MCU USB Message
+#define SET_REQUEST_MCU            (0x40)//Set the MCU USB Message
 
+/* Mems Class Specific Request Codes */
+#define Get_State                            (0x66)
+#define GET_Frame                            (0x65)
+#define SET_Frame                            (0x64)
+#define SET_Sample                           (0x63)
+#define GET_NUMber                           (0x62)
+
+
+#define SIZE_NUMber                          (0x01)
+#define SIZE_State                           (0x01)
+#define SIZE_Frame                           (0x02)
 int main(int argc, char *argv[])
 {
   struct usb_bus *bus;
   int DevNum;
   int ret;
-
-  /*
-  if (argc > 1 && !strcmp(argv[1], "-v"))
-    verbose = 1;
-
-  usb_init();
-
-  usb_find_busses();
-  usb_find_devices();
-
-  for (bus = usb_busses; bus; bus = bus->next) {
-    if (bus->root_dev && !verbose)
-      print_device(bus->root_dev, 0);
-    else {
-      struct usb_device *dev;
-
-      for (dev = bus->devices; dev; dev = dev->next)
-        print_device(dev, 0);
-    }
-  }
-
-  return 0;
-  */
-
+  char bytes[10];
   //扫描设备连接数，需要初始化
 	DevNum = USBScanDev(1);
 	printf("设备连接数为：%d\n",DevNum);
@@ -50,7 +41,6 @@ int main(int argc, char *argv[])
 	//打印设备0的描述符
 	ret = print_device(0);
 	
-
 	//打开设备1
 	ret = USBOpenDev(1);
 	if(ret == SEVERITY_ERROR){
@@ -61,6 +51,20 @@ int main(int argc, char *argv[])
 	}
 	//打印设备1的描述符
 	ret = print_device(1);
+
+	//receive the MCU Number
+	ret = USBCtrlData(0,GET_REQUEST_MCU,GET_NUMber,0x00, EP0, bytes, SIZE_NUMber,100);
+
+	//receive the MCU State
+	ret = USBCtrlData(0,GET_REQUEST_MCU,Get_State,0x00, EP0, bytes+1, SIZE_State,100);
+	//state=200,unsigned char is 11001000-----char:首先取反：00110111，转化成十进制是55，加上符号是-55，再减去1是-56
+
+	//receive the Frame Number
+	ret = USBCtrlData(0,GET_REQUEST_MCU,GET_Frame,0x00, EP0, bytes+2, SIZE_Frame,100);
+	//S_FrameNumber初始值是10000.在经过S_FrameNumber &= 0x3ff取余操作后，等于784
+	//784是无符号数0011 0001 0000，直接转换成两个字节的有符号数，是0011 和0001 0000，即是0x10和0x03
+	
+	//在计算机系统中，仍然是以二进制存储的，因此对于state=200而言，对应的二进制是0xc8，上位机接收到的也是0xc8
 
 	return 0;
 }

@@ -521,8 +521,8 @@ int __stdcall print_device(int DevIndex)
 
   printf("#%d:   %s\n",  dev->devnum,    description);
 
-  if (udev)
-    usb_close(udev);
+  //if (udev)
+  //  usb_close(udev);
 
 
   if (!dev->config) {
