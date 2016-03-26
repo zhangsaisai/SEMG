@@ -1,0 +1,28 @@
+﻿生成启动时间为 2016/3/26 17:08:29。
+     1>项目“D:\kuaipan\SEMG\libusb\USB_DriverTest\USB_DriverTest.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Release\USB_DriverTest.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Release\USB_DriverTest.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\USB_DriverTest.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\USB_DriverTest.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt USB_DriverTest.cpp
+         USB_DriverTest.cpp
+     1>USB_DriverTest.cpp(11): warning C4101: “bus”: 未引用的局部变量
+       Link:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\kuaipan\SEMG\libusb\USB_DriverTest\Release\USB_DriverTest.exe" /INCREMENTAL:NO /NOLOGO USB_Driver.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Release\USB_DriverTest.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\kuaipan\SEMG\libusb\USB_DriverTest\Release\USB_DriverTest.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\kuaipan\SEMG\libusb\USB_DriverTest\Release\USB_DriverTest.lib" /MACHINE:X86 Release\stdafx.obj
+         Release\USB_DriverTest.obj
+         正在生成代码
+         已完成代码的生成
+         USB_DriverTest.vcxproj -> D:\kuaipan\SEMG\libusb\USB_DriverTest\Release\USB_DriverTest.exe
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\kuaipan\SEMG\libusb\USB_DriverTest\Release\USB_DriverTest.exe;#1" /manifest Release\USB_DriverTest.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\USB_DriverTest.unsuccessfulbuild”。
+         正在对“Release\USB_DriverTest.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\kuaipan\SEMG\libusb\USB_DriverTest\USB_DriverTest.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.81

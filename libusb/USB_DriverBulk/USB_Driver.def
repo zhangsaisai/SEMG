@@ -1,0 +1,12 @@
+LIBRARY USB_Driver
+EXPORTS
+
+USBScanDev @ 1
+USBOpenDev @ 2
+USBCloseDev @ 3
+USBBulkWriteData @ 4
+USBIntWriteData @ 5
+USBCtrlData @ 6
+USBBulkReadData @ 7
+USBIntReadData @ 8
+print_device @ 9

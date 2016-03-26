@@ -1,0 +1,46 @@
+﻿生成启动时间为 2016/3/26 17:08:04。
+     1>项目“D:\kuaipan\SEMG\libusb\USB_DriverBulk\USB_Driver.vcxproj”在节点 2 上(rebuild 个目标)。
+     1>_PrepareForClean:
+         正在删除文件“Release\USB_Driver.lastbuildstate”。
+       InitializeBuildStatus:
+         正在创建“Release\USB_Driver.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       ClCompile:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D USB_DRIVER_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yc"StdAfx.h" /Fp"Release\USB_Driver.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D USB_DRIVER_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt dllmain.cpp
+         dllmain.cpp
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /Oy- /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D USB_DRIVER_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Release\USB_Driver.pch" /Fo"Release\\" /Fd"Release\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt USB_Driver.cpp
+         USB_Driver.cpp
+     1>USB_Driver.cpp(497): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(500): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(503): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(510): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(513): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(516): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(520): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 E:\Program Files\Microsoft Visual Studio 10.0\VC\include\stdio.h(363) : 参见“_snprintf”的声明
+     1>USB_Driver.cpp(486): warning C4101: “i”: 未引用的局部变量
+       Link:
+         E:\Program Files\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /DEF:"USB_Driver.def" /MANIFEST /ManifestFile:"Release\USB_Driver.dll.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.lib" /MACHINE:X86 /DLL Release\dllmain.obj
+         Release\stdafx.obj
+         Release\USB_Driver.obj
+            正在创建库 D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.lib 和对象 D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.exp
+         正在生成代码
+         已完成代码的生成
+         USB_Driver.vcxproj -> D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.dll
+       Manifest:
+         C:\Program Files\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"D:\kuaipan\SEMG\libusb\USB_DriverBulk\Release\USB_Driver.dll;#2" /manifest Release\USB_Driver.dll.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Release\USB_Driver.unsuccessfulbuild”。
+         正在对“Release\USB_Driver.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“D:\kuaipan\SEMG\libusb\USB_DriverBulk\USB_Driver.vcxproj”(rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.49
