@@ -17,7 +17,7 @@ int __stdcall USBIntWriteData(unsigned int nBoardID,int pipenum,char *sendbuffer
 int __stdcall USBIntReadData(unsigned int nBoardID,int pipenum,char *readbuffer,int len,int waittime);
 int __stdcall USBCtrlData(unsigned int nBoardID,int requesttype,int request,int value, int index, char *bytes, int size,int waittime);
 
-int __stdcall print_device(int level);
+int __stdcall print_device(int DevIndex);
 
 
 #endif

@@ -38,17 +38,30 @@ int main(int argc, char *argv[])
   //扫描设备连接数，需要初始化
 	DevNum = USBScanDev(1);
 	printf("设备连接数为：%d\n",DevNum);
+
 	//打开设备0
 	ret = USBOpenDev(0);
 	if(ret == SEVERITY_ERROR){
-		printf("打开设备失败！\n");
+		printf("打开设备0失败！\n");
 		return SEVERITY_ERROR;
 	}else{
-		printf("打开设备成功！\n");
+		printf("打开设备0成功！\n");
 	}
-
+	//打印设备0的描述符
 	ret = print_device(0);
 	
+
+	//打开设备1
+	ret = USBOpenDev(1);
+	if(ret == SEVERITY_ERROR){
+		printf("打开设备1失败！\n");
+		return SEVERITY_ERROR;
+	}else{
+		printf("打开设备1成功！\n");
+	}
+	//打印设备1的描述符
+	ret = print_device(1);
+
 	return 0;
 }
 

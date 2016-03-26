@@ -454,7 +454,7 @@ void print_interface(struct usb_interface *interface)
 {
   int i;
 
-  for (i = 0; i < interface->num_altsetting+1; i++)
+  for (i = 0; i < interface->num_altsetting; i++)
     print_altsetting(&interface->altsetting[i]);
 }
 
@@ -474,8 +474,8 @@ void print_configuration(struct usb_config_descriptor *config)
 }
 
 
-//int print_device(struct usb_device *dev, int level)
-int __stdcall print_device(int level)
+//DevIndex is the number index of device
+int __stdcall print_device(int DevIndex)
 {
 
   usb_dev_handle *udev;
@@ -486,7 +486,7 @@ int __stdcall print_device(int level)
   int ret, i;
   description[sizeof(description)-1]=0;//ensure the last char is null
 
-  dev = pBoard[0];
+  dev = pBoard[DevIndex];
 
   udev = usb_open(dev);
   if (udev) {
@@ -523,6 +523,16 @@ int __stdcall print_device(int level)
 
   if (udev)
     usb_close(udev);
+
+
+  if (!dev->config) {
+      printf("  Couldn't retrieve descriptors\n");
+      return 0;
+    }
+
+    for (i = 0; i < dev->descriptor.bNumConfigurations; i++)
+      print_configuration(&dev->config[i]);
+
 
   return 0;
 }
