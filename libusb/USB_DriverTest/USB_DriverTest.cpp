@@ -2,8 +2,15 @@
 
 #include "stdafx.h"
 
-#define	EP1_OUT_SIZE	64
-#define	EP1_IN_SIZE	64
+#define	DEVICE0	         0
+#define	DEVICE1	         1
+
+#define	EP1_OUT_SIZE	128
+#define	EP1_IN_SIZE	    128
+
+//实际读取或发送的数据
+#define	DATA_OUT_SIZE	102
+#define	DATA_IN_SIZE	102
 
 /* Code of bmRequest Type */
 #define GET_REQUEST_MCU            (0xC0)//Get the MCU USB Message
@@ -16,7 +23,6 @@
 #define SET_Sample                           (0x63)
 #define GET_NUMber                           (0x62)
 
-
 #define SIZE_NUMber                          (0x01)
 #define SIZE_State                           (0x01)
 #define SIZE_Frame                           (0x02)
@@ -25,7 +31,18 @@ int main(int argc, char *argv[])
   struct usb_bus *bus;
   int DevNum;
   int ret;
-  char bytes[10];
+  char rece_comm_dev0[5];
+  char rece_comm_dev1[5];
+  char send_comm_dev0[5];
+  char send_comm_dev1[5];
+
+  char rece_data_dev0[128];
+  char rece_data_dev1[128];
+  char send_data_dev0[128];
+  char send_data_dev1[128];
+
+  unsigned char sensor_data[128];
+
   //扫描设备连接数，需要初始化
 	DevNum = USBScanDev(1);
 	printf("设备连接数为：%d\n",DevNum);
@@ -52,21 +69,46 @@ int main(int argc, char *argv[])
 	//打印设备1的描述符
 	ret = print_device(1);
 
-	//receive the MCU Number
-	ret = USBCtrlData(0,GET_REQUEST_MCU,GET_NUMber,0x00, EP0, bytes, SIZE_NUMber,100);
-
-	//receive the MCU State
-	ret = USBCtrlData(0,GET_REQUEST_MCU,Get_State,0x00, EP0, bytes+1, SIZE_State,100);
-	//state=200,unsigned char is 11001000-----char:首先取反：00110111，转化成十进制是55，加上符号是-55，再减去1是-56
-
-	//receive the Frame Number
-	ret = USBCtrlData(0,GET_REQUEST_MCU,GET_Frame,0x00, EP0, bytes+2, SIZE_Frame,100);
-	//S_FrameNumber初始值是10000.在经过S_FrameNumber &= 0x3ff取余操作后，等于784
-	//784是无符号数0011 0001 0000，直接转换成两个字节的有符号数，是0011 和0001 0000，即是0x10和0x03
-	
+	//device0对应接口0，device1对应接口1
+	//receive the device0 MCU Number
+	ret = USBCtrlData(DEVICE0,GET_REQUEST_MCU,GET_NUMber,0x00, EP0, rece_comm_dev0, SIZE_NUMber,100);
+	//receive the device0 MCU State
+	ret = USBCtrlData(DEVICE0,GET_REQUEST_MCU,Get_State,0x00, EP0, rece_comm_dev0+1, SIZE_State,100);
+	//state=200,unsigned char is 11001000(0xc8)-----char:接收到的16进制也是0xc8，在将其转换成首先取反：00110111，转化成十进制是55，加上符号是-55，再减去1是-56
 	//在计算机系统中，仍然是以二进制存储的，因此对于state=200而言，对应的二进制是0xc8，上位机接收到的也是0xc8
+	//receive the device0 Frame Number
+	ret = USBCtrlData(DEVICE0,GET_REQUEST_MCU,GET_Frame,0x00, EP0, rece_comm_dev0+2, SIZE_Frame,100);
+	//S_FrameNumber初始值是10000.在经过S_FrameNumber &= 0x3ff取余操作后，等于784
+	//784是无符号数0011 0001 0000，直接转换成两个字节的有符号数，是0011 和0001 0000，即是0x03和0x10,0x10（低字节）在低内存地址，0x03（高字节）在高内存地址
+	
+	//receive the device1 MCU Number、MCU State、Frame Number
+	ret = USBCtrlData(DEVICE1,GET_REQUEST_MCU,GET_NUMber,0x00, EP0, rece_comm_dev1, SIZE_NUMber,100);
+	ret = USBCtrlData(DEVICE1,GET_REQUEST_MCU,Get_State,0x00, EP0, rece_comm_dev1+1, SIZE_State,100);
+	ret = USBCtrlData(DEVICE1,GET_REQUEST_MCU,GET_Frame,0x00, EP0, rece_comm_dev1+2, SIZE_Frame,100);
 
-	return 0;
+	//对device1（对应接口1，包括同步端点0和同步端点1）进行接收数据,102个字节
+	//当你读数据失败时，返回值为-116；
+    //当读数据字节数不为64的倍数（整块），读出来的数据正确，但返回-5.
+    //当读出来的字节数为64倍数且读出来数据正确时，返回值为成功读取的字节数。
+	while(1)
+	{
+		ret = USBBulkReadData(DEVICE1,EP1_IN,rece_data_dev1,EP1_IN_SIZE,500);//EP1_IN_SIZE设置为64的倍数，128
+		if(ret != DATA_IN_SIZE){
+			printf("端点1读数据失败！%d\n",ret);
+			return SEVERITY_ERROR;
+		}else{
+			printf("端点1读数据成功！\n");
+			for(int i=0;i<DATA_IN_SIZE;i++){
+				sensor_data[i] = (unsigned char)rece_data_dev1[i];
+				printf("%d, 0x%02x  ", i,  sensor_data[i]);
+				if(((i+1)%5)==0){
+					printf("\n\r");
+				}
+			}
+			printf("\n");
+		}
+		Sleep(1);
+	}
 }
 
 

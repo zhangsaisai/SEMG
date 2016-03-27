@@ -246,7 +246,7 @@ int __stdcall USBBulkWriteData(unsigned int nBoardID,int pipenum,char *sendbuffe
 #endif
 
 #ifdef TEST_CLAIM_INTERFACE
-    if (usb_claim_interface(pBoardHandle[nBoardID], 0) < 0)
+    if (usb_claim_interface(pBoardHandle[nBoardID], nBoardID) < 0)
     {
         usb_close(pBoardHandle[nBoardID]);
         return SEVERITY_ERROR;
@@ -263,7 +263,7 @@ int __stdcall USBBulkWriteData(unsigned int nBoardID,int pipenum,char *sendbuffe
 	}*/
 #endif
 #ifdef TEST_CLAIM_INTERFACE
-    usb_release_interface(pBoardHandle[nBoardID], 0);
+    usb_release_interface(pBoardHandle[nBoardID], nBoardID);
 #endif
     return ret;
 }
@@ -292,7 +292,7 @@ int __stdcall USBIntWriteData(unsigned int nBoardID,int pipenum,char *sendbuffer
 #endif
 
 #ifdef TEST_CLAIM_INTERFACE
-    if (usb_claim_interface(pBoardHandle[nBoardID], 0) < 0)
+    if (usb_claim_interface(pBoardHandle[nBoardID], nBoardID) < 0)
     {
         usb_close(pBoardHandle[nBoardID]);
         return SEVERITY_ERROR;
@@ -300,7 +300,7 @@ int __stdcall USBIntWriteData(unsigned int nBoardID,int pipenum,char *sendbuffer
 #endif
 	ret = usb_interrupt_write(pBoardHandle[nBoardID], pipenum, sendbuffer, len, waittime);
 #ifdef TEST_CLAIM_INTERFACE
-    usb_release_interface(pBoardHandle[nBoardID], 0);
+    usb_release_interface(pBoardHandle[nBoardID], nBoardID);
 #endif
     return ret;
 }
@@ -329,7 +329,7 @@ int __stdcall USBCtrlData(unsigned int nBoardID,int requesttype,int request,int 
 #endif
 
 #ifdef TEST_CLAIM_INTERFACE
-    if (usb_claim_interface(pBoardHandle[nBoardID], 0) < 0)
+    if (usb_claim_interface(pBoardHandle[nBoardID], nBoardID) < 0)//pBoardHandle[nBoardID]对应的interface编号和nBoardID相同
     {
         usb_close(pBoardHandle[nBoardID]);
         return SEVERITY_ERROR;
@@ -337,7 +337,7 @@ int __stdcall USBCtrlData(unsigned int nBoardID,int requesttype,int request,int 
 #endif
 	ret = usb_control_msg(pBoardHandle[nBoardID], requesttype, request,value, index, bytes, size,waittime);
 #ifdef TEST_CLAIM_INTERFACE
-    usb_release_interface(pBoardHandle[nBoardID], 0);
+    usb_release_interface(pBoardHandle[nBoardID], nBoardID);
 #endif
     return ret;
 }
@@ -366,7 +366,7 @@ int __stdcall USBBulkReadData(unsigned int nBoardID,int pipenum,char *readbuffer
 #endif
 
 #ifdef TEST_CLAIM_INTERFACE
-    if (usb_claim_interface(pBoardHandle[nBoardID], 0) < 0)
+    if (usb_claim_interface(pBoardHandle[nBoardID], nBoardID) < 0)
     {
         usb_close(pBoardHandle[nBoardID]);
         return SEVERITY_ERROR;
@@ -380,7 +380,7 @@ int __stdcall USBBulkReadData(unsigned int nBoardID,int pipenum,char *readbuffer
 	ret = usb_bulk_read(pBoardHandle[nBoardID], pipenum, readbuffer, len, waittime);
 #endif
 #ifdef TEST_CLAIM_INTERFACE
-    usb_release_interface(pBoardHandle[nBoardID], 0);
+    usb_release_interface(pBoardHandle[nBoardID], nBoardID);
 #endif
     return ret;
 }
@@ -409,7 +409,7 @@ int __stdcall USBIntReadData(unsigned int nBoardID,int pipenum,char *readbuffer,
 #endif
 
 #ifdef TEST_CLAIM_INTERFACE
-    if (usb_claim_interface(pBoardHandle[nBoardID], 0) < 0)
+    if (usb_claim_interface(pBoardHandle[nBoardID], nBoardID) < 0)
     {
         usb_close(pBoardHandle[nBoardID]);
         return SEVERITY_ERROR;
@@ -417,7 +417,7 @@ int __stdcall USBIntReadData(unsigned int nBoardID,int pipenum,char *readbuffer,
 #endif
 	ret = usb_interrupt_read(pBoardHandle[nBoardID], pipenum, readbuffer, len, waittime);
 #ifdef TEST_CLAIM_INTERFACE
-    usb_release_interface(pBoardHandle[nBoardID], 0);
+    usb_release_interface(pBoardHandle[nBoardID], nBoardID);
 #endif
     return ret;
 }

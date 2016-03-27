@@ -3,10 +3,8 @@
 
 // Device endpoint(s)
 #define EP0		0x00
-#define EP1_IN	0x81	//wMaxPacketSize:   16	Int
-#define EP1_OUT	0x01	//wMaxPacketSize:   16	Int
-#define EP2_IN	0x82	//wMaxPacketSize:   64	Bulk
-#define EP2_OUT	0x02	//wMaxPacketSize:   64	Bulk
+#define EP1_IN	0x81	//wMaxPacketSize:   64	Bulk
+#define EP1_OUT	0x02	//wMaxPacketSize:   64	Bulk
 
 int __stdcall USBScanDev(int NeedInit);
 int __stdcall USBOpenDev(int DevIndex);
