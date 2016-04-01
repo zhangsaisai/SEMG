@@ -1,6 +1,9 @@
 // USB_DriverTest.cpp : 定义控制台应用程序的入口点。
 
 #include "stdafx.h"
+#include <fstream>
+#include <iomanip>
+using namespace std;
 
 #define	DEVICE0	         0
 #define	DEVICE1	         1
@@ -41,7 +44,8 @@ int main(int argc, char *argv[])
   char send_data_dev0[128];
   char send_data_dev1[128];
 
-  unsigned char sensor_data[128];
+  unsigned char sensor_data[128];//pringf to the command line
+  int  data[128];//printf to the txt
 
   //扫描设备连接数，需要初始化
 	DevNum = USBScanDev(1);
@@ -90,8 +94,15 @@ int main(int argc, char *argv[])
 	//当你读数据失败时，返回值为-116；
     //当读数据字节数不为64的倍数（整块），读出来的数据正确，但返回-5.
     //当读出来的字节数为64倍数且读出来数据正确时，返回值为成功读取的字节数。
+	
+	//若文件已经存在时，清空文件的内容
+	ofstream ocout_data("sensordata.txt", ios::out|ios::trunc);
+
 	while(1)
 	{
+		//创建txt文件，打开方式为：打开文件之后文件指针指向文件末尾，只能在文件末尾进行数据的写入
+		ofstream ocout_data("sensordata.txt", ios::out|ios::app);
+
 		ret = USBBulkReadData(DEVICE1,EP1_IN,rece_data_dev1,EP1_IN_SIZE,500);//EP1_IN_SIZE设置为64的倍数，128
 		if(ret != DATA_IN_SIZE){
 			printf("端点1读数据失败！%d\n",ret);
@@ -100,14 +111,15 @@ int main(int argc, char *argv[])
 			printf("端点1读数据成功！\n");
 			for(int i=0;i<DATA_IN_SIZE;i++){
 				sensor_data[i] = (unsigned char)rece_data_dev1[i];
+				data[i] = (int)sensor_data[i];
 				printf("%d, 0x%02x  ", i,  sensor_data[i]);
-				if(((i+1)%5)==0){
+				ocout_data << dec << i <<" "<< "hex:0x" << hex << data[i]  <<" "<<"\n";
+				if(((i+1)%5)==0)
 					printf("\n\r");
-				}
 			}
-			printf("\n");
 		}
 		Sleep(1);
+		ocout_data.close();
 	}
 }
 
